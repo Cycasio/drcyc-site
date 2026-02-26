@@ -26,9 +26,9 @@ const faqs = [
       <a href="/" class="nav-brand">YC Chen, MD</a>
       <div class="nav-links">
         <a href="#about">關於</a>
-        <a href="#specialties">專長</a>
-        <a href="#philosophy">理念</a>
-        <a href="#faq">FAQ</a>
+        <a href="/workplace-health">臨場服務</a>
+        <a href="/health-checkup">高階健檢</a>
+        <a href="/community-health">社區營造</a>
         <a href="#contact">聯絡</a>
       </div>
     </div>
@@ -135,6 +135,33 @@ const faqs = [
           熱愛圍棋、跑馬拉松、健身與彈烏克麗麗，
           相信規律運動與心智活動能培養身心平衡的長期韌性。
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">服務項目</h2>
+      <div class="services-grid">
+        <a href="/workplace-health" class="service-card">
+          <span class="service-icon">🏭</span>
+          <h3>企業臨場健康服務</h3>
+          <p>專業職醫為您的企業把關員工健康，符合法規並提升生產力。</p>
+          <span class="service-link">了解更多 →</span>
+        </a>
+        <a href="/health-checkup" class="service-card">
+          <span class="service-icon">🔬</span>
+          <h3>高階健康檢查</h3>
+          <p>不只是報告，是一份改變的起點。結合行為科學的個人化健檢。</p>
+          <span class="service-link">了解更多 →</span>
+        </a>
+        <a href="/community-health" class="service-card">
+          <span class="service-icon">🏘️</span>
+          <h3>社區健康營造</h3>
+          <p>以 Photovoice 推動由下而上的社區健康計畫。</p>
+          <span class="service-link">了解更多 →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -292,6 +319,23 @@ const faqs = [
   .card-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
   .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
   .card p { color: var(--text-light); font-size: 0.95rem; }
+
+  /* Services CTA */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: white; padding: 2rem; border-radius: var(--radius);
+    border: 1px solid var(--border); transition: all 0.2s;
+    display: block; color: var(--text); text-decoration: none;
+  }
+  .service-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-decoration: none; transform: translateY(-2px); }
+  .service-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+  .service-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .service-card p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem; }
+  .service-link { color: var(--primary); font-weight: 600; font-size: 0.95rem; }
 
   /* FAQ */
   .faq-list { max-width: 700px; margin: 0 auto; }

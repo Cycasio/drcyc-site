@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  { icon: '👨‍⚕️', title: '醫師臨場服務', desc: '依法規每月定期至企業現場，提供勞工健康諮詢、職業病預防指導、工作適性評估與健康管理建議。' },
+  { icon: '📋', title: '勞工健檢規劃', desc: '協助企業規劃一般健檢與特殊健檢項目，健檢結果判讀、異常追蹤與分級管理。' },
+  { icon: '⚠️', title: '職場危害評估', desc: '現場作業環境巡視，辨識物理、化學、人因性危害因子，提供改善建議與風險控管方案。' },
+  { icon: '🛡️', title: '職業傷病預防', desc: '肌肉骨骼疾病、過勞預防、異常工作負荷管理，協助企業建立預防機制。' },
+  { icon: '🧠', title: '職場心理健康', desc: '壓力管理、員工協助方案(EAP)諮詢、職場霸凌預防與心理健康促進。' },
+  { icon: '📊', title: '健康管理系統', desc: '導入數位化員工健康管理平台，健康數據追蹤、衛教推播、慢性病管理。' },
+];
+
+const faqs = [
+  { q: '什麼是臨場健康服務？企業為什麼需要？', a: '依據《勞工健康保護規則》，僱用勞工達一定人數之企業須聘請醫師提供臨場健康服務。醫師定期到場協助健康諮詢、職業病預防、工作適性評估等，幫助企業降低職災風險、提升員工健康與生產力。' },
+  { q: '服務範圍涵蓋哪些地區？', a: '主要服務高雄市、屏東縣企業，包括但不限於楠梓加工區、屏東工業區、臨海工業區等。其他地區歡迎來信洽詢。' },
+  { q: '臨場服務的頻率和費用？', a: '依企業規模與法規要求，通常每月 1-4 次，每次 2-4 小時。費用依服務內容與頻率議定，歡迎來信索取報價。' },
+  { q: '可以協助處理職業傷病認定嗎？', a: '可以。協助勞工進行職業傷病因果關係評估、開立診斷證明、並提供復工評估與工作調整建議。' },
+  { q: '如何開始合作？', a: '請來信 cyc@edfm.org 或透過 Facebook 粉專聯繫，將安排初步需求訪談，了解貴公司規模、產業類型與現有健康管理現況後，提供客製化服務方案。' },
+];
+---
+
+<Layout
+  title="企業臨場健康服務｜職業醫學｜陳昱彰醫師"
+  description="高雄屏東企業臨場健康服務。陳昱彰醫師提供職場醫師臨場服務、勞工健檢規劃、職場危害評估、職業傷病預防，協助企業符合法規並提升員工健康。"
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "企業臨場健康服務",
+    "provider": {
+      "@type": "Person",
+      "name": "陳昱彰",
+      "jobTitle": "職業醫學科醫師"
+    },
+    "areaServed": ["高雄市", "屏東縣"],
+    "description": "依據勞工健康保護規則，提供企業臨場健康服務，包含醫師臨場諮詢、勞工健檢規劃、職場危害評估、職業傷病預防等。",
+    "url": "https://drcyc.io/workplace-health"
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">YC Chen, MD</a>
+      <div class="nav-links">
+        <a href="/">首頁</a>
+        <a href="/workplace-health">臨場服務</a>
+        <a href="/health-checkup">高階健檢</a>
+        <a href="/community-health">社區營造</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-badge">Workplace Health Services</p>
+      <h1>企業臨場健康服務</h1>
+      <p class="hero-subtitle">專業職業醫學醫師為您的企業把關員工健康<br/>高雄・屏東地區</p>
+      <a href="#contact" class="btn btn-primary">洽詢合作</a>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">為什麼選擇我們？</h2>
+      <div class="about-content">
+        <p>
+          陳昱彰醫師具備<strong>家庭醫學與職業醫學</strong>雙專長背景，
+          不僅熟悉法規要求，更以<strong>行為科學</strong>為基礎，
+          協助企業建立真正有效的員工健康管理機制——不只是紙上合規，
+          而是讓健康促進實際落地。
+        </p>
+        <p>
+          結合<strong>數位健康管理平台</strong>，提供健檢數據追蹤、
+          個人化衛教推播、慢性病管理等服務，讓臨場服務的效果延續到日常。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">服務項目</h2>
+      <div class="grid">
+        {services.map(s => (
+          <div class="card">
+            <span class="card-icon">{s.icon}</span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">常見問題</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section section-alt">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title">聯絡洽詢</h2>
+      <p style="font-size:1.1rem;color:var(--text-light);margin-bottom:1.5rem;">
+        歡迎企業來信洽詢臨場健康服務方案
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:cyc@edfm.org" class="btn btn-primary">📧 cyc@edfm.org</a>
+        <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .nav { position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border); }
+  .nav-inner { display:flex;align-items:center;justify-content:space-between;height:64px; }
+  .nav-brand { font-weight:700;font-size:1.15rem;color:var(--text); }
+  .nav-brand:hover { text-decoration:none; }
+  .nav-links { display:flex;gap:1.5rem; }
+  .nav-links a { color:var(--text-light);font-size:0.95rem; }
+  .nav-links a:hover { color:var(--primary);text-decoration:none; }
+
+  .page-hero { padding:5rem 0 4rem;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fe 100%);text-align:center; }
+  .page-hero h1 { font-size:2.5rem;font-weight:800;margin-bottom:1rem; }
+  .hero-badge { display:inline-block;background:var(--primary);color:white;padding:0.35rem 1rem;border-radius:99px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem; }
+  .hero-subtitle { font-size:1.15rem;color:var(--text-light);margin-bottom:2rem; }
+
+  .btn { display:inline-block;padding:0.75rem 1.75rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.2s; }
+  .btn:hover { text-decoration:none; }
+  .btn-primary { background:var(--primary);color:white; }
+  .btn-primary:hover { background:var(--primary-dark); }
+  .btn-outline { border:2px solid var(--primary);color:var(--primary); }
+  .btn-outline:hover { background:var(--primary);color:white; }
+
+  .section { padding:5rem 0; }
+  .section-alt { background:var(--bg-light); }
+  .section-title { font-size:2rem;font-weight:700;text-align:center;margin-bottom:3rem; }
+
+  .about-content { max-width:700px;margin:0 auto;font-size:1.1rem;color:var(--text-light); }
+  .about-content p { margin-bottom:1rem; }
+  .about-content strong { color:var(--text); }
+
+  .grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem; }
+  .card { background:white;padding:2rem;border-radius:var(--radius);border:1px solid var(--border);transition:box-shadow 0.2s; }
+  .card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+  .card-icon { font-size:2rem;display:block;margin-bottom:0.75rem; }
+  .card h3 { font-size:1.1rem;margin-bottom:0.5rem; }
+  .card p { color:var(--text-light);font-size:0.95rem; }
+
+  .faq-list { max-width:700px;margin:0 auto; }
+  .faq-item { border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden; }
+  .faq-item summary { padding:1.25rem 1.5rem;cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none; }
+  .faq-item summary::-webkit-details-marker { display:none; }
+  .faq-item summary::before { content:'＋ ';color:var(--primary); }
+  .faq-item[open] summary::before { content:'－ '; }
+  .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
+
+  .footer { padding:2rem 0;text-align:center;color:var(--text-light);font-size:0.9rem;border-top:1px solid var(--border); }
+
+  @media (max-width:768px) {
+    .page-hero h1 { font-size:1.8rem; }
+    .nav-links { gap:0.8rem; }
+    .nav-links a { font-size:0.8rem; }
+    .section { padding:3rem 0; }
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const packages = [
+  { icon: '🔬', title: '進階代謝評估', desc: '全套代謝指標、胰島素阻抗評估、內臟脂肪分析，提供個人化代謝風險報告與改善策略。' },
+  { icon: '🦴', title: '骨質疏鬆篩檢', desc: '骨密度檢測(DXA)、FRAX骨折風險評估、鈣質與維生素D分析，制定骨骼健康策略。' },
+  { icon: '❤️', title: '心血管風險評估', desc: '動脈硬化指標、頸動脈超音波、高敏感CRP，全面評估心血管疾病風險。' },
+  { icon: '🏃', title: '運動體適能評估', desc: '結合運動醫學，評估體適能狀態、運動風險，開立個人化運動處方。' },
+  { icon: '⚖️', title: '減重健康評估', desc: '身體組成分析、荷爾蒙檢測、飲食行為評估，規劃實證減重方案。' },
+  { icon: '🧠', title: '行為健康諮詢', desc: '結合行為科學的深度健康諮詢，找出生活習慣的改變切入點，不只看報告，更看見改變的可能。' },
+];
+
+const faqs = [
+  { q: '高階健檢跟一般健檢有什麼不同？', a: '一般健檢著重基本篩檢，高階健檢更深入分析代謝、心血管、骨骼等風險，並結合醫師一對一諮詢，提供個人化的健康改善方案，而非只是一份報告。' },
+  { q: '適合什麼樣的人？', a: '40歲以上想深度了解身體狀況者、有家族慢性病史者、長期久坐或工作壓力大的上班族、想科學化管理體重者、運動愛好者想了解身體極限。' },
+  { q: '健檢地點在哪裡？', a: '於義大醫院進行，享有醫學中心等級的檢查設備與品質。' },
+  { q: '健檢後會有後續追蹤嗎？', a: '會。健檢結果由陳醫師親自解說，並提供個人化健康改善計畫。如需進一步治療或追蹤，可直接安排門診。' },
+  { q: '如何預約？', a: '請來信 cyc@edfm.org 或透過 Facebook 粉專聯繫，將為您安排適合的健檢方案。' },
+];
+---
+
+<Layout
+  title="高階健康檢查｜個人化健康評估｜陳昱彰醫師"
+  description="高雄義大醫院高階健檢。陳昱彰醫師提供進階代謝評估、骨質疏鬆篩檢、心血管風險評估、運動體適能評估，結合行為科學的個人化健康管理。"
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "高階健康檢查",
+    "provider": {
+      "@type": "Person",
+      "name": "陳昱彰",
+      "jobTitle": "家庭醫學科醫師"
+    },
+    "areaServed": ["高雄市", "屏東縣"],
+    "description": "結合家庭醫學、肥胖醫學與行為科學的個人化高階健康檢查，於義大醫院進行。",
+    "url": "https://drcyc.io/health-checkup"
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">YC Chen, MD</a>
+      <div class="nav-links">
+        <a href="/">首頁</a>
+        <a href="/workplace-health">臨場服務</a>
+        <a href="/health-checkup">高階健檢</a>
+        <a href="/community-health">社區營造</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-badge">Premium Health Checkup</p>
+      <h1>高階健康檢查</h1>
+      <p class="hero-subtitle">不只是一份報告，是一份改變的起點<br/>義大醫院・醫學中心等級</p>
+      <a href="#contact" class="btn btn-primary">預約諮詢</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">我們的不同</h2>
+      <div class="about-content">
+        <p>
+          多數健檢給你一疊數字，然後呢？陳醫師的高階健檢<strong>不只看報告，更看見改變的可能</strong>。
+        </p>
+        <p>
+          結合<strong>家庭醫學的全人觀點</strong>、<strong>肥胖醫學的代謝專業</strong>、
+          以及<strong>行為科學的改變策略</strong>，每份健檢結果都會轉化為
+          具體可行的健康行動計畫。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">評估項目</h2>
+      <div class="grid">
+        {packages.map(s => (
+          <div class="card">
+            <span class="card-icon">{s.icon}</span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">常見問題</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section section-alt">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title">預約高階健檢</h2>
+      <p style="font-size:1.1rem;color:var(--text-light);margin-bottom:1.5rem;">
+        為自己的健康做一次深度投資
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:cyc@edfm.org" class="btn btn-primary">📧 cyc@edfm.org</a>
+        <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .nav { position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border); }
+  .nav-inner { display:flex;align-items:center;justify-content:space-between;height:64px; }
+  .nav-brand { font-weight:700;font-size:1.15rem;color:var(--text); }
+  .nav-brand:hover { text-decoration:none; }
+  .nav-links { display:flex;gap:1.5rem; }
+  .nav-links a { color:var(--text-light);font-size:0.95rem; }
+  .nav-links a:hover { color:var(--primary);text-decoration:none; }
+  .page-hero { padding:5rem 0 4rem;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fe 100%);text-align:center; }
+  .page-hero h1 { font-size:2.5rem;font-weight:800;margin-bottom:1rem; }
+  .hero-badge { display:inline-block;background:var(--primary);color:white;padding:0.35rem 1rem;border-radius:99px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem; }
+  .hero-subtitle { font-size:1.15rem;color:var(--text-light);margin-bottom:2rem; }
+  .btn { display:inline-block;padding:0.75rem 1.75rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.2s; }
+  .btn:hover { text-decoration:none; }
+  .btn-primary { background:var(--primary);color:white; }
+  .btn-primary:hover { background:var(--primary-dark); }
+  .btn-outline { border:2px solid var(--primary);color:var(--primary); }
+  .btn-outline:hover { background:var(--primary);color:white; }
+  .section { padding:5rem 0; }
+  .section-alt { background:var(--bg-light); }
+  .section-title { font-size:2rem;font-weight:700;text-align:center;margin-bottom:3rem; }
+  .about-content { max-width:700px;margin:0 auto;font-size:1.1rem;color:var(--text-light); }
+  .about-content p { margin-bottom:1rem; }
+  .about-content strong { color:var(--text); }
+  .grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem; }
+  .card { background:white;padding:2rem;border-radius:var(--radius);border:1px solid var(--border);transition:box-shadow 0.2s; }
+  .card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+  .card-icon { font-size:2rem;display:block;margin-bottom:0.75rem; }
+  .card h3 { font-size:1.1rem;margin-bottom:0.5rem; }
+  .card p { color:var(--text-light);font-size:0.95rem; }
+  .faq-list { max-width:700px;margin:0 auto; }
+  .faq-item { border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden; }
+  .faq-item summary { padding:1.25rem 1.5rem;cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none; }
+  .faq-item summary::-webkit-details-marker { display:none; }
+  .faq-item summary::before { content:'＋ ';color:var(--primary); }
+  .faq-item[open] summary::before { content:'－ '; }
+  .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
+  .footer { padding:2rem 0;text-align:center;color:var(--text-light);font-size:0.9rem;border-top:1px solid var(--border); }
+  @media (max-width:768px) {
+    .page-hero h1 { font-size:1.8rem; }
+    .nav-links { gap:0.8rem; }
+    .nav-links a { font-size:0.8rem; }
+    .section { padding:3rem 0; }
+  }
+</style>

@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  { icon: '📸', title: 'Photovoice 社區參與', desc: '運用影像發聲法，讓社區居民透過攝影記錄健康議題，促進由下而上的社區對話與行動。' },
+  { icon: '🏘️', title: '社區健康需求評估', desc: '深入了解社區人口結構、健康問題、資源分布，以實證方法制定在地化健康策略。' },
+  { icon: '👵', title: '長者健康促進', desc: '肌少症篩檢、跌倒預防、慢性病共同照護，打造高齡友善社區。' },
+  { icon: '🏃', title: '運動處方推廣', desc: '設計適合社區居民的團體運動課程，結合運動醫學專業，安全有效地提升社區體適能。' },
+  { icon: '📊', title: '健康數據管理', desc: '導入數位健康管理平台，追蹤社區健康指標，以數據驅動計畫調整與成效評估。' },
+  { icon: '🤝', title: '跨單位合作', desc: '串聯衛生所、學校、社區發展協會、長照據點，建立整合性社區健康照護網絡。' },
+];
+
+const faqs = [
+  { q: '什麼是社區健康營造？', a: '社區健康營造是由社區居民主動參與，結合專業醫療資源，共同辨識健康問題、規劃行動方案、改善社區整體健康的過程。不是由上而下的政策，而是由下而上的社區力量。' },
+  { q: '目前在哪些地區推動？', a: '目前以屏東縣竹田鄉為主要場域，並持續拓展至屏東、高雄其他社區。歡迎有意願的社區主動聯繫合作。' },
+  { q: '社區或里辦公處如何跟我們合作？', a: '歡迎社區發展協會、里辦公處、衛生所來信洽詢。我們會先進行社區訪視與需求評估，再提出客製化的健康營造方案。' },
+  { q: '什麼是 Photovoice？', a: 'Photovoice（影像發聲法）是一種參與式行動研究方法。社區居民用相機記錄日常中的健康相關議題，透過團體討論凝聚共識，最終向決策者提出改善建議。這是賦權社區、讓在地聲音被聽見的有力工具。' },
+  { q: '計畫經費來源？', a: '可透過國健署社區健康營造計畫、地方政府衛生局補助、或醫院社會責任(CSR)等管道取得經費支持。我們協助社區撰寫計畫書與申請補助。' },
+];
+---
+
+<Layout
+  title="社區健康營造｜Photovoice｜陳昱彰醫師"
+  description="屏東高雄社區健康營造計畫。陳昱彰醫師以 Photovoice 影像發聲法推動社區參與，結合長者健康促進、慢性病管理、運動處方，打造健康社區。"
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "社區健康營造計畫",
+    "provider": {
+      "@type": "Person",
+      "name": "陳昱彰",
+      "jobTitle": "社區醫學科主任"
+    },
+    "areaServed": ["屏東縣", "高雄市", "竹田鄉"],
+    "description": "以 Photovoice 等參與式方法推動社區健康營造，結合長者健康促進、慢性病管理、運動處方等，打造由下而上的健康社區。",
+    "url": "https://drcyc.io/community-health"
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">YC Chen, MD</a>
+      <div class="nav-links">
+        <a href="/">首頁</a>
+        <a href="/workplace-health">臨場服務</a>
+        <a href="/health-checkup">高階健檢</a>
+        <a href="/community-health">社區營造</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-badge">Community Health Building</p>
+      <h1>社區健康營造</h1>
+      <p class="hero-subtitle">讓健康從社區長出來<br/>屏東・竹田・高雄</p>
+      <a href="#contact" class="btn btn-primary">合作洽詢</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">我們的理念</h2>
+      <div class="about-content">
+        <p>
+          真正的社區健康，不是衛教單張和血壓量測站。
+          是<strong>讓居民成為自己健康的主人</strong>。
+        </p>
+        <p>
+          陳昱彰醫師即將擔任<strong>屏東義大醫院社區醫學科主任</strong>，
+          以<strong>竹田鄉</strong>為起點，運用 <strong>Photovoice 影像發聲法</strong>
+          等參與式方法，讓社區居民的聲音成為健康計畫的起點，
+          結合臺大公衛學院<strong>健康行為與社區科學</strong>的研究基礎，
+          打造真正由下而上的健康社區。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">服務項目</h2>
+      <div class="grid">
+        {services.map(s => (
+          <div class="card">
+            <span class="card-icon">{s.icon}</span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">常見問題</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section section-alt">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title">合作洽詢</h2>
+      <p style="font-size:1.1rem;color:var(--text-light);margin-bottom:1.5rem;">
+        歡迎社區、衛生所、地方政府聯繫合作
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:cyc@edfm.org" class="btn btn-primary">📧 cyc@edfm.org</a>
+        <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .nav { position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border); }
+  .nav-inner { display:flex;align-items:center;justify-content:space-between;height:64px; }
+  .nav-brand { font-weight:700;font-size:1.15rem;color:var(--text); }
+  .nav-brand:hover { text-decoration:none; }
+  .nav-links { display:flex;gap:1.5rem; }
+  .nav-links a { color:var(--text-light);font-size:0.95rem; }
+  .nav-links a:hover { color:var(--primary);text-decoration:none; }
+  .page-hero { padding:5rem 0 4rem;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fe 100%);text-align:center; }
+  .page-hero h1 { font-size:2.5rem;font-weight:800;margin-bottom:1rem; }
+  .hero-badge { display:inline-block;background:var(--primary);color:white;padding:0.35rem 1rem;border-radius:99px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem; }
+  .hero-subtitle { font-size:1.15rem;color:var(--text-light);margin-bottom:2rem; }
+  .btn { display:inline-block;padding:0.75rem 1.75rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.2s; }
+  .btn:hover { text-decoration:none; }
+  .btn-primary { background:var(--primary);color:white; }
+  .btn-primary:hover { background:var(--primary-dark); }
+  .btn-outline { border:2px solid var(--primary);color:var(--primary); }
+  .btn-outline:hover { background:var(--primary);color:white; }
+  .section { padding:5rem 0; }
+  .section-alt { background:var(--bg-light); }
+  .section-title { font-size:2rem;font-weight:700;text-align:center;margin-bottom:3rem; }
+  .about-content { max-width:700px;margin:0 auto;font-size:1.1rem;color:var(--text-light); }
+  .about-content p { margin-bottom:1rem; }
+  .about-content strong { color:var(--text); }
+  .grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem; }
+  .card { background:white;padding:2rem;border-radius:var(--radius);border:1px solid var(--border);transition:box-shadow 0.2s; }
+  .card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+  .card-icon { font-size:2rem;display:block;margin-bottom:0.75rem; }
+  .card h3 { font-size:1.1rem;margin-bottom:0.5rem; }
+  .card p { color:var(--text-light);font-size:0.95rem; }
+  .faq-list { max-width:700px;margin:0 auto; }
+  .faq-item { border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden; }
+  .faq-item summary { padding:1.25rem 1.5rem;cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none; }
+  .faq-item summary::-webkit-details-marker { display:none; }
+  .faq-item summary::before { content:'＋ ';color:var(--primary); }
+  .faq-item[open] summary::before { content:'－ '; }
+  .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
+  .footer { padding:2rem 0;text-align:center;color:var(--text-light);font-size:0.9rem;border-top:1px solid var(--border); }
+  @media (max-width:768px) {
+    .page-hero h1 { font-size:1.8rem; }
+    .nav-links { gap:0.8rem; }
+    .nav-links a { font-size:0.8rem; }
+    .section { padding:3rem 0; }
+  }
+</style>
