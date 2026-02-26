@@ -1,0 +1,246 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const specialties = [
+  { icon: '🏥', title: '家庭醫學', desc: '慢性病管理、預防醫學、全人照護' },
+  { icon: '⚖️', title: '肥胖醫學', desc: '實證減重、代謝疾病、體重維持' },
+  { icon: '🏃', title: '運動醫學', desc: '運動處方、運動傷害評估' },
+  { icon: '🏭', title: '職業醫學', desc: '職場健康、勞工體檢、職業傷病' },
+  { icon: '🦴', title: '骨質疏鬆', desc: '骨密度評估、骨鬆治療與預防' },
+  { icon: '🧠', title: '行為科學', desc: 'COM-B、動機式晤談、行為改變技術' },
+];
+
+const faqs = [
+  { q: '陳醫師的門診在哪裡？', a: '義大醫院家庭醫學科及義大減重中心。' },
+  { q: '陳醫師的專長有哪些？', a: '家庭醫學、肥胖醫學、運動醫學、職業醫學、骨質疏鬆、行為科學、實證醫學。' },
+  { q: '什麼是行為科學導向的醫療？', a: '結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患建立可持續的健康習慣，而非只開藥治療。' },
+  { q: '減重門診的方式？', a: '採用實證醫學方法，結合營養、行為科學與運動處方，制定個人化減重策略。' },
+];
+---
+
+<Layout>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">Dr. YC Chen</a>
+      <div class="nav-links">
+        <a href="#about">關於</a>
+        <a href="#specialties">專長</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">聯絡</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="hero-badge">Family Medicine × Behavioral Science</p>
+      <h1>陳昱彰 醫師</h1>
+      <p class="hero-subtitle">行為科學 × 臨床醫學<br/>讓醫療不只治療疾病，更幫助人活得更好</p>
+      <div class="hero-actions">
+        <a href="#specialties" class="btn btn-primary">了解專長</a>
+        <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">關於陳醫師</h2>
+      <div class="about-content">
+        <p>
+          陳昱彰醫師為<strong>義大醫院家庭醫學科主治醫師</strong>，專長結合行為科學與臨床醫學，
+          協助病患建立可持續的健康行為改變。
+        </p>
+        <p>
+          核心理念：醫療的價值不只在治療疾病，更在<strong>幫助人活得更好</strong>。
+          透過 COM-B 模型、動機式晤談、雙歷程理論等行為改變技術，
+          為病患制定實際可行的健康策略。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialties -->
+  <section id="specialties" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">專長領域</h2>
+      <div class="grid">
+        {specialties.map(s => (
+          <div class="card">
+            <span class="card-icon">{s.icon}</span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section-title">常見問題</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section section-alt">
+    <div class="container contact-section">
+      <h2 class="section-title">聯絡資訊</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>🏥 門診地點</h3>
+          <p>義大醫院 家庭醫學科</p>
+          <p>義大減重中心</p>
+        </div>
+        <div class="contact-card">
+          <h3>📱 線上</h3>
+          <p><a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener">Facebook 粉專 @lazydr</a></p>
+          <p><a href="https://drcyc.io">drcyc.io</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 陳昱彰醫師 Dr. Yu-Chang Chen</p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-brand { font-weight: 700; font-size: 1.15rem; color: var(--text); }
+  .nav-brand:hover { text-decoration: none; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { color: var(--text-light); font-size: 0.95rem; }
+  .nav-links a:hover { color: var(--primary); text-decoration: none; }
+
+  /* Hero */
+  .hero {
+    padding: 6rem 0 5rem;
+    background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
+    text-align: center;
+  }
+  .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--primary); color: white;
+    padding: 0.35rem 1rem; border-radius: 99px;
+    font-size: 0.85rem; font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .hero-subtitle { font-size: 1.25rem; color: var(--text-light); max-width: 600px; margin: 0 auto 2rem; }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; padding: 0.75rem 1.75rem;
+    border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+    transition: all 0.2s;
+  }
+  .btn:hover { text-decoration: none; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+  .btn-outline:hover { background: var(--primary); color: white; }
+
+  /* Sections */
+  .section { padding: 5rem 0; }
+  .section-alt { background: var(--bg-light); }
+  .section-title {
+    font-size: 2rem; font-weight: 700; text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  /* About */
+  .about-content {
+    max-width: 700px; margin: 0 auto;
+    font-size: 1.1rem; color: var(--text-light);
+  }
+  .about-content p { margin-bottom: 1rem; }
+  .about-content strong { color: var(--text); }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: white; padding: 2rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .card-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+  .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .card p { color: var(--text-light); font-size: 0.95rem; }
+
+  /* FAQ */
+  .faq-list { max-width: 700px; margin: 0 auto; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 1rem; overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 1.25rem 1.5rem; cursor: pointer;
+    font-weight: 600; font-size: 1.05rem;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::before { content: '＋ '; color: var(--primary); }
+  .faq-item[open] summary::before { content: '－ '; }
+  .faq-item p { padding: 0 1.5rem 1.25rem; color: var(--text-light); }
+
+  /* Contact */
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem; max-width: 700px; margin: 0 auto;
+  }
+  .contact-card {
+    background: white; padding: 2rem;
+    border-radius: var(--radius); border: 1px solid var(--border);
+  }
+  .contact-card h3 { margin-bottom: 0.75rem; }
+  .contact-card p { color: var(--text-light); margin-bottom: 0.25rem; }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 0; text-align: center;
+    color: var(--text-light); font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2rem; }
+    .hero-subtitle { font-size: 1.05rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.85rem; }
+    .section { padding: 3rem 0; }
+  }
+</style>

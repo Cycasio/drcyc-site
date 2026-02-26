@@ -1,0 +1,114 @@
+---
+const { title = '陳昱彰醫師 Dr. Yu-Chang Chen', description = '家庭醫學科醫師｜行為科學 × 臨床醫學' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href="https://drcyc.io" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content="https://drcyc.io" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "陳昱彰",
+    "alternateName": "Yu-Chang Chen",
+    "jobTitle": "家庭醫學科主治醫師",
+    "worksFor": {
+      "@type": "Hospital",
+      "name": "義大醫院",
+      "url": "https://www.edah.org.tw"
+    },
+    "url": "https://drcyc.io",
+    "sameAs": [
+      "https://www.facebook.com/lazydr"
+    ],
+    "knowsAbout": ["家庭醫學","肥胖醫學","運動醫學","職業醫學","骨質疏鬆","行為科學","實證醫學"],
+    "description": "義大醫院家庭醫學科主治醫師，專長結合行為科學與臨床醫學，協助病患建立可持續的健康行為改變。"
+  })} />
+
+  <!-- JSON-LD: MedicalBusiness -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "陳昱彰醫師門診",
+    "url": "https://drcyc.io",
+    "medicalSpecialty": ["FamilyMedicine"],
+    "parentOrganization": {
+      "@type": "Hospital",
+      "name": "義大醫院"
+    }
+  })} />
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "陳醫師的門診在哪裡？",
+        "acceptedAnswer": { "@type": "Answer", "text": "義大醫院家庭醫學科及義大減重中心。" }
+      },
+      {
+        "@type": "Question",
+        "name": "陳醫師的專長有哪些？",
+        "acceptedAnswer": { "@type": "Answer", "text": "家庭醫學、肥胖醫學、運動醫學、職業醫學、骨質疏鬆、行為科學、實證醫學。" }
+      },
+      {
+        "@type": "Question",
+        "name": "什麼是行為科學導向的醫療？",
+        "acceptedAnswer": { "@type": "Answer", "text": "結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患建立可持續的健康習慣，而非只開藥治療。" }
+      },
+      {
+        "@type": "Question",
+        "name": "減重門診的方式？",
+        "acceptedAnswer": { "@type": "Answer", "text": "採用實證醫學方法，結合營養、行為科學與運動處方，制定個人化減重策略。" }
+      }
+    ]
+  })} />
+
+  <style is:global>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #ffffff;
+      --bg-light: #f8fafc;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --max-width: 1120px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>
