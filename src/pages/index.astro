@@ -37,13 +37,18 @@ const faqs = [
   <!-- Hero -->
   <section class="hero">
     <div class="container hero-inner">
-      <p class="hero-badge">Family Medicine × Behavioral Science</p>
-      <h1>🌿 陳昱彰 醫師</h1>
-      <p class="hero-tagline">Yu-Chang Chen, MD</p>
-      <p class="hero-subtitle">家庭醫學・肥胖醫學・運動醫學・職業醫學<br/>結合行為科學推動慢性病與健康行為改變</p>
-      <div class="hero-actions">
-        <a href="#specialties" class="btn btn-primary">了解專長</a>
-        <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+      <div class="hero-content">
+        <p class="hero-badge">Family Medicine × Behavioral Science</p>
+        <h1>🌿 陳昱彰 醫師</h1>
+        <p class="hero-tagline">Yu-Chang Chen, MD</p>
+        <p class="hero-subtitle">家庭醫學・肥胖醫學・運動醫學・職業醫學<br/>結合行為科學推動慢性病與健康行為改變</p>
+        <div class="hero-actions">
+          <a href="#specialties" class="btn btn-primary">了解專長</a>
+          <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <img src="/images/portrait.jpg" alt="陳昱彰醫師" width="320" height="400" loading="eager" />
       </div>
     </div>
   </section>
@@ -198,7 +203,14 @@ const faqs = [
   .hero {
     padding: 6rem 0 5rem;
     background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
-    text-align: center;
+  }
+  .hero-inner {
+    display: flex; align-items: center; gap: 3rem; justify-content: center;
+  }
+  .hero-content { text-align: left; flex: 1; max-width: 560px; }
+  .hero-portrait img {
+    border-radius: var(--radius); box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    object-fit: cover; width: 280px; height: 350px;
   }
   .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 0.25rem; }
   .hero-tagline { font-size: 1.3rem; color: var(--text-light); margin-bottom: 1rem; font-weight: 500; }
@@ -317,7 +329,11 @@ const faqs = [
   }
 
   /* Responsive */
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
+    .hero-inner { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+    .hero-content { text-align: center; }
+    .hero-actions { justify-content: center; }
+    .hero-portrait img { width: 200px; height: 250px; }
     .hero h1 { font-size: 2rem; }
     .hero-subtitle { font-size: 1.05rem; }
     .nav-links { gap: 1rem; }
