@@ -2,19 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 
 const specialties = [
-  { icon: '🏥', title: '家庭醫學', desc: '慢性病管理、預防醫學、全人照護' },
-  { icon: '⚖️', title: '肥胖醫學', desc: '實證減重、代謝疾病、體重維持' },
-  { icon: '🏃', title: '運動醫學', desc: '運動處方、運動傷害評估' },
-  { icon: '🏭', title: '職業醫學', desc: '職場健康、勞工體檢、職業傷病' },
-  { icon: '🦴', title: '骨質疏鬆', desc: '骨密度評估、骨鬆治療與預防' },
-  { icon: '🧠', title: '行為科學', desc: 'COM-B、動機式晤談、行為改變技術' },
+  { icon: '🏥', title: '慢性病管理與健康促進', desc: '糖尿病、高血壓、高血脂等代謝性疾病之整合治療，強調生活調整、營養教育與運動介入的精準照護。' },
+  { icon: '⚖️', title: '肥胖醫學與減重管理', desc: '結合營養學、行為科學與運動處方，提供個人化、循證的減重與體重維持策略。' },
+  { icon: '🏃', title: '運動醫學與運動處方', desc: '針對不同年齡與需求，設計安全有效的運動計畫，協助強化表現、降低運動傷害風險。' },
+  { icon: '🏭', title: '職業醫學與職場健康', desc: '聚焦工作環境危害評估、職業病預防與健康促進，協助企業建立員工健康管理系統。' },
+  { icon: '🦴', title: '骨質疏鬆', desc: '骨密度評估、骨鬆治療與預防策略。' },
+  { icon: '🧠', title: '行為科學', desc: 'COM-B 模型、動機式晤談、雙歷程理論等行為改變技術，協助建立可持續的健康習慣。' },
 ];
 
 const faqs = [
-  { q: '陳醫師的門診在哪裡？', a: '義大醫院家庭醫學科及義大減重中心。' },
+  { q: '陳醫師的門診在哪裡？', a: '義大醫院家庭暨社區醫學部及義大減重中心。' },
   { q: '陳醫師的專長有哪些？', a: '家庭醫學、肥胖醫學、運動醫學、職業醫學、骨質疏鬆、行為科學、實證醫學。' },
-  { q: '什麼是行為科學導向的醫療？', a: '結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患建立可持續的健康習慣，而非只開藥治療。' },
+  { q: '什麼是行為科學導向的醫療？', a: '結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患建立可持續的健康習慣，而非只開藥治療。核心理念：理解（Understand）→ 溝通（Communicate）→ 改變（Transform）。' },
   { q: '減重門診的方式？', a: '採用實證醫學方法，結合營養、行為科學與運動處方，制定個人化減重策略。' },
+  { q: '如何聯絡陳醫師？', a: '可透過 Facebook 粉專 @lazydr 聯繫，或至義大醫院家庭暨社區醫學部門診。電子信箱：cyc@edfm.org' },
 ];
 ---
 
@@ -26,6 +27,7 @@ const faqs = [
       <div class="nav-links">
         <a href="#about">關於</a>
         <a href="#specialties">專長</a>
+        <a href="#philosophy">理念</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">聯絡</a>
       </div>
@@ -36,8 +38,9 @@ const faqs = [
   <section class="hero">
     <div class="container hero-inner">
       <p class="hero-badge">Family Medicine × Behavioral Science</p>
-      <h1>陳昱彰 醫師</h1>
-      <p class="hero-subtitle">行為科學 × 臨床醫學<br/>讓醫療不只治療疾病，更幫助人活得更好</p>
+      <h1>🌿 陳昱彰 醫師</h1>
+      <p class="hero-tagline">Yu-Chang Chen, MD</p>
+      <p class="hero-subtitle">家庭醫學・肥胖醫學・運動醫學・職業醫學<br/>結合行為科學推動慢性病與健康行為改變</p>
       <div class="hero-actions">
         <a href="#specialties" class="btn btn-primary">了解專長</a>
         <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
@@ -48,17 +51,20 @@ const faqs = [
   <!-- About -->
   <section id="about" class="section">
     <div class="container">
-      <h2 class="section-title">關於陳醫師</h2>
+      <h2 class="section-title">👨‍⚕️ 專業簡介</h2>
       <div class="about-content">
         <p>
-          陳昱彰醫師為<strong>義大醫院家庭醫學科主治醫師</strong>，專長結合行為科學與臨床醫學，
-          協助病患建立可持續的健康行為改變。
+          現任<strong>義大醫院家庭暨社區醫學部主治醫師</strong>與<strong>義大減重中心醫師</strong>，
+          同時兼任職業醫學訓練醫師，並於<strong>臺大公共衛生學院健康行為與社區科學組</strong>攻讀碩士。
         </p>
         <p>
-          核心理念：醫療的價值不只在治療疾病，更在<strong>幫助人活得更好</strong>。
-          透過 COM-B 模型、動機式晤談、雙歷程理論等行為改變技術，
-          為病患制定實際可行的健康策略。
+          專注於整合家庭醫學、肥胖醫學、運動醫學與職業醫學，
+          以行為科學為核心，協助民眾進行減重治療與慢性病管理，
+          打造可持續、具行動力的健康生活方式。
         </p>
+        <blockquote>
+          「醫學的價值，不僅在於治療疾病，更在於幫助人們過上更好的生活。」
+        </blockquote>
       </div>
     </div>
   </section>
@@ -66,7 +72,7 @@ const faqs = [
   <!-- Specialties -->
   <section id="specialties" class="section section-alt">
     <div class="container">
-      <h2 class="section-title">專長領域</h2>
+      <h2 class="section-title">🩺 專業領域與服務項目</h2>
       <div class="grid">
         {specialties.map(s => (
           <div class="card">
@@ -75,6 +81,55 @@ const faqs = [
             <p>{s.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section id="philosophy" class="section">
+    <div class="container">
+      <h2 class="section-title">💡 臨床理念</h2>
+      <div class="about-content">
+        <p>
+          我相信專業知識應該<strong>「有理、有據、有趣、有用」</strong>。
+          醫療不只是開立處方，而是陪伴與理解；
+          真正的健康，來自科學依據與人文同理的平衡。
+        </p>
+        <div class="philosophy-keys">
+          <div class="philosophy-key">
+            <span class="key-icon">🔍</span>
+            <h3>理解 Understand</h3>
+            <p>深入了解每位患者的生活脈絡與行為模式</p>
+          </div>
+          <div class="philosophy-key">
+            <span class="key-icon">💬</span>
+            <h3>溝通 Communicate</h3>
+            <p>以溫暖而理性的方式傳遞健康知識</p>
+          </div>
+          <div class="philosophy-key">
+            <span class="key-icon">🔄</span>
+            <h3>改變 Transform</h3>
+            <p>協助建立持久可行的健康行為</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">🧬 關於我</h2>
+      <div class="about-content">
+        <p>
+          畢業於<strong>高雄醫學大學醫學系</strong>。
+          現職於義大醫院家庭暨社區醫學部與減重中心，
+          並於臺大公衛學院深耕健康行為與社區科學。
+        </p>
+        <p>
+          熱愛圍棋、跑馬拉松、健身與彈烏克麗麗，
+          相信規律運動與心智活動能培養身心平衡的長期韌性。
+        </p>
       </div>
     </div>
   </section>
@@ -97,17 +152,18 @@ const faqs = [
   <!-- Contact -->
   <section id="contact" class="section section-alt">
     <div class="container contact-section">
-      <h2 class="section-title">聯絡資訊</h2>
+      <h2 class="section-title">🌐 聯絡與連結</h2>
       <div class="contact-grid">
         <div class="contact-card">
           <h3>🏥 門診地點</h3>
-          <p>義大醫院 家庭醫學科</p>
+          <p>義大醫院 家庭暨社區醫學部</p>
           <p>義大減重中心</p>
         </div>
         <div class="contact-card">
-          <h3>📱 線上</h3>
+          <h3>📱 線上聯絡</h3>
           <p><a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener">Facebook 粉專 @lazydr</a></p>
-          <p><a href="https://drcyc.io">drcyc.io</a></p>
+          <p><a href="mailto:cyc@edfm.org">📧 cyc@edfm.org</a></p>
+          <p><a href="https://drcyc.io">🌐 drcyc.io</a></p>
         </div>
       </div>
     </div>
@@ -116,7 +172,7 @@ const faqs = [
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>© 2026 陳昱彰醫師 Dr. Yu-Chang Chen</p>
+      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
     </div>
   </footer>
 </Layout>
@@ -144,7 +200,8 @@ const faqs = [
     background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
     text-align: center;
   }
-  .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
+  .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 0.25rem; }
+  .hero-tagline { font-size: 1.3rem; color: var(--text-light); margin-bottom: 1rem; font-weight: 500; }
   .hero-badge {
     display: inline-block;
     background: var(--primary); color: white;
@@ -152,7 +209,7 @@ const faqs = [
     font-size: 0.85rem; font-weight: 600;
     margin-bottom: 1.5rem;
   }
-  .hero-subtitle { font-size: 1.25rem; color: var(--text-light); max-width: 600px; margin: 0 auto 2rem; }
+  .hero-subtitle { font-size: 1.15rem; color: var(--text-light); max-width: 600px; margin: 0 auto 2rem; }
   .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
   /* Buttons */
@@ -182,6 +239,30 @@ const faqs = [
   }
   .about-content p { margin-bottom: 1rem; }
   .about-content strong { color: var(--text); }
+  .about-content blockquote {
+    border-left: 4px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text);
+    background: var(--bg-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  /* Philosophy */
+  .philosophy-keys {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .philosophy-key {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .key-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+  .philosophy-key h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text); }
+  .philosophy-key p { font-size: 0.95rem; color: var(--text-light); }
 
   /* Grid */
   .grid {
@@ -197,7 +278,7 @@ const faqs = [
   }
   .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
   .card-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
-  .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
   .card p { color: var(--text-light); font-size: 0.95rem; }
 
   /* FAQ */
