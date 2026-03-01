@@ -1,0 +1,2 @@
+# Redirect apex to www (preserving path)
+https://drcyc.io/* https://www.drcyc.io/:splat 301
