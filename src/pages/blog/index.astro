@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="衛教專欄 | 陳昱彰醫師" description="陳昱彰醫師的健康衛教文章：減重、骨質疏鬆、職場健康、行為科學等主題。">
+  <main class="container mx-auto px-4 py-12 max-w-4xl">
+    <h1 class="text-3xl font-bold mb-2">📝 衛教專欄</h1>
+    <p class="text-gray-600 mb-8">用白話文聊健康，結合行為科學與實證醫學的觀點。</p>
+    
+    <div class="space-y-8">
+      {posts.map((post) => (
+        <article class="border-b pb-6">
+          <a href={`/blog/${post.slug}`} class="group">
+            <h2 class="text-xl font-semibold group-hover:text-blue-600 transition-colors">
+              {post.data.title}
+            </h2>
+            <p class="text-gray-600 mt-2">{post.data.description}</p>
+            <div class="flex items-center gap-4 mt-3 text-sm text-gray-500">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              {post.data.tags && (
+                <div class="flex gap-2">
+                  {post.data.tags.slice(0, 3).map((tag) => (
+                    <span class="bg-gray-100 px-2 py-0.5 rounded text-xs">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </main>
+</Layout>
