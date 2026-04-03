@@ -76,7 +76,7 @@ const faqs = [
         <a href="/services" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex flex-col justify-between hover:bg-white transition-colors no-underline group">
           <div>
             <div class="w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined text-3xl">corporate_fare</span>
+              <span class="text-3xl">🏢</span>
             </div>
             <h3 class="text-2xl font-bold text-primary mb-4 font-headline">企業臨場健康服務</h3>
             <p class="text-on-surface-variant chinese-line-height text-lg">
@@ -84,7 +84,7 @@ const faqs = [
             </p>
           </div>
           <div class="mt-8 flex items-center text-secondary font-bold cursor-pointer">
-            了解詳情 <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            了解詳情 →
           </div>
         </a>
 
@@ -92,7 +92,7 @@ const faqs = [
         <a href="/services" class="bg-primary text-on-primary p-10 rounded-3xl flex flex-col justify-between no-underline">
           <div>
             <div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined text-3xl">health_and_safety</span>
+              <span class="text-3xl">🔬</span>
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">高階健康檢查</h3>
             <p class="text-on-primary-container chinese-line-height">
@@ -106,7 +106,7 @@ const faqs = [
         <a href="/services" class="bg-secondary-container text-on-secondary-container p-10 rounded-3xl flex flex-col justify-between no-underline">
           <div>
             <div class="w-14 h-14 bg-on-secondary-container/10 text-on-secondary-container rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined text-3xl">monitor_weight</span>
+              <span class="text-3xl">⚖️</span>
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
             <p class="chinese-line-height">
@@ -138,17 +138,11 @@ const faqs = [
     <div class="bg-surface-container-lowest rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-sm">
       <div class="md:w-6 flex-shrink-0 bg-secondary"></div>
       <div class="p-12 md:p-20">
-        <span class="material-symbols-outlined text-secondary text-5xl mb-6">format_quote</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary leading-snug mb-8 font-headline">
-          「醫學不只是科學的應用，更是人與人之間的信任連結。我的目標是成為每一位病人最信賴的健康顧問，在疾病發生前預防，在患病時給予最有溫度的支持。」
+        <span class="text-secondary text-5xl mb-6 block">"</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-primary leading-snug mb-8 font-headline chinese-line-height">
+          醫學不只是科學的應用，更是人與人之間的信任連結。我的目標是成為每一位病人最信賴的健康顧問，在疾病發生前預防，在患病時給予最有溫度的支持。
         </h2>
-        <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">YC</div>
-          <div>
-            <p class="font-bold text-primary">陳醫師 (Dr. YC Chen)</p>
-            <p class="text-on-surface-variant text-sm">家庭醫學科專科醫師</p>
-          </div>
-        </div>
+        <p class="text-on-surface-variant font-medium">— 陳昱彰</p>
       </div>
     </div>
   </section>
@@ -187,7 +181,7 @@ const faqs = [
           <details class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
             <summary class="px-8 py-6 cursor-pointer font-bold text-primary text-lg list-none flex items-center justify-between">
               {f.q}
-              <span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+              <span class="text-secondary transition-transform group-open:rotate-180 inline-block">▼</span>
             </summary>
             <p class="px-8 pb-6 text-on-surface-variant chinese-line-height">{f.a}</p>
           </details>

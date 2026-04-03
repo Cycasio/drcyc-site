@@ -56,13 +56,13 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
               </p>
               <div class="flex items-center gap-6 mb-8 text-sm text-on-surface-variant font-medium">
                 <span class="flex items-center gap-1.5">
-                  <span class="material-symbols-outlined text-base">calendar_today</span>
+                  →
                   {featuredPost.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </span>
               </div>
               <span class="text-secondary font-bold flex items-center gap-2">
                 閱讀更多
-                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                →
               </span>
             </div>
           </div>
