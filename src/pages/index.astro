@@ -1,14 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
 
-const specialties = [
-  { icon: '🏥', title: '慢性病管理與健康促進', desc: '糖尿病、高血壓、高血脂等代謝性疾病之整合治療，強調生活調整、營養教育與運動介入的精準照護。' },
-  { icon: '⚖️', title: '肥胖醫學與減重管理', desc: '結合營養學、行為科學與運動處方，提供個人化、循證的減重與體重維持策略。' },
-  { icon: '🏃', title: '運動醫學與運動處方', desc: '針對不同年齡與需求，設計安全有效的運動計畫，協助強化表現、降低運動傷害風險。' },
-  { icon: '🏭', title: '職業醫學與職場健康', desc: '聚焦工作環境危害評估、職業病預防與健康促進，協助企業建立員工健康管理系統。' },
-  { icon: '🦴', title: '骨質疏鬆', desc: '骨密度評估、骨鬆治療與預防策略。' },
-  { icon: '🧠', title: '行為科學', desc: 'COM-B 模型、動機式晤談、雙歷程理論等行為改變技術，協助建立可持續的健康習慣。' },
-];
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 const faqs = [
   { q: '陳醫師的門診在哪裡？', a: '義大醫院家庭暨社區醫學部及義大減重中心。' },
@@ -20,368 +17,204 @@ const faqs = [
 ---
 
 <Layout>
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="nav-brand">YC Chen, MD</a>
-      <div class="nav-links">
-        <a href="#about">關於</a>
-        <a href="/workplace-health">臨場服務</a>
-        <a href="/health-checkup">高階健檢</a>
-        <a href="/community-health">社區營造</a>
-        <a href="#contact">聯絡</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <p class="hero-badge">Family Medicine × Behavioral Science</p>
-        <h1>🌿 陳昱彰 醫師</h1>
-        <p class="hero-tagline">Yu-Chang Chen, MD</p>
-        <p class="hero-subtitle">家庭醫學・肥胖醫學・運動醫學・職業醫學<br/>結合行為科學推動慢性病與健康行為改變</p>
-        <div class="hero-actions">
-          <a href="#specialties" class="btn btn-primary">了解專長</a>
-          <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-surface pt-12 pb-24 md:pt-20 md:pb-32">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 z-10">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-primary leading-tight tracking-tight mb-6 font-headline">
+          YC Chen, MD:<br />
+          <span class="text-secondary">Your Health Partner</span><br />
+          in Family Medicine
+        </h1>
+        <p class="text-xl text-on-surface-variant mb-10 max-w-xl chinese-line-height">
+          陳醫師致力於提供全方位的家庭醫學照護。從預防醫學到慢性病管理，以實證醫學為基礎，結合行為科學與人文關懷，守護您與家人的健康。
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="https://www.edah.org.tw"
+            target="_blank"
+            rel="noopener"
+            class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:scale-[1.02] transition-transform no-underline"
+          >
+            立即預約掛號
+          </a>
+          <a
+            href="/services"
+            class="border border-primary/20 text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary-fixed-dim/20 transition-colors no-underline"
+          >
+            了解診療項目
+          </a>
         </div>
       </div>
-      <div class="hero-portrait">
-        <img src="/images/portrait.jpg" alt="陳昱彰醫師" width="320" height="400" loading="eager" />
+      <div class="lg:col-span-5 relative">
+        <div class="absolute -top-10 -right-10 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl transform lg:rotate-2">
+          <img
+            src="/images/portrait.jpg"
+            alt="陳昱彰醫師"
+            class="w-full h-full object-cover"
+            width="400"
+            height="500"
+            loading="eager"
+          />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2 class="section-title">👨‍⚕️ 專業簡介</h2>
-      <div class="about-content">
-        <p>
-          現任<strong>義大醫院家庭暨社區醫學部主治醫師</strong>與<strong>義大減重中心醫師</strong>，
-          同時兼任職業醫學訓練醫師，曾就讀<strong>臺大公共衛生學院健康行為與社區科學組</strong>。
-        </p>
-        <p>
-          專注於整合家庭醫學、肥胖醫學、運動醫學與職業醫學，
-          以行為科學為核心，協助民眾進行減重治療與慢性病管理，
-          打造可持續、具行動力的健康生活方式。
-        </p>
-        <blockquote>
-          「醫學的價值，不僅在於治療疾病，更在於幫助人們過上更好的生活。」
-        </blockquote>
+  <!-- Service Highlights (Bento Grid) -->
+  <section class="py-24 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-16">
+        <span class="text-on-surface-variant text-sm font-bold tracking-[0.2em] uppercase">Services</span>
+        <h2 class="text-4xl font-bold text-primary mt-2 font-headline">專業服務項目</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- Specialties -->
-  <section id="specialties" class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">🩺 專業領域與服務項目</h2>
-      <div class="grid">
-        {specialties.map(s => (
-          <div class="card">
-            <span class="card-icon">{s.icon}</span>
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 企業臨場健康服務 (large, col-span-2) -->
+        <a href="/services" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex flex-col justify-between hover:bg-white transition-colors no-underline group">
+          <div>
+            <div class="w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-3xl">corporate_fare</span>
+            </div>
+            <h3 class="text-2xl font-bold text-primary mb-4 font-headline">企業臨場健康服務</h3>
+            <p class="text-on-surface-variant chinese-line-height text-lg">
+              依據《職業安全衛生法》，提供專業臨場健康服務：勞工健康保護四大計畫、工作環境危害評估、員工健康管理與追蹤。協助企業法規遵循，打造員工健康管理系統。
+            </p>
           </div>
+          <div class="mt-8 flex items-center text-secondary font-bold cursor-pointer">
+            了解詳情 <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </div>
+        </a>
+
+        <!-- 高階健康檢查 (small dark primary card) -->
+        <a href="/services" class="bg-primary text-on-primary p-10 rounded-3xl flex flex-col justify-between no-underline">
+          <div>
+            <div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-3xl">health_and_safety</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 font-headline">高階健康檢查</h3>
+            <p class="text-on-primary-container chinese-line-height">
+              結合行為科學的個人化健檢。不只是報告，更是一份改變的起點——整合血液生化分析、癌症篩檢與生活型態建議。
+            </p>
+          </div>
+          <span class="text-sm font-medium opacity-60">預防勝於治療</span>
+        </a>
+
+        <!-- 減重管理門診 (teal secondary-container card) -->
+        <a href="/services" class="bg-secondary-container text-on-secondary-container p-10 rounded-3xl flex flex-col justify-between no-underline">
+          <div>
+            <div class="w-14 h-14 bg-on-secondary-container/10 text-on-secondary-container rounded-2xl flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-3xl">monitor_weight</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
+            <p class="chinese-line-height">
+              以 COM-B 行為科學模型為架構，結合營養學與運動處方，提供實證導向的個人化減重策略。義大減重中心專業團隊。
+            </p>
+          </div>
+          <span class="text-sm font-bold">科學減重，持久有效</span>
+        </a>
+
+        <!-- 社區健康營造 (horizontal card, col-span-2) -->
+        <a href="/services" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex items-center gap-10 hover:bg-white transition-colors no-underline group">
+          <div>
+            <h3 class="text-2xl font-bold text-primary mb-4 font-headline">社區健康營造</h3>
+            <p class="text-on-surface-variant chinese-line-height">
+              以居民參與為核心，推動由下而上的社區健康計畫。深入社區提供健康講座、諮詢與居家醫療評估，讓專業醫療資源不再有距離感。
+            </p>
+            <div class="mt-6 flex gap-4">
+              <span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">健康講座</span>
+              <span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">籌備中</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy Quote Section -->
+  <section class="py-24 max-w-7xl mx-auto px-8">
+    <div class="bg-surface-container-lowest rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-sm">
+      <div class="md:w-6 flex-shrink-0 bg-secondary"></div>
+      <div class="p-12 md:p-20">
+        <span class="material-symbols-outlined text-secondary text-5xl mb-6">format_quote</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-primary leading-snug mb-8 font-headline">
+          「醫學不只是科學的應用，更是人與人之間的信任連結。我的目標是成為每一位病人最信賴的健康顧問，在疾病發生前預防，在患病時給予最有溫度的支持。」
+        </h2>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">YC</div>
+          <div>
+            <p class="font-bold text-primary">陳醫師 (Dr. YC Chen)</p>
+            <p class="text-on-surface-variant text-sm">家庭醫學科專科醫師</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Blog Posts -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex justify-between items-end mb-16">
+        <div>
+          <span class="text-on-surface-variant text-sm font-bold tracking-[0.2em] uppercase">Health Blog</span>
+          <h2 class="text-4xl font-bold text-primary mt-2 font-headline">衛教專欄</h2>
+        </div>
+        <a class="text-secondary font-bold hover:underline underline-offset-8 transition-all no-underline" href="/blog">查看所有文章</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            slug={post.slug}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+            image={post.data.image}
+          />
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Philosophy -->
-  <section id="philosophy" class="section">
-    <div class="container">
-      <h2 class="section-title">💡 臨床理念</h2>
-      <div class="about-content">
-        <p>
-          我相信專業知識應該<strong>「有理、有據、有趣、有用」</strong>。
-          醫療不只是開立處方，而是陪伴與理解；
-          真正的健康，來自科學依據與人文同理的平衡。
-        </p>
-        <div class="philosophy-keys">
-          <div class="philosophy-key">
-            <span class="key-icon">🔍</span>
-            <h3>理解 Understand</h3>
-            <p>深入了解每位患者的生活脈絡與行為模式</p>
-          </div>
-          <div class="philosophy-key">
-            <span class="key-icon">💬</span>
-            <h3>溝通 Communicate</h3>
-            <p>以溫暖而理性的方式傳遞健康知識</p>
-          </div>
-          <div class="philosophy-key">
-            <span class="key-icon">🔄</span>
-            <h3>改變 Transform</h3>
-            <p>協助建立持久可行的健康行為</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Me -->
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">🧬 關於我</h2>
-      <div class="about-content">
-        <p>
-          畢業於<strong>高雄醫學大學醫學系</strong>。
-          現職於義大醫院家庭暨社區醫學部與減重中心，
-          曾於臺大公衛學院研修健康行為與社區科學。
-        </p>
-        <p>
-          熱愛圍棋、跑馬拉松、健身與彈烏克麗麗，
-          相信規律運動與心智活動能培養身心平衡的長期韌性。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services CTA -->
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">服務項目</h2>
-      <div class="services-grid">
-        <a href="/workplace-health" class="service-card">
-          <span class="service-icon">🏭</span>
-          <h3>企業臨場健康服務</h3>
-          <p>專業職醫為您的企業把關員工健康，符合法規並提升生產力。</p>
-          <span class="service-link">了解更多 →</span>
-        </a>
-        <a href="/health-checkup" class="service-card">
-          <span class="service-icon">🔬</span>
-          <h3>高階健康檢查</h3>
-          <p>不只是報告，是一份改變的起點。結合行為科學的個人化健檢。</p>
-          <span class="service-link">了解更多 →</span>
-        </a>
-        <a href="/community-health" class="service-card">
-          <span class="service-icon">🏘️</span>
-          <h3>社區健康營造</h3>
-          <p>以居民參與為核心，推動由下而上的社區健康計畫。</p>
-          <span class="service-link">了解更多 →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2 class="section-title">常見問題</h2>
-      <div class="faq-list">
-        {faqs.map(f => (
-          <details class="faq-item">
-            <summary>{f.q}</summary>
-            <p>{f.a}</p>
+  <!-- FAQ Section -->
+  <section class="py-24 bg-surface-container-low">
+    <div class="max-w-3xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-primary mb-12 text-center font-headline">常見問題</h2>
+      <div class="space-y-4">
+        {faqs.map((f) => (
+          <details class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
+            <summary class="px-8 py-6 cursor-pointer font-bold text-primary text-lg list-none flex items-center justify-between">
+              {f.q}
+              <span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <p class="px-8 pb-6 text-on-surface-variant chinese-line-height">{f.a}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section section-alt">
-    <div class="container contact-section">
-      <h2 class="section-title">🌐 聯絡與連結</h2>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h3>🏥 門診地點</h3>
-          <p>義大醫院 家庭暨社區醫學部</p>
-          <p>義大減重中心</p>
-        </div>
-        <div class="contact-card">
-          <h3>📱 線上聯絡</h3>
-          <p><a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener">Facebook 粉專 @lazydr</a></p>
-          <p><a href="mailto:cyc@edfm.org">📧 cyc@edfm.org</a></p>
-          <p><a href="https://drcyc.io">🌐 drcyc.io</a></p>
+  <!-- CTA Section -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="bg-primary-container rounded-[2rem] p-12 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/50 to-transparent"></div>
+        <div class="relative z-10">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-headline">準備好開始您的健康旅程了嗎？</h2>
+          <p class="text-on-primary-container text-lg mb-10 max-w-2xl mx-auto">
+            義大醫院提供線上掛號服務，省去現場排隊的漫長等待。
+          </p>
+          <a
+            href="https://www.edah.org.tw"
+            target="_blank"
+            rel="noopener"
+            class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold text-xl hover:bg-on-secondary-container transition-all shadow-xl no-underline"
+          >
+            預約掛號
+          </a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
-    </div>
-  </footer>
 </Layout>
-
-<style>
-  /* Nav */
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
-  }
-  .nav-brand { font-weight: 700; font-size: 1.15rem; color: var(--text); }
-  .nav-brand:hover { text-decoration: none; }
-  .nav-links { display: flex; gap: 1.5rem; }
-  .nav-links a { color: var(--text-light); font-size: 0.95rem; }
-  .nav-links a:hover { color: var(--primary); text-decoration: none; }
-
-  /* Hero */
-  .hero {
-    padding: 6rem 0 5rem;
-    background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
-  }
-  .hero-inner {
-    display: flex; align-items: center; gap: 3rem; justify-content: center;
-  }
-  .hero-content { text-align: left; flex: 1; max-width: 560px; }
-  .hero-portrait img {
-    border-radius: var(--radius); box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    object-fit: cover; width: 280px; height: 350px;
-  }
-  .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 0.25rem; }
-  .hero-tagline { font-size: 1.3rem; color: var(--text-light); margin-bottom: 1rem; font-weight: 500; }
-  .hero-badge {
-    display: inline-block;
-    background: var(--primary); color: white;
-    padding: 0.35rem 1rem; border-radius: 99px;
-    font-size: 0.85rem; font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-  .hero-subtitle { font-size: 1.15rem; color: var(--text-light); max-width: 600px; margin: 0 auto 2rem; }
-  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-  /* Buttons */
-  .btn {
-    display: inline-block; padding: 0.75rem 1.75rem;
-    border-radius: 8px; font-weight: 600; font-size: 0.95rem;
-    transition: all 0.2s;
-  }
-  .btn:hover { text-decoration: none; }
-  .btn-primary { background: var(--primary); color: white; }
-  .btn-primary:hover { background: var(--primary-dark); }
-  .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
-  .btn-outline:hover { background: var(--primary); color: white; }
-
-  /* Sections */
-  .section { padding: 5rem 0; }
-  .section-alt { background: var(--bg-light); }
-  .section-title {
-    font-size: 2rem; font-weight: 700; text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  /* About */
-  .about-content {
-    max-width: 700px; margin: 0 auto;
-    font-size: 1.1rem; color: var(--text-light);
-  }
-  .about-content p { margin-bottom: 1rem; }
-  .about-content strong { color: var(--text); }
-  .about-content blockquote {
-    border-left: 4px solid var(--primary);
-    padding: 1rem 1.5rem;
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--text);
-    background: var(--bg-light);
-    border-radius: 0 var(--radius) var(--radius) 0;
-  }
-
-  /* Philosophy */
-  .philosophy-keys {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-  .philosophy-key {
-    text-align: center;
-    padding: 1.5rem;
-  }
-  .key-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
-  .philosophy-key h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text); }
-  .philosophy-key p { font-size: 0.95rem; color: var(--text-light); }
-
-  /* Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  .card {
-    background: white; padding: 2rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    transition: box-shadow 0.2s;
-  }
-  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .card-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
-  .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-  .card p { color: var(--text-light); font-size: 0.95rem; }
-
-  /* Services CTA */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  .service-card {
-    background: white; padding: 2rem; border-radius: var(--radius);
-    border: 1px solid var(--border); transition: all 0.2s;
-    display: block; color: var(--text); text-decoration: none;
-  }
-  .service-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-decoration: none; transform: translateY(-2px); }
-  .service-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
-  .service-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-  .service-card p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem; }
-  .service-link { color: var(--primary); font-weight: 600; font-size: 0.95rem; }
-
-  /* FAQ */
-  .faq-list { max-width: 700px; margin: 0 auto; }
-  .faq-item {
-    border: 1px solid var(--border); border-radius: var(--radius);
-    margin-bottom: 1rem; overflow: hidden;
-  }
-  .faq-item summary {
-    padding: 1.25rem 1.5rem; cursor: pointer;
-    font-weight: 600; font-size: 1.05rem;
-    list-style: none;
-  }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::before { content: '＋ '; color: var(--primary); }
-  .faq-item[open] summary::before { content: '－ '; }
-  .faq-item p { padding: 0 1.5rem 1.25rem; color: var(--text-light); }
-
-  /* Contact */
-  .contact-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem; max-width: 700px; margin: 0 auto;
-  }
-  .contact-card {
-    background: white; padding: 2rem;
-    border-radius: var(--radius); border: 1px solid var(--border);
-  }
-  .contact-card h3 { margin-bottom: 0.75rem; }
-  .contact-card p { color: var(--text-light); margin-bottom: 0.25rem; }
-
-  /* Footer */
-  .footer {
-    padding: 2rem 0; text-align: center;
-    color: var(--text-light); font-size: 0.9rem;
-    border-top: 1px solid var(--border);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .hero-inner { flex-direction: column-reverse; text-align: center; gap: 2rem; }
-    .hero-content { text-align: center; }
-    .hero-actions { justify-content: center; }
-    .hero-portrait img { width: 200px; height: 250px; }
-    .hero h1 { font-size: 2rem; }
-    .hero-subtitle { font-size: 1.05rem; }
-    .nav-links { gap: 1rem; }
-    .nav-links a { font-size: 0.85rem; }
-    .section { padding: 3rem 0; }
-  }
-</style>

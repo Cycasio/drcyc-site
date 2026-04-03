@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  pubDate: Date;
+  tags?: string[];
+  image?: string;
+}
+
+const { title, description, slug, pubDate, tags, image } = Astro.props;
+
+const dateStr = pubDate.toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+}).replace(/\//g, '.');
+
+const firstTag = tags?.[0];
+---
+
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+  <a href={`/blog/${slug}`} class="no-underline flex flex-col flex-grow">
+    {image && (
+      <div class="relative aspect-[16/10] overflow-hidden">
+        <img
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          src={image}
+          alt={title}
+          loading="lazy"
+        />
+        {firstTag && (
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">
+              {firstTag}
+            </span>
+          </div>
+        )}
+      </div>
+    )}
+    <div class="p-8 flex flex-col flex-grow">
+      {!image && firstTag && (
+        <span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold tracking-widest uppercase mb-4 w-fit">
+          {firstTag}
+        </span>
+      )}
+      <h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">
+        {title}
+      </h3>
+      <p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+        {description}
+      </p>
+      <div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+        <span class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">calendar_month</span>
+          {dateStr}
+        </span>
+      </div>
+    </div>
+  </a>
+</article>

@@ -1,40 +1,129 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const featuredPost = posts[0];
+const remainingPosts = posts.slice(1);
+
+// Extract unique tags from all posts
+const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
 ---
 
 <Layout title="衛教專欄 | 陳昱彰醫師" description="陳昱彰醫師的健康衛教文章：減重、骨質疏鬆、職場健康、行為科學等主題。">
-  <main class="container mx-auto px-4 py-12 max-w-4xl">
-    <h1 class="text-3xl font-bold mb-2">📝 衛教專欄</h1>
-    <p class="text-gray-600 mb-8">用白話文聊健康，結合行為科學與實證醫學的觀點。</p>
-    
-    <div class="space-y-8">
-      {posts.map((post) => (
-        <article class="border-b pb-6">
-          <a href={`/blog/${post.slug}`} class="group">
-            <h2 class="text-xl font-semibold group-hover:text-blue-600 transition-colors">
-              {post.data.title}
-            </h2>
-            <p class="text-gray-600 mt-2">{post.data.description}</p>
-            <div class="flex items-center gap-4 mt-3 text-sm text-gray-500">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </time>
-              {post.data.tags && (
-                <div class="flex gap-2">
-                  {post.data.tags.slice(0, 3).map((tag) => (
-                    <span class="bg-gray-100 px-2 py-0.5 rounded text-xs">{tag}</span>
-                  ))}
+  <main class="max-w-7xl mx-auto px-8 py-16">
+    <!-- Header Section -->
+    <header class="mb-16">
+      <h1 class="text-5xl font-extrabold tracking-tight text-primary mb-4 font-headline">衛教專欄</h1>
+      <p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl chinese-line-height">
+        在這裡，我們分享醫學新知與健康管理建議。透過臨床實踐與專業知識，協助您建立更健康的生活型態。
+      </p>
+    </header>
+
+    <!-- Featured Post (Editorial Style) -->
+    {featuredPost && (
+      <section class="mb-24">
+        <a href={`/blog/${featuredPost.slug}`} class="no-underline group">
+          <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest flex flex-col md:flex-row shadow-[0_20px_40px_rgba(25,28,29,0.05)]">
+            {featuredPost.data.image && (
+              <div class="md:w-3/5 overflow-hidden">
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 min-h-[400px]"
+                  src={featuredPost.data.image}
+                  alt={featuredPost.data.title}
+                  loading="eager"
+                />
+              </div>
+            )}
+            <div class:list={[
+              'p-12 flex flex-col justify-center',
+              featuredPost.data.image ? 'md:w-2/5' : 'w-full',
+            ]}>
+              {featuredPost.data.tags?.[0] && (
+                <div class="inline-block px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold tracking-widest uppercase mb-6 w-fit">
+                  {featuredPost.data.tags[0]}
                 </div>
               )}
+              <h2 class="text-3xl font-bold text-primary mb-6 leading-tight font-headline">
+                {featuredPost.data.title}
+              </h2>
+              <p class="text-on-surface-variant mb-8 line-clamp-3 leading-relaxed chinese-line-height">
+                {featuredPost.data.description}
+              </p>
+              <div class="flex items-center gap-6 mb-8 text-sm text-on-surface-variant font-medium">
+                <span class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-base">calendar_today</span>
+                  {featuredPost.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </span>
+              </div>
+              <span class="text-secondary font-bold flex items-center gap-2">
+                閱讀更多
+                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+              </span>
             </div>
-          </a>
-        </article>
+          </div>
+        </a>
+      </section>
+    )}
+
+    <!-- Category Filter -->
+    <div class="flex flex-wrap gap-4 mb-12">
+      <button class="px-6 py-2 rounded-full bg-primary text-on-primary text-sm font-bold" data-filter="all">全部文章</button>
+      {allTags.map(tag => (
+        <button
+          class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors"
+          data-filter={tag}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+
+    <!-- 3-Column Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="posts-grid">
+      {remainingPosts.map((post) => (
+        <div data-tags={JSON.stringify(post.data.tags ?? [])}>
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            slug={post.slug}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+            image={post.data.image}
+          />
+        </div>
       ))}
     </div>
   </main>
 </Layout>
+
+<script>
+  const filterBtns = document.querySelectorAll('[data-filter]');
+  const postItems = document.querySelectorAll('#posts-grid > div');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary');
+        b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      });
+      btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      btn.classList.add('bg-primary', 'text-on-primary');
+
+      postItems.forEach(item => {
+        if (filter === 'all') {
+          (item as HTMLElement).style.display = '';
+          return;
+        }
+        const tags: string[] = JSON.parse(item.getAttribute('data-tags') ?? '[]');
+        (item as HTMLElement).style.display = tags.includes(filter) ? '' : 'none';
+      });
+    });
+  });
+</script>

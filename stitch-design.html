@@ -1,0 +1,1128 @@
+<!-- Design System -->
+<!DOCTYPE html>
+
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2e3132",
+                    "primary": "#022448",
+                    "secondary": "#006a60",
+                    "primary-container": "#1e3a5f",
+                    "on-secondary-container": "#007166",
+                    "tertiary-fixed-dim": "#edbf7f",
+                    "surface-container": "#edeeef",
+                    "surface-bright": "#f8f9fa",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#74777f",
+                    "surface-container-highest": "#e1e3e4",
+                    "secondary-fixed-dim": "#6fd8c8",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1d",
+                    "surface-dim": "#d9dadb",
+                    "tertiary": "#341f00",
+                    "surface": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#8aa4cf",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "background": "#f8f9fa",
+                    "on-primary-fixed": "#001c3b",
+                    "inverse-primary": "#adc8f5",
+                    "on-tertiary-fixed": "#291800",
+                    "secondary-container": "#8cf5e4",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#60410c",
+                    "on-surface-variant": "#43474e",
+                    "secondary-fixed": "#8cf5e4",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d5e3ff",
+                    "on-secondary-fixed-variant": "#005048",
+                    "tertiary-container": "#503300",
+                    "primary-fixed-dim": "#adc8f5",
+                    "surface-tint": "#455f87",
+                    "on-secondary-fixed": "#00201c",
+                    "outline-variant": "#c4c6cf",
+                    "on-tertiary-container": "#c69b5f",
+                    "tertiary-fixed": "#ffddb2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Public Sans", "sans-serif"],
+                    "label": ["Public Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl transition-all border-none">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="text-xl font-bold tracking-tighter text-blue-950">YC Chen, MD</div>
+<!-- Desktop Links -->
+<div class="hidden md:flex items-center gap-10">
+<a class="text-slate-600 font-medium hover:text-teal-700 transition-colors duration-300" href="#">首頁</a>
+<a class="text-blue-900 border-b-2 border-teal-600 pb-1 font-bold" href="#">衛教專欄</a>
+<a class="text-slate-600 font-medium hover:text-teal-700 transition-colors duration-300" href="#">服務項目</a>
+<a class="text-slate-600 font-medium hover:text-teal-700 transition-colors duration-300" href="#">關於我</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all">
+                預約掛號
+            </button>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-8 py-16">
+<!-- Header Section -->
+<header class="mb-16">
+<h1 class="text-5xl font-extrabold tracking-tight text-primary mb-4">衛教專欄</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl">
+                在這裡，我們分享醫學新知與健康管理建議。透過臨床實踐與專業知識，協助您建立更健康的生活型態。
+            </p>
+</header>
+<!-- Featured Post (Editorial Style) -->
+<section class="mb-24">
+<div class="relative group overflow-hidden rounded-xl bg-surface-container-lowest flex flex-col md:flex-row shadow-[0_20px_40px_rgba(25,28,29,0.05)]">
+<div class="md:w-3/5 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 min-h-[400px]" data-alt="A stethoscope laying on a wooden desk next to a journal and a pair of glasses, soft natural window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7QA9s8iOqHMXPKvaxGjrM92TjOF32naCfsjLZ6752u32YA0XbueCxyXORnarCrcxYkgPxoMnIO_9-kBUT1lCLeekI2E6SFzaUc27oYATJKKptAetxNmNNLTgLc8b9esmJOHY35TQ8KXLaLOvBFR8KeSqhWOGNiQGbS_t8bqm_cfSyEf9rhVwSLY579j0FbdqlcGz4PkBTRuaa34lrX3oCl2zNbBokylPgdOqRApE0mUWCJDW02h9L0tjHxMCps7NqNEfyk_SgYsY"/>
+</div>
+<div class="md:w-2/5 p-12 flex flex-col justify-center">
+<div class="inline-block px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold tracking-widest uppercase mb-6 w-fit">
+                        慢性病預防
+                    </div>
+<h2 class="text-3xl font-bold text-primary mb-6 leading-tight">全方位預防醫學：如何在日常生活中穩定血壓與血糖</h2>
+<p class="text-on-surface-variant mb-8 line-clamp-3 leading-relaxed">
+                        現代生活的快節奏常讓我們忽略了身體發出的警訊。本文將深入探討飲食調整、適度運動及壓力管理如何成為控制慢性病的三大支柱。
+                    </p>
+<div class="flex items-center gap-6 mb-8 text-sm text-on-surface-variant font-medium">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">calendar_today</span> 2024年3月15日</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">schedule</span> 8 分鐘閱讀</span>
+</div>
+<a class="text-secondary font-bold flex items-center gap-2 group/link" href="#">
+                        閱讀更多 
+                        <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Category Filter (Subtle Tonal Shift) -->
+<div class="flex flex-wrap gap-4 mb-12">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary text-sm font-bold">全部文章</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors">慢性病預防</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors">兒童保健</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors">營養衛教</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors">心理健康</button>
+</div>
+<!-- 3-Column Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Post Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+<div class="relative aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of various colorful vegetables and fruits in a wooden bowl on a light table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMgTF1j6fVoBseVGqn_7wdalp6C2izhDPkUmzIeMAnZaVIwtV3olyJs6vuDu1X1axdTLzseFl8mlH1BjWwzFhYVT_ETNuSei2A4PYd-65neHh-gYMnIQF-xbOsnG00B42l3gFjEJBMvE1VtXvc55A4QMcSIKwB_cQdgq2a0D7mSFAfGrmCp1xshMSNZAMjD3P8aWyOIOKNAQFjcrk8VSN840uGKr3_via84tioUx1zOUaeSLwwI9a1PPdrT5fWo4oEG0SPoRFrR6A"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">營養衛教</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">夏日飲食指南：如何透過飲食增強身體免疫力</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+                        隨著氣溫上升，飲食的選擇對體力恢復至關重要。了解維生素C與益生菌在夏季抗炎中的角色。
+                    </p>
+<div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_month</span> 2024.03.10</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 5 MIN READ</span>
+</div>
+</div>
+</article>
+<!-- Post Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+<div class="relative aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A child playing outdoors in a grassy field with colorful toys, bright sunny afternoon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt98ViLoefcfRVCeShvNEu0Y3fIa5mV1fJvZSfpSFJLUW4kHBC-ugRZC9ASAvKOI-_b_3-f8NoLXWmxbBSG4o3tyERYgY73XkXlCULhH9unMwyJAxaD7VwZTa4N8-REqzxGwZP_ilTYJqvpAXSvLGg2Dii9iKsMMY9BD4L4H2CWQ5DrMBm86HfNHXwCWElCsj24IdfM5h7lUOf2zQRze54kT0PkyXe5DfEwBvXFcjdEJKYtE7JWU2-uOXUASWQT2zoHKvJVVn7hbo"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">兒童保健</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">新手父母必讀：預防性疫苗接種與幼兒成長里程碑</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+                        提供專業的疫苗接種建議，以及如何在家中觀察幼兒各階段的發展，確保孩子健康成長。
+                    </p>
+<div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_month</span> 2024.02.28</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 12 MIN READ</span>
+</div>
+</div>
+</article>
+<!-- Post Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+<div class="relative aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Abstract soft focus of morning sunlight hitting a glass of water on a clean bedside table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIv8ccckwlFdxLKqZ2euW9UScLnd1f0Kf6zIUeajVQA19k0AtjSGLa3FRd8wy2YhE7CGccqg73ZoKLwJ55mi9fUJnnadrUJhk1YM7AkGxSjjzhm__YB-JzMsbxm7eCvX0UYgBhwOsu67_eLISkVyJ5JaNNfQinMun3eiAydG2fPKFAh2dZx9W5G7AD2JhkIUT28LCDgoRjgFVy9gGdzAUkybsNL6LZjIMuId9s0RgV09ADglHMPXAvAgQ-jKax6C96bQvy8ceuPuY"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">慢性病預防</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">睡眠質量與代謝疾病：你睡得好嗎？</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+                        醫學研究證實，缺乏規律睡眠會增加罹患糖尿病與心血管疾病的風險。本文教你如何優化睡眠環境。
+                    </p>
+<div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_month</span> 2024.02.15</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 6 MIN READ</span>
+</div>
+</div>
+</article>
+<!-- Post Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+<div class="relative aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A person meditating peacefully by a window with greenery outside, morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLeRQ671A2YhK6IJyBsG-lEeiHNOdLTGDtfPbrrHR4YmYsjg6ZT05R8aDaNyewUARwugZ4m52aadEsy7BkBFQ1EysnQz6w_y5BRNJxIkUymIiI4MHOfjMPHq-EqfX-qEhC-S6fr_xMzzlH0WWDl7JfomnaNc9d85dDiz1WGXDzScODJLtgFeBl9l0som6u6u06a_J2QPNjVFQgy5OteAkwjrdClqtVNY-ndV_RyO15GGoVR4BBmBMKNyN3okPP8RrJvlA-GaPkCkU"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">心理健康</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">壓力荷爾蒙與身體健康：建立平衡的生活節奏</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+                        長期處於壓力下會使皮質醇分泌異常，影響消化系統與心血管健康。學習專業的減壓技巧。
+                    </p>
+<div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_month</span> 2024.02.05</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 10 MIN READ</span>
+</div>
+</div>
+</article>
+<!-- Post Card 5 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+<div class="relative aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Doctor explaining results to a patient using a tablet in a modern clinic office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu7p4Bxnl_OumHF5jIVD1Ncvg55-w-yzaU1EUt-1FB2vgT1ZQSoZwJREgl4l8LKv9rNepv5PDuJbRsBWCxyxlElQk2TvNC__DuQK6I7vfb881EsCOFP8lGx5_N-LqnmYDLlOZRXAehY7zUyOJQd9j-p2Ktv1Va8WcV5TQ_ayD62tZVtBvH8amzi57EG1v4HvqJqiM81Pr4-QEHukX7jd7_J2it8r0LT-Kczxp_XGzSOu6NzhO1aUnUOUbrJYuyrocbe_sUYRKfKeI"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">慢性病預防</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">如何看懂健康檢查報告：指標背後的意義</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+                        血液檢查中的 ALT、AST、LDL 到底代表什麼？陳醫師親自帶你解讀報告中的關鍵數據。
+                    </p>
+<div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_month</span> 2024.01.20</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 15 MIN READ</span>
+</div>
+</div>
+</article>
+<!-- Post Card 6 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
+<div class="relative aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of a pair of high-quality running shoes on a clean grey surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdCWS_QkprvVcYuXt5KRInC-MXkS7BmhCzIBVNuWY093sw9lIxWknh-EpgQ1KtaLGnB87JXrTRZqHoKJzPnN2u4sSsRabksID59aL7_LUIbp_DzA5gdlwrj3xGDX5pDHwqQ3yrpz9Ci6QJ_GKkm-2i-Ca3an5djwMGijVHKNEktbLyvWcEUCXfg193nptoMDr_p9hek7TCF-7STlWdCwpglnfGd2Bsy0b1oRNAQPCBVFAq49ygXU8w5NXUBFPs0r8OXmAVX_zmeDo"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-secondary text-[10px] font-extrabold tracking-widest rounded-full uppercase">營養衛教</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-primary mb-4 leading-snug group-hover:text-secondary transition-colors">運動後的營養補給：黃金 30 分鐘內的飲食建議</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 line-clamp-2">
+                        適當的碳水與蛋白質比例能加速肌肉修復與體力回升。針對不同運動類型的補充建議。
+                    </p>
+<div class="mt-auto flex items-center justify-between text-[11px] font-bold text-outline uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_month</span> 2024.01.12</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 7 MIN READ</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<nav class="mt-20 flex justify-center gap-3">
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">3</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 py-12 px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-start">
+<div class="space-y-4">
+<div class="font-manrope font-bold text-blue-900 text-xl">YC Chen, MD</div>
+<p class="text-slate-500 text-sm max-w-xs leading-relaxed">
+                    提供專業、溫暖、全方位的家庭醫學服務。我們不僅關心您的疾病，更關心您的整體健康。
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-blue-900 font-bold mb-2">快速連結</h4>
+<a class="text-slate-500 text-sm hover:underline decoration-teal-500 underline-offset-4" href="#">隱私政策</a>
+<a class="text-slate-500 text-sm hover:underline decoration-teal-500 underline-offset-4" href="#">聯絡我們</a>
+<a class="text-slate-500 text-sm hover:underline decoration-teal-500 underline-offset-4" href="#">診所地點</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-blue-900 font-bold mb-2">訂閱健康新知</h4>
+<div class="flex gap-2">
+<input class="bg-white border-none rounded-lg px-4 py-2 text-sm flex-grow focus:ring-2 focus:ring-secondary/40 outline-none" placeholder="您的電子郵件" type="email"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-bold">訂閱</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm">
+            © 2024 YC Chen, MD. All Rights Reserved.
+        </div>
+</footer>
+</body></html>
+
+<!-- 衛教專欄 | YC Chen, MD -->
+<!DOCTYPE html>
+
+<html lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YC Chen, MD | 家庭醫學的健康夥伴</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Public+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2e3132",
+                    "primary": "#022448",
+                    "secondary": "#006a60",
+                    "primary-container": "#1e3a5f",
+                    "on-secondary-container": "#007166",
+                    "tertiary-fixed-dim": "#edbf7f",
+                    "surface-container": "#edeeef",
+                    "surface-bright": "#f8f9fa",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#74777f",
+                    "surface-container-highest": "#e1e3e4",
+                    "secondary-fixed-dim": "#6fd8c8",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1d",
+                    "surface-dim": "#d9dadb",
+                    "tertiary": "#341f00",
+                    "surface": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#8aa4cf",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "background": "#f8f9fa",
+                    "on-primary-fixed": "#001c3b",
+                    "inverse-primary": "#adc8f5",
+                    "on-tertiary-fixed": "#291800",
+                    "secondary-container": "#8cf5e4",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#60410c",
+                    "on-surface-variant": "#43474e",
+                    "secondary-fixed": "#8cf5e4",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d5e3ff",
+                    "on-secondary-fixed-variant": "#005048",
+                    "tertiary-container": "#503300",
+                    "primary-fixed-dim": "#adc8f5",
+                    "surface-tint": "#455f87",
+                    "on-secondary-fixed": "#00201c",
+                    "outline-variant": "#c4c6cf",
+                    "on-tertiary-container": "#c69b5f",
+                    "tertiary-fixed": "#ffddb2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Public Sans", "sans-serif"],
+                    "label": ["Public Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chinese-line-height { line-height: 1.8; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="text-xl font-bold tracking-tighter text-blue-950">YC Chen, MD</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-blue-900 border-b-2 border-teal-600 pb-1 font-manrope tracking-tight font-bold text-lg transition-all active:opacity-80" href="#">首頁</a>
+<a class="text-slate-600 font-medium font-manrope tracking-tight text-lg hover:text-teal-700 transition-colors duration-300" href="#">衛教專欄</a>
+<a class="text-slate-600 font-medium font-manrope tracking-tight text-lg hover:text-teal-700 transition-colors duration-300" href="#">服務項目</a>
+<a class="text-slate-600 font-medium font-manrope tracking-tight text-lg hover:text-teal-700 transition-colors duration-300" href="#">關於我</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2.5 rounded-full font-bold hover:opacity-90 transition-all shadow-sm">預約掛號</button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-surface pt-12 pb-24 md:pt-20 md:pb-32">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<h1 class="text-5xl md:text-7xl font-extrabold text-primary leading-tight tracking-tight mb-6">
+                        YC Chen, MD:<br/>
+<span class="text-secondary">Your Health Partner</span><br/>
+                        in Family Medicine
+                    </h1>
+<p class="text-xl text-on-surface-variant mb-10 max-w-xl chinese-line-height">
+                        陳醫師致力於提供全方位的家庭醫學照護。從預防醫學到慢性病管理，我們以實證醫學為基礎，結合人文關懷，守護您與家人的健康。
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:scale-[1.02] transition-transform">
+                            立即預約掛號
+                        </button>
+<button class="border border-primary/20 text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary-fixed-dim/20 transition-colors">
+                            了解診療項目
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl transform lg:rotate-2">
+<img alt="Dr. YC Chen" class="w-full h-full object-cover" data-alt="Professional and friendly male doctor in a clean white lab coat, smiling warmly in a bright modern clinic setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYwOuNdds66N1NLHS3u3U7NTaMfBzqv2uHRJ0JkVsusz6v7MVyFE2kP3D3jDHEQhrWe-KjfUzYl9Tww5WGWyXZoaC1S4uQ7enDJsJr612TfkHAEW-1DpdjYvB7WriDHBPq3OK1Sz6M-gnOYNQ9dWMdYUNtjcBBb-Lurn4LC5saIBZ2Y2IXL92NC6GsYWZ0LRI9NNpTN0tC-NWuXaw0bVE9739FAKInXOUEhnDS3WpElfdI7BaF5jpV7DWYCFNjjsYI3U6zF4QQn80"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Service Highlights (Bento Grid) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-16">
+<span class="text-on-surface-variant text-sm font-bold tracking-[0.2em] uppercase">Services</span>
+<h2 class="text-4xl font-bold text-primary mt-2">專業服務項目</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex flex-col justify-between hover:bg-white transition-colors">
+<div>
+<div class="w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="stethoscope">stethoscope</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">全方位家庭醫學診療</h3>
+<p class="text-on-surface-variant chinese-line-height text-lg">
+                                提供各類急慢性疾病診療、常見病痛評估與轉診諮詢。我們不只看「病」，更看「人」，為您建立長期的健康資料庫。
+                            </p>
+</div>
+<div class="mt-8 flex items-center text-secondary font-bold group cursor-pointer">
+                            了解詳情 <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<div class="bg-primary text-on-primary p-10 rounded-3xl flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">成人健康檢查</h3>
+<p class="text-on-primary-container chinese-line-height">
+                                涵蓋基礎生理評估、血液生化分析及癌症篩檢諮詢，為您的健康把關。
+                            </p>
+</div>
+<span class="text-sm font-medium opacity-60">預防勝於治療</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container p-10 rounded-3xl flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 bg-on-secondary-container/10 text-on-secondary-container rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="monitor_heart">monitor_heart</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">慢性病長期照護</h3>
+<p class="chinese-line-height">
+                                針對高血壓、糖尿病及高血脂，提供個人化的用藥調整與生活型態建議。
+                            </p>
+</div>
+<span class="text-sm font-bold">精準控制，品質生活</span>
+</div>
+<div class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex items-center gap-10 hover:bg-white transition-colors">
+<div class="hidden sm:block w-48 h-48 rounded-2xl overflow-hidden flex-shrink-0">
+<img alt="Vaccination" class="w-full h-full object-cover" data-alt="Close up of a medical professional preparing a vaccine in a sterile environment with soft blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB02hMSWz8M_3MzoFp3Vk-x1z8HDGXxb3FlL6Y_yn3VwKKoZik2_wghjn5Qb05mWTBc8qWTUwVrhmpX5Jtb4C9zOqAbD_S-APghCy2ERd_wGE456hOCEr-Wpf8e9fSIaZrv0aYqp21wgdt0s62XNo-GiQIRsOiixMV1NTNJwNgiIIrCw5OpscS7mzSzb3t1wSqCWWs-XnLka2dB_-KDH8_APGMsasPLzxjWjoVm7rlbNx30MxZvxumRRex7d1pEXLg7eaXTwKcmgTI"/>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-primary mb-4">疫苗接種諮詢</h3>
+<p class="text-on-surface-variant chinese-line-height">
+                                流感疫苗、肺炎鏈球菌疫苗及成人自費疫苗接種諮詢。提供完整的免疫計畫評估，強化身體防護網。
+                            </p>
+<div class="mt-6 flex gap-4">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">流感疫苗</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">帶狀疱疹</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Philosophy Quote Section -->
+<section class="py-24 max-w-7xl mx-auto px-8">
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-sm">
+<div class="md:w-6 flex-shrink-0 bg-secondary"></div>
+<div class="p-12 md:p-20">
+<span class="material-symbols-outlined text-secondary text-5xl mb-6" data-icon="format_quote" data-weight="fill">format_quote</span>
+<h2 class="text-3xl md:text-4xl font-bold text-primary leading-snug mb-8 font-headline">
+                        「醫學不只是科學的應用，更是人與人之間的信任連結。我的目標是成為每一位病人最信賴的健康顧問，在疾病發生前預防，在患病時給予最有溫度的支持。」
+                    </h2>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">YC</div>
+<div>
+<p class="font-bold text-primary">陳醫師 (Dr. YC Chen)</p>
+<p class="text-on-surface-variant text-sm">家庭醫學科專科醫師</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Health Column -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-16">
+<div>
+<span class="text-on-surface-variant text-sm font-bold tracking-[0.2em] uppercase">Health Blog</span>
+<h2 class="text-4xl font-bold text-primary mt-2">衛教專欄</h2>
+</div>
+<a class="text-secondary font-bold hover:underline underline-offset-8 transition-all" href="#">查看所有文章</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Post Card 1 -->
+<div class="group cursor-pointer">
+<div class="rounded-2xl overflow-hidden mb-6 aspect-video">
+<img alt="Healthy eating" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Beautifully arranged Mediterranean salad with fresh vegetables and olive oil on a rustic wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9f69KXHTV6PdPPdQJSsPBw_Urhuxyzj1k7JxxCSEEDPv0Q2Np7ZBJAqsBRc8EcJNchtplLMQu2xu8PWjf9eAFn1aEeW49LbZ8L8mpbgRyRMO-o0Pbr58eJt3hjGQbT4FUAoHRRa4MKPI7gKYFdAY5EyAwBzbBlFsDfmL1SkdShoVwcqAEToMdcjqdQdX30hs1Z7zT8BipRm6EUxrLSJnOHQrqyBGFI0ZRTELnb6ScMAv7fQVDA6HedPycAuuzhwquNHHr3ZkVfnY"/>
+</div>
+<span class="text-secondary text-sm font-bold uppercase tracking-wider mb-3 block">飲食營養</span>
+<h3 class="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">如何透過飲食有效控制「三高」？陳醫師的五大建議</h3>
+<p class="text-on-surface-variant text-sm chinese-line-height line-clamp-2">
+                            面對慢性病管理，飲食是第一道防線。本篇將分享如何在不犧牲美味的情況下，建立健康的飲食習慣...
+                        </p>
+</div>
+<!-- Post Card 2 -->
+<div class="group cursor-pointer">
+<div class="rounded-2xl overflow-hidden mb-6 aspect-video">
+<img alt="Modern wellness" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Peaceful woman practicing meditation in a sun-drenched minimalist living room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOPOkl3acFh1T0XfBVOtfYMQVsyYfxMnDZMWFSs4HyHv6MZm4FNpcXXDB99P7Aum51V2x3KaVquVt4xIYSkwSFiougOpZREdWErq2__Lrnhvz0c8WQOMUzq-3KfpeU_c_9v_CMrlX6W2K9cBXsTfUpnTPC_Zai6gNSa5MdXdV8YOIwEdn1yVU6jSkjh29ZSUFEKyC8e5As8WlkiQtXF9FM4CzgekN6juLqFBtXtH6hTDR0fj68MPZAqh93AS9BIe1Vanb4TJga9PU"/>
+</div>
+<span class="text-secondary text-sm font-bold uppercase tracking-wider mb-3 block">預防醫學</span>
+<h3 class="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">健康檢查報告怎麼看？教你解讀關鍵紅字</h3>
+<p class="text-on-surface-variant text-sm chinese-line-height line-clamp-2">
+                            拿到健檢報告總是心驚膽顫？其實紅字不代表一定有病，重要的是紅字背後的臨床意義...
+                        </p>
+</div>
+<!-- Post Card 3 -->
+<div class="group cursor-pointer">
+<div class="rounded-2xl overflow-hidden mb-6 aspect-video">
+<img alt="Sleep hygiene" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Soft comfortable bed linens in a cool blue toned bedroom with a dim bedside lamp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH2nBp4xrz9qpxR8eFB-Mnh5JJIR8wtz3pO4dqGwqySrHUgb8iQkimIq19cxbPBrd1piQhhOrx57amTcD1yxc-QgMmvcivDGmDc5mUarxdnGQqXT5Itnjcgz06RNO2voDmv9ykKocpO95XfdeUxO7xpEvkdz3AQxwKb1VPlZ6-ngC2FkNW8tWUd8yUNRMLAwGlktI8JcfRCNqnJwVphNegjP-sTLYVxskoFmjE1EMfQxcM5Fnfky7byWOgUzFL3tY4-8lz1rEKh6U"/>
+</div>
+<span class="text-secondary text-sm font-bold uppercase tracking-wider mb-3 block">生活型態</span>
+<h3 class="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">睡眠品質與免疫力的關係：為什麼你需要睡好覺</h3>
+<p class="text-on-surface-variant text-sm chinese-line-height line-clamp-2">
+                            長期失眠不僅影響精神，更會削弱免疫系統。陳醫師分享如何建立「睡眠衛生」提升睡眠效率...
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-20">
+<div class="max-w-5xl mx-auto px-8">
+<div class="bg-primary-container rounded-[2rem] p-12 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/50 to-transparent"></div>
+<div class="relative z-10">
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">準備好開始您的健康旅程了嗎？</h2>
+<p class="text-on-primary-container text-lg mb-10 max-w-2xl mx-auto">
+                            陳醫師診所提供線上掛號服務，省去現場排隊的漫長等待。
+                        </p>
+<button class="bg-secondary text-white px-10 py-4 rounded-full font-bold text-xl hover:bg-on-secondary-container transition-all shadow-xl">
+                            預約掛號
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 py-12 px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+<div>
+<div class="font-manrope font-bold text-blue-900 text-2xl mb-6">YC Chen, MD</div>
+<p class="text-slate-500 font-sans leading-relaxed text-sm mb-6">
+                    專業、親切、全方位的家庭醫學照護。我們相信，優質的醫療源自於深厚的身心關懷與專業的醫學知見。
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-blue-900 mb-6">快速連結</h4>
+<div class="flex flex-col gap-3">
+<a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm transition-all" href="#">隱私政策</a>
+<a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm transition-all" href="#">聯絡我們</a>
+<a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm transition-all" href="#">診所地點</a>
+<a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm transition-all" href="#">門診時間</a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-blue-900 mb-6">診所資訊</h4>
+<div class="flex items-start gap-3 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+<span>台北市大安區健康路 123 號 1 樓</span>
+</div>
+<div class="flex items-start gap-3 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="call">call</span>
+<span>(02) 2345-6789</span>
+</div>
+<div class="flex items-start gap-3 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="schedule">schedule</span>
+<span>週一至週五：09:00 - 21:00<br/>週六：09:00 - 12:00 (週日休診)</span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200">
+<p class="text-slate-500 text-sm text-center">© 2024 YC Chen, MD. All Rights Reserved.</p>
+</div>
+</footer>
+</body></html>
+
+<!-- 首頁 | YC Chen, MD -->
+<!DOCTYPE html>
+
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>衛教專欄 | YC Chen, MD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Public+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2e3132",
+                        "primary": "#022448",
+                        "secondary": "#006a60",
+                        "primary-container": "#1e3a5f",
+                        "on-secondary-container": "#007166",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "surface-container": "#edeeef",
+                        "surface-bright": "#f8f9fa",
+                        "surface-variant": "#e1e3e4",
+                        "outline": "#74777f",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed-dim": "#6fd8c8",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1d",
+                        "surface-dim": "#d9dadb",
+                        "tertiary": "#341f00",
+                        "surface": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#8aa4cf",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "background": "#f8f9fa",
+                        "on-primary-fixed": "#001c3b",
+                        "inverse-primary": "#adc8f5",
+                        "on-tertiary-fixed": "#291800",
+                        "secondary-container": "#8cf5e4",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "on-surface-variant": "#43474e",
+                        "secondary-fixed": "#8cf5e4",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d5e3ff",
+                        "on-secondary-fixed-variant": "#005048",
+                        "tertiary-container": "#503300",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-tint": "#455f87",
+                        "on-secondary-fixed": "#00201c",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary-container": "#c69b5f",
+                        "tertiary-fixed": "#ffddb2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Public Sans", "Noto Sans TC", "sans-serif"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #f8f9fa; color: #191c1d; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .article-content p { line-height: 1.8; font-size: 1.125rem; margin-bottom: 1.5rem; color: #43474e; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl transition-all border-none">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="text-xl font-bold tracking-tighter text-blue-950">
+                YC Chen, MD
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-600 font-medium hover:text-teal-700 transition-colors duration-300" href="#">首頁</a>
+<a class="text-blue-900 border-b-2 border-teal-600 pb-1 font-bold" href="#">衛教專欄</a>
+<a class="text-slate-600 font-medium hover:text-teal-700 transition-colors duration-300" href="#">服務項目</a>
+<a class="text-slate-600 font-medium hover:text-teal-700 transition-colors duration-300" href="#">關於我</a>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all">
+                    預約掛號
+                </button>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+<div class="flex flex-col lg:flex-row gap-16 relative">
+<!-- Article Canvas -->
+<article class="flex-1 max-w-[720px] mx-auto lg:mx-0">
+<!-- Category Label -->
+<div class="flex items-center gap-2 mb-6">
+<span class="text-xs font-bold tracking-widest text-on-surface-variant uppercase bg-surface-container-low px-3 py-1 rounded-full">生活醫學 • PREVENTION</span>
+<span class="text-xs text-outline">2024年11月15日</span>
+</div>
+<!-- Main Heading -->
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-8 leading-tight">
+                    重塑健康：如何透過精準生活習慣，建立可持續的身心屏障
+                </h1>
+<!-- Featured Image -->
+<div class="mb-12 rounded-xl overflow-hidden bg-surface-container-low">
+<img alt="Health Lifestyle" class="w-full aspect-[16/9] object-cover" data-alt="Close-up of fresh organic green vegetables and a glass of water on a minimalist white table with soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFBFX3tYknXTPl9xBWGXrITVY8rsJcIsZ0HmS5EP61WPSUK-OSZ20JyU8uUDUP0RfrsFwE2W4Y2LXftbUGciNUiDV7KBdgMMkELH2K0QAyA9i7mm7rXYJ49vk_xBM52y4-0HAbVQ1c4_erl1oVQYgjkDjh3ReAiEwMMQa2clHAsMIhDqhP_mipGqwTzrpgJHOrpLzMMqSk2nFdFY-SKkiGf6U5uM8-WV8hOx-T_nvh3cUXvxZa5ZQmfFK7QHhXL3Ljey_G4U8XLoM"/>
+</div>
+<!-- Article Content -->
+<div class="article-content">
+<p>
+                        在現代快節奏的生活中，許多人常感到疲憊不堪，卻往往忽略了身體發出的微小信號。作為家庭醫學科醫師，我觀察到多數慢性健康問題的根源，並非突如其來的病變，而是長期不經意累積的生活壓力與不良習慣。
+                    </p>
+<h2 class="text-2xl font-bold text-primary mt-12 mb-6">第一階段：建立節律的生理時鐘</h2>
+<p>
+                        生理時鐘的紊亂是免疫系統的大敵。人體內的皮質醇與褪黑激素應隨著日照起伏。建議每日固定於同一時間起床，並在晨間接受至少 15 分鐘的自然光照，這能有效校正腦部視交叉上核，改善夜間睡眠品質。
+                    </p>
+<!-- Philosophy Quote / Pull Quote -->
+<div class="my-12 p-8 bg-surface-container-lowest border-l-8 border-secondary rounded-r-xl">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">format_quote</span>
+<blockquote class="text-2xl font-bold text-primary leading-snug">
+                            「最好的醫療並非治癒疾病，而是讓身體恢復其與生俱來的平衡機制。」
+                        </blockquote>
+<cite class="block mt-4 text-on-surface-variant font-medium not-italic">— YC Chen, MD</cite>
+</div>
+<h2 class="text-2xl font-bold text-primary mt-12 mb-6">飲食中的微量精準</h2>
+<p>
+                        精緻醣類的過量攝取是導致現代人胰島素阻抗的主因。我們應專注於「原形食物」的比例提升。並非全然禁止澱粉，而是選擇更穩定的能量來源，如紅藜、地瓜或燕麥。每一餐的組成應像是一幅調色盤，豐富的植化素能為細胞提供關鍵的抗氧化保護。
+                    </p>
+<p>
+                        除了營養，飲水習慣也常被低估。人體約 70% 由水組成，輕微的脫水會導致認知功能下降。我建議採取「少量多次」的補水策略，而非口渴時才大量飲用，這能維持腎臟最有效的代謝節律。
+                    </p>
+<h2 class="text-2xl font-bold text-primary mt-12 mb-6">結語：從小步開始</h2>
+<p>
+                        健康管理不需要一蹴而就的巨變。從今天起，選擇早 20 分鐘就寢，或在午餐多加一份深色蔬菜。這些看似微小的「原子習慣」，將在未來五年、十年內，轉化為巨大的健康資產。
+                    </p>
+</div>
+<!-- Bottom CTA Card -->
+<section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">
+<h3 class="text-2xl md:text-3xl font-bold mb-4">預約您的健康諮詢</h3>
+<p class="text-on-primary-container mb-8 max-w-md mx-auto">
+                        想進一步了解如何優化個人健康？歡迎預約診所時段，我們將為您制定專屬的衛教計畫。
+                    </p>
+<button class="bg-secondary-container text-on-secondary-fixed-variant px-8 py-3 rounded-full font-bold text-lg hover:opacity-90 transition-all flex items-center gap-2 mx-auto">
+<span class="material-symbols-outlined">calendar_month</span>
+                        立即線上掛號
+                    </button>
+</section>
+</article>
+<!-- Sticky Sidebar (TOC) -->
+<aside class="hidden lg:block w-64">
+<div class="sticky top-28 space-y-8">
+<div>
+<h4 class="text-xs font-bold tracking-[0.1em] text-outline uppercase mb-4">目錄索引</h4>
+<nav class="flex flex-col space-y-4">
+<a class="text-secondary font-bold flex items-center gap-2" href="#">
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+                                生活醫學概論
+                            </a>
+<a class="text-slate-500 hover:text-primary transition-colors pl-3" href="#">建立生理時鐘</a>
+<a class="text-slate-500 hover:text-primary transition-colors pl-3" href="#">飲食精準管理</a>
+<a class="text-slate-500 hover:text-primary transition-colors pl-3" href="#">小步前行結語</a>
+</nav>
+</div>
+<!-- Small Author Bio Card -->
+<div class="p-6 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+<img alt="Dr. YC Chen" class="w-full h-full object-cover" data-alt="Professional headshot of a friendly young male doctor in a white lab coat with a warm smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFmlQ41qyd--Db8YaKx1Ygyy0Dqdq273esm0rNstEym_XkX_Xe3hSgQJdbTh0ZswlZ5t5heA016FnapekyJ7CP1q_RmVz25hrMfiGl9-BikxIyxA_RlrxHIyFKMbFHD8Bl1Ku5Q3FlVw20UbAncr3JJ_CGEm-N0T-FG-QnZQCDIiSCOsjdu8F-0xhvb_W2d7g6RWIWoj2dnotvoNZ52miR-RmSDmjvMOJczKJUKs87TiCkTgmInpIV-2bl8h8ToJeHLweFxVopOIg"/>
+</div>
+<div>
+<p class="text-sm font-bold text-primary">陳醫師 YC Chen</p>
+<p class="text-xs text-outline">家庭醫學科</p>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                            致力於將複雜的醫學知識轉化為生活實踐，協助每一位病患找回健康的自主權。
+                        </p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 py-12 px-8 border-none mt-16">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-start">
+<div>
+<p class="font-manrope font-bold text-blue-900 text-lg mb-4">YC Chen, MD</p>
+<p class="text-slate-500 text-sm leading-relaxed max-w-xs">
+                    為您提供專業、溫馨且具有人文關懷的醫療服務，守護您與家人的每一階段。
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="text-blue-900 font-bold mb-2">快速連結</h5>
+<a class="text-slate-500 text-sm hover:underline decoration-teal-500 underline-offset-4" href="#">隱私政策</a>
+<a class="text-slate-500 text-sm hover:underline decoration-teal-500 underline-offset-4" href="#">聯絡我們</a>
+<a class="text-slate-500 text-sm hover:underline decoration-teal-500 underline-offset-4" href="#">診所地點</a>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="text-blue-900 font-bold mb-2">門診時段</h5>
+<p class="text-slate-500 text-sm">週一 — 週五: 09:00 - 18:00</p>
+<p class="text-slate-500 text-sm">週六: 09:00 - 12:00</p>
+<p class="text-slate-500 text-sm">週日: 休息</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200">
+<p class="text-slate-500 text-sm text-center">© 2024 YC Chen, MD. All Rights Reserved.</p>
+</div>
+</footer>
+</body></html>
+
+<!-- 健康專欄文章 | YC Chen, MD -->
+<!DOCTYPE html>
+
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>服務項目 | YC Chen, MD - 家庭醫學專科醫師</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Public+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2e3132",
+                    "primary": "#022448",
+                    "secondary": "#006a60",
+                    "primary-container": "#1e3a5f",
+                    "on-secondary-container": "#007166",
+                    "tertiary-fixed-dim": "#edbf7f",
+                    "surface-container": "#edeeef",
+                    "surface-bright": "#f8f9fa",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#74777f",
+                    "surface-container-highest": "#e1e3e4",
+                    "secondary-fixed-dim": "#6fd8c8",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1d",
+                    "surface-dim": "#d9dadb",
+                    "tertiary": "#341f00",
+                    "surface": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#8aa4cf",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "background": "#f8f9fa",
+                    "on-primary-fixed": "#001c3b",
+                    "inverse-primary": "#adc8f5",
+                    "on-tertiary-fixed": "#291800",
+                    "secondary-container": "#8cf5e4",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#60410c",
+                    "on-surface-variant": "#43474e",
+                    "secondary-fixed": "#8cf5e4",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d5e3ff",
+                    "on-secondary-fixed-variant": "#005048",
+                    "tertiary-container": "#503300",
+                    "primary-fixed-dim": "#adc8f5",
+                    "surface-tint": "#455f87",
+                    "on-secondary-fixed": "#00201c",
+                    "outline-variant": "#c4c6cf",
+                    "on-tertiary-container": "#c69b5f",
+                    "tertiary-fixed": "#ffddb2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Public Sans", "sans-serif"],
+                    "label": ["Public Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="text-xl font-bold tracking-tighter text-blue-950 dark:text-white">
+                YC Chen, MD
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-teal-700 dark:hover:text-teal-300 transition-colors duration-300" href="#">首頁</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-teal-700 dark:hover:text-teal-300 transition-colors duration-300" href="#">衛教專欄</a>
+<a class="text-blue-900 dark:text-blue-100 border-b-2 border-teal-600 dark:border-teal-400 pb-1 font-bold" href="#">服務項目</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-teal-700 dark:hover:text-teal-300 transition-colors duration-300" href="#">關於我</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold hover:opacity-80 transition-all">
+                預約掛號
+            </button>
+</nav>
+</header>
+<main class="min-h-screen">
+<!-- Hero Section / Title Anchor -->
+<section class="relative bg-surface-container-low pt-24 pb-16 overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 relative z-10">
+<div class="max-w-2xl">
+<span class="text-secondary font-label uppercase tracking-widest text-sm mb-4 block">Our Specialties</span>
+<h1 class="text-5xl font-extrabold tracking-tight text-primary mb-6 leading-tight">
+                        全面且細緻的<br/><span class="text-secondary">家庭醫學照顧</span>
+</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed max-w-lg">
+                        從成人預防保健到社區健康諮詢，我們致力於成為您家庭健康的長期守護者。透過專業的整合性醫療，為每一位患者提供個人化的健康對策。
+                    </p>
+</div>
+</div>
+<!-- Aesthetic Element: Large subtle graphic -->
+<div class="absolute -right-24 top-0 w-1/2 h-full opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[400px] text-primary">stethoscope</span>
+</div>
+</section>
+<!-- Service Bento Grid -->
+<section class="max-w-7xl mx-auto px-8 py-24">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Adult Health Checkups (Large Card) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-10 flex flex-col justify-between group transition-all hover:bg-white border border-transparent hover:border-outline-variant/20">
+<div>
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
+<span class="material-symbols-outlined text-3xl">medical_services</span>
+</div>
+<h3 class="text-3xl font-bold text-primary mb-4">成人預防保健</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-2xl">
+                            提供國民健康署成人預防保健服務。包含血液檢查、尿液檢查及專業健康風險評估，我們不僅提供報告讀取，更著重於追蹤與生活型態建議，助您提早發現潛在問題。
+                        </p>
+<div class="flex flex-wrap gap-4 mb-8">
+<span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">三高篩檢</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">癌症篩檢</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">健康管理</span>
+</div>
+</div>
+<a class="text-secondary font-bold inline-flex items-center gap-2 group-hover:underline" href="#">
+                        詳細內容 <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<!-- Vaccinations (Small Card) -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between border border-transparent hover:border-outline-variant/20">
+<div>
+<div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container mb-8">
+<span class="material-symbols-outlined text-3xl">vaccines</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">疫苗接種</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                            提供各類成人疫苗諮詢與接種，包括流感疫苗、肺炎鏈球菌疫苗及帶狀疱疹疫苗。
+                        </p>
+</div>
+<a class="text-secondary font-bold inline-flex items-center gap-2" href="#">
+                        詳細內容 <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<!-- Chronic Disease Care (Vertical Card) -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between border border-transparent hover:border-outline-variant/20">
+<div>
+<div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container mb-8">
+<span class="material-symbols-outlined text-3xl">monitor_heart</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">慢性病整合門診</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                            針對高血壓、糖尿病、高血脂等慢性病，提供跨科別整合式的長期追蹤與用藥管理，陪伴您穩定控制病情。
+                        </p>
+</div>
+<a class="text-secondary font-bold inline-flex items-center gap-2" href="#">
+                        詳細內容 <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<!-- Community Health (Horizontal Card) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-10 flex flex-col md:flex-row gap-10 items-center border border-transparent hover:border-outline-variant/20">
+<div class="w-full md:w-1/2">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<h3 class="text-3xl font-bold text-primary mb-4">社區健康諮詢</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                            深耕社區，提供健康講座、諮詢與居家醫療評估。我們走進社區，讓專業醫療資源不再有距離感。
+                        </p>
+<a class="text-secondary font-bold inline-flex items-center gap-2" href="#">
+                            詳細內容 <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<div class="w-full md:w-1/2 h-64 rounded-xl overflow-hidden relative">
+<img alt="doctor interacting with community" class="w-full h-full object-cover" data-alt="a professional doctor smiling and explaining health concepts to a small group of seniors in a modern sunlit community center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCma9FXTbXrS-Zn9p4uUyQCOWxV6D4UaXXjINltHowYMUDz9mUw3Cq5NSeG9GpXigj7EKlZ9cEQwmzrVJbZYqxBhiTYzpLVvooPl5qDgL-g3Cc_aDHXLu3BMukJLoTdXT9pjMedICkWTG6aAsczs9QagGy9eaKsmWXvSgcqMUcVNxGyFNmVs1zLsKO1UKinBw8Ua3_-jfNBDEiXGQ0o-Eg2vRzwgje72lErKF9IArvTHzbs994ySNxqrdaFjvpAe5RrznAH1IIIMtA"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Philosophy Component -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="bg-surface-container-lowest rounded-xl p-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-secondary"></div>
+<div class="flex-1">
+<h2 class="text-3xl font-extrabold text-primary mb-6">我們的醫療理念</h2>
+<p class="text-2xl font-medium text-on-surface leading-snug">
+                        「我們不只是在治療疾病，而是在照顧『人』。每一次看診都是建立信任的過程，我們致力於提供有溫度的專業醫療。」
+                    </p>
+<p class="mt-6 text-on-surface-variant">— YC Chen, MD</p>
+</div>
+<div class="w-48 h-48 rounded-full overflow-hidden bg-surface-container border-4 border-white shadow-xl flex-shrink-0">
+<img alt="Dr. YC Chen" class="w-full h-full object-cover" data-alt="close up professional headshot of a friendly east asian male doctor wearing a white coat with a stethoscope around neck soft background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb2Wro9tePObD96se_tSG2HfgtTNkspfGTVtSo9oljpuXdBL22NAdNLZToD7UnG6RcqkcvjnAlbtIBhWQaVa8I80T4HRusnQf_7eZBVTjKoJU8DsrmXWzAGnzmaYeGTVpimgBLFxzaIfUU29mLlJA9xbRPvM5VN2rq-9I4Bo-gDjZ2g9meBQmZhxYagJ7YA_R9wpOX6UqDhglFvbeMyvnwkF6j8JecvtTbtflPkByTA-aVjcHLEEIg1121kzeBdKouNzIV20NTZjw"/>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="bg-primary py-24 text-center">
+<div class="max-w-3xl mx-auto px-8">
+<h2 class="text-4xl font-bold text-white mb-6">守護您的健康，從現在開始</h2>
+<p class="text-on-primary-container text-lg mb-10">
+                    如果您有任何健康疑問，或需要預防醫學方面的諮詢，歡迎隨時預約門診時間。
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-secondary text-on-secondary px-10 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-all">
+                        立即預約掛號
+                    </button>
+<button class="border border-white/20 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
+                        聯絡我們
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-slate-100 dark:bg-slate-950 w-full py-12 px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+<div>
+<h4 class="font-manrope font-bold text-blue-900 dark:text-white text-xl mb-4">YC Chen, MD</h4>
+<p class="text-slate-500 text-sm leading-relaxed max-w-xs">
+                    致力於提供專業、溫暖且全面的家庭醫學照護。我們深耕社區，為每一位患者的健康把關。
+                </p>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-4">快速連結</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm" href="#">隱私政策</a></li>
+<li><a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm" href="#">聯絡我們</a></li>
+<li><a class="text-slate-500 hover:underline decoration-teal-500 underline-offset-4 text-sm" href="#">診所地點</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-4">門診資訊</h5>
+<p class="text-slate-500 text-sm mb-2">週一至週五: 09:00 - 18:00</p>
+<p class="text-slate-500 text-sm mb-4">週六: 09:00 - 12:00 (預約制)</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer">social_leaderboard</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">mail</span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-500 text-sm">© 2024 YC Chen, MD. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-secondary text-sm transition-colors" href="#">繁體中文</a>
+<a class="text-slate-400 hover:text-secondary text-sm transition-colors" href="#">English</a>
+</div>
+</div>
+</footer>
+</body></html>

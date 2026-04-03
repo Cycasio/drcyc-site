@@ -8,6 +8,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     author: z.string().default('陳昱彰醫師'),
     tags: z.array(z.string()).optional(),
+    category: z.string().optional(),
     image: z.string().optional(),
   }),
 });

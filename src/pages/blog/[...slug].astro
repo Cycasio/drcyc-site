@@ -11,63 +11,226 @@ export async function getStaticPaths() {
 }
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+const h2Headings = headings.filter(h => h.depth === 2);
+
+const dateStr = post.data.pubDate.toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const firstTag = post.data.tags?.[0];
 ---
 
 <Layout title={`${post.data.title} | 陳昱彰醫師`} description={post.data.description}>
-  <article class="container mx-auto px-4 py-12 max-w-3xl">
-    <header class="mb-8">
-      <a href="/blog" class="text-blue-600 hover:underline text-sm mb-4 inline-block">← 返回衛教專欄</a>
-      <h1 class="text-3xl font-bold mt-2">{post.data.title}</h1>
-      <div class="flex items-center gap-4 mt-4 text-gray-600">
-        <span>{post.data.author}</span>
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
-      </div>
-      {post.data.tags && (
-        <div class="flex gap-2 mt-3">
-          {post.data.tags.map((tag) => (
-            <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-sm">{tag}</span>
-          ))}
+  <main class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+    <div class="flex flex-col lg:flex-row gap-16 relative">
+      <!-- Article Canvas -->
+      <article class="flex-1 max-w-[720px] mx-auto lg:mx-0">
+        <!-- Category Label + Date -->
+        <div class="flex items-center gap-3 mb-6 flex-wrap">
+          {firstTag && (
+            <span class="text-xs font-bold tracking-widest text-on-surface-variant uppercase bg-surface-container-low px-3 py-1 rounded-full">
+              {firstTag}
+            </span>
+          )}
+          <span class="text-xs text-outline">{dateStr}</span>
         </div>
-      )}
-    </header>
-    
-    <div class="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-table:text-sm">
-      <Content />
+
+        <!-- Main Heading -->
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-8 leading-tight font-headline">
+          {post.data.title}
+        </h1>
+
+        <!-- Featured Image -->
+        {post.data.image && (
+          <div class="mb-12 rounded-xl overflow-hidden bg-surface-container-low">
+            <img
+              src={post.data.image}
+              alt={post.data.title}
+              class="w-full aspect-[16/9] object-cover"
+              loading="eager"
+            />
+          </div>
+        )}
+
+        <!-- Article Content -->
+        <div class="article-content">
+          <Content />
+        </div>
+
+        <!-- Bottom CTA Card -->
+        <section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">
+          <h3 class="text-2xl md:text-3xl font-bold mb-4 font-headline">預約您的健康諮詢</h3>
+          <p class="text-on-primary-container mb-8 max-w-md mx-auto">
+            想進一步了解如何優化個人健康？歡迎預約門診時段，我們將為您制定專屬的衛教計畫。
+          </p>
+          <a
+            href="https://www.edah.org.tw"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-fixed-variant px-8 py-3 rounded-full font-bold text-lg hover:opacity-90 transition-all no-underline"
+          >
+            <span class="material-symbols-outlined">calendar_month</span>
+            立即線上掛號
+          </a>
+        </section>
+      </article>
+
+      <!-- Sticky Sidebar (TOC) -->
+      <aside class="hidden lg:block w-64">
+        <div class="sticky top-28 space-y-8">
+          {h2Headings.length > 0 && (
+            <div>
+              <h4 class="text-xs font-bold tracking-[0.1em] text-outline uppercase mb-4">目錄索引</h4>
+              <nav class="flex flex-col space-y-4" id="toc-nav">
+                {h2Headings.map((heading) => (
+                  <a
+                    href={`#${heading.slug}`}
+                    class="text-slate-500 hover:text-primary transition-colors pl-3 text-sm toc-link no-underline"
+                    data-heading={heading.slug}
+                  >
+                    {heading.text}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          )}
+
+          <!-- Author Bio Card -->
+          <div class="p-6 bg-surface-container-low rounded-xl">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-white font-bold">
+                YC
+              </div>
+              <div>
+                <p class="text-sm font-bold text-primary">陳醫師 YC Chen</p>
+                <p class="text-xs text-outline">家庭醫學科</p>
+              </div>
+            </div>
+            <p class="text-xs text-on-surface-variant leading-relaxed chinese-line-height">
+              致力於將複雜的醫學知識轉化為生活實踐，協助每一位病患找回健康的自主權。
+            </p>
+          </div>
+        </div>
+      </aside>
     </div>
-    
-    <footer class="mt-12 pt-8 border-t">
-      <div class="bg-blue-50 rounded-lg p-6">
-        <h3 class="font-bold text-lg mb-2">預約門診</h3>
-        <p class="text-gray-700 mb-4">如果這篇文章對你有幫助，歡迎來門診進一步諮詢。</p>
-        <a 
-          href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" 
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          線上掛號
-        </a>
-      </div>
-    </footer>
-  </article>
+  </main>
 </Layout>
 
-<style>
-  .prose h2 {
+<style is:global>
+  .article-content p {
+    line-height: 1.8;
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    color: #43474e;
+  }
+  .article-content h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #022448;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  .article-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #022448;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  .article-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #022448;
     margin-top: 2rem;
     margin-bottom: 1rem;
   }
-  .prose table {
+  .article-content blockquote {
+    border-left: 8px solid #006a60;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 0 0.75rem 0.75rem 0;
+    margin: 2rem 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #022448;
+    line-height: 1.6;
+  }
+  .article-content a {
+    color: #006a60;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .article-content a:hover {
+    color: #022448;
+  }
+  .article-content ul,
+  .article-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #43474e;
+  }
+  .article-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+  }
+  .article-content strong {
+    color: #191c1d;
+    font-weight: 600;
+  }
+  .article-content hr {
+    border: none;
+    border-top: 1px solid #c4c6cf;
+    margin: 2.5rem 0;
+  }
+  .article-content table {
     width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
   }
-  .prose th, .prose td {
-    padding: 0.5rem;
-    border: 1px solid #e5e7eb;
+  .article-content th,
+  .article-content td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #c4c6cf;
+    text-align: left;
   }
-  .prose th {
-    background-color: #f9fafb;
+  .article-content th {
+    background-color: #f3f4f5;
+    font-weight: 600;
+    color: #191c1d;
+  }
+  .article-content td {
+    color: #43474e;
+  }
+  .toc-link.active {
+    color: #006a60;
+    font-weight: 700;
   }
 </style>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  if (tocLinks.length > 0) {
+    const headingEls = Array.from(tocLinks).map(link => {
+      const slug = link.getAttribute('data-heading');
+      return slug ? document.getElementById(slug) : null;
+    }).filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const activeLink = document.querySelector(`.toc-link[data-heading="${entry.target.id}"]`);
+            activeLink?.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -60% 0px' }
+    );
+
+    headingEls.forEach(el => observer.observe(el));
+  }
+</script>

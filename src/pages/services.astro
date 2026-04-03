@@ -1,0 +1,226 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="服務項目 | 陳昱彰醫師" description="企業臨場健康服務、高階健康檢查、減重管理門診、社區健康營造、骨質疏鬆門診、運動醫學諮詢。">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative bg-surface-container-low pt-24 pb-16 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-8 relative z-10">
+        <div class="max-w-2xl">
+          <span class="text-secondary font-label uppercase tracking-widest text-sm mb-4 block">Our Specialties</span>
+          <h1 class="text-5xl font-extrabold tracking-tight text-primary mb-6 leading-tight font-headline">
+            全面且細緻的<br /><span class="text-secondary">家庭醫學照顧</span>
+          </h1>
+          <p class="text-lg text-on-surface-variant leading-relaxed max-w-lg chinese-line-height">
+            從企業臨場健康服務到社區健康諮詢，我們致力於成為您與家人的長期健康守護者。透過專業的整合性醫療，為每一位患者提供個人化的健康對策。
+          </p>
+        </div>
+      </div>
+      <div class="absolute -right-24 top-0 w-1/2 h-full opacity-10 pointer-events-none hidden md:block">
+        <span class="material-symbols-outlined text-[400px] text-primary">stethoscope</span>
+      </div>
+    </section>
+
+    <!-- Service Bento Grid -->
+    <section class="max-w-7xl mx-auto px-8 py-24">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <!-- 企業臨場健康服務 (Large Card, col-span-8) -->
+        <div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-10 flex flex-col justify-between group transition-all hover:bg-white border border-transparent hover:border-outline-variant/20">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
+              <span class="material-symbols-outlined text-3xl">corporate_fare</span>
+            </div>
+            <h3 class="text-3xl font-bold text-primary mb-4 font-headline">企業臨場健康服務</h3>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-2xl chinese-line-height">
+              依據《職業安全衛生法》，為企業提供專業的臨場健康服務。包含勞工健康保護四大計畫（人因性危害預防、異常工作負荷促發疾病預防、職場不法侵害預防、母性健康保護），協助企業法規遵循、降低職災風險、提升員工健康。
+            </p>
+            <div class="flex flex-wrap gap-4 mb-8">
+              <span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">四大計畫</span>
+              <span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">法規遵循</span>
+              <span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">員工健康管理</span>
+              <span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">工作環境評估</span>
+            </div>
+          </div>
+          <a class="text-secondary font-bold inline-flex items-center gap-2 group-hover:underline no-underline" href="/blog/workplace-health-guide">
+            了解更多 <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- 高階健康檢查 (col-span-4) -->
+        <div class="md:col-span-4 bg-primary text-on-primary rounded-xl p-10 flex flex-col justify-between">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white mb-8">
+              <span class="material-symbols-outlined text-3xl">health_and_safety</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 font-headline">高階健康檢查</h3>
+            <p class="text-on-primary-container leading-relaxed mb-6 chinese-line-height">
+              不只是一份報告，更是一份改變的起點。結合行為科學的個人化健檢——涵蓋血液生化分析、癌症篩檢與專業健康風險評估，著重於追蹤與生活型態建議。
+            </p>
+          </div>
+          <span class="text-sm font-medium opacity-60">預防勝於治療</span>
+        </div>
+
+        <!-- 減重管理門診 (col-span-4) -->
+        <div class="md:col-span-4 bg-secondary-container text-on-secondary-container rounded-xl p-10 flex flex-col justify-between">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-on-secondary-container/10 flex items-center justify-center text-on-secondary-container mb-8">
+              <span class="material-symbols-outlined text-3xl">monitor_weight</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
+            <p class="leading-relaxed mb-6 chinese-line-height">
+              以 COM-B 行為科學模型為架構，結合營養學與運動處方，提供實證導向的個人化減重策略。義大減重中心專業團隊，協助您建立可持續的體重管理計畫。
+            </p>
+          </div>
+          <a class="font-bold inline-flex items-center gap-2 no-underline text-on-secondary-container" href="/blog/weight-loss-comb-model">
+            了解 COM-B 模型 <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- 社區健康營造 (Horizontal, col-span-8) -->
+        <div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-10 flex flex-col md:flex-row gap-10 items-center border border-transparent hover:border-outline-variant/20">
+          <div class="w-full md:w-1/2">
+            <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
+              <span class="material-symbols-outlined text-3xl">groups</span>
+            </div>
+            <h3 class="text-3xl font-bold text-primary mb-4 font-headline">社區健康營造</h3>
+            <p class="text-on-surface-variant leading-relaxed mb-6 chinese-line-height">
+              以居民參與為核心，推動由下而上的社區健康計畫。深入社區提供健康講座、諮詢與居家醫療評估，讓專業醫療資源不再有距離感。
+            </p>
+            <span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">籌備中</span>
+          </div>
+        </div>
+
+        <!-- 骨質疏鬆門診 (col-span-6) -->
+        <div class="md:col-span-6 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between border border-transparent hover:border-outline-variant/20">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container mb-8">
+              <span class="material-symbols-outlined text-3xl">skeleton</span>
+            </div>
+            <h3 class="text-2xl font-bold text-primary mb-4 font-headline">骨質疏鬆門診</h3>
+            <p class="text-on-surface-variant leading-relaxed mb-6 chinese-line-height">
+              骨密度（DXA）評估、骨鬆風險篩檢與治療策略。40 歲以上即應關注骨骼健康，及早預防勝過事後治療。
+            </p>
+          </div>
+          <a class="text-secondary font-bold inline-flex items-center gap-2 no-underline" href="/blog/osteoporosis-screening-guide">
+            骨鬆篩檢指南 <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- 運動醫學諮詢 (col-span-6) -->
+        <div class="md:col-span-6 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between border border-transparent hover:border-outline-variant/20">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container mb-8">
+              <span class="material-symbols-outlined text-3xl">exercise</span>
+            </div>
+            <h3 class="text-2xl font-bold text-primary mb-4 font-headline">運動醫學諮詢</h3>
+            <p class="text-on-surface-variant leading-relaxed mb-6 chinese-line-height">
+              針對不同年齡與需求，設計安全有效的運動處方。從肌少症預防到運動傷害評估，結合實證醫學提供個人化運動建議。
+            </p>
+          </div>
+          <a class="text-secondary font-bold inline-flex items-center gap-2 no-underline" href="/blog/sarcopenia-resistance-training">
+            肌少症與阻力訓練 <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy Quote Section -->
+    <section class="max-w-7xl mx-auto px-8 mb-24">
+      <div class="bg-surface-container-lowest rounded-xl p-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+        <div class="absolute left-0 top-0 bottom-0 w-2 bg-secondary"></div>
+        <div class="flex-1 pl-4">
+          <h2 class="text-3xl font-extrabold text-primary mb-6 font-headline">我們的醫療理念</h2>
+          <p class="text-2xl font-medium text-on-surface leading-snug chinese-line-height">
+            「我們不只是在治療疾病，而是在照顧『人』。每一次看診都是建立信任的過程，我們致力於提供有溫度的專業醫療。」
+          </p>
+          <p class="mt-6 text-on-surface-variant">— YC Chen, MD</p>
+        </div>
+        <div class="w-48 h-48 rounded-full overflow-hidden bg-surface-container border-4 border-white shadow-xl flex-shrink-0">
+          <img
+            src="/images/portrait.jpg"
+            alt="陳昱彰醫師"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-primary py-24 text-center">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="text-4xl font-bold text-white mb-6 font-headline">守護您的健康，從現在開始</h2>
+        <p class="text-on-primary-container text-lg mb-10 chinese-line-height">
+          如果您有任何健康疑問，或需要預防醫學方面的諮詢，歡迎隨時預約門診時間。
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="https://www.edah.org.tw"
+            target="_blank"
+            rel="noopener"
+            class="bg-secondary text-on-secondary px-10 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-all no-underline"
+          >
+            立即預約掛號
+          </a>
+          <a
+            href="mailto:cyc@edfm.org"
+            class="border border-white/20 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all no-underline"
+          >
+            聯絡我們
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JSON-LD: Service schemas -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "陳昱彰醫師 - 服務項目",
+    "url": "https://drcyc.io/services",
+    "provider": {
+      "@type": "Physician",
+      "name": "陳昱彰",
+      "alternateName": "Yu-Chang Chen",
+      "medicalSpecialty": "FamilyMedicine"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "醫療服務項目",
+      "itemListElement": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "企業臨場健康服務",
+          "description": "依據職業安全衛生法提供臨場健康服務，包含勞工健康保護四大計畫。"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "高階健康檢查",
+          "description": "結合行為科學的個人化健檢，涵蓋血液生化分析與癌症篩檢。"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "減重管理門診",
+          "description": "以 COM-B 行為科學模型為架構，結合營養學與運動處方的實證減重。"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "社區健康營造",
+          "description": "以居民參與為核心，推動由下而上的社區健康計畫。"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "骨質疏鬆門診",
+          "description": "骨密度評估、骨鬆風險篩檢與治療策略。"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "運動醫學諮詢",
+          "description": "個人化運動處方，從肌少症預防到運動傷害評估。"
+        }
+      ]
+    }
+  })} />
+</Layout>

@@ -1,0 +1,94 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: '首頁' },
+  { href: '/blog', label: '衛教專欄' },
+  { href: '/services', label: '服務項目' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+---
+
+<header class="sticky top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl transition-all border-none">
+  <nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+    <a href="/" class="text-xl font-bold tracking-tighter text-blue-950 hover:no-underline">YC Chen, MD</a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-10">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'transition-colors duration-300',
+            isActive(link.href)
+              ? 'text-blue-900 border-b-2 border-teal-600 pb-1 font-bold'
+              : 'text-slate-600 font-medium hover:text-teal-700',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <a
+      href="https://www.edah.org.tw"
+      target="_blank"
+      rel="noopener"
+      class="hidden md:inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
+    >
+      預約掛號
+    </a>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden flex flex-col gap-1.5 p-2"
+      aria-label="開啟選單"
+    >
+      <span class="block w-6 h-0.5 bg-on-surface transition-transform" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-on-surface transition-opacity" id="bar2"></span>
+      <span class="block w-6 h-0.5 bg-on-surface transition-transform" id="bar3"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
+    <div class="flex flex-col gap-4 pt-4">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'text-lg py-2 transition-colors',
+            isActive(link.href)
+              ? 'text-blue-900 font-bold'
+              : 'text-slate-600 font-medium',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="https://www.edah.org.tw"
+        target="_blank"
+        rel="noopener"
+        class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-full font-bold text-sm text-center no-underline mt-2"
+      >
+        預約掛號
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>
