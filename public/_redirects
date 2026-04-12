@@ -1,2 +1,5 @@
 # Redirect apex to www (preserving path)
 https://drcyc.io/* https://www.drcyc.io/:splat 301
+
+# Sitemap alias — some bots probe /sitemap.xml first
+/sitemap.xml /sitemap-index.xml 301

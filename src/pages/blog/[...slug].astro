@@ -20,9 +20,47 @@ const dateStr = post.data.pubDate.toLocaleDateString('zh-TW', {
   day: 'numeric',
 });
 const firstTag = post.data.tags?.[0];
+
+const SITE = 'https://www.drcyc.io';
+const postUrl = `${SITE}/blog/${post.slug}/`;
+const postImage = post.data.image && post.data.image.length > 0
+  ? (post.data.image.startsWith('http') ? post.data.image : `${SITE}${post.data.image}`)
+  : `${SITE}/images/portrait.jpg`;
+
+const blogPostingSchema = {
+  '@type': 'BlogPosting',
+  '@id': `${postUrl}#article`,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+  headline: post.data.title,
+  description: post.data.description,
+  image: postImage,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: post.data.pubDate.toISOString(),
+  inLanguage: 'zh-Hant',
+  author: { '@id': `${SITE}/#person` },
+  publisher: { '@id': `${SITE}/#person` },
+  keywords: post.data.tags?.join(', '),
+  articleSection: post.data.category,
+  url: postUrl,
+};
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: postUrl },
+  ],
+};
 ---
 
-<Layout title={`${post.data.title} | 陳昱彰醫師`} description={post.data.description}>
+<Layout
+  title={`${post.data.title} | 陳昱彰醫師`}
+  description={post.data.description}
+  ogImage={postImage}
+  ogType="article"
+  jsonLd={[blogPostingSchema, breadcrumbSchema]}
+>
   <main class="max-w-7xl mx-auto px-6 md:px-12 py-16">
     <div class="flex flex-col lg:flex-row gap-16 relative">
       <!-- Article Canvas -->

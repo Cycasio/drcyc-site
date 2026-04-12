@@ -3,7 +3,7 @@
 > 義大醫院家醫科主治醫師，整合行為科學推動減重、慢性病管理與職場健康。
 > Family medicine physician at E-Da Hospital, Kaohsiung, Taiwan. Specializes in obesity medicine, osteoporosis, and occupational health integrated with behavioral science approaches.
 
-- Website: https://drcyc.io
+- Website: https://www.drcyc.io
 - 預約掛號: https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675
 - Email: cyc@edfm.org
 - Facebook: https://facebook.com/lazydr
@@ -17,8 +17,9 @@
 ## 頁面索引
 
 - [首頁](/) — 醫師簡介與服務總覽
-- [服務項目](/services) — 企業臨場健康服務、減重門診、骨鬆門診、社區營造等
-- [衛教專欄](/blog) — 健康衛教文章
+- [關於陳醫師](/about/) — 完整學經歷、證照、學術發表
+- [服務項目](/services/) — 企業臨場健康服務、減重門診、骨鬆門診、社區營造等
+- [衛教專欄](/blog/) — 健康衛教文章
 - [減重 COM-B 模型](/blog/weight-loss-comb-model)
 - [職場健康指南](/blog/workplace-health-guide)
 - [骨鬆篩檢指南](/blog/osteoporosis-screening-guide)

@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+
+const aboutPageSchema = {
+  '@type': 'AboutPage',
+  '@id': `${SITE}/about/#aboutpage`,
+  url: `${SITE}/about/`,
+  name: '關於陳昱彰醫師',
+  mainEntity: { '@id': `${SITE}/#person` },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+      { '@type': 'ListItem', position: 2, name: '關於', item: `${SITE}/about/` },
+    ],
+  },
+};
+
+const title = '關於陳昱彰醫師｜義大醫院家醫科・三專科醫師・實證銀獎';
+const description =
+  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師。高雄醫學大學畢業，整合行為科學與實證醫學，榮獲國家醫療品質獎實證醫學臨床組銀獎。發表 SCI 論文 2 篇（70+ 引用），進行中研究涵蓋減重、肌少症、戒菸與骨關節炎 meta-analysis。';
+
+const credentials = [
+  { category: '專科證照', items: [
+    '家庭醫學科專科醫師',
+    '台灣肥胖醫學會 肥胖醫學專科醫師',
+    '中華民國骨質疏鬆症學會 骨鬆專科醫師',
+    '勞工健康服務醫師',
+    '糖尿病共同照護網醫事人員',
+    '戒菸治療認證醫師',
+    'OSCE 國家考試考官',
+  ]},
+  { category: '學歷', items: [
+    '高雄醫學大學 醫學系',
+    '國立臺灣大學公共衛生學院 健康行為與社區科學組',
+    '義守大學 生物科技與化學工程研究所 博士班（就讀中）',
+  ]},
+  { category: '榮譽', items: [
+    '國家醫療品質獎 實證醫學類 臨床組 銀獎',
+    '國家醫療品質獎 實證醫學類 新人組 佳作',
+    '醫策會 EBM 競賽 臨床組 佳作',
+    '義大醫院 模範住院醫師',
+  ]},
+];
+
+const publications = [
+  {
+    citation: 'Chen YC, et al. (2023). Comparative effectiveness of pharmacological interventions for sarcopenia: a systematic review and network meta-analysis. European Journal of Applied Physiology and Occupational Physiology.',
+    cites: '40+ citations',
+  },
+  {
+    citation: 'Chen YC, et al. (2018). Continuance compliance of privacy policy of electronic medical records. BMC Medical Informatics and Decision Making.',
+    doi: '10.1186/s12911-018-0722-7',
+    cites: '27+ citations',
+  },
+];
+
+const ongoing = [
+  'BMI 與髖關節骨關節炎 Meta-Analysis',
+  '白噪音與 ADHD 兒童工作記憶 Meta-Analysis',
+  'Varenicline 完整療程戒菸成功率 Meta-Analysis',
+  '足球／橄欖球與髖膝 OA Meta-Analysis（目標：BJSM）',
+  'NHANES LDL-PA-Mortality 世代研究（目標：JAMA Internal Medicine）',
+  'SCI 脊髓損傷 HSUV Meta-Analysis',
+];
+---
+
+<Layout title={title} description={description} jsonLd={aboutPageSchema}>
+  <main class="max-w-4xl mx-auto px-6 md:px-12 py-16">
+    <nav class="text-sm text-outline mb-8" aria-label="breadcrumb">
+      <a href="/" class="hover:text-primary">首頁</a>
+      <span class="mx-2">／</span>
+      <span>關於</span>
+    </nav>
+
+    <header class="mb-16">
+      <p class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">About</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-6">
+        陳昱彰 醫師<br/>
+        <span class="text-2xl md:text-3xl text-slate-600 font-bold">Yu-Chang Chen, MD</span>
+      </h1>
+      <p class="text-lg text-slate-700 chinese-line-height max-w-3xl">
+        義大醫院家庭暨社區醫學部主治醫師與減重中心醫師。整合家庭醫學、肥胖醫學、骨質疏鬆、運動醫學與職業醫學，
+        以 <strong>COM-B 行為改變模型</strong>與<strong>實證醫學</strong>為雙核心，協助民眾建立可持續的健康習慣，
+        而非只靠藥物與意志力。
+      </p>
+    </header>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">臨床理念</h2>
+      <blockquote class="border-l-4 border-teal-600 pl-6 py-2 text-xl text-blue-950 font-bold leading-relaxed">
+        「醫學的價值，不僅在於治療疾病，更在於幫助人們過上更好的生活。」
+      </blockquote>
+      <p class="mt-6 text-slate-700 chinese-line-height">
+        陳醫師的臨床模型：<strong>理解（Understand）→ 溝通（Communicate）→ 改變（Transform）</strong>。
+        先花時間理解病患的生活脈絡與動機，再以動機式晤談建立信任，最後以行為科學工具協助實際改變。
+        這套方法在減重、戒菸、慢性病管理與職場健康上都能應用。
+      </p>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">學經歷與證照</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {credentials.map(({category, items}) => (
+          <div>
+            <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">{category}</h3>
+            <ul class="space-y-2 text-slate-700 text-sm leading-relaxed">
+              {items.map(item => <li>• {item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">學術發表</h2>
+      <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">SCI 期刊論文</h3>
+      <ol class="space-y-6 mb-10">
+        {publications.map((p, i) => (
+          <li class="pl-6 border-l-2 border-slate-200">
+            <p class="text-slate-700 text-sm leading-relaxed">{p.citation}</p>
+            {p.doi && <p class="text-xs text-outline mt-1">DOI: {p.doi}</p>}
+            <p class="text-xs font-bold text-teal-700 mt-1">{p.cites}</p>
+          </li>
+        ))}
+      </ol>
+      <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">進行中研究</h3>
+      <ul class="grid md:grid-cols-2 gap-2 text-sm text-slate-700">
+        {ongoing.map(item => <li>• {item}</li>)}
+      </ul>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">聯絡與學術身份</h2>
+      <dl class="grid md:grid-cols-2 gap-4 text-sm">
+        <div><dt class="font-bold text-blue-950">門診單位</dt><dd class="text-slate-700">義大醫院 家庭暨社區醫學部</dd></div>
+        <div><dt class="font-bold text-blue-950">線上掛號</dt><dd><a class="text-teal-700 underline" href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener">義大醫院預約系統</a></dd></div>
+        <div><dt class="font-bold text-blue-950">Email</dt><dd class="text-slate-700">cyc@edfm.org</dd></div>
+        <div><dt class="font-bold text-blue-950">Facebook</dt><dd><a class="text-teal-700 underline" href="https://www.facebook.com/lazydr" target="_blank" rel="noopener">@lazydr</a></dd></div>
+        <div><dt class="font-bold text-blue-950">Instagram</dt><dd><a class="text-teal-700 underline" href="https://www.instagram.com/lazydr.cyc" target="_blank" rel="noopener">@lazydr.cyc</a></dd></div>
+        <div><dt class="font-bold text-blue-950">ORCID</dt><dd><a class="text-teal-700 underline" href="https://orcid.org/0009-0005-2506-1058" target="_blank" rel="noopener">0009-0005-2506-1058</a></dd></div>
+      </dl>
+    </section>
+
+    <section class="p-10 bg-gradient-to-br from-blue-950 to-teal-700 rounded-2xl text-white text-center">
+      <h3 class="text-2xl font-bold mb-4">準備好開始您的健康旅程</h3>
+      <a
+        href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-white text-blue-950 px-8 py-3 rounded-full font-bold hover:opacity-90 no-underline"
+      >
+        立即線上掛號
+      </a>
+    </section>
+  </main>
+</Layout>
