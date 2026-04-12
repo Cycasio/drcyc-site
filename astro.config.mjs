@@ -3,7 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://drcyc.io',
+  site: 'https://www.drcyc.io',
+  trailingSlash: 'always',
   integrations: [sitemap(), tailwind()],
   redirects: {
     '/workplace-health': '/services',
