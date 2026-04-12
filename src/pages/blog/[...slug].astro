@@ -52,6 +52,20 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 3, name: post.data.title, item: postUrl },
   ],
 };
+
+const faqSchema = post.data.faq && post.data.faq.length > 0
+  ? {
+      '@type': 'FAQPage',
+      '@id': `${postUrl}#faq`,
+      mainEntity: post.data.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    }
+  : null;
+
+const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
 ---
 
 <Layout
@@ -59,7 +73,7 @@ const breadcrumbSchema = {
   description={post.data.description}
   ogImage={postImage}
   ogType="article"
-  jsonLd={[blogPostingSchema, breadcrumbSchema]}
+  jsonLd={postJsonLd}
 >
   <main class="max-w-7xl mx-auto px-6 md:px-12 py-16">
     <div class="flex flex-col lg:flex-row gap-16 relative">
