@@ -142,19 +142,28 @@ const description =
     <!-- Quick facts card -->
     <section class="grid md:grid-cols-3 gap-4 mb-14">
       <div class="rounded-xl border border-slate-200 bg-white p-6">
-        <div class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">📅 看診時段</div>
+        <div class="flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">
+          <span class="material-symbols-outlined" style="font-size:18px;">schedule</span>
+          看診時段
+        </div>
         <p class="text-lg font-bold text-blue-950">每週五 18:00–21:00</p>
         <p class="text-sm text-slate-600 mt-1">陳昱彰醫師親自駐診</p>
       </div>
       <div class="rounded-xl border border-slate-200 bg-white p-6">
-        <div class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">📞 預約電話</div>
+        <div class="flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">
+          <span class="material-symbols-outlined" style="font-size:18px;">call</span>
+          預約電話
+        </div>
         <a href={`tel:+886${DAZHENG.telephone.replace(/\+886|-/g, '')}`} class="text-lg font-bold text-blue-950 no-underline hover:text-teal-700">
           {DAZHENG.telephone.replace('+886-', '0')}
         </a>
         <p class="text-sm text-slate-600 mt-1">建議先電話確認名額</p>
       </div>
       <div class="rounded-xl border border-slate-200 bg-white p-6">
-        <div class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">📍 地點</div>
+        <div class="flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">
+          <span class="material-symbols-outlined" style="font-size:18px;">location_on</span>
+          地點
+        </div>
         <p class="text-lg font-bold text-blue-950">高雄市旗山區</p>
         <a href={DAZHENG.mapUrl} target="_blank" rel="noopener" class="text-sm text-teal-700 underline mt-1 inline-block">
           開啟 Google 地圖 →
@@ -167,7 +176,10 @@ const description =
       <h2 class="text-2xl font-bold text-blue-950 mb-6">這個夜診適合誰?</h2>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="rounded-xl border-l-4 border-teal-600 bg-teal-50/50 p-6">
-          <h3 class="font-bold text-blue-950 mb-3 flex items-center gap-2">🏠 住在這些地方的居民</h3>
+          <h3 class="font-bold text-blue-950 mb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700" style="font-size:22px;">home</span>
+            住在這些地方的居民
+          </h3>
           <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
             <li><strong>旗山</strong> — 步行可達或短程車程</li>
             <li><strong>美濃</strong> — 車程約 15 分鐘</li>
@@ -179,7 +191,10 @@ const description =
           </p>
         </div>
         <div class="rounded-xl border-l-4 border-teal-600 bg-teal-50/50 p-6">
-          <h3 class="font-bold text-blue-950 mb-3 flex items-center gap-2">🕔 白天不方便就診的人</h3>
+          <h3 class="font-bold text-blue-950 mb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700" style="font-size:22px;">work</span>
+            白天不方便就診的人
+          </h3>
           <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
             <li>週一到週五要上班,難請假看醫生</li>
             <li>需要定期拿三高慢性病藥</li>
@@ -198,7 +213,10 @@ const description =
       <h2 class="text-2xl font-bold text-blue-950 mb-6">夜診提供哪些門診服務?</h2>
       <div class="space-y-4">
         <div class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="font-bold text-blue-950 mb-2">🍱 藥物減重門診(含 GLP-1 類)</h3>
+          <h3 class="font-bold text-blue-950 mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700" style="font-size:22px;">medication</span>
+            藥物減重門診(含 GLP-1 類)
+          </h3>
           <p class="text-sm text-slate-700 leading-relaxed chinese-line-height">
             針對過重或肥胖族群的個人化藥物減重計畫,包含口服藥物(如 Contrave)與 GLP-1
             類注射藥物(如猛健樂 Mounjaro、Wegovy 等)。治療前會與你討論適應症、禁忌症、副作用與生活型態配合,療程為自費項目。
@@ -207,13 +225,19 @@ const description =
           </p>
         </div>
         <div class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="font-bold text-blue-950 mb-2">❤️ 三高慢性病追蹤</h3>
+          <h3 class="font-bold text-blue-950 mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700" style="font-size:22px;">monitor_heart</span>
+            三高慢性病追蹤
+          </h3>
           <p class="text-sm text-slate-700 leading-relaxed chinese-line-height">
             糖尿病、高血壓、高血脂的穩定期處方與追蹤,週五晚上就能完成回診、拿月份藥物。適合白天工作不便請假的人;初診或控制不穩者建議先至義大進行完整評估,後續再轉回旗山夜診維持追蹤。
           </p>
         </div>
         <div class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="font-bold text-blue-950 mb-2">🏥 家庭醫學科一般門診</h3>
+          <h3 class="font-bold text-blue-950 mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700" style="font-size:22px;">local_hospital</span>
+            家庭醫學科一般門診
+          </h3>
           <p class="text-sm text-slate-700 leading-relaxed chinese-line-height">
             家庭醫學科處理的常見問題:呼吸道感染、慢性疼痛、失眠、健康諮詢、疫苗建議、保健問題等都可以在夜診處理。
           </p>
@@ -278,17 +302,19 @@ const description =
       <div class="flex flex-wrap gap-3 justify-center text-sm">
         <a
           href={`tel:+886${DAZHENG.telephone.replace(/\+886|-/g, '')}`}
-          class="inline-block bg-white text-blue-950 px-6 py-3 rounded-full font-bold hover:opacity-90 no-underline"
+          class="inline-flex items-center gap-2 bg-white text-blue-950 px-6 py-3 rounded-full font-bold hover:opacity-90 no-underline"
         >
-          📞 {DAZHENG.telephone.replace('+886-', '0')}
+          <span class="material-symbols-outlined" style="font-size:20px;">call</span>
+          {DAZHENG.telephone.replace('+886-', '0')}
         </a>
         <a
           href={DAZHENG.mapUrl}
           target="_blank"
           rel="noopener"
-          class="inline-block bg-white/10 border border-white/40 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 no-underline"
+          class="inline-flex items-center gap-2 bg-white/10 border border-white/40 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 no-underline"
         >
-          📍 Google 地圖
+          <span class="material-symbols-outlined" style="font-size:20px;">location_on</span>
+          Google 地圖
         </a>
         <a
           href="https://www.facebook.com/lazydr"
