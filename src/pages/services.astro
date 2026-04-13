@@ -128,6 +128,26 @@ import Layout from '../layouts/Layout.astro';
             肌少症與阻力訓練 →
           </a>
         </div>
+
+        <!-- 衛教演講 / 企業健康講座 (col-span-12 full-width banner) -->
+        <a href="/speaking/" class="md:col-span-12 bg-on-secondary-container text-secondary-container rounded-xl p-10 flex flex-col md:flex-row items-start md:items-center gap-8 no-underline hover:opacity-95 transition-opacity">
+          <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white flex-shrink-0">
+            <span class="material-symbols-outlined" style="font-size:36px;">campaign</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-2xl md:text-3xl font-bold mb-3 font-headline">衛教演講 / 企業健康講座</h3>
+            <p class="leading-relaxed chinese-line-height opacity-90 mb-4">
+              曾赴中鋼、中油、國巨、李長榮、英特格、麥當勞、Anytime Fitness、東海大學、義守大學、高科大、中正大學、各地警政與衛生所及多所國高中演講。主題涵蓋減重醫學、GLP-1 新藥、三高、骨質疏鬆、行為科學、職場健康與四大計畫(含人因危害、異常工作負荷)。
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <span class="px-3 py-1 bg-white/15 rounded-full font-medium">南部為主</span>
+              <span class="px-3 py-1 bg-white/15 rounded-full font-medium">線上場次可接</span>
+              <span class="px-3 py-1 bg-white/15 rounded-full font-medium">企業內訓</span>
+              <span class="px-3 py-1 bg-white/15 rounded-full font-medium">邀約來信 cyc@edfm.org</span>
+            </div>
+          </div>
+          <span class="text-sm font-bold whitespace-nowrap hidden md:block">查看講題與邀約 →</span>
+        </a>
       </div>
     </section>
 
@@ -225,6 +245,11 @@ import Layout from '../layouts/Layout.astro';
           "@type": "MedicalProcedure",
           "name": "運動醫學諮詢",
           "description": "個人化運動處方，從肌少症預防到運動傷害評估。"
+        },
+        {
+          "@type": "Service",
+          "name": "衛教演講 / 企業健康講座",
+          "description": "企業與社區的健康講座，主題含減重、三高、骨鬆、職場健康、行為科學。服務範圍南部為主，線上場次可接。"
         }
       ]
     }
