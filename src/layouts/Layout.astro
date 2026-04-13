@@ -42,6 +42,9 @@ const personSchema = {
     '肥胖醫學',
     '減重治療',
     '運動醫學',
+    '運動處方 FITT-VP',
+    '阻力訓練',
+    '肌少症',
     '職業醫學',
     '骨質疏鬆',
     '行為科學',
@@ -76,6 +79,12 @@ const personSchema = {
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '骨質疏鬆症專科醫師' },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '認證', name: '勞工健康服務醫師' },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '認證', name: '戒菸治療認證醫師' },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: '運動教練認證',
+      name: 'ACE-CPT (American Council on Exercise - Certified Personal Trainer)',
+      recognizedBy: { '@type': 'Organization', name: 'American Council on Exercise', url: 'https://www.acefitness.org' },
+    },
   ],
   award: [
     '國家醫療品質獎 實證醫學類 臨床組 銀獎',
@@ -107,7 +116,7 @@ const physicianSchema = {
     { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
     { '@type': 'MedicalProcedure', name: '企業臨場健康服務', description: '依《職業安全衛生法》提供勞工健康保護四大計畫' },
     { '@type': 'MedicalProcedure', name: '高階健康檢查解讀', description: '結合行為科學的個人化健檢諮詢' },
-    { '@type': 'MedicalProcedure', name: '運動處方諮詢', description: '個人化運動處方設計與運動傷害評估' },
+    { '@type': 'MedicalProcedure', name: '運動處方 (FITT-VP)', description: '以 ACSM FITT-VP 架構設計個人化運動處方,結合 ACE-CPT 訓練學觀點涵蓋心肺、阻力、柔軟度與進階進程' },
   ],
   parentOrganization: {
     '@type': 'Hospital',
