@@ -1,0 +1,305 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { DAZHENG, POSITIONING, QISHAN_RADIUS } from '../data/clinic';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/qishan-clinic/`;
+
+const clinicSchema = {
+  '@type': 'MedicalClinic',
+  '@id': `${pageUrl}#clinic`,
+  name: '大政診所(陳昱彰醫師 週五夜診)',
+  url: pageUrl,
+  telephone: DAZHENG.telephone,
+  hasMap: DAZHENG.mapUrl,
+  address: {
+    '@type': 'PostalAddress',
+    ...DAZHENG.address,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: DAZHENG.geo.lat,
+    longitude: DAZHENG.geo.lng,
+  },
+  medicalSpecialty: ['FamilyMedicine', 'Obesity'],
+  areaServed: QISHAN_RADIUS.map((a) => ({
+    '@type': 'City',
+    name: `高雄市${a}區`,
+  })),
+  physician: { '@id': `${SITE}/#person` },
+  openingHoursSpecification: DAZHENG.hours.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.day,
+    opens: h.opens,
+    closes: h.closes,
+  })),
+  availableService: [
+    { '@type': 'MedicalProcedure', name: '家庭醫學科夜診' },
+    { '@type': 'MedicalProcedure', name: '三高慢性病追蹤(糖尿病、高血壓、高血脂)' },
+    { '@type': 'MedicalProcedure', name: '藥物減重諮詢(含 GLP-1 類藥物)' },
+  ],
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '旗山大政診所的陳醫師夜診時間?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '每週五 18:00–21:00,由義大醫院家醫科陳昱彰醫師親自駐診。看診前建議先電話預約 07-662-2588 確認名額。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '旗山這邊也能打猛健樂(Mounjaro)、GLP-1 減重嗎?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '可以。藥物減重門診在旗山夜診與義大減重中心兩地都有提供。如果你住旗山、美濃、田寮、內門一帶,或白天要上班、只有晚上有空,旗山大政夜診是適合的選擇。減重治療為自費項目,詳細方案與費用請於診間與醫師討論。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '我有高血壓或糖尿病,可以在旗山繼續追蹤嗎?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '可以。三高(糖尿病、高血壓、高血脂)的穩定期追蹤與處方,是旗山夜診的主要服務之一。週五晚上就診、拿一個月份藥物是常見的使用方式,適合白天工作不便請假的上班族。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '義大醫院跟旗山大政,我該選哪邊?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '兩邊是同一位醫師,只是定位不同。義大有醫學中心等級的影像與檢查設備,適合第一次完整評估、高階健檢、複雜個案。旗山大政是週五夜診,適合已經規劃好療程、需要固定回診的人,或住在旗山、美濃、田寮、內門一帶、白天不方便就診的居民。慢性病與減重療程其實在兩邊都能繼續,不會因為換地點而中斷。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '大政診所怎麼預約、可以現場掛號嗎?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '電話預約 07-662-2588;若名額還有,現場掛號也可以,但建議提前打電話確認,以免白跑一趟。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '旗山到義大比較近,還是大政診所比較近?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '對於住在旗山、美濃、田寮、內門的居民,大政診所明顯較近(通常 10–20 分鐘)。義大醫院位於燕巢區,從這些地方開車約 30–40 分鐘。若你住楠梓、左營、鳳山、岡山,義大距離反而比較近。',
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '服務項目', item: `${SITE}/services/` },
+    { '@type': 'ListItem', position: 3, name: '旗山大政診所夜診', item: pageUrl },
+  ],
+};
+
+const title = '旗山大政診所 · 週五夜診|家醫科陳昱彰醫師 減重・三高門診';
+const description =
+  '義大醫院家醫科陳昱彰醫師,每週五晚上 18:00–21:00 於旗山大政診所親自駐診。提供藥物減重(含 GLP-1 類)、三高慢性病追蹤、家庭醫學門診。適合旗山、美濃、田寮、內門居民,以及下班後才有空就診的上班族。';
+---
+
+<Layout title={title} description={description} jsonLd={[clinicSchema, faqSchema, breadcrumbSchema]}>
+  <main class="max-w-5xl mx-auto px-6 md:px-10 py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/services/" class="hover:text-teal-700">服務項目</a>
+      <span class="mx-2">／</span>
+      <span>旗山大政診所夜診</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="mb-12">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">Friday Night Clinic · Qishan</p>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-5">
+        旗山大政診所<br />週五夜診
+      </h1>
+      <p class="text-lg text-slate-700 leading-relaxed max-w-3xl chinese-line-height">
+        我是義大醫院家醫科主治醫師<strong>陳昱彰</strong>。每週五晚上 18:00–21:00,我會在
+        <strong>旗山大政診所</strong>親自駐診,提供<strong
+          >家庭醫學、三高慢性病追蹤與藥物減重(含 GLP-1 類)</strong
+        >門診。
+      </p>
+      <p class="text-base text-slate-600 mt-4 leading-relaxed chinese-line-height max-w-3xl">
+        這個時段是給<strong>住在旗山、美濃、田寮、內門一帶的居民</strong>,以及<strong
+          >白天要上班、只能晚上看診</strong
+        >的人設計的。慢性病拿藥、GLP-1 減重療程的回診都可以在這邊進行,不用特地請假跑義大。
+      </p>
+    </header>
+
+    <!-- Quick facts card -->
+    <section class="grid md:grid-cols-3 gap-4 mb-14">
+      <div class="rounded-xl border border-slate-200 bg-white p-6">
+        <div class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">📅 看診時段</div>
+        <p class="text-lg font-bold text-blue-950">每週五 18:00–21:00</p>
+        <p class="text-sm text-slate-600 mt-1">陳昱彰醫師親自駐診</p>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-6">
+        <div class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">📞 預約電話</div>
+        <a href={`tel:+886${DAZHENG.telephone.replace(/\+886|-/g, '')}`} class="text-lg font-bold text-blue-950 no-underline hover:text-teal-700">
+          {DAZHENG.telephone.replace('+886-', '0')}
+        </a>
+        <p class="text-sm text-slate-600 mt-1">建議先電話確認名額</p>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-6">
+        <div class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">📍 地點</div>
+        <p class="text-lg font-bold text-blue-950">高雄市旗山區</p>
+        <a href={DAZHENG.mapUrl} target="_blank" rel="noopener" class="text-sm text-teal-700 underline mt-1 inline-block">
+          開啟 Google 地圖 →
+        </a>
+      </div>
+    </section>
+
+    <!-- Who this is for -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">這個夜診適合誰?</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border-l-4 border-teal-600 bg-teal-50/50 p-6">
+          <h3 class="font-bold text-blue-950 mb-3 flex items-center gap-2">🏠 住在這些地方的居民</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
+            <li><strong>旗山</strong> — 步行可達或短程車程</li>
+            <li><strong>美濃</strong> — 車程約 15 分鐘</li>
+            <li><strong>田寮</strong> — 車程約 15 分鐘</li>
+            <li><strong>內門</strong> — 車程約 20 分鐘</li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-3 chinese-line-height">
+            對這些地區的居民,大政診所通常比義大醫院近 15–25 分鐘車程。
+          </p>
+        </div>
+        <div class="rounded-xl border-l-4 border-teal-600 bg-teal-50/50 p-6">
+          <h3 class="font-bold text-blue-950 mb-3 flex items-center gap-2">🕔 白天不方便就診的人</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
+            <li>週一到週五要上班,難請假看醫生</li>
+            <li>需要定期拿三高慢性病藥</li>
+            <li>GLP-1 減重療程需要穩定回診追蹤</li>
+            <li>不想在醫學中心人擠人、排隊等</li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-3 chinese-line-height">
+            下班後 18:00 開始看診,不用特地請假,對雙薪家庭尤其方便。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services offered -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">夜診提供哪些門診服務?</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-2">🍱 藥物減重門診(含 GLP-1 類)</h3>
+          <p class="text-sm text-slate-700 leading-relaxed chinese-line-height">
+            針對過重或肥胖族群的個人化藥物減重計畫,包含口服藥物(如 Contrave)與 GLP-1
+            類注射藥物(如猛健樂 Mounjaro、Wegovy 等)。治療前會與你討論適應症、禁忌症、副作用與生活型態配合,療程為自費項目。
+            詳細藥物介紹可參考
+            <a href="/blog/mounjaro-weight-loss/" class="text-teal-700 underline">猛健樂完整指南</a>。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-2">❤️ 三高慢性病追蹤</h3>
+          <p class="text-sm text-slate-700 leading-relaxed chinese-line-height">
+            糖尿病、高血壓、高血脂的穩定期處方與追蹤,週五晚上就能完成回診、拿月份藥物。適合白天工作不便請假的人;初診或控制不穩者建議先至義大進行完整評估,後續再轉回旗山夜診維持追蹤。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-2">🏥 家庭醫學科一般門診</h3>
+          <p class="text-sm text-slate-700 leading-relaxed chinese-line-height">
+            家庭醫學科處理的常見問題:呼吸道感染、慢性疼痛、失眠、健康諮詢、疫苗建議、保健問題等都可以在夜診處理。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qishan vs E-Da -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-4">旗山還是義大?我這樣建議</h2>
+      <p class="text-slate-700 mb-6 leading-relaxed chinese-line-height">
+        兩邊是<strong>同一位醫師</strong>,同樣的治療邏輯、同樣的減重方案。差別只在設備與使用情境。
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">義大醫院</p>
+          <h3 class="text-lg font-bold text-blue-950 mb-3">{POSITIONING.edah.headline}</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
+            {POSITIONING.edah.bestFor.map((item) => <li>{item}</li>)}
+          </ul>
+          <div class="mt-5 pt-4 border-t border-slate-100">
+            <a
+              href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
+              target="_blank"
+              rel="noopener"
+              class="text-sm font-bold text-teal-700 no-underline hover:underline"
+            >
+              義大線上掛號 →
+            </a>
+          </div>
+        </div>
+        <div class="rounded-xl border-2 border-teal-600 bg-teal-50/30 p-6">
+          <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">旗山大政診所</p>
+          <h3 class="text-lg font-bold text-blue-950 mb-3">{POSITIONING.dazheng.headline}</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
+            {POSITIONING.dazheng.bestFor.map((item) => <li>{item}</li>)}
+          </ul>
+          <div class="mt-5 pt-4 border-t border-teal-200">
+            <a
+              href={`tel:+886${DAZHENG.telephone.replace(/\+886|-/g, '')}`}
+              class="text-sm font-bold text-teal-700 no-underline hover:underline"
+            >
+              電話預約 {DAZHENG.telephone.replace('+886-', '0')} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Note -->
+    <aside class="rounded-xl border-l-4 border-slate-300 bg-slate-50 p-5 mb-14 text-sm text-slate-600 leading-relaxed chinese-line-height">
+      <strong class="text-slate-800">溫馨提醒</strong> —
+      本頁資訊為陳昱彰醫師在大政診所的看診時段與服務說明,非任何形式的藥物或療效廣告。藥物減重為自費項目,治療計畫、適應症、禁忌症與費用需在診間與醫師個別討論。詳細門診規則以大政診所公告為準。
+    </aside>
+
+    <!-- CTA -->
+    <section class="rounded-2xl bg-gradient-to-br from-blue-950 to-teal-700 text-white p-10 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">週五下班後,順路看個診</h2>
+      <p class="text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed chinese-line-height">
+        不用請假、不用跑醫學中心。住旗山、美濃、田寮、內門一帶的朋友,週五晚上就能完成減重療程的回診、拿三高慢性病藥,或處理家醫科常見問題。
+      </p>
+      <div class="flex flex-wrap gap-3 justify-center text-sm">
+        <a
+          href={`tel:+886${DAZHENG.telephone.replace(/\+886|-/g, '')}`}
+          class="inline-block bg-white text-blue-950 px-6 py-3 rounded-full font-bold hover:opacity-90 no-underline"
+        >
+          📞 {DAZHENG.telephone.replace('+886-', '0')}
+        </a>
+        <a
+          href={DAZHENG.mapUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-block bg-white/10 border border-white/40 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 no-underline"
+        >
+          📍 Google 地圖
+        </a>
+        <a
+          href="https://www.facebook.com/lazydr"
+          target="_blank"
+          rel="noopener"
+          class="inline-block bg-white/10 border border-white/40 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 no-underline"
+        >
+          Facebook @lazydr
+        </a>
+      </div>
+      <p class="text-xs text-white/60 mt-6">每週五 18:00–21:00 · 陳昱彰醫師親自駐診</p>
+    </section>
+  </main>
+</Layout>

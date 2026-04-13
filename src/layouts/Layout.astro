@@ -96,7 +96,7 @@ const physicianSchema = {
   '@context': 'https://schema.org',
   '@type': 'Physician',
   '@id': `${SITE}/#physician`,
-  name: '陳昱彰醫師門診',
+  name: '陳昱彰醫師門診 - 義大醫院',
   url: SITE,
   image: `${SITE}/images/portrait.jpg`,
   telephone: '+886-7-615-0011',
@@ -127,11 +127,56 @@ const physicianSchema = {
     latitude: 22.7345,
     longitude: 120.3882,
   },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:30', closes: '12:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:30', closes: '12:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:30', closes: '12:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '13:30', closes: '17:00' },
+  ],
   potentialAction: {
     '@type': 'ReserveAction',
     target: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
     name: '線上預約掛號',
   },
+};
+
+const qishanClinicSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalClinic',
+  '@id': `${SITE}/#qishan-clinic`,
+  name: '大政診所(陳昱彰醫師 週五夜診)',
+  url: `${SITE}/qishan-clinic/`,
+  telephone: '+886-7-662-2588',
+  hasMap: 'https://maps.app.goo.gl/JcgmsZQqFahbT2T1A',
+  medicalSpecialty: ['FamilyMedicine', 'Obesity'],
+  physician: { '@id': `${SITE}/#person` },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '旗山區',
+    addressLocality: '旗山區',
+    addressRegion: '高雄市',
+    postalCode: '842',
+    addressCountry: 'TW',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 22.892365,
+    longitude: 120.4836464,
+  },
+  areaServed: [
+    { '@type': 'City', name: '高雄市旗山區' },
+    { '@type': 'City', name: '高雄市美濃區' },
+    { '@type': 'City', name: '高雄市田寮區' },
+    { '@type': 'City', name: '高雄市內門區' },
+  ],
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '18:00', closes: '21:00' },
+  ],
+  availableService: [
+    { '@type': 'MedicalProcedure', name: '家庭醫學科夜診' },
+    { '@type': 'MedicalProcedure', name: '三高慢性病追蹤(糖尿病、高血壓、高血脂)' },
+    { '@type': 'MedicalProcedure', name: '藥物減重諮詢(含 GLP-1 類)' },
+  ],
 };
 
 const websiteSchema = {
@@ -149,6 +194,7 @@ const schemaGraph = {
   '@graph': [
     personSchema,
     physicianSchema,
+    qishanClinicSchema,
     websiteSchema,
     ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
   ],
