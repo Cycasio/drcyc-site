@@ -48,22 +48,22 @@ export const EDAH: ClinicLocation = {
   bookingUrl: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
   hours: [
     {
-      label: '週一上午・家醫科門診',
+      label: '週一上午・義大健診中心',
       session: '上午',
       day: 'Monday',
       dayLabel: '週一',
       opens: '08:30',
       closes: '12:00',
-      focus: '家庭醫學・慢性病追蹤・高階健檢',
+      focus: '高階健檢・報告解說',
     },
     {
-      label: '週二上午・家醫科門診',
+      label: '週二上午・義大健診中心',
       session: '上午',
       day: 'Tuesday',
       dayLabel: '週二',
       opens: '08:30',
       closes: '12:00',
-      focus: '家庭醫學・慢性病追蹤・高階健檢',
+      focus: '高階健檢・報告解說',
     },
     {
       label: '週五上午・家醫科門診',
