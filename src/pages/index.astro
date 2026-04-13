@@ -11,17 +11,34 @@ const faqs = [
   {
     q: '陳醫師有哪些看診地點？',
     a: '兩個地點，同一位醫師。(1) 義大醫院家庭暨社區醫學部 / 義大健診中心 / 義大減重中心：週一、週二上午高階健檢報告解說；週五上午家醫科門診；週五下午減重中心。(2) 旗山大政診所：每週五 18:00–21:00 夜診，提供家醫科、三高慢性病追蹤與藥物減重。',
-    table: {
-      headers: ['', '義大醫院', '旗山大政診所'],
-      rows: [
-        ['週一上午', '高階健檢 / 報告解說', '—'],
-        ['週二上午', '高階健檢 / 報告解說', '—'],
-        ['週五上午', '家醫科門診', '—'],
-        ['週五下午', '減重中心', '—'],
-        ['週五夜診', '—', '18:00–21:00 家醫 / 三高 / 減重'],
-        ['預約方式', '義大線上掛號', '電話 07-662-2588'],
-      ],
-    },
+    locations: [
+      {
+        icon: '🏥',
+        name: '義大醫院',
+        subtitle: '家醫科・健診中心・減重中心',
+        slots: [
+          { day: '週一', time: '上午', focus: '高階健檢 / 報告解說' },
+          { day: '週二', time: '上午', focus: '高階健檢 / 報告解說' },
+          { day: '週五', time: '上午', focus: '家醫科門診' },
+          { day: '週五', time: '下午', focus: '減重中心' },
+        ],
+        bookingLabel: '義大線上掛號',
+        bookingHref: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
+        bookingIcon: '📋',
+      },
+      {
+        icon: '🌙',
+        name: '旗山大政診所',
+        subtitle: '週五夜診',
+        slots: [
+          { day: '週五', time: '夜診', focus: '家醫 / 三高 / 減重' },
+        ],
+        extraNote: '18:00–21:00',
+        bookingLabel: '07-662-2588',
+        bookingHref: 'tel:+886766225588',
+        bookingIcon: '📞',
+      },
+    ],
   },
   {
     q: '猛健樂（Mounjaro）GLP-1 減重在哪邊比較方便？',
@@ -252,30 +269,36 @@ const faqs = [
               <span class="text-secondary transition-transform group-open:rotate-180 inline-block">▼</span>
             </summary>
             <div class="px-8 pb-6">
-              {f.table ? (
+              {f.locations ? (
                 <>
-                  <p class="text-on-surface-variant chinese-line-height mb-4">兩個地點，同一位醫師、同樣的治療邏輯，按居住地與時段方便度選擇。</p>
-                  <div class="overflow-x-auto rounded-lg border border-outline-variant/20">
-                    <table class="w-full text-sm">
-                      <thead class="bg-surface-container-low">
-                        <tr>
-                          {f.table.headers.map((h, i) => (
-                            <th class={`p-3 text-left font-bold text-primary ${i === 0 ? 'w-24' : ''}`}>{h}</th>
+                  <p class="text-on-surface-variant chinese-line-height mb-5">兩個地點，同一位醫師、同樣的治療邏輯，按居住地與時段方便度選擇。</p>
+                  <div class="grid md:grid-cols-2 gap-4">
+                    {f.locations.map((loc) => (
+                      <div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-5">
+                        <div class="flex items-center gap-2 mb-1">
+                          <span class="text-xl">{loc.icon}</span>
+                          <h4 class="font-bold text-primary text-base">{loc.name}</h4>
+                        </div>
+                        <p class="text-xs text-on-surface-variant mb-4">{loc.subtitle}</p>
+                        <ul class="space-y-2 mb-4">
+                          {loc.slots.map((s) => (
+                            <li class="flex items-start gap-3 text-sm">
+                              <span class="font-semibold text-primary whitespace-nowrap min-w-[60px]">{s.day} {s.time}</span>
+                              <span class="text-on-surface-variant flex-1">{s.focus}</span>
+                            </li>
                           ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {f.table.rows.map((row) => (
-                          <tr class="border-t border-outline-variant/10">
-                            {row.map((cell, i) => (
-                              <td class={`p-3 ${i === 0 ? 'font-semibold text-primary whitespace-nowrap' : 'text-on-surface-variant'}`}>
-                                {cell}
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </ul>
+                        {loc.extraNote && <p class="text-xs text-secondary font-bold mb-3">⏰ {loc.extraNote}</p>}
+                        <a
+                          href={loc.bookingHref}
+                          target={loc.bookingHref.startsWith('http') ? '_blank' : undefined}
+                          rel={loc.bookingHref.startsWith('http') ? 'noopener' : undefined}
+                          class="inline-flex items-center gap-2 text-sm font-bold text-secondary hover:underline no-underline"
+                        >
+                          {loc.bookingIcon} {loc.bookingLabel} →
+                        </a>
+                      </div>
+                    ))}
                   </div>
                 </>
               ) : (
