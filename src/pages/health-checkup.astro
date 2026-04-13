@@ -1,181 +1,420 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {
+  PACKAGES,
+  EVIDENCE,
+  LOW_EVIDENCE_NOTE,
+  GENERAL_PREP,
+  ENDO_PREP,
+  BOWEL_PREP_DRUGS,
+  LOCATION,
+  TRANSIT_CAR,
+  TRANSIT_PUBLIC,
+  FAQ,
+  LAST_UPDATED,
+  OFFICIAL_URL,
+  BOOKING_PHONE,
+  BOOKING_EXTENSIONS,
+} from '../data/checkup';
 
-const packages = [
-  { icon: '🔬', title: '進階代謝評估', desc: '全套代謝指標、胰島素阻抗評估、內臟脂肪分析，提供個人化代謝風險報告與改善策略。' },
-  { icon: '🦴', title: '骨質疏鬆篩檢', desc: '骨密度檢測(DXA)、FRAX骨折風險評估、鈣質與維生素D分析，制定骨骼健康策略。' },
-  { icon: '❤️', title: '心血管風險評估', desc: '動脈硬化指標、頸動脈超音波、高敏感CRP，全面評估心血管疾病風險。' },
-  { icon: '🏃', title: '運動體適能評估', desc: '結合運動醫學，評估體適能狀態、運動風險，開立個人化運動處方。' },
-  { icon: '⚖️', title: '減重健康評估', desc: '身體組成分析、荷爾蒙檢測、飲食行為評估，規劃實證減重方案。' },
-  { icon: '🧠', title: '行為健康諮詢', desc: '結合行為科學的深度健康諮詢，找出生活習慣的改變切入點，不只看報告，更看見改變的可能。' },
-];
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/health-checkup/`;
 
-const faqs = [
-  { q: '高階健檢跟一般健檢有什麼不同？', a: '一般健檢著重基本篩檢，高階健檢更深入分析代謝、心血管、骨骼等風險，並結合醫師一對一諮詢，提供個人化的健康改善方案，而非只是一份報告。' },
-  { q: '適合什麼樣的人？', a: '40歲以上想深度了解身體狀況者、有家族慢性病史者、長期久坐或工作壓力大的上班族、想科學化管理體重者、運動愛好者想了解身體極限。' },
-  { q: '健檢地點在哪裡？', a: '於義大醫院進行，享有醫學中心等級的檢查設備與品質。' },
-  { q: '健檢後會有後續追蹤嗎？', a: '會。健檢結果由陳醫師親自解說，並提供個人化健康改善計畫。如需進一步治療或追蹤，可直接安排門診。' },
-  { q: '如何預約？', a: '請來信 cyc@edfm.org 或透過 Facebook 粉專聯繫，將為您安排適合的健檢方案。' },
-];
+const publicPackages = PACKAGES.filter((p) => p.group === '公教人員專案');
+const premiumPackages = PACKAGES.filter((p) => p.group === '健診中心精選');
+
+const fmtPrice = (n: number) => `$${n.toLocaleString('en-US')}`;
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: '義大醫院健檢套餐完整指南 2026',
+  description:
+    '義大醫院家醫科陳昱彰醫師整理的 16 個健檢套餐完整比較,含 USPSTF 實證醫學點評、健檢前準備、清腸藥 SOP、交通與預約資訊。',
+  lastReviewed: LAST_UPDATED,
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  about: { '@type': 'MedicalProcedure', name: '健康檢查 Health Checkup' },
+  specialty: 'FamilyMedicine',
+  inLanguage: 'zh-Hant',
+};
+
+const itemListSchema = {
+  '@type': 'ItemList',
+  '@id': `${pageUrl}#packagelist`,
+  name: '義大醫院健診中心套餐',
+  numberOfItems: PACKAGES.length,
+  itemListElement: PACKAGES.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: `${p.name}（${p.theme}）`,
+    item: {
+      '@type': 'MedicalProcedure',
+      name: p.name,
+      description: p.theme,
+      procedureType: 'Diagnostic',
+    },
+  })),
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: FAQ.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '義大健檢指南', item: pageUrl },
+  ],
+};
+
+const title = '義大醫院健檢套餐完整指南 2026｜家醫科陳昱彰醫師實證比較';
+const description =
+  '高雄義大醫院健診中心 2025–2026 年度 16 個健檢套餐完整比較,含公教人員專案 A–H 與精選套餐價格、項目、適合對象、陳醫師 USPSTF 實證點評、健檢前準備、清腸藥 SOP、交通與預約資訊。';
 ---
 
 <Layout
-  title="高階健康檢查｜個人化健康評估｜陳昱彰醫師"
-  description="高雄義大醫院高階健檢。陳昱彰醫師提供進階代謝評估、骨質疏鬆篩檢、心血管風險評估、運動體適能評估，結合行為科學的個人化健康管理。"
+  title={title}
+  description={description}
+  jsonLd={[medicalWebPage, itemListSchema, faqSchema, breadcrumbSchema]}
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "高階健康檢查",
-    "provider": {
-      "@type": "Person",
-      "name": "陳昱彰",
-      "jobTitle": "家庭醫學科醫師"
-    },
-    "areaServed": ["高雄市", "屏東縣"],
-    "description": "結合家庭醫學、肥胖醫學與行為科學的個人化高階健康檢查，於義大醫院進行。",
-    "url": "https://drcyc.io/health-checkup"
-  })} />
+  <main class="max-w-6xl mx-auto px-6 md:px-10 py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <span>義大健檢指南</span>
+    </nav>
 
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(f => ({
-      "@type": "Question",
-      "name": f.q,
-      "acceptedAnswer": { "@type": "Answer", "text": f.a }
-    }))
-  })} />
+    <!-- Hero -->
+    <header class="mb-10">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">
+        Health Checkup Guide · 2025–2026
+      </p>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-5">
+        義大醫院健檢套餐完整指南
+      </h1>
+      <p class="text-lg text-slate-700 leading-relaxed max-w-3xl chinese-line-height">
+        我是義大醫院家醫科主治醫師<strong>陳昱彰</strong>。這一頁把義大健診中心 2025–2026
+        年度的 <strong>16 個健檢套餐</strong>整理成一張可以一次讀完的比較表,並在每個方案旁附上
+        <strong>USPSTF 實證醫學點評</strong>,告訴你什麼人真的會受益、什麼情況可以省下來。
+      </p>
+    </header>
 
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="nav-brand">YC Chen, MD</a>
-      <div class="nav-links">
-        <a href="/">首頁</a>
-        <a href="/workplace-health">臨場服務</a>
-        <a href="/health-checkup">高階健檢</a>
-        <a href="/community-health">社區營造</a>
-        <a href="/blog">衛教專欄</a>
+    <!-- Disclaimer -->
+    <aside class="rounded-xl border-l-4 border-teal-600 bg-teal-50/60 p-5 mb-12 text-sm text-slate-700 leading-relaxed">
+      <p class="mb-2">
+        <strong class="text-teal-800">資料來源聲明</strong> —
+        本頁資訊整理自義大醫院健診中心官方公告,<strong>最後核對日期 {LAST_UPDATED}</strong>。
+        實際價格、項目與最新方案以
+        <a href={OFFICIAL_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
+          >義大醫院官方公告</a
+        >為準。
+      </p>
+      <p>
+        本文由義大家庭暨社區醫學部陳昱彰醫師整理,<strong>不收取任何轉介佣金</strong
+        >,亦非任何形式的廣告文宣。撰寫目的是協助民眾在有實證醫學觀點下選擇適合自己的健檢方案。
+      </p>
+    </aside>
+
+    <!-- 3-step how-to -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">三步驟選對你的健檢方案</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <div class="text-3xl font-extrabold text-teal-700 mb-2">1</div>
+          <h3 class="font-bold text-blue-950 mb-1">看自己的風險</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            年齡、吸菸史、家族病史、慢性病,決定了你該優先篩什麼。實證醫學章節有完整清單。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <div class="text-3xl font-extrabold text-teal-700 mb-2">2</div>
+          <h3 class="font-bold text-blue-950 mb-1">對照套餐 + 點評</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            每個方案旁邊都有陳醫師的一段話,告訴你這個套餐適合誰、哪些項目真的值得。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <div class="text-3xl font-extrabold text-teal-700 mb-2">3</div>
+          <h3 class="font-bold text-blue-950 mb-1">預約 + 指定醫師解說</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            致電 {BOOKING_PHONE} 分機 {BOOKING_EXTENSIONS.join(' / ')},可直接指定由陳醫師解說報告。
+          </p>
+        </div>
       </div>
-    </div>
-  </nav>
+    </section>
 
-  <section class="page-hero">
-    <div class="container">
-      <p class="hero-badge">Premium Health Checkup</p>
-      <h1>高階健康檢查</h1>
-      <p class="hero-subtitle">不只是一份報告，是一份改變的起點<br/>義大醫院・醫學中心等級</p>
-      <a href="#contact" class="btn btn-primary">預約諮詢</a>
-    </div>
-  </section>
+    <!-- USPSTF Evidence -->
+    <section id="evidence" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-3">實證醫學觀點:什麼檢查「真的」有用?</h2>
+      <p class="text-slate-700 leading-relaxed mb-6 chinese-line-height">
+        醫學中心的健檢型錄動輒 30–50 項,但真正有實證支持的篩檢項目其實不多。美國預防服務工作小組(
+        <strong>USPSTF</strong>)把篩檢建議分成 A / B / C / D / I 五個等級,A 和 B 代表「證據充足,建議執行」。
+        挑健檢時,讓 A/B 等級的項目先被涵蓋,再看其他附加內容有沒有符合你的個別需求 —
+        這是最省錢也最不容易被過度診斷綁架的方法。
+      </p>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">我們的不同</h2>
-      <div class="about-content">
-        <p>
-          多數健檢給你一疊數字，然後呢？陳醫師的高階健檢<strong>不只看報告，更看見改變的可能</strong>。
-        </p>
-        <p>
-          結合<strong>家庭醫學的全人觀點</strong>、<strong>肥胖醫學的代謝專業</strong>、
-          以及<strong>行為科學的改變策略</strong>，每份健檢結果都會轉化為
-          具體可行的健康行動計畫。
-        </p>
+      <div class="overflow-x-auto rounded-xl border border-slate-200 mb-4">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-blue-950">
+            <tr>
+              <th class="text-left p-3 font-bold">項目</th>
+              <th class="text-center p-3 font-bold w-16">等級</th>
+              <th class="text-left p-3 font-bold">建議族群</th>
+            </tr>
+          </thead>
+          <tbody>
+            {EVIDENCE.map((e) => (
+              <tr class="border-t border-slate-100 align-top">
+                <td class="p-3 font-semibold text-blue-950">
+                  {e.name}
+                  {e.note && <p class="font-normal text-slate-500 text-xs mt-1 leading-relaxed">{e.note}</p>}
+                </td>
+                <td class="p-3 text-center">
+                  <span class="inline-block rounded-full bg-teal-100 text-teal-800 font-bold px-3 py-1 text-xs">
+                    {e.grade}
+                  </span>
+                </td>
+                <td class="p-3 text-slate-700 leading-relaxed">{e.population}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </div>
-  </section>
+      <p class="text-xs text-slate-500 leading-relaxed chinese-line-height">
+        ⚠️ {LOW_EVIDENCE_NOTE}
+      </p>
+    </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">評估項目</h2>
-      <div class="grid">
-        {packages.map(s => (
-          <div class="card">
-            <span class="card-icon">{s.icon}</span>
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
-          </div>
+    <!-- Package Comparison Summary -->
+    <section id="comparison" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">16 個套餐一次看完</h2>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-blue-950">
+            <tr>
+              <th class="text-left p-3 font-bold">套餐</th>
+              <th class="text-left p-3 font-bold">主題</th>
+              <th class="text-right p-3 font-bold">價格</th>
+              <th class="text-left p-3 font-bold">時長</th>
+            </tr>
+          </thead>
+          <tbody>
+            {PACKAGES.map((p) => (
+              <tr class="border-t border-slate-100 hover:bg-slate-50/50">
+                <td class="p-3">
+                  <a href={`#pkg-${p.id}`} class="font-semibold text-teal-700 hover:underline no-underline">
+                    {p.name}
+                  </a>
+                  <p class="text-xs text-slate-500">{p.group}</p>
+                </td>
+                <td class="p-3 text-slate-700">{p.theme}</td>
+                <td class="p-3 text-right font-mono font-bold text-blue-950 price-tag">{fmtPrice(p.price)}</td>
+                <td class="p-3 text-slate-600 text-xs">{p.duration}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Detailed packages: public -->
+    <section id="packages-public" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-2">公教人員專案 A–H</h2>
+      <p class="text-sm text-slate-600 mb-6">$8,900–$18,800｜同等級項目最便宜的選擇</p>
+      <div class="space-y-6">
+        {publicPackages.map((p) => (
+          <article id={`pkg-${p.id}`} class="rounded-xl border border-slate-200 bg-white p-6 scroll-mt-24">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-700 text-white font-bold text-sm">
+                    {p.id}
+                  </span>
+                  <h3 class="text-xl font-bold text-blue-950">{p.name}</h3>
+                </div>
+                <p class="text-sm text-slate-600">{p.theme}・{p.duration}</p>
+              </div>
+              <div class="text-right">
+                <p class="font-mono font-extrabold text-2xl text-blue-950 price-tag">{fmtPrice(p.price)}</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-700 mb-4">
+              <strong class="text-blue-950">適合誰:</strong> {p.bestFor}
+            </p>
+            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-4 chinese-line-height">
+              {p.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+            <div class="border-l-4 border-teal-600 bg-teal-50/50 p-4 rounded-r-lg">
+              <p class="text-sm text-blue-950 leading-relaxed chinese-line-height">
+                <strong>🩺 陳醫師點評:</strong> {p.chenNote}
+              </p>
+            </div>
+          </article>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">常見問題</h2>
-      <div class="faq-list">
-        {faqs.map(f => (
-          <details class="faq-item">
-            <summary>{f.q}</summary>
-            <p>{f.a}</p>
+    <!-- Detailed packages: premium -->
+    <section id="packages-premium" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-2">健診中心精選套餐</h2>
+      <p class="text-sm text-slate-600 mb-6">$15,000–$196,000｜加入高階影像或功能醫學項目</p>
+      <div class="space-y-6">
+        {premiumPackages.map((p) => (
+          <article id={`pkg-${p.id}`} class="rounded-xl border border-slate-200 bg-white p-6 scroll-mt-24">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+              <div>
+                <h3 class="text-xl font-bold text-blue-950 mb-1">{p.name}</h3>
+                <p class="text-sm text-slate-600">{p.theme}・{p.duration}</p>
+              </div>
+              <div class="text-right">
+                <p class="font-mono font-extrabold text-2xl text-blue-950 price-tag">{fmtPrice(p.price)}</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-700 mb-4">
+              <strong class="text-blue-950">適合誰:</strong> {p.bestFor}
+            </p>
+            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-4 chinese-line-height">
+              {p.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+            <div class="border-l-4 border-teal-600 bg-teal-50/50 p-4 rounded-r-lg">
+              <p class="text-sm text-blue-950 leading-relaxed chinese-line-height">
+                <strong>🩺 陳醫師點評:</strong> {p.chenNote}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Prep Section -->
+    <section id="prep" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">健檢前準備</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-3">一般注意事項</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 chinese-line-height">
+            {GENERAL_PREP.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-3">含無痛胃腸鏡(H、舒適健檢)</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 chinese-line-height">
+            {ENDO_PREP.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="text-lg font-bold text-blue-950 mt-8 mb-4">三種清腸藥的服用時程</h3>
+      <p class="text-sm text-slate-600 mb-4">
+        義大健診中心依個別情況開立下列其中一種,飲用時程大致如下(實際以健診中心說明為準):
+      </p>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-blue-950">
+            <tr>
+              <th class="text-left p-3 font-bold">清腸藥</th>
+              <th class="text-left p-3 font-bold">服用時程</th>
+            </tr>
+          </thead>
+          <tbody>
+            {BOWEL_PREP_DRUGS.map((d) => (
+              <tr class="border-t border-slate-100 align-top">
+                <td class="p-3 font-semibold text-blue-950 whitespace-nowrap">{d.name}</td>
+                <td class="p-3 text-slate-700">
+                  <ul class="list-disc list-inside space-y-1 chinese-line-height">
+                    {d.schedule.map((s) => <li>{s}</li>)}
+                  </ul>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Transit -->
+    <section id="transit" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-4">交通資訊</h2>
+      <p class="text-slate-700 mb-6">
+        <strong>{LOCATION}</strong>
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-3">🚗 自行開車</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 chinese-line-height">
+            {TRANSIT_CAR.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-blue-950 mb-3">🚆 大眾運輸</h3>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 chinese-line-height">
+            {TRANSIT_PUBLIC.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="text-xs text-slate-500 mt-3">※ 當日含無痛胃腸鏡者,務必由家人接送或搭大眾運輸。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">常見問題</h2>
+      <div class="space-y-3">
+        {FAQ.map((f) => (
+          <details class="group rounded-xl border border-slate-200 bg-white">
+            <summary class="cursor-pointer list-none px-5 py-4 font-semibold text-blue-950 flex justify-between items-center">
+              <span>{f.q}</span>
+              <span class="text-teal-700 text-xl group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-slate-700 leading-relaxed chinese-line-height">
+              {f.a}
+            </div>
           </details>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact" class="section section-alt">
-    <div class="container" style="text-align:center;">
-      <h2 class="section-title">預約高階健檢</h2>
-      <p style="font-size:1.1rem;color:var(--text-light);margin-bottom:1.5rem;">
-        為自己的健康做一次深度投資
+    <!-- CTA -->
+    <section class="rounded-2xl bg-gradient-to-br from-blue-950 to-teal-700 text-white p-10 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">預約時可直接指定陳醫師解說報告</h2>
+      <p class="text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed chinese-line-height">
+        健檢拿到一份報告只是起點。具備家庭醫學、實證醫學與行為科學訓練的醫師,能把數字跟你的生活型態、病史連結起來,找出具體可以改變的切入點 —
+        這才是把健檢花的錢真正用在「變健康」上。
       </p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="mailto:cyc@edfm.org" class="btn btn-primary">📧 cyc@edfm.org</a>
-        <a href="https://www.facebook.com/lazydr" target="_blank" rel="noopener" class="btn btn-outline">Facebook 粉專</a>
+      <div class="flex flex-wrap gap-3 justify-center text-sm">
+        <a
+          href={`tel:+886${BOOKING_PHONE.replace(/-/g, '').substring(1)}`}
+          class="inline-block bg-white text-blue-950 px-6 py-3 rounded-full font-bold hover:opacity-90 no-underline"
+        >
+          📞 {BOOKING_PHONE}
+        </a>
+        <a
+          href="mailto:cyc@edfm.org"
+          class="inline-block bg-white/10 border border-white/40 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 no-underline"
+        >
+          📧 cyc@edfm.org
+        </a>
+        <a
+          href="https://www.facebook.com/lazydr"
+          target="_blank"
+          rel="noopener"
+          class="inline-block bg-white/10 border border-white/40 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 no-underline"
+        >
+          Facebook @lazydr
+        </a>
       </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
-    </div>
-  </footer>
+      <p class="text-xs text-white/60 mt-6">
+        健診中心分機 {BOOKING_EXTENSIONS.join(' / ')}｜週一至週五 07:30–16:00、週六 07:30–12:00
+      </p>
+    </section>
+  </main>
 </Layout>
-
-<style>
-  .nav { position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border); }
-  .nav-inner { display:flex;align-items:center;justify-content:space-between;height:64px; }
-  .nav-brand { font-weight:700;font-size:1.15rem;color:var(--text); }
-  .nav-brand:hover { text-decoration:none; }
-  .nav-links { display:flex;gap:1.5rem; }
-  .nav-links a { color:var(--text-light);font-size:0.95rem; }
-  .nav-links a:hover { color:var(--primary);text-decoration:none; }
-  .page-hero { padding:5rem 0 4rem;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fe 100%);text-align:center; }
-  .page-hero h1 { font-size:2.5rem;font-weight:800;margin-bottom:1rem; }
-  .hero-badge { display:inline-block;background:var(--primary);color:white;padding:0.35rem 1rem;border-radius:99px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem; }
-  .hero-subtitle { font-size:1.15rem;color:var(--text-light);margin-bottom:2rem; }
-  .btn { display:inline-block;padding:0.75rem 1.75rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.2s; }
-  .btn:hover { text-decoration:none; }
-  .btn-primary { background:var(--primary);color:white; }
-  .btn-primary:hover { background:var(--primary-dark); }
-  .btn-outline { border:2px solid var(--primary);color:var(--primary); }
-  .btn-outline:hover { background:var(--primary);color:white; }
-  .section { padding:5rem 0; }
-  .section-alt { background:var(--bg-light); }
-  .section-title { font-size:2rem;font-weight:700;text-align:center;margin-bottom:3rem; }
-  .about-content { max-width:700px;margin:0 auto;font-size:1.1rem;color:var(--text-light); }
-  .about-content p { margin-bottom:1rem; }
-  .about-content strong { color:var(--text); }
-  .grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem; }
-  .card { background:white;padding:2rem;border-radius:var(--radius);border:1px solid var(--border);transition:box-shadow 0.2s; }
-  .card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
-  .card-icon { font-size:2rem;display:block;margin-bottom:0.75rem; }
-  .card h3 { font-size:1.1rem;margin-bottom:0.5rem; }
-  .card p { color:var(--text-light);font-size:0.95rem; }
-  .faq-list { max-width:700px;margin:0 auto; }
-  .faq-item { border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden; }
-  .faq-item summary { padding:1.25rem 1.5rem;cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none; }
-  .faq-item summary::-webkit-details-marker { display:none; }
-  .faq-item summary::before { content:'＋ ';color:var(--primary); }
-  .faq-item[open] summary::before { content:'－ '; }
-  .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
-  .footer { padding:2rem 0;text-align:center;color:var(--text-light);font-size:0.9rem;border-top:1px solid var(--border); }
-  @media (max-width:768px) {
-    .page-hero h1 { font-size:1.8rem; }
-    .nav-links { gap:0.8rem; }
-    .nav-links a { font-size:0.8rem; }
-    .section { padding:3rem 0; }
-  }
-</style>

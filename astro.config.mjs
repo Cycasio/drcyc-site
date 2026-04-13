@@ -8,7 +8,6 @@ export default defineConfig({
   integrations: [sitemap(), tailwind()],
   redirects: {
     '/workplace-health': '/services',
-    '/health-checkup': '/services',
     '/community-health': '/services',
   },
 });
