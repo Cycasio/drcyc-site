@@ -8,11 +8,30 @@ const posts = (await getCollection('blog'))
   .slice(0, 3);
 
 const faqs = [
-  { q: '陳醫師的門診在哪裡？', a: '義大醫院家庭暨社區醫學部及義大減重中心。' },
-  { q: '陳醫師的專長有哪些？', a: '家庭醫學、肥胖醫學、運動醫學、職業醫學、骨質疏鬆、行為科學、實證醫學。' },
-  { q: '什麼是行為科學導向的醫療？', a: '結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患建立可持續的健康習慣，而非只開藥治療。核心理念：理解（Understand）→ 溝通（Communicate）→ 改變（Transform）。' },
-  { q: '減重門診的方式？', a: '採用實證醫學方法，結合營養、行為科學與運動處方，制定個人化減重策略。' },
-  { q: '如何聯絡陳醫師？', a: '可透過 Facebook 粉專 @lazydr 聯繫，或至義大醫院家庭暨社區醫學部門診。電子信箱：cyc@edfm.org' },
+  {
+    q: '陳醫師有哪些看診地點？',
+    a: '兩個地點。(1) 義大醫院家庭暨社區醫學部 / 義大減重中心：週一、週二、週五上午家醫科門診；週五下午減重中心。(2) 旗山大政診所：每週五 18:00–21:00 夜診，提供家醫科、三高慢性病追蹤與藥物減重。兩邊是同一位醫師，同樣的治療邏輯。',
+  },
+  {
+    q: '猛健樂（Mounjaro）GLP-1 減重在哪邊比較方便？',
+    a: '如果你住在旗山、美濃、田寮、內門，或是白天要上班不方便請假，週五晚上到旗山大政診所最順。如果你想搭配完整健檢一起做、或住在楠梓/左營/岡山/橋頭/燕巢一帶，義大減重中心比較近。兩邊都能做減重療程，不會因為換地點而中斷。',
+  },
+  {
+    q: '陳醫師的專長有哪些？',
+    a: '家庭醫學、肥胖醫學、運動醫學、職業醫學、骨質疏鬆、行為科學、實證醫學。持有家庭醫學、肥胖醫學、骨質疏鬆症三專科證照，榮獲國家醫療品質獎實證醫學類臨床組銀獎。',
+  },
+  {
+    q: '什麼是行為科學導向的醫療？',
+    a: '結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患建立可持續的健康習慣，而非只開藥治療。核心理念：理解（Understand）→ 溝通（Communicate）→ 改變（Transform）。',
+  },
+  {
+    q: '減重門診的方式？',
+    a: '採用實證醫學方法，結合營養、行為科學、運動處方與藥物治療（含 Contrave、GLP-1 類如猛健樂），制定個人化減重策略。不是單靠一支針就解決，是整套可持續的生活改變。',
+  },
+  {
+    q: '如何預約、聯絡陳醫師？',
+    a: '義大醫院線上掛號：webreg.edah.org.tw（查「家庭醫學科 陳昱彰」）。旗山大政診所預約電話：07-662-2588（建議先致電確認名額）。其他聯絡：Facebook 粉專 @lazydr、電子信箱 cyc@edfm.org。',
+  },
 ];
 ---
 
@@ -142,18 +161,20 @@ const faqs = [
           <span class="text-secondary font-bold text-sm whitespace-nowrap">查看夜診資訊 →</span>
         </a>
 
-        <!-- 社區健康營造 (horizontal card, col-span-2) -->
-        <a href="/services" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex items-center gap-10 hover:bg-white transition-colors no-underline group">
-          <div>
+        <!-- 社區健康營造 (full-width, col-span-3) -->
+        <a href="/services" class="md:col-span-3 bg-surface-container-lowest p-10 rounded-3xl flex flex-col md:flex-row items-start md:items-center gap-10 hover:bg-white transition-colors no-underline group">
+          <div class="flex-1">
             <h3 class="text-2xl font-bold text-primary mb-4 font-headline">社區健康營造</h3>
-            <p class="text-on-surface-variant chinese-line-height">
+            <p class="text-on-surface-variant chinese-line-height max-w-2xl">
               以居民參與為核心，推動由下而上的社區健康計畫。深入社區提供健康講座、諮詢與居家醫療評估，讓專業醫療資源不再有距離感。
             </p>
-            <div class="mt-6 flex gap-4">
+            <div class="mt-6 flex gap-4 flex-wrap">
               <span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">健康講座</span>
+              <span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">居家醫療評估</span>
               <span class="px-3 py-1 bg-surface-container-high rounded-full text-sm font-medium">籌備中</span>
             </div>
           </div>
+          <div class="text-secondary font-bold whitespace-nowrap hidden md:block">了解更多 →</div>
         </a>
       </div>
     </div>
@@ -233,17 +254,28 @@ const faqs = [
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/50 to-transparent"></div>
         <div class="relative z-10">
           <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-headline">準備好開始您的健康旅程了嗎？</h2>
-          <p class="text-on-primary-container text-lg mb-10 max-w-2xl mx-auto">
-            義大醫院提供線上掛號服務，省去現場排隊的漫長等待。
+          <p class="text-on-primary-container text-lg mb-10 max-w-2xl mx-auto chinese-line-height">
+            兩個看診地點，同一位醫師。選一個你方便的地方開始。
           </p>
-          <a
-            href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
-            target="_blank"
-            rel="noopener"
-            class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold text-xl hover:bg-on-secondary-container transition-all shadow-xl no-underline"
-          >
-            預約掛號
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
+              target="_blank"
+              rel="noopener"
+              class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-on-secondary-container transition-all shadow-xl no-underline"
+            >
+              📋 義大線上掛號
+            </a>
+            <a
+              href="tel:+886766225588"
+              class="inline-block bg-white/10 border border-white/40 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all no-underline"
+            >
+              📞 旗山大政 07-662-2588
+            </a>
+          </div>
+          <p class="text-on-primary-container/70 text-xs mt-6">
+            義大：週一、二、五上午・週五下午減重中心｜旗山大政：每週五 18:00–21:00 夜診
+          </p>
         </div>
       </div>
     </div>
