@@ -47,19 +47,21 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </div>
 
-        <!-- 高階健康檢查 (col-span-4) -->
-        <div class="md:col-span-4 bg-primary text-on-primary rounded-xl p-10 flex flex-col justify-between">
+        <!-- 義大健檢完整指南 (col-span-4) -->
+        <a href="/health-checkup/" class="md:col-span-4 bg-primary text-on-primary rounded-xl p-10 flex flex-col justify-between no-underline group hover:opacity-95 transition-opacity">
           <div>
             <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white mb-8">
               <span class="text-3xl">🔬</span>
             </div>
-            <h3 class="text-2xl font-bold mb-4 font-headline">高階健康檢查</h3>
+            <h3 class="text-2xl font-bold mb-4 font-headline">義大健檢完整指南</h3>
             <p class="text-on-primary-container leading-relaxed mb-6 chinese-line-height">
-              不只是一份報告，更是一份改變的起點。結合行為科學的個人化健檢——涵蓋血液生化分析、癌症篩檢與專業健康風險評估，著重於追蹤與生活型態建議。
+              義大醫院健診中心 16 個套餐一次比完，附 USPSTF 實證點評、健檢前準備、清腸藥時程與交通資訊。我幫你用家醫科的角度，告訴你哪個方案適合你，預約時也可指定由我為你解說報告。
             </p>
           </div>
-          <span class="text-sm font-medium opacity-60">預防勝於治療</span>
-        </div>
+          <span class="text-sm font-medium opacity-80 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+            查看 16 套餐完整比較 →
+          </span>
+        </a>
 
         <!-- 減重管理門診 (col-span-4) -->
         <div class="md:col-span-4 bg-secondary-container text-on-secondary-container rounded-xl p-10 flex flex-col justify-between">
