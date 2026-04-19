@@ -59,11 +59,16 @@
 - 時段:每週五 18:00–21:00 夜診
 - 服務:家庭醫學、三高慢性病追蹤、藥物減重(含 GLP-1 類)
 - 適合:住旗山、美濃、田寮、內門一帶的居民;白天要上班、只能晚上看診的人;需要穩定回診 GLP-1 減重療程但不想跑醫學中心的人
-- [減重 COM-B 模型](/blog/weight-loss-comb-model)
-- [職場健康指南](/blog/workplace-health-guide)
-- [骨鬆篩檢指南](/blog/osteoporosis-screening-guide)
-- [肌少症與阻力訓練](/blog/sarcopenia-resistance-training)
-- [動機式晤談](/blog/motivational-interviewing)
+- [FITT-VP 運動處方](/blog/fitt-vp-exercise-prescription) — ACSM 運動醫學標準架構:頻率/強度/時間/類型/總量/進階,含 Tanaka 心跳公式、實戰案例
+- [超慢跑（Slow Jogging）](/blog/slow-jogging) — 田中宏暁的低衝擊有氧,METs ~6,前足著地 + 步頻 180+,膝蓋不好也能跑
+- [第二型糖尿病可以逆轉嗎？](/blog/type-2-diabetes-remission) — DiRECT / STEP-1 / SURMOUNT-4 / STAMPEDE 實際數字,減重 vs 緩解率對照
+- [GLP-1 減重藥要搭配運動](/blog/exercise-glp1-weight-loss) — 猛健樂 / Ozempic 瘦掉的有 24–40% 是肌肉,阻力訓練是關鍵
+- [猛健樂 Mounjaro 完整指南](/blog/mounjaro-weight-loss) — SURMOUNT-1 數據、GIP/GLP-1 雙受體機轉、副作用與禁忌症
+- [動機式晤談](/blog/motivational-interviewing) — PACE 精神 + OARS 技巧,讓病人自己想改變
+- [骨鬆篩檢指南](/blog/osteoporosis-screening-guide) — DXA、T-score 判讀、40 歲就該知道的預防策略
+- [肌少症與阻力訓練](/blog/sarcopenia-resistance-training) — SR/NMA 證據:中等強度就有效、長輩也能做
+- [減重 COM-B 模型](/blog/weight-loss-comb-model) — 行為科學三要素:能力 / 機會 / 動機
+- [職場健康指南](/blog/workplace-health-guide) — 勞工健康保護四大計畫懶人包
 
 ## 核心服務
 
@@ -83,6 +88,7 @@
 - 糖尿病共同照護網醫事人員
 - 戒菸治療認證醫師
 - OSCE 國家考試考官
+- ACE-CPT 美國運動委員會認證私人教練(Certified Personal Trainer)
 
 ## 學歷
 
