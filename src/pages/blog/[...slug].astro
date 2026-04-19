@@ -35,7 +35,7 @@ const blogPostingSchema = {
   description: post.data.description,
   image: postImage,
   datePublished: post.data.pubDate.toISOString(),
-  dateModified: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
   inLanguage: 'zh-Hant',
   author: { '@id': `${SITE}/#person` },
   publisher: { '@id': `${SITE}/#person` },

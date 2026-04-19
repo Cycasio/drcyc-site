@@ -6,6 +6,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
     author: z.string().default('陳昱彰醫師'),
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
