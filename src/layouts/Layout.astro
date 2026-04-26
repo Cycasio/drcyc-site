@@ -110,7 +110,7 @@ const physicianSchema = {
   image: `${SITE}/images/portrait.jpg`,
   telephone: '+886-7-615-0011',
   priceRange: '$$',
-  medicalSpecialty: ['FamilyMedicine', 'Obesity', 'OccupationalMedicine', 'SportsMedicine'],
+  medicalSpecialty: ['FamilyPractice', 'Endocrine', 'OccupationalMedicine', 'SportsMedicine'],
   availableService: [
     { '@type': 'MedicalProcedure', name: '減重管理門診', description: '結合 COM-B 行為科學、營養、運動處方與藥物治療（Contrave、Mounjaro 等 GLP-1）的個人化減重療程' },
     { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
@@ -157,7 +157,7 @@ const qishanClinicSchema = {
   url: `${SITE}/qishan-clinic/`,
   telephone: '+886-7-662-2588',
   hasMap: 'https://maps.app.goo.gl/JcgmsZQqFahbT2T1A',
-  medicalSpecialty: ['FamilyMedicine', 'Obesity'],
+  medicalSpecialty: ['FamilyPractice', 'Endocrine'],
   physician: { '@id': `${SITE}/#person` },
   address: {
     '@type': 'PostalAddress',

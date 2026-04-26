@@ -61,9 +61,38 @@ const faqs = [
     a: '義大醫院線上掛號：webreg.edah.org.tw（查「家庭醫學科 陳昱彰」）。旗山大政診所預約電話：07-662-2588（建議先致電確認名額）。其他聯絡：Facebook 粉專 @lazydr、電子信箱 cyc@edfm.org。',
   },
 ];
+
+const SITE = 'https://www.drcyc.io';
+
+const homepageSchema = {
+  '@type': 'WebPage',
+  '@id': `${SITE}/#homepage`,
+  url: `${SITE}/`,
+  name: '陳昱彰醫師 Dr. Yu-Chang Chen｜義大醫院家醫科・減重門診',
+  description:
+    '義大醫院家醫科主治醫師陳昱彰，三專科醫師（家醫、肥胖、骨鬆），結合 COM-B 行為科學與實證醫學，提供高雄減重門診、骨質疏鬆、企業臨場與職業醫學服務。',
+  inLanguage: 'zh-Hant',
+  isPartOf: { '@id': `${SITE}/#website` },
+  about: { '@id': `${SITE}/#person` },
+  mainEntity: { '@id': `${SITE}/#physician` },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', '.chinese-line-height'],
+  },
+};
+
+const homepageFaqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE}/#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
-<Layout>
+<Layout jsonLd={[homepageSchema, homepageFaqSchema]}>
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-surface pt-12 pb-24 md:pt-20 md:pb-32">
     <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
