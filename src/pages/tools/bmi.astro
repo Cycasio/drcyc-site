@@ -1,0 +1,35 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import BmiWidget from '../../components/tools/BmiWidget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('bmi');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['sex', 'heightCm', 'weightKg']} />
+  <BmiWidget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">關於 BMI 與台灣分級標準</h2>
+    <p class="chinese-line-height text-slate-700">
+      BMI（Body Mass Index，身體質量指數）以體重（kg）除以身高（m）的平方得出，是 WHO 與各國公衛單位最常用的成人體重評估指標。臺灣國民健康署採用比 WHO 西方標準更嚴格的亞洲人切點：<strong>BMI ≥ 24 即為過重、BMI ≥ 27 即為肥胖症</strong>，因為亞洲人在較低 BMI 就會出現代謝風險。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">BMI 的限制</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>不分肌肉與脂肪</strong>：肌肉量大的健身族 BMI 可能偏高但體脂率正常。</li>
+      <li><strong>不反映脂肪分布</strong>：腰圍與內臟脂肪對心血管風險的預測力比 BMI 更強，建議搭配腰圍身高比一起看。</li>
+      <li><strong>長者要小心</strong>：高齡族群 BMI 偏低反而與肌少症、營養不良相關，預後較差。</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">什麼時候該至減重門診？</h3>
+    <p class="chinese-line-height text-slate-700">
+      臺灣肥胖醫學會與健保署共識：<strong>BMI ≥ 30，或 BMI ≥ 27 加上至少一項體重相關共病</strong>（第二型糖尿病、高血壓、高血脂、阻塞型睡眠呼吸中止、心血管疾病、非酒精性脂肪肝），即符合藥物治療適應症。常用藥物包含 Semaglutide（Wegovy / Ozempic）、Tirzepatide（Mounjaro）、Liraglutide（Saxenda）等 GLP-1 類藥物。
+    </p>
+    <p class="chinese-line-height text-slate-700">
+      可接著使用 <a href="/tools/glp1-eligibility/" class="text-teal-700 underline">GLP-1 減重藥物資格評估</a> 與 <a href="/tools/waist-ratio/" class="text-teal-700 underline">腰圍身高比計算</a>，更完整地評估你的代謝風險。
+    </p>
+  </article>
+</ToolLayout>

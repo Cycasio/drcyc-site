@@ -1,0 +1,42 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import WeightProgressWidget from '../../components/tools/WeightProgressWidget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('weight-progress');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['weightHistory', 'weightKg']} />
+  <WeightProgressWidget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">5–10% 是減重的「臨床有意義門檻」</h2>
+    <p class="chinese-line-height text-slate-700">
+      在實證醫學中，<strong>體重下降 5%</strong> 即可顯著改善血糖、血壓、血脂、脂肪肝、睡眠呼吸中止；<strong>下降 10%</strong> 則可達到糖尿病前期逆轉、部分第二型糖尿病緩解的效果。換句話說，不必追求理想體重——先達到 5–10% 對代謝健康就有極大價值。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">看「七日均值」而非每天的數字</h3>
+    <p class="chinese-line-height text-slate-700">
+      每日體重會被水分、鹽分、糞便量、月經週期、飲食時間等因素影響，波動可達 1–2 kg。<strong>建議用過去 7 天的平均值來看趨勢</strong>，這比每天看單一數字穩定許多。市售體重計多數有此功能，或自行記錄即可。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">減重平台期的 4 個常見成因</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>代謝適應</strong>：體重下降後 BMR 與 NEAT 同步下降，原本的熱量缺口縮小。</li>
+      <li><strong>低估熱量攝取</strong>：研究顯示一般人對熱量低估約 20–30%，建議實際秤重 / 量份量。</li>
+      <li><strong>運動量沒提升</strong>：依賴單純節食的減重，到後期需要加入阻力訓練 + 增加 NEAT。</li>
+      <li><strong>賀爾蒙變化</strong>：瘦素下降、飢餓素上升、甲狀腺賀爾蒙微降，這是身體保護機制。</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">維持比減重更難</h3>
+    <p class="chinese-line-height text-slate-700">
+      減重後的<strong>第 12–18 個月</strong>是最常復胖的時期。建議：(1) 持續同樣的飲食結構與運動習慣，至少維持 1–2 年；(2) 每週量體重不間斷；(3) 體重回升 2–3 kg 立即介入，不要拖到回到原點。藥物治療若有使用，通常需與醫師討論逐步減量與長期維持策略。
+    </p>
+
+    <p class="chinese-line-height text-slate-700">
+      減重停滯或想精準計算每日攝取，可使用 <a href="/blog/health-tools/tdee-calculator/" class="text-teal-700 underline">TDEE 計算機</a>。若有藥物治療需求，可參考 <a href="/tools/glp1-eligibility/" class="text-teal-700 underline">GLP-1 適應症評估</a>。
+    </p>
+  </article>
+</ToolLayout>

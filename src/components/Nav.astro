@@ -1,15 +1,42 @@
 ---
 const pathname = Astro.url.pathname;
 
-const links = [
+const primaryLinks = [
   { href: '/', label: '首頁' },
-  { href: '/blog', label: '衛教專欄' },
+  {
+    href: '/blog',
+    label: '衛教專欄',
+    children: [
+      { href: '/blog/', label: '全部文章' },
+      { href: '/blog/health-tools/', label: '健康工具' },
+    ],
+  },
   { href: '/services', label: '服務項目' },
 ];
 
+function normalize(path: string): string {
+  return path.endsWith('/') ? path : `${path}/`;
+}
+
 function isActive(href: string): boolean {
-  if (href === '/') return pathname === '/';
-  return pathname.startsWith(href);
+  const current = normalize(pathname);
+  const target = normalize(href);
+  if (target === '/') return current === '/';
+  return current.startsWith(target);
+}
+
+function isChildActive(parentHref: string, childHref: string): boolean {
+  const current = normalize(pathname);
+
+  if (parentHref === '/blog' && childHref === '/blog/') {
+    return current === '/blog/' || (current.startsWith('/blog/') && !current.startsWith('/blog/health-tools/'));
+  }
+
+  return isActive(childHref);
+}
+
+function hasActiveChild(link: { href: string; children?: { href: string; label: string }[] }): boolean {
+  return Boolean(link.children?.some((child) => isChildActive(link.href, child.href)));
 }
 ---
 
@@ -19,18 +46,51 @@ function isActive(href: string): boolean {
 
     <!-- Desktop Links -->
     <div class="hidden md:flex items-center gap-10">
-      {links.map(link => (
-        <a
-          href={link.href}
-          class:list={[
-            'transition-colors duration-300',
-            isActive(link.href)
-              ? 'text-blue-900 border-b-2 border-teal-600 pb-1 font-bold'
-              : 'text-slate-600 font-medium hover:text-teal-700',
-          ]}
-        >
-          {link.label}
-        </a>
+      {primaryLinks.map(link => (
+        link.children ? (
+          <details class="relative group">
+            <summary
+              class:list={[
+                'list-none inline-flex cursor-pointer items-center gap-1 transition-colors duration-300 marker:content-none',
+                hasActiveChild(link)
+                  ? 'text-blue-900 border-b-2 border-teal-600 pb-1 font-bold'
+                  : 'text-slate-600 font-medium hover:text-teal-700',
+              ]}
+            >
+              {link.label}
+              <span class="text-xs">▾</span>
+            </summary>
+            <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-open:opacity-100 group-open:visible group-open:translate-y-0 transition-all duration-200">
+              <div class="min-w-[13rem] rounded-2xl border border-outline-variant/40 bg-white shadow-xl p-2" aria-label={`${link.label} 子選單`}>
+                {link.children.map(child => (
+                  <a
+                    href={child.href}
+                    class:list={[
+                      'block rounded-xl px-4 py-3 text-sm no-underline transition-colors',
+                      isChildActive(link.href, child.href)
+                        ? 'bg-surface-container text-blue-900 font-bold'
+                        : 'text-slate-600 hover:bg-surface-container-low hover:text-teal-700',
+                    ]}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </details>
+        ) : (
+          <a
+            href={link.href}
+            class:list={[
+              'transition-colors duration-300',
+              isActive(link.href)
+                ? 'text-blue-900 border-b-2 border-teal-600 pb-1 font-bold'
+                : 'text-slate-600 font-medium hover:text-teal-700',
+            ]}
+          >
+            {link.label}
+          </a>
+        )
       ))}
     </div>
 
@@ -58,18 +118,49 @@ function isActive(href: string): boolean {
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
     <div class="flex flex-col gap-4 pt-4">
-      {links.map(link => (
-        <a
-          href={link.href}
-          class:list={[
-            'text-lg py-2 transition-colors',
-            isActive(link.href)
-              ? 'text-blue-900 font-bold'
-              : 'text-slate-600 font-medium',
-          ]}
-        >
-          {link.label}
-        </a>
+      {primaryLinks.map(link => (
+        link.children ? (
+          <div class="flex flex-col gap-1">
+            <a
+              href={link.href}
+              class:list={[
+                'text-lg py-2 transition-colors',
+                isActive(link.href)
+                  ? 'text-blue-900 font-bold'
+                  : 'text-slate-600 font-medium',
+              ]}
+            >
+              {link.label}
+            </a>
+            <div class="pl-4 flex flex-col gap-1 border-l-2 border-surface-container-high">
+              {link.children.map(child => (
+                <a
+                  href={child.href}
+                  class:list={[
+                    'text-sm py-1.5 transition-colors',
+                    isActive(child.href)
+                      ? 'text-blue-900 font-bold'
+                      : 'text-slate-500 font-medium',
+                  ]}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={link.href}
+            class:list={[
+              'text-lg py-2 transition-colors',
+              isActive(link.href)
+                ? 'text-blue-900 font-bold'
+                : 'text-slate-600 font-medium',
+            ]}
+          >
+            {link.label}
+          </a>
+        )
       ))}
       <a
         href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"

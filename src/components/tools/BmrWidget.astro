@@ -1,0 +1,62 @@
+---
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = 'BMR 結果', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-bmr-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入性別、年齡、身高、體重。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <div class="flex items-baseline gap-3 mb-2">
+      <span class="text-5xl font-bold text-blue-950 font-headline tabular-nums" data-bmr>—</span>
+      <span class="text-sm text-slate-500">kcal / 天</span>
+    </div>
+    <p class="text-sm text-slate-600 mb-5">基礎代謝率（Mifflin-St Jeor 公式）</p>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height">
+        BMR 是「完全靜止一整天」會消耗的熱量，約佔每日總消耗的 60–70%。但人不可能整天躺著，實際每日消耗（TDEE）= BMR × 活動係數。減重時不要把攝取壓到 BMR 以下太多，會增加肌肉流失與代謝適應，反而不利長期維持。建議搭配
+        <a href="/blog/health-tools/tdee-calculator/" class="text-teal-700 underline">TDEE 計算機</a> 一起看。
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import { calcBmr, fmtKcal } from '../../scripts/tools/calculators';
+
+  const widgets = document.querySelectorAll('[data-bmr-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.sex || !m.age || !m.heightCm || !m.weightKg) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const bmr = calcBmr(m.sex, m.weightKg, m.heightCm, m.age);
+      (root.querySelector('[data-bmr]') as HTMLElement).textContent = String(Math.round(bmr));
+    });
+  }
+</script>

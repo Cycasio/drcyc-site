@@ -1,0 +1,156 @@
+---
+import { COMORBIDITY_LABELS } from '../../scripts/tools/calculators';
+
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = 'GLP-1 適應症評估', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-glp1-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入性別、身高、體重，並勾選共病。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <!-- 大型結果卡 -->
+    <div data-verdict-card class="rounded-2xl p-5 mb-5">
+      <p class="text-xs font-bold uppercase tracking-widest mb-1" data-verdict-pretitle>—</p>
+      <p class="text-2xl md:text-3xl font-bold font-headline mb-1" data-verdict-title>—</p>
+      <p class="text-sm" data-verdict-detail>—</p>
+    </div>
+
+    <!-- 建議藥物 -->
+    <div data-drugs-block class="hidden mb-5">
+      <h3 class="text-sm font-bold text-blue-950 mb-2">常用 GLP-1 / 減重藥物（皆需處方）</h3>
+      <ul class="text-sm text-slate-700 chinese-line-height list-disc pl-5 space-y-1" data-drugs-list></ul>
+    </div>
+
+    <!-- 禁忌症提醒 -->
+    <details class="rounded-xl bg-rose-50 border border-rose-200 p-4 mb-5">
+      <summary class="text-sm font-bold text-rose-900 cursor-pointer">⚠️ 重要禁忌症（請務必告知醫師）</summary>
+      <ul class="text-xs text-rose-900 mt-3 chinese-line-height list-disc pl-5 space-y-1">
+        <li>本人或家族有甲狀腺髓質癌（MTC）或第 2 型多發性內分泌腫瘤（MEN2）病史</li>
+        <li>急性胰臟炎病史、嚴重胃輕癱</li>
+        <li>懷孕、計畫懷孕、哺乳期</li>
+        <li>對藥物成分嚴重過敏</li>
+        <li>第 1 型糖尿病或糖尿病酮酸血症（DKA）</li>
+      </ul>
+    </details>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height" data-commentary>—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import {
+    calcBmi, evalGlp1Eligibility, COMORBIDITY_LABELS,
+    type Glp1Reason, type Comorbidities,
+  } from '../../scripts/tools/calculators';
+
+  const widgets = document.querySelectorAll('[data-glp1-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function activeComorbidities(c: Comorbidities): string[] {
+    const keys = Object.keys(c) as (keyof Comorbidities)[];
+    return keys.filter((k) => c[k]).map((k) => COMORBIDITY_LABELS[k]);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.sex || !m.heightCm || !m.weightKg) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const bmi = calcBmi(m.heightCm, m.weightKg);
+      const ev = evalGlp1Eligibility(bmi, m.comorbidities);
+
+      const card = root.querySelector('[data-verdict-card]') as HTMLElement;
+      const pretitle = root.querySelector('[data-verdict-pretitle]') as HTMLElement;
+      const title = root.querySelector('[data-verdict-title]') as HTMLElement;
+      const detail = root.querySelector('[data-verdict-detail]') as HTMLElement;
+
+      const activeC = activeComorbidities(m.comorbidities);
+      const cListText = activeC.length > 0 ? activeC.join('、') : '無';
+
+      const setStyle = (cls: string, ptitle: string, ttl: string, dtl: string) => {
+        card.className = 'rounded-2xl p-5 mb-5 ' + cls;
+        pretitle.textContent = ptitle;
+        title.textContent = ttl;
+        detail.textContent = dtl;
+      };
+
+      switch (ev.reason as Glp1Reason) {
+        case 'bmi30':
+          setStyle(
+            'bg-emerald-50 border border-emerald-300 text-emerald-900',
+            '評估結果',
+            '✓ 符合 GLP-1 減重藥物適應症',
+            `BMI ${bmi.toFixed(1)} ≥ 30，達肥胖症診斷標準（已勾選共病：${cListText}）。`,
+          );
+          break;
+        case 'bmi27WithComorbidity':
+          setStyle(
+            'bg-emerald-50 border border-emerald-300 text-emerald-900',
+            '評估結果',
+            '✓ 符合 GLP-1 減重藥物適應症',
+            `BMI ${bmi.toFixed(1)}（27–30）＋ 共病：${cListText}。共病條件下符合適應症。`,
+          );
+          break;
+        case 'bmi27NoComorbidity':
+          setStyle(
+            'bg-amber-50 border border-amber-300 text-amber-900',
+            '評估結果',
+            '⚠ 暫不符合（差一項共病）',
+            `BMI ${bmi.toFixed(1)}（27–30）但目前未勾選共病。若有未顯示在清單上的代謝問題或健檢異常，建議至門診由醫師評估。`,
+          );
+          break;
+        case 'belowThreshold':
+          setStyle(
+            'bg-slate-50 border border-slate-300 text-slate-700',
+            '評估結果',
+            '✗ 不符合適應症',
+            `BMI ${bmi.toFixed(1)} 低於 27，未達減重藥物治療門檻。建議從飲食與運動介入。`,
+          );
+          break;
+      }
+
+      const drugsBlock = root.querySelector('[data-drugs-block]') as HTMLElement;
+      const drugsList = root.querySelector('[data-drugs-list]') as HTMLElement;
+      if (ev.eligible && ev.suggestedDrugs.length > 0) {
+        drugsBlock.classList.remove('hidden');
+        drugsList.innerHTML = ev.suggestedDrugs.map((d) => `<li>${d}</li>`).join('');
+      } else {
+        drugsBlock.classList.add('hidden');
+      }
+
+      const commentary = root.querySelector('[data-commentary]') as HTMLElement;
+      if (ev.eligible) {
+        commentary.textContent = '符合適應症不代表一定要用藥。藥物是工具，行為改變才是長期關鍵。臨床上會搭配飲食、運動、行為治療，並依據糖尿病、心血管病史、生育計畫、價格與保險條件選擇藥物。建議至減重門診由醫師評估。';
+      } else if (ev.reason === 'bmi27NoComorbidity') {
+        commentary.textContent = 'BMI 27–30 是介入最有效的階段。即使藥物還沒到適應症，飲食記錄、阻力訓練、改善睡眠都很值得做。若擔心已有代謝問題，可至家醫科或減重門診抽血評估。';
+      } else {
+        commentary.textContent = 'BMI 還未達藥物治療門檻。可使用 TDEE 計算機估算每日熱量需求，從飲食結構與活動量著手。如果有體型困擾或運動處方需求，仍歡迎至門診諮詢。';
+      }
+    });
+  }
+</script>

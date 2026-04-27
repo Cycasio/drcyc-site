@@ -1,0 +1,35 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import BmrWidget from '../../components/tools/BmrWidget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('bmr');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['sex', 'age', 'heightCm', 'weightKg']} />
+  <BmrWidget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">什麼是 BMR？</h2>
+    <p class="chinese-line-height text-slate-700">
+      BMR（Basal Metabolic Rate，基礎代謝率）是身體在<strong>完全靜止、清醒、空腹</strong>狀態下，維持基本生命所需的最低熱量，約佔每日總熱量消耗的 60–70%。換句話說，即使整天躺著不動，身體還是會消耗 BMR。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">為什麼採用 Mifflin-St Jeor 公式？</h3>
+    <p class="chinese-line-height text-slate-700">
+      在常見公式中（Harris-Benedict、Schofield、Cunningham、Mifflin-St Jeor），<strong>Mifflin-St Jeor（1990）</strong>對成人預測最準確，誤差約 ±10%，是美國營養與飲食學會建議的成人預設公式。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">減重時 BMR 的兩個重要觀念</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>不要把攝取壓到 BMR 以下太多</strong>：身體會啟動代謝適應、肌肉流失，反而難維持。</li>
+      <li><strong>BMR 會隨著肌肉量改變</strong>：阻力訓練增加肌肉，能小幅提高 BMR；節食減重則會降低 BMR，這也是復胖的重要機制之一。</li>
+    </ul>
+
+    <p class="chinese-line-height text-slate-700">
+      接著計算 <a href="/blog/health-tools/tdee-calculator/" class="text-teal-700 underline">TDEE（含減重熱量目標）</a> 才能得到「每日該吃多少」的具體數字。
+    </p>
+  </article>
+</ToolLayout>

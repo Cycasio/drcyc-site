@@ -1,0 +1,149 @@
+---
+import { BMI_CATEGORY_INFO } from '../../scripts/tools/calculators';
+
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+
+const { heading = 'BMI 結果', showHeading = true } = Astro.props as Props;
+
+const orderedCats = [
+  BMI_CATEGORY_INFO.underweight,
+  BMI_CATEGORY_INFO.normal,
+  BMI_CATEGORY_INFO.overweight,
+  BMI_CATEGORY_INFO.obeseI,
+  BMI_CATEGORY_INFO.obeseII,
+  BMI_CATEGORY_INFO.obeseIII,
+];
+
+const toneClass: Record<string, string> = {
+  sky:     'bg-sky-100 text-sky-800',
+  emerald: 'bg-emerald-100 text-emerald-800',
+  amber:   'bg-amber-100 text-amber-800',
+  orange:  'bg-orange-100 text-orange-800',
+  red:     'bg-red-100 text-red-800',
+  rose:    'bg-rose-100 text-rose-800',
+};
+
+const dotClass: Record<string, string> = {
+  sky:     'bg-sky-500',
+  emerald: 'bg-emerald-500',
+  amber:   'bg-amber-500',
+  orange:  'bg-orange-500',
+  red:     'bg-red-600',
+  rose:    'bg-rose-700',
+};
+---
+
+<section
+  data-bmi-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && (
+    <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>
+  )}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入身高與體重。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <div class="flex items-baseline gap-3 mb-3">
+      <span class="text-5xl font-bold text-blue-950 font-headline tabular-nums" data-bmi>—</span>
+      <span class="text-sm text-slate-500">kg/m²</span>
+    </div>
+
+    <div class="mb-4">
+      <span data-category-badge class="inline-block px-3 py-1 rounded-full text-sm font-bold">—</span>
+    </div>
+
+    <!-- 國健署分級條 -->
+    <div class="space-y-2 mb-5">
+      {orderedCats.map((c) => (
+        <div data-category-row data-category-key={c.key} class="flex items-center gap-3 text-xs">
+          <span class={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${dotClass[c.tone]}`}></span>
+          <span class="font-medium text-slate-700 w-20">{c.label}</span>
+          <span class="text-slate-500 tabular-nums">BMI {c.range}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- 臨床點評 -->
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height" data-commentary>—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import {
+    calcBmi, bmiCategory, BMI_CATEGORY_INFO, fmtNumber,
+    type BmiCategory,
+  } from '../../scripts/tools/calculators';
+
+  const COMMENTARY: Record<BmiCategory, string> = {
+    underweight: '體重過輕不見得健康。年輕女生若刻意維持過低 BMI，長期可能影響月經與骨密度；年長者則要特別留意肌少症與營養不良。建議檢查飲食是否足夠、是否有阻力訓練習慣。',
+    normal: '在台灣國健署的健康範圍內。但 BMI 正常不等於代謝健康，腰圍、體脂率、血壓血糖血脂仍要看，特別是「瘦胖子」（BMI 正常但內臟脂肪高）的族群。',
+    overweight: '離健康只差一點。臨床上若加上腰圍偏大或代謝指標異常，就值得開始介入；先從飲食記錄、增加日常活動度做起。離 BMI 27 以上的「肥胖」診斷不遠，這時介入最有效。',
+    obeseI: '在台灣這個區間（27–30）已符合「肥胖症」診斷。若同時有第二型糖尿病、高血壓、高血脂、脂肪肝等任一項共病，就符合 GLP-1 減重藥物適應症，建議至減重門診評估。',
+    obeseII: 'BMI 30 以上單靠意志力的成功率明顯較低。建議結合行為治療、營養師、運動處方與藥物。臨床上 5–10% 的體重下降即可顯著改善血糖、血壓、脂肪肝與睡眠呼吸中止。',
+    obeseIII: 'BMI 35 以上的減重，通常需要多管齊下：在 GLP-1 等藥物之外，也應評估代謝手術（bariatric surgery）。若同時有糖尿病等代謝共病，手術效益更高，五年代謝改善率優於單純藥物。',
+  };
+
+  const widgets = document.querySelectorAll('[data-bmi-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.heightCm || !m.weightKg) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const bmi = calcBmi(m.heightCm, m.weightKg);
+      const cat = bmiCategory(bmi);
+      const info = BMI_CATEGORY_INFO[cat];
+
+      (root.querySelector('[data-bmi]') as HTMLElement).textContent = fmtNumber(bmi, 1);
+
+      const badge = root.querySelector('[data-category-badge]') as HTMLElement;
+      badge.textContent = `${info.label}（${info.range}）`;
+      badge.className = 'inline-block px-3 py-1 rounded-full text-sm font-bold ' + toneClassMap[info.tone];
+
+      // 標出當前所在那一列
+      const rows = root.querySelectorAll('[data-category-row]') as NodeListOf<HTMLElement>;
+      rows.forEach((row) => {
+        const key = row.dataset.categoryKey as BmiCategory;
+        if (key === cat) {
+          row.classList.add('font-bold');
+          row.classList.remove('opacity-50');
+        } else {
+          row.classList.remove('font-bold');
+          row.classList.add('opacity-50');
+        }
+      });
+
+      (root.querySelector('[data-commentary]') as HTMLElement).textContent = COMMENTARY[cat];
+    });
+  }
+
+  const toneClassMap: Record<string, string> = {
+    sky:     'bg-sky-100 text-sky-800',
+    emerald: 'bg-emerald-100 text-emerald-800',
+    amber:   'bg-amber-100 text-amber-800',
+    orange:  'bg-orange-100 text-orange-800',
+    red:     'bg-red-100 text-red-800',
+    rose:    'bg-rose-100 text-rose-800',
+  };
+</script>

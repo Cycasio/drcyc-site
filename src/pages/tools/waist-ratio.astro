@@ -1,0 +1,45 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import WaistRatioWidget from '../../components/tools/WaistRatioWidget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('waist-ratio');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['sex', 'heightCm', 'waistCm', 'hipCm']} />
+  <WaistRatioWidget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">為什麼腰圍比 BMI 更值得看？</h2>
+    <p class="chinese-line-height text-slate-700">
+      BMI 看「總體重」，腰圍則直接反映「<strong>內臟脂肪</strong>」——也就是包覆在肝、胰、腸繫膜周圍的脂肪。內臟脂肪分泌大量發炎激素，與胰島素阻抗、第二型糖尿病、心血管疾病風險的連結遠強於 BMI。臨床上常見<strong>「BMI 正常但腰圍超標」的瘦胖子</strong>，他們的代謝風險和肥胖者其實相當。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">三個簡單的腰圍指標</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-2">
+      <li>
+        <strong>腰圍身高比 WHtR（最推薦）</strong>：腰圍 ÷ 身高，<strong>應小於 0.5</strong>。一句話記法：「腰圍應小於身高的一半」。研究顯示 WHtR 對心血管事件的預測力優於 BMI 與 WHR。
+      </li>
+      <li>
+        <strong>腰臀比 WHR</strong>：腰圍 ÷ 臀圍，男性 ≥ 0.9 / 女性 ≥ 0.85 為中央型肥胖。需要量臀圍。
+      </li>
+      <li>
+        <strong>腰圍絕對值（國健署）</strong>：男 ≥ 90 cm / 女 ≥ 80 cm 為腰圍過粗，是<strong>代謝症候群五項指標之一</strong>。
+      </li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">怎麼正確量腰圍？</h3>
+    <ol class="chinese-line-height text-slate-700 list-decimal pl-5 space-y-1">
+      <li>站立、雙腳與肩同寬，正常呼吸（不刻意吸氣或縮肚子）</li>
+      <li>找肋骨下緣與髂前上棘之間的中點（約肚臍位置）</li>
+      <li>皮尺水平環繞，貼合但不勒緊</li>
+      <li>呼氣末讀數，連量兩次取平均</li>
+    </ol>
+
+    <p class="chinese-line-height text-slate-700">
+      若腰圍偏高，建議搭配 <a href="/tools/glp1-eligibility/" class="text-teal-700 underline">GLP-1 減重藥物資格評估</a>，並至門診評估其他代謝症候群指標（血糖、血脂、血壓、HDL）。
+    </p>
+  </article>
+</ToolLayout>

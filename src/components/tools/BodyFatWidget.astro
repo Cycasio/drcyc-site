@@ -1,0 +1,100 @@
+---
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = '體脂率粗估', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-body-fat-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入性別、年齡、身高、體重。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <div class="flex items-baseline gap-3 mb-2">
+      <span class="text-5xl font-bold text-blue-950 font-headline tabular-nums" data-body-fat>—</span>
+      <span class="text-sm text-slate-500">%</span>
+    </div>
+    <div class="mb-5">
+      <span data-band-badge class="inline-block px-3 py-1 rounded-full text-sm font-bold">—</span>
+    </div>
+
+    <div class="rounded-xl border border-amber-300 bg-amber-50 p-4 mb-4 text-xs text-amber-900">
+      <strong>數值僅供概略參考</strong>。Deurenberg 公式以 BMI、年齡、性別推估，不能反映實際肌肉量；臨床上需以 InBody（生物電阻）或 DXA（最準）測量為主。
+    </div>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height" data-commentary>—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import {
+    calcBmi, calcBodyFat, bodyFatBand, BODY_FAT_RANGES, fmtNumber,
+    type BodyFatBand,
+  } from '../../scripts/tools/calculators';
+
+  const BAND_LABEL: Record<BodyFatBand, string> = {
+    athletic:   '運動員水準',
+    fitness:    '健身體態',
+    acceptable: '正常範圍',
+    obesity:    '過高（肥胖）',
+  };
+
+  const BAND_TONE: Record<BodyFatBand, string> = {
+    athletic:   'bg-sky-100 text-sky-800',
+    fitness:    'bg-emerald-100 text-emerald-800',
+    acceptable: 'bg-amber-100 text-amber-800',
+    obesity:    'bg-rose-100 text-rose-800',
+  };
+
+  const COMMENTARY: Record<BodyFatBand, string> = {
+    athletic:   '體脂偏低，多見於規律訓練者。注意女性過低（< 16%）可能影響賀爾蒙與月經週期，需確保熱量與營養充足。',
+    fitness:    '體脂落在健康且有運動習慣的範圍。維持飲食結構與訓練即可。',
+    acceptable: '體脂在一般成人正常範圍。若想進一步提升代謝健康，可從增加肌肉量（阻力訓練）著手，比單純減脂更有效。',
+    obesity:    '體脂率落在肥胖範圍。減脂優先於減體重——同樣減 5 kg，若是減脂肪比減水分更有意義。建議結合阻力訓練與適度熱量缺口，並考慮是否符合 GLP-1 藥物適應症（請至減重門診評估）。',
+  };
+
+  const widgets = document.querySelectorAll('[data-body-fat-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.sex || !m.age || !m.heightCm || !m.weightKg) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const bmi = calcBmi(m.heightCm, m.weightKg);
+      const bf = calcBodyFat(bmi, m.age, m.sex);
+      const band = bodyFatBand(bf, m.sex);
+      const range = BODY_FAT_RANGES[m.sex];
+
+      (root.querySelector('[data-body-fat]') as HTMLElement).textContent = fmtNumber(bf, 1);
+
+      const badge = root.querySelector('[data-band-badge]') as HTMLElement;
+      const acceptableLabel = `（${m.sex === 'male' ? '男性' : '女性'} 正常 ${range.acceptable[0]}–${range.acceptable[1]}%）`;
+      badge.textContent = BAND_LABEL[band] + acceptableLabel;
+      badge.className = 'inline-block px-3 py-1 rounded-full text-sm font-bold ' + BAND_TONE[band];
+
+      (root.querySelector('[data-commentary]') as HTMLElement).textContent = COMMENTARY[band];
+    });
+  }
+</script>

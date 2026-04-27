@@ -1,0 +1,33 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import IdealWeightWidget from '../../components/tools/IdealWeightWidget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('ideal-weight');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['sex', 'heightCm', 'weightKg']} />
+  <IdealWeightWidget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">三種「理想體重」公式為什麼有差？</h2>
+    <p class="chinese-line-height text-slate-700">
+      「理想體重」其實沒有單一答案，不同公式來自不同族群與情境：
+    </p>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>BMI 22 × 身高²</strong>：衛福部國民健康署用來描述「健康體重」的常用值，亞洲人在這個 BMI 死亡率較低，是台灣門診最常用的目標。</li>
+      <li><strong>BMI 18.5–24 健康範圍</strong>：是國健署的健康體位區間，比單一數字更有彈性。</li>
+      <li><strong>Devine 公式（1974）</strong>：原本是給藥物劑量計算用的，並非真正的「最佳體重」，西方男性偏向偏低。在台灣只能當參考，不建議拿來當減重目標。</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">減重門診常用的「實際目標」</h3>
+    <p class="chinese-line-height text-slate-700">
+      在臨床上，與其追求理想體重，<strong>「先減 5–10%」</strong>更務實：這個幅度即可顯著改善血糖、血壓、脂肪肝、睡眠呼吸中止症。等第一階段穩定後，再依個人意願與耐受度決定是否進一步減重。
+    </p>
+    <p class="chinese-line-height text-slate-700">
+      可搭配 <a href="/blog/health-tools/tdee-calculator/" class="text-teal-700 underline">TDEE 計算機</a> 推算每日熱量需求，以及 <a href="/tools/weight-progress/" class="text-teal-700 underline">減重進度追蹤</a>。
+    </p>
+  </article>
+</ToolLayout>

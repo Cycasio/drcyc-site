@@ -1,0 +1,36 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import BodyFatWidget from '../../components/tools/BodyFatWidget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('body-fat');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['sex', 'age', 'heightCm', 'weightKg']} />
+  <BodyFatWidget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">為什麼這個體脂率只是「粗估」？</h2>
+    <p class="chinese-line-height text-slate-700">
+      Deurenberg 公式（1991）以 BMI、年齡、性別反推體脂率，誤差約 ±5%。它能告訴你「以平均族群來說，這樣的 BMI＋年齡＋性別大概多少體脂」，但<strong>無法分辨你是高肌肉量還是低肌肉量族群</strong>——同樣 BMI 25 的健身者與長期久坐者，實際體脂率可能差 10% 以上。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">想要更精準怎麼辦？</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>InBody / 生物電阻法（BIA）</strong>：健身房、健檢中心常見，誤差約 ±3–5%，受水分影響大（建議晨起、空腹、相同條件量測）。</li>
+      <li><strong>DXA 雙能量 X 光吸收儀</strong>：醫療等級，誤差 &lt; 2%，但需到大型醫院或運動醫學中心，自費約 1500–3000 元。</li>
+      <li><strong>水下秤重 / Bod Pod</strong>：研究等級，台灣較少見。</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">減重時體脂率比體重更值得追蹤</h3>
+    <p class="chinese-line-height text-slate-700">
+      臨床上常看到體重減了但「都減到肌肉」的案例，外觀變得鬆垮、代謝下降、容易復胖。<strong>同樣減 5 kg，「減 5 kg 脂肪」與「減 3 kg 脂肪 + 2 kg 肌肉」效果完全不同</strong>。建議搭配阻力訓練 + 高蛋白飲食，才能在減重時最大化保留肌肉。
+    </p>
+
+    <p class="chinese-line-height text-slate-700">
+      若想更全面評估代謝風險，建議搭配 <a href="/tools/waist-ratio/" class="text-teal-700 underline">腰圍身高比</a>——「BMI 正常但腰圍超標」的瘦胖子族群，光看體脂率反而會錯過。
+    </p>
+  </article>
+</ToolLayout>

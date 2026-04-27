@@ -1,0 +1,104 @@
+---
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = '減重進度', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-progress-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請輸入起始、目前、目標體重。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <!-- 進度條 -->
+    <div class="mb-2 flex justify-between text-xs text-slate-500">
+      <span data-start-label>起始 — kg</span>
+      <span data-target-label>目標 — kg</span>
+    </div>
+    <div class="h-3 rounded-full bg-slate-200 overflow-hidden mb-1">
+      <div class="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all" data-progress-bar style="width: 0%"></div>
+    </div>
+    <p class="text-right text-xs text-slate-600 mb-5"><span data-progress-pct>0%</span> 達成</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-5">
+      <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4">
+        <p class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-1">已減</p>
+        <p class="text-2xl font-bold text-emerald-900 font-headline tabular-nums" data-lost-kg>—</p>
+        <p class="text-xs text-emerald-700 mt-1"><span data-lost-pct>—</span> 起始體重</p>
+      </div>
+      <div class="rounded-xl bg-sky-50 border border-sky-200 p-4">
+        <p class="text-xs font-bold text-sky-700 uppercase tracking-wider mb-1">距目標</p>
+        <p class="text-2xl font-bold text-sky-900 font-headline tabular-nums" data-to-goal>—</p>
+        <p class="text-xs text-sky-700 mt-1">還需減重</p>
+      </div>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 md:col-span-1 col-span-2">
+        <p class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">目前體重</p>
+        <p class="text-2xl font-bold text-slate-900 font-headline tabular-nums" data-current-kg>—</p>
+      </div>
+    </div>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height" data-commentary>—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import { calcWeightProgress, fmtKg, fmtPct } from '../../scripts/tools/calculators';
+
+  const widgets = document.querySelectorAll('[data-progress-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      const start = m.weightHistory.startWeightKg;
+      const target = m.weightHistory.targetWeightKg;
+      const current = m.weightKg;
+      if (start == null || target == null || current == null) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const p = calcWeightProgress(start, current, target);
+      (root.querySelector('[data-start-label]') as HTMLElement).textContent = `起始 ${fmtKg(start)}`;
+      (root.querySelector('[data-target-label]') as HTMLElement).textContent = `目標 ${fmtKg(target)}`;
+      (root.querySelector('[data-current-kg]') as HTMLElement).textContent = fmtKg(current);
+      (root.querySelector('[data-lost-kg]') as HTMLElement).textContent = fmtKg(p.lostKg);
+      (root.querySelector('[data-lost-pct]') as HTMLElement).textContent = fmtPct(p.lostPctOfStart);
+      (root.querySelector('[data-to-goal]') as HTMLElement).textContent = fmtKg(Math.max(0, p.toGoalKg));
+
+      const pct = Math.max(0, Math.min(100, p.goalProgressPct));
+      const bar = root.querySelector('[data-progress-bar]') as HTMLElement;
+      bar.style.width = pct.toFixed(1) + '%';
+      (root.querySelector('[data-progress-pct]') as HTMLElement).textContent = fmtPct(pct);
+
+      const commentary = root.querySelector('[data-commentary]') as HTMLElement;
+      if (p.reachedGoal) {
+        commentary.textContent = '已達標！減重後最大的挑戰是「維持」。建議目標達成後仍維持原有的飲食結構與運動頻率，並接受 1–2 年的長期追蹤——體重反彈通常發生在第 12–18 個月。';
+      } else if (p.lostPctOfStart >= 5) {
+        commentary.textContent = `已減重 ${p.lostPctOfStart.toFixed(1)}%——達到「臨床有意義減重」門檻（≥ 5%）。在這個階段血糖、血壓、脂肪肝、睡眠呼吸中止都會明顯改善。繼續穩定推進即可。`;
+      } else if (p.lostKg < 0) {
+        commentary.textContent = '目前體重比起始略高。回顧最近 2 週的飲食與運動，常見原因是熱量缺口不足、睡眠品質下降、壓力性進食。若持續難以推進，建議至減重門診評估藥物或行為治療介入。';
+      } else {
+        commentary.textContent = '進度尚未達 5%。持續穩定推進即可，不必追求快。建議用體重七日均值（用 7 天平均值看趨勢）取代每日數字以避免被水分波動誤導。';
+      }
+    });
+  }
+</script>

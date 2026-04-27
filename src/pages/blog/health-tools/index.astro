@@ -1,0 +1,115 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { TOOLS } from '../../../data/tools';
+
+const SITE = 'https://www.drcyc.io';
+const hubUrl = `${SITE}/blog/health-tools/`;
+const title = '健康工具｜TDEE 熱量需求計算與健康評估 | 陳昱彰醫師';
+const description = '陳昱彰醫師整理的健康工具專區：從 TDEE 熱量需求計算開始，逐步建立減重、代謝健康與生活型態調整的實用起點。';
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: '健康工具', item: hubUrl },
+  ],
+};
+
+const collectionSchema = {
+  '@type': 'CollectionPage',
+  '@id': `${hubUrl}#collection`,
+  url: hubUrl,
+  name: '健康工具',
+  description,
+  inLanguage: 'zh-Hant',
+};
+
+const extraTools = TOOLS.filter((tool) => tool.slug !== 'tdee');
+---
+
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema, collectionSchema]}>
+  <main class="max-w-6xl mx-auto px-6 md:px-10 py-12">
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
+      <span class="mx-2">／</span>
+      <span>健康工具</span>
+    </nav>
+
+    <header class="mb-10">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">Health Tools · 陳昱彰醫師</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">健康工具</h1>
+      <p class="text-slate-600 chinese-line-height max-w-3xl">
+        提供實用的健康試算與評估工具，協助你從數據開始，更了解自己的熱量需求、體重管理方向與代謝健康狀態。
+        這些工具適合作為第一步的自我評估；若你有肥胖、糖尿病、脂肪肝、代謝症候群或反覆減重失敗等問題，也歡迎進一步預約門診做更個人化的規劃。
+      </p>
+    </header>
+
+    <section class="mb-12">
+      <a
+        href="/blog/health-tools/tdee-calculator/"
+        class="block rounded-3xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-6 md:p-8 hover:opacity-95 transition-opacity no-underline"
+      >
+        <div class="flex items-start gap-4">
+          <span class="text-4xl">🍽️</span>
+          <div class="flex-1">
+            <p class="text-xs font-bold uppercase tracking-widest mb-2 opacity-80">推薦起點</p>
+            <h2 class="text-xl md:text-2xl font-bold mb-2 font-headline">TDEE 熱量需求計算機</h2>
+            <p class="text-on-primary-container chinese-line-height">
+              快速估算每日總熱量消耗，作為減重、維持體重或增肌飲食規劃的起點。算完之後，也能更自然銜接減重門診與個人化建議。
+            </p>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-blue-950 mb-4 font-headline">更多工具</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {extraTools.map((tool) => (
+          <a
+            href={tool.url.replace(SITE, '')}
+            class="block p-5 rounded-2xl bg-white border border-outline-variant hover:border-primary hover:shadow-md transition-all no-underline"
+          >
+            <span class="text-3xl">{tool.emoji}</span>
+            <h3 class="text-base font-bold text-blue-950 mt-3 font-headline">{tool.pageHeading}</h3>
+            <p class="text-xs text-teal-700 font-medium mt-1">適合：{tool.audience}</p>
+            <p class="text-sm text-slate-600 mt-2 chinese-line-height line-clamp-3">{tool.description}</p>
+          </a>
+        ))}
+      </div>
+      <p class="text-sm text-slate-500 mt-4 chinese-line-height">
+        目前先將 TDEE 放在「衛教專欄 → 健康工具」底下作為主入口；其他既有工具也會陸續整理到這個架構中。
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+      <div class="rounded-2xl bg-surface-container p-6 md:p-8">
+        <h2 class="text-lg font-bold text-blue-950 mb-3 font-headline">先了解觀念，再使用工具</h2>
+        <ul class="space-y-2 text-sm text-slate-700 chinese-line-height list-disc pl-5">
+          <li><a href="/blog/mounjaro-weight-loss/" class="text-teal-700 underline">猛健樂（Mounjaro）減重藥物完整指南</a></li>
+          <li><a href="/blog/exercise-glp1-weight-loss/" class="text-teal-700 underline">吃猛健樂就不用運動了？錯！為什麼 GLP-1 更需要搭配運動</a></li>
+          <li><a href="/blog/weight-loss-comb-model/" class="text-teal-700 underline">為什麼你總是減肥失敗？醫師用 COM-B 模型拆解減重成功關鍵</a></li>
+          <li><a href="/blog/fitt-vp-exercise-prescription/" class="text-teal-700 underline">什麼是 FITT-VP？醫師怎麼幫你開運動處方</a></li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-6 md:p-8">
+        <h2 class="text-xl font-bold mb-3 font-headline">想把數字變成真正做得到的健康計畫？</h2>
+        <p class="text-on-primary-container chinese-line-height mb-5">
+          健康工具可以幫你快速建立基本概念，但真正能長期執行的減重與代謝改善，仍需要結合飲食、運動、睡眠、壓力與必要時的藥物治療。
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/services/" class="inline-block bg-white text-primary px-6 py-3 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-opacity no-underline">
+            了解減重管理門診
+          </a>
+          <a href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener" class="inline-block bg-white/10 border border-white/30 text-white px-6 py-3 rounded-full font-bold text-sm tracking-tight hover:bg-white/15 transition-colors no-underline">
+            立即預約掛號
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

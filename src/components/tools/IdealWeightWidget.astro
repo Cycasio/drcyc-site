@@ -1,0 +1,101 @@
+---
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = '理想體重結果', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-ideal-weight-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入性別與身高。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+      <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4">
+        <p class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-1">健康體重（BMI 22）</p>
+        <p class="text-3xl font-bold text-emerald-900 font-headline tabular-nums" data-bmi22>—</p>
+        <p class="text-xs text-emerald-700 mt-1">國健署常用建議值</p>
+      </div>
+      <div class="rounded-xl bg-sky-50 border border-sky-200 p-4">
+        <p class="text-xs font-bold text-sky-700 uppercase tracking-wider mb-1">健康範圍</p>
+        <p class="text-2xl font-bold text-sky-900 font-headline tabular-nums" data-range>—</p>
+        <p class="text-xs text-sky-700 mt-1">BMI 18.5–24</p>
+      </div>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+        <p class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Devine 公式</p>
+        <p class="text-2xl font-bold text-slate-900 font-headline tabular-nums" data-devine>—</p>
+        <p class="text-xs text-slate-500 mt-1">美國臨床參考值</p>
+      </div>
+    </div>
+
+    <!-- 與目前體重比較 -->
+    <div data-current-block class="hidden mb-4 p-4 rounded-xl bg-surface-container">
+      <p class="text-sm text-slate-600 mb-1">您目前 <span class="font-bold text-blue-950" data-current-weight>—</span></p>
+      <p class="text-base text-slate-700" data-distance>—</p>
+    </div>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height" data-commentary>—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import { calcIdealWeight, calcBmi, fmtKg } from '../../scripts/tools/calculators';
+
+  const widgets = document.querySelectorAll('[data-ideal-weight-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.sex || !m.heightCm) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const ideal = calcIdealWeight(m.heightCm, m.sex);
+      (root.querySelector('[data-bmi22]') as HTMLElement).textContent = fmtKg(ideal.bmi22Kg);
+      (root.querySelector('[data-range]') as HTMLElement).textContent =
+        `${ideal.healthyRangeMinKg.toFixed(1)} – ${ideal.healthyRangeMaxKg.toFixed(1)} kg`;
+      (root.querySelector('[data-devine]') as HTMLElement).textContent = fmtKg(ideal.devineKg);
+
+      const currentBlock = root.querySelector('[data-current-block]') as HTMLElement;
+      if (m.weightKg) {
+        currentBlock.classList.remove('hidden');
+        (root.querySelector('[data-current-weight]') as HTMLElement).textContent = fmtKg(m.weightKg);
+        const bmi = calcBmi(m.heightCm, m.weightKg);
+        const diff = m.weightKg - ideal.bmi22Kg;
+        const distEl = root.querySelector('[data-distance]') as HTMLElement;
+        if (Math.abs(diff) < 1) {
+          distEl.textContent = `已在健康體重附近（BMI ${bmi.toFixed(1)}）。`;
+        } else if (diff > 0) {
+          distEl.textContent = `距離 BMI 22 健康體重還有 ${diff.toFixed(1)} kg，目前 BMI ${bmi.toFixed(1)}。`;
+        } else {
+          distEl.textContent = `已低於 BMI 22 約 ${Math.abs(diff).toFixed(1)} kg，目前 BMI ${bmi.toFixed(1)}。`;
+        }
+      } else {
+        currentBlock.classList.add('hidden');
+      }
+
+      (root.querySelector('[data-commentary]') as HTMLElement).textContent =
+        '臨床上不需要追求單一「理想體重」數字。對代謝健康而言，比起體重本身，腰圍、體脂率、代謝指標更重要。減重門診常用的目標是「先減 5–10%」，這個幅度即可顯著改善血糖、血壓、脂肪肝；不必一開始就鎖定 BMI 22。';
+    });
+  }
+</script>

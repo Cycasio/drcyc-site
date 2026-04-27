@@ -1,0 +1,117 @@
+---
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = '腰圍指標', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-waist-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入性別、身高、腰圍（臀圍選填）。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+      <div class="rounded-xl border p-4" data-whtr-card>
+        <p class="text-xs font-bold uppercase tracking-wider mb-1 text-slate-600">腰圍身高比 WHtR</p>
+        <p class="text-3xl font-bold font-headline tabular-nums text-blue-950" data-whtr>—</p>
+        <span data-whtr-badge class="inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold">—</span>
+        <p class="text-xs text-slate-500 mt-2">理想 &lt; 0.5</p>
+      </div>
+      <div class="rounded-xl border p-4" data-whr-card>
+        <p class="text-xs font-bold uppercase tracking-wider mb-1 text-slate-600">腰臀比 WHR</p>
+        <p class="text-3xl font-bold font-headline tabular-nums text-blue-950" data-whr>—</p>
+        <span data-whr-badge class="inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold">—</span>
+        <p class="text-xs text-slate-500 mt-2" data-whr-cutoff>—</p>
+      </div>
+    </div>
+
+    <div data-tw-warning class="hidden mb-4 rounded-xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-900">
+      ⚠️ 您的腰圍已超過國健署中央型肥胖標準（<span data-tw-cutoff>—</span>），即使 BMI 正常仍應警覺心血管與代謝風險。
+    </div>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height">
+        腰圍比 BMI 更能反映「內臟脂肪」與心血管風險。臨床上看到的「BMI 正常但腰圍超標」族群（瘦胖子）並不少，他們的代謝風險和肥胖者其實接近。WHtR 0.5 是一個簡單記法：<strong>「腰圍應小於身高的一半」</strong>。
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import { calcWaistMetrics, fmtNumber, type WaistRisk } from '../../scripts/tools/calculators';
+
+  const RISK_LABEL: Record<WaistRisk, string> = {
+    low: '健康',
+    increased: '風險升高',
+    high: '高風險',
+  };
+  const RISK_TONE: Record<WaistRisk, string> = {
+    low: 'bg-emerald-100 text-emerald-800',
+    increased: 'bg-amber-100 text-amber-800',
+    high: 'bg-rose-100 text-rose-800',
+  };
+
+  const widgets = document.querySelectorAll('[data-waist-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.sex || !m.heightCm || !m.waistCm) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const w = calcWaistMetrics(m.waistCm, m.heightCm, m.hipCm ?? null, m.sex);
+
+      (root.querySelector('[data-whtr]') as HTMLElement).textContent = fmtNumber(w.whtR, 2);
+      const whtRBadge = root.querySelector('[data-whtr-badge]') as HTMLElement;
+      whtRBadge.textContent = RISK_LABEL[w.whtRRisk];
+      whtRBadge.className = 'inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold ' + RISK_TONE[w.whtRRisk];
+
+      const whrCard = root.querySelector('[data-whr-card]') as HTMLElement;
+      if (w.whR != null && w.whRRisk != null) {
+        whrCard.classList.remove('opacity-50');
+        (root.querySelector('[data-whr]') as HTMLElement).textContent = fmtNumber(w.whR, 2);
+        const whrBadge = root.querySelector('[data-whr-badge]') as HTMLElement;
+        whrBadge.textContent = w.whRRisk === 'high' ? '中央型肥胖' : '健康';
+        whrBadge.className = 'inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold '
+          + (w.whRRisk === 'high' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800');
+        (root.querySelector('[data-whr-cutoff]') as HTMLElement).textContent =
+          m.sex === 'male' ? '男性 ≥ 0.9 為高風險' : '女性 ≥ 0.85 為高風險';
+      } else {
+        whrCard.classList.add('opacity-50');
+        (root.querySelector('[data-whr]') as HTMLElement).textContent = '—';
+        const whrBadge = root.querySelector('[data-whr-badge]') as HTMLElement;
+        whrBadge.textContent = '需要臀圍';
+        whrBadge.className = 'inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-600';
+        (root.querySelector('[data-whr-cutoff]') as HTMLElement).textContent = '請輸入臀圍以計算';
+      }
+
+      const twWarning = root.querySelector('[data-tw-warning]') as HTMLElement;
+      if (w.isCentralObesityTW) {
+        twWarning.classList.remove('hidden');
+        (root.querySelector('[data-tw-cutoff]') as HTMLElement).textContent =
+          m.sex === 'male' ? '男性 ≥ 90 cm' : '女性 ≥ 80 cm';
+      } else {
+        twWarning.classList.add('hidden');
+      }
+    });
+  }
+</script>

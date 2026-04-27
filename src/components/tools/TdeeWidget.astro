@@ -1,0 +1,100 @@
+---
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+}
+const { heading = 'TDEE 與減重熱量', showHeading = true } = Astro.props as Props;
+---
+
+<section
+  data-tdee-widget
+  class="rounded-2xl bg-white border border-outline-variant p-6 md:p-8 mb-6 print:mb-3 print:break-inside-avoid"
+>
+  {showHeading && <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">{heading}</h2>}
+
+  <div data-state="empty" class="text-sm text-slate-500 italic">
+    請先輸入性別、年齡、身高、體重，並選擇活動量。
+  </div>
+
+  <div data-state="result" class="hidden">
+    <div class="grid grid-cols-2 gap-3 mb-5">
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+        <p class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">BMR 基礎代謝</p>
+        <p class="text-2xl font-bold text-slate-800 font-headline tabular-nums" data-bmr>—</p>
+        <p class="text-xs text-slate-500 mt-1">kcal / 天</p>
+      </div>
+      <div class="rounded-xl bg-primary text-on-primary p-4">
+        <p class="text-xs font-bold uppercase tracking-wider mb-1">TDEE 每日總消耗</p>
+        <p class="text-3xl font-bold font-headline tabular-nums" data-tdee>—</p>
+        <p class="text-xs mt-1 opacity-80">維持體重的攝取上限</p>
+      </div>
+    </div>
+
+    <h3 class="text-sm font-bold text-blue-950 mb-3">減重熱量目標</h3>
+    <div class="space-y-3 mb-5">
+      <div class="rounded-xl border border-emerald-300 bg-emerald-50 p-4">
+        <div class="flex items-baseline justify-between gap-2 mb-1">
+          <p class="text-sm font-bold text-emerald-900">每週減 0.5 kg（緩和）</p>
+          <p class="text-2xl font-bold text-emerald-900 font-headline tabular-nums" data-mild-target>—</p>
+        </div>
+        <p class="text-xs text-emerald-800">每日缺口 <span data-mild-deficit>—</span>，每月約減 2 kg</p>
+        <p class="text-xs text-rose-700 mt-1 hidden" data-mild-warning>⚠️ 此攝取已低於安全下限，已自動調整為下限值</p>
+      </div>
+      <div class="rounded-xl border border-amber-300 bg-amber-50 p-4">
+        <div class="flex items-baseline justify-between gap-2 mb-1">
+          <p class="text-sm font-bold text-amber-900">每週減 1 kg（積極）</p>
+          <p class="text-2xl font-bold text-amber-900 font-headline tabular-nums" data-mod-target>—</p>
+        </div>
+        <p class="text-xs text-amber-800">每日缺口 <span data-mod-deficit>—</span>，每月約減 4 kg</p>
+        <p class="text-xs text-rose-700 mt-1 hidden" data-mod-warning>⚠️ 此攝取已低於安全下限，已自動調整為下限值</p>
+      </div>
+    </div>
+
+    <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
+      <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
+      <p class="text-sm text-slate-700 chinese-line-height">
+        每週減 0.5–1 kg 是相對能維持的速率。減太快肌肉流失大、復胖風險高。建議搭配阻力訓練與每日蛋白質 1.2–1.6 g/kg，可顯著降低肌肉流失。若 TDEE 已減去 1100 kcal 仍超過安全下限太多，代表你 TDEE 偏高，不需要極端節食。
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { loadMetrics, onMetricsChange, type PatientMetrics } from '../../scripts/tools/metrics-store';
+  import { calcBmr, calcTdee, calcDeficit, fmtKcal } from '../../scripts/tools/calculators';
+
+  const widgets = document.querySelectorAll('[data-tdee-widget]') as NodeListOf<HTMLElement>;
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
+
+  function render(m: PatientMetrics) {
+    widgets.forEach((root) => {
+      const empty = root.querySelector('[data-state="empty"]') as HTMLElement;
+      const result = root.querySelector('[data-state="result"]') as HTMLElement;
+      if (!m.sex || !m.age || !m.heightCm || !m.weightKg || !m.activityLevel) {
+        empty.classList.remove('hidden');
+        result.classList.add('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      result.classList.remove('hidden');
+
+      const bmr = calcBmr(m.sex, m.weightKg, m.heightCm, m.age);
+      const tdee = calcTdee(bmr, m.activityLevel);
+      (root.querySelector('[data-bmr]') as HTMLElement).textContent = String(Math.round(bmr));
+      (root.querySelector('[data-tdee]') as HTMLElement).textContent = String(Math.round(tdee));
+
+      const mild = calcDeficit(tdee, m.sex, 0.5);
+      (root.querySelector('[data-mild-target]') as HTMLElement).textContent = fmtKcal(mild.safeTargetKcal);
+      (root.querySelector('[data-mild-deficit]') as HTMLElement).textContent = fmtKcal(mild.deficitKcal);
+      (root.querySelector('[data-mild-warning]') as HTMLElement).classList.toggle('hidden', !mild.belowSafetyFloor);
+
+      const mod = calcDeficit(tdee, m.sex, 1);
+      (root.querySelector('[data-mod-target]') as HTMLElement).textContent = fmtKcal(mod.safeTargetKcal);
+      (root.querySelector('[data-mod-deficit]') as HTMLElement).textContent = fmtKcal(mod.deficitKcal);
+      (root.querySelector('[data-mod-warning]') as HTMLElement).classList.toggle('hidden', !mod.belowSafetyFloor);
+    });
+  }
+</script>

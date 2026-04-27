@@ -1,0 +1,194 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import MetricsForm from '../../../components/tools/MetricsForm.astro';
+import TdeeWidget from '../../../components/tools/TdeeWidget.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/health-tools/tdee-calculator/`;
+const title = 'TDEE 熱量需求計算機｜每日熱量消耗試算、減重熱量估算 | 陳昱彰醫師';
+const description = '快速估算你的每日總熱量消耗（TDEE），作為減重、維持體重或增肌飲食規劃的起點。由陳昱彰醫師整理，並銜接減重門診與個人化建議。';
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: 'TDEE 熱量需求計算機',
+  description,
+  inLanguage: 'zh-Hant',
+  about: { '@type': 'MedicalEntity', name: 'TDEE 熱量需求計算' },
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  isAccessibleForFree: true,
+};
+
+const softwareApp = {
+  '@type': 'SoftwareApplication',
+  '@id': `${pageUrl}#calculator`,
+  name: 'TDEE 熱量需求計算機',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'TWD' },
+  creator: { '@id': `${SITE}/#person` },
+  url: pageUrl,
+};
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: '健康工具', item: `${SITE}/blog/health-tools/` },
+    { '@type': 'ListItem', position: 4, name: 'TDEE 熱量需求計算機', item: pageUrl },
+  ],
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'TDEE 是什麼？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'TDEE 是 Total Daily Energy Expenditure，指一個人一天的總熱量消耗，包含基礎代謝、日常活動與運動消耗。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'TDEE 可以拿來減重嗎？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '可以。TDEE 常被用來作為減重熱量設定的起點，但實際減重策略還要考慮蛋白質攝取、運動安排、生活型態與能否長期執行。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'TDEE 計算結果準確嗎？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'TDEE 是估算值，不是精密儀器測量結果。它適合當作起點，之後仍要依體重變化、飢餓感與生活習慣調整。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '有糖尿病或正在使用減重藥物，也可以直接照 TDEE 吃嗎？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '不一定。若有糖尿病、慢性病或正在使用減重藥物，建議由醫師依病況、藥物與生活型態做更個人化的規劃。',
+      },
+    },
+  ],
+};
+---
+
+<Layout title={title} description={description} jsonLd={[medicalWebPage, softwareApp, breadcrumbSchema, faqSchema]}>
+  <main class="max-w-4xl mx-auto px-6 md:px-10 py-12">
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/health-tools/" class="hover:text-teal-700">健康工具</a>
+      <span class="mx-2">／</span>
+      <span>TDEE 熱量需求計算機</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">Health Tool · 陳昱彰醫師整理</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">🍽️ TDEE 熱量需求計算機</h1>
+      <p class="text-slate-600 chinese-line-height">
+        TDEE（Total Daily Energy Expenditure）是你一天的總熱量消耗。透過年齡、性別、身高、體重與活動量，可以初步估算你每天大約需要多少熱量，作為減重、維持體重或增肌規劃的起點。
+      </p>
+    </header>
+
+    <section class="rounded-2xl bg-surface-container p-6 md:p-8 mb-8">
+      <h2 class="text-lg font-bold text-blue-950 mb-3 font-headline">這個工具適合誰？</h2>
+      <ul class="text-sm text-slate-700 chinese-line-height list-disc pl-5 space-y-1">
+        <li>想減重，但不知道一天該吃多少</li>
+        <li>想維持體重，避免吃太多或太少</li>
+        <li>想增肌，想知道熱量攝取起點</li>
+        <li>想更有概念地安排飲食與運動</li>
+      </ul>
+    </section>
+
+    <MetricsForm fields={['sex', 'age', 'heightCm', 'weightKg', 'activityLevel']} />
+    <TdeeWidget />
+
+    <article class="max-w-none mt-10 space-y-5">
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">如何解讀你的結果？</h2>
+        <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+          <li><strong>維持體重</strong>：可先以估算出的 TDEE 作為每日熱量參考。</li>
+          <li><strong>減脂</strong>：常見做法是從 TDEE 減少約 300–500 大卡作為起點，但仍需依飢餓感、活動量、蛋白質攝取與可持續性調整。</li>
+          <li><strong>增肌</strong>：可在 TDEE 基礎上小幅增加熱量，並搭配足夠蛋白質與阻力訓練。</li>
+        </ul>
+        <p class="chinese-line-height text-slate-700 mt-3">
+          重點不是追求「最精準的一個數字」，而是找到<strong>你做得到、身體也能長期適應</strong>的範圍。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">使用前請注意</h2>
+        <p class="chinese-line-height text-slate-700 mb-3">
+          這個工具提供的是一般性估算，不能取代醫師診斷與個人化營養建議。若你有以下情況，熱量規劃通常需要更謹慎：
+        </p>
+        <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+          <li>第二型糖尿病</li>
+          <li>慢性腎臟病</li>
+          <li>懷孕或哺乳</li>
+          <li>進食障礙病史</li>
+          <li>BMI 過低或營養不良</li>
+          <li>正在使用減重藥物或其他會影響食慾、代謝的藥物</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸閱讀</h2>
+        <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+          <li><a href="/blog/mounjaro-weight-loss/" class="text-teal-700 underline">猛健樂（Mounjaro）減重藥物完整指南</a></li>
+          <li><a href="/blog/exercise-glp1-weight-loss/" class="text-teal-700 underline">吃猛健樂就不用運動了？錯！為什麼 GLP-1 更需要搭配運動</a></li>
+          <li><a href="/blog/weight-loss-comb-model/" class="text-teal-700 underline">為什麼你總是減肥失敗？醫師用 COM-B 模型拆解減重成功關鍵</a></li>
+          <li><a href="/blog/fitt-vp-exercise-prescription/" class="text-teal-700 underline">什麼是 FITT-VP？醫師怎麼幫你開運動處方</a></li>
+        </ul>
+      </section>
+    </article>
+
+    <section class="mt-12 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-6 md:p-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-2 font-headline">不知道怎麼把 TDEE 變成真正做得到的減重計畫？</h2>
+      <p class="text-on-primary-container chinese-line-height mb-5">
+        很多人算出了熱量，卻還是不知道下一步該怎麼做：熱量要抓多低才不會撐不住？蛋白質要吃多少？有糖尿病、脂肪肝或代謝症候群時能不能照一般減重法做？如果你也有這些問題，代表你需要的可能不只是工具，而是個人化的醫療與行為規劃。
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/services/" class="inline-block bg-white text-primary px-6 py-3 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-opacity no-underline">
+          了解減重管理門診
+        </a>
+        <a href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener" class="inline-block bg-white/10 border border-white/30 text-white px-6 py-3 rounded-full font-bold text-sm tracking-tight hover:bg-white/15 transition-colors no-underline">
+          立即預約掛號
+        </a>
+      </div>
+    </section>
+
+    <section class="mt-12 border-t border-outline-variant pt-8">
+      <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">常見問題</h2>
+      <div class="space-y-4 text-slate-700 chinese-line-height">
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">TDEE 是什麼？</h3>
+          <p>TDEE 是 Total Daily Energy Expenditure，指一個人一天的總熱量消耗，包含基礎代謝、日常活動與運動消耗。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">TDEE 可以拿來減重嗎？</h3>
+          <p>可以。TDEE 常被用來作為減重熱量設定的起點，但實際減重策略還要考慮蛋白質攝取、運動安排、生活型態與能否長期執行。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">TDEE 計算結果準確嗎？</h3>
+          <p>TDEE 是估算值，不是精密儀器測量結果。它適合當作起點，之後仍要依體重變化、飢餓感與生活習慣調整。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">有糖尿病或正在使用減重藥物，也可以直接照 TDEE 吃嗎？</h3>
+          <p>不一定。若有糖尿病、慢性病或正在使用減重藥物，建議由醫師依病況、藥物與生活型態做更個人化的規劃。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

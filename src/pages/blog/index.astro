@@ -24,6 +24,26 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
       </p>
     </header>
 
+    <section class="mb-14">
+      <a
+        href="/blog/health-tools/"
+        class="block rounded-3xl border border-outline-variant/30 bg-gradient-to-br from-surface-container-low to-white p-8 md:p-10 no-underline hover:shadow-lg transition-shadow"
+      >
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div class="max-w-3xl">
+            <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">衛教專欄 · 健康工具</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-primary mb-3 font-headline">健康工具：從文章走到可立即行動的試算</h2>
+            <p class="text-on-surface-variant chinese-line-height">
+              不知道一天該吃多少、減重熱量該怎麼抓？先從 <strong>TDEE 熱量需求計算機</strong> 開始。之後也會陸續整理更多體重管理與代謝健康工具。
+            </p>
+          </div>
+          <span class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-on-primary font-bold whitespace-nowrap">
+            前往健康工具 →
+          </span>
+        </div>
+      </a>
+    </section>
+
     <!-- Featured Post (Editorial Style) -->
     {featuredPost && (
       <section class="mb-24">

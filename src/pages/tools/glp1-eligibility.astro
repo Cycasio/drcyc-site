@@ -1,0 +1,50 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import MetricsForm from '../../components/tools/MetricsForm.astro';
+import Glp1Widget from '../../components/tools/Glp1Widget.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('glp1-eligibility');
+---
+
+<ToolLayout tool={tool}>
+  <MetricsForm fields={['sex', 'heightCm', 'weightKg', 'comorbidities']} />
+  <Glp1Widget />
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">什麼是 GLP-1 減重藥物（俗稱「瘦瘦針」）？</h2>
+    <p class="chinese-line-height text-slate-700">
+      GLP-1 是腸道分泌的飽足賀爾蒙。GLP-1 類藥物模擬此作用，<strong>抑制食慾、延緩胃排空、改善胰島素敏感度</strong>，是目前臨床上效果最強的減重藥物。在台灣常見的有：
+    </p>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>Semaglutide（Wegovy / Ozempic）</strong>：每週注射一次。Wegovy 為減重適應症，Ozempic 為糖尿病適應症。</li>
+      <li><strong>Tirzepatide（Mounjaro）</strong>：GLP-1 + GIP 雙重作用，目前減重效果最強。每週注射一次。</li>
+      <li><strong>Liraglutide（Saxenda）</strong>：每日注射，作用時間較短。</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">適應症標準（國際 / 台灣）</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li><strong>BMI ≥ 30</strong>，或</li>
+      <li><strong>BMI ≥ 27 + 至少一項體重相關共病</strong>（第二型糖尿病、高血壓、高血脂、阻塞型睡眠呼吸中止、心血管疾病、非酒精性脂肪肝）</li>
+    </ul>
+    <p class="chinese-line-height text-slate-700">
+      需注意：在台灣，<strong>減重適應症（Wegovy / Saxenda）目前以自費為主</strong>；糖尿病適應症（Ozempic）若符合條件可健保給付，但不能單純為減重而開立。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">常見副作用</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1">
+      <li>腸胃道不適（噁心、嘔吐、便秘 / 腹瀉）：最常見，多在前 4–8 週適應。</li>
+      <li>食慾下降、容易飽——這是治療效果的一部分，但需注意攝取仍需均衡。</li>
+      <li>少見但嚴重：胰臟炎、膽結石、低血糖（合併其他降血糖藥時）。</li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">藥物只是工具，行為改變才是長期</h3>
+    <p class="chinese-line-height text-slate-700">
+      臨床觀察：用藥期間減重明顯，但停藥後 1–2 年若沒有建立新的飲食與運動習慣，多半會回到接近用藥前的體重。我在減重門診的策略是 <strong>「藥物 × 行為治療雙軌並行」</strong>：用藥減輕飢餓感的同時，同步建立可長期維持的飲食結構與運動習慣，藥物逐步減量後仍能維持。
+    </p>
+
+    <p class="chinese-line-height text-slate-700">
+      如果評估結果符合適應症、想進一步討論藥物選擇與療程，歡迎到義大醫院家醫科 / 減重門診評估。
+    </p>
+  </article>
+</ToolLayout>
