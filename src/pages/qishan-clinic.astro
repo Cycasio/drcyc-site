@@ -5,41 +5,6 @@ import { DAZHENG, POSITIONING, QISHAN_RADIUS } from '../data/clinic';
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/qishan-clinic/`;
 
-const clinicSchema = {
-  '@type': 'MedicalClinic',
-  '@id': `${pageUrl}#clinic`,
-  name: '大政診所(陳昱彰醫師 週五夜診)',
-  url: pageUrl,
-  telephone: DAZHENG.telephone,
-  hasMap: DAZHENG.mapUrl,
-  address: {
-    '@type': 'PostalAddress',
-    ...DAZHENG.address,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: DAZHENG.geo.lat,
-    longitude: DAZHENG.geo.lng,
-  },
-  medicalSpecialty: ['FamilyPractice', 'Endocrine'],
-  areaServed: QISHAN_RADIUS.map((a) => ({
-    '@type': 'City',
-    name: `高雄市${a}區`,
-  })),
-  physician: { '@id': `${SITE}/#person` },
-  openingHoursSpecification: DAZHENG.hours.map((h) => ({
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: h.day,
-    opens: h.opens,
-    closes: h.closes,
-  })),
-  availableService: [
-    { '@type': 'MedicalProcedure', name: '家庭醫學科夜診' },
-    { '@type': 'MedicalProcedure', name: '三高慢性病追蹤(糖尿病、高血壓、高血脂)' },
-    { '@type': 'MedicalProcedure', name: '藥物減重諮詢(含 GLP-1 類藥物)' },
-  ],
-};
-
 const faqSchema = {
   '@type': 'FAQPage',
   '@id': `${pageUrl}#faq`,
@@ -109,7 +74,7 @@ const description =
   '義大醫院家醫科陳昱彰醫師,每週五晚上 18:00–21:00 於旗山大政診所親自駐診。提供藥物減重(含 GLP-1 類)、三高慢性病追蹤、家庭醫學門診。適合旗山、美濃、田寮、內門居民,以及下班後才有空就診的上班族。';
 ---
 
-<Layout title={title} description={description} jsonLd={[clinicSchema, faqSchema, breadcrumbSchema]}>
+<Layout title={title} description={description} jsonLd={[faqSchema, breadcrumbSchema]}>
   <main class="max-w-5xl mx-auto px-6 md:px-10 py-12">
     <!-- Breadcrumb -->
     <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
