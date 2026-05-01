@@ -1,0 +1,619 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/health-tools/overwork-risk-calculator/`;
+const title = '異常工作負荷促發疾病風險計算機｜過勞分級評估工具 | 陳昱彰醫師';
+const description =
+  '依勞動部職安署「異常工作負荷促發疾病預防指引第二版」設計，協助廠護與職安人員進行心血管風險 + 工作負荷雙維度分級，自動判定是否需安排健康面談。';
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: '健康工具', item: `${SITE}/blog/health-tools/` },
+    { '@type': 'ListItem', position: 4, name: '異常工作負荷風險計算機', item: pageUrl },
+  ],
+};
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: '異常工作負荷促發疾病風險計算機',
+  description,
+  inLanguage: 'zh-Hant',
+  about: { '@type': 'MedicalEntity', name: '異常工作負荷促發疾病預防' },
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  isAccessibleForFree: true,
+};
+
+const softwareApp = {
+  '@type': 'SoftwareApplication',
+  '@id': `${pageUrl}#calculator`,
+  name: '異常工作負荷促發疾病風險計算機',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'TWD' },
+  creator: { '@id': `${SITE}/#person` },
+  url: pageUrl,
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '這個計算機適用於哪些對象？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '適用於廠護、職安人員、人資或職業醫師，協助對勞工進行異常工作負荷促發疾病的預防評估，以決定是否需要安排醫師健康面談。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '什麼是過勞量表（個人過勞 / 工作過勞）分數？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '指勞動部指引採用的工作過勞量表（如哥本哈根過勞量表 CBI）中的個人過勞及工作相關過勞子量表分數，分數 0–100，由健康檢查或問卷調查取得。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '廠護常用 Framingham 評估為低風險，這樣對嗎？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '不一定。Framingham 評分若沒有正確輸入糖尿病（DM）、高血壓用藥等資訊，容易低估心血管風險。此外，光有 Framingham 分數還不夠，需同時考量工作負荷程度，兩者合算才是正確的最終風險等級。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '評估出中度或高度風險後，下一步是什麼？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '中度風險建議安排職業醫師健康面談；高度風險則需要安排面談，並依結果採取必要的工作調整、追蹤或轉介措施。詳見勞動部「異常工作負荷促發疾病預防指引第二版」Table 5。',
+      },
+    },
+  ],
+};
+---
+
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema, medicalWebPage, softwareApp, faqSchema]}>
+  <main class="max-w-4xl mx-auto px-6 md:px-10 py-12">
+
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/health-tools/" class="hover:text-teal-700">健康工具</a>
+      <span class="mx-2">／</span>
+      <span>異常工作負荷風險計算機</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">職業健康工具 · 陳昱彰醫師整理</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">異常工作負荷促發疾病<br class="hidden md:block">風險分級計算機</h1>
+      <p class="text-slate-600 chinese-line-height">
+        依據勞動部職安署《異常工作負荷促發疾病預防指引第二版》（108年4月）設計。
+        結合心血管風險（Framingham / WHO-ISH）與工作負荷程度，輸出最終風險等級與面談建議。
+        適合廠護、職安人員或職業醫師用於預防評估。
+      </p>
+    </header>
+
+    <!-- 注意事項 -->
+    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-8 text-sm text-amber-900 chinese-line-height">
+      <strong>使用前提醒：</strong>本工具為參考輔助，不能取代職業醫師臨床判斷。
+      請確認 Framingham 或 WHO-ISH 評估時已<strong>正確輸入糖尿病（DM）、高血壓、用藥等資訊</strong>，
+      否則容易系統性低估心血管風險。
+    </div>
+
+    <!-- 計算表單 -->
+    <form id="overwork-form" class="space-y-8" novalidate>
+
+      <!-- 第一步：心血管風險 -->
+      <section class="rounded-2xl bg-surface-container p-6 md:p-8">
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-1">第一步：心血管風險評估</h2>
+        <p class="text-xs text-slate-500 mb-5">依 Framingham 心臟研究或 WHO-ISH 風險圖表計算出的 10 年心血管事件機率</p>
+
+        <fieldset class="mb-5">
+          <legend class="text-sm font-semibold text-blue-900 mb-2">
+            目前是否有確診心血管疾病，或正在服用心血管相關藥物（降壓藥、降血脂藥、降血糖藥）？
+          </legend>
+          <div class="flex flex-wrap gap-4 mt-1">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="hasCVD" value="no" class="accent-teal-600" checked>
+              <span class="text-sm">否，依 Framingham / WHO-ISH 計算</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="hasCVD" value="yes" class="accent-teal-600">
+              <span class="text-sm">是（確診心臟病、腦血管疾病、腎臟病，或使用上述藥物）</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div id="cv-percent-row" class="mb-5">
+          <label class="block text-sm font-semibold text-blue-900 mb-1" for="cvRisk">
+            10 年心血管風險（%）
+          </label>
+          <p class="text-xs text-slate-500 mb-2">請輸入 Framingham 或 WHO-ISH 計算結果（0–100）</p>
+          <input
+            type="number" id="cvRisk" name="cvRisk"
+            min="0" max="100" step="0.1" placeholder="例如：12.5"
+            class="w-40 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+          >
+          <div id="cv-preview" class="mt-2 text-xs text-slate-500"></div>
+        </div>
+
+        <div id="cv-medication-note" class="hidden rounded-lg bg-blue-50 border border-blue-200 p-3 text-sm text-blue-800 chinese-line-height">
+          已確診心血管疾病或使用相關藥物，依指引直接歸類為<strong>中高度心血管風險</strong>（至少中度，計分 = 1）。
+        </div>
+      </section>
+
+      <!-- 第二步：工作負荷 -->
+      <section class="rounded-2xl bg-surface-container p-6 md:p-8">
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-1">第二步：工作負荷評估</h2>
+        <p class="text-xs text-slate-500 mb-5">以下四項取最嚴重者作為工作負荷程度</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="individualBurnout">
+              個人過勞量表分數（0–100）
+            </label>
+            <p class="text-xs text-slate-500 mb-2">
+              以工作過勞量表中「個人過勞」子量表計算<br>
+              低負荷 &lt;50 ／ 中負荷 50–70 ／ 高負荷 &gt;70
+            </p>
+            <input
+              type="number" id="individualBurnout" name="individualBurnout"
+              min="0" max="100" step="1" placeholder="0–100"
+              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+            >
+            <div id="ind-preview" class="mt-1 text-xs text-slate-500"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="workBurnout">
+              工作相關過勞量表分數（0–100）
+            </label>
+            <p class="text-xs text-slate-500 mb-2">
+              以工作過勞量表中「工作過勞」子量表計算<br>
+              低負荷 &lt;45 ／ 中負荷 45–60 ／ 高負荷 &gt;60
+            </p>
+            <input
+              type="number" id="workBurnout" name="workBurnout"
+              min="0" max="100" step="1" placeholder="0–100"
+              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+            >
+            <div id="work-preview" class="mt-1 text-xs text-slate-500"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="overtimeHours">
+              最近三個月平均月加班時數（小時）
+            </label>
+            <p class="text-xs text-slate-500 mb-2">
+              低負荷 &lt;45 ／ 中負荷 45–80 ／ 高負荷 &gt;80
+            </p>
+            <input
+              type="number" id="overtimeHours" name="overtimeHours"
+              min="0" max="300" step="1" placeholder="例如：60"
+              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+            >
+            <div id="ot-preview" class="mt-1 text-xs text-slate-500"></div>
+          </div>
+
+        </div>
+
+        <!-- 工作型態 -->
+        <div>
+          <p class="text-sm font-semibold text-blue-900 mb-1">工作型態核對（勾選符合項目）</p>
+          <p class="text-xs text-slate-500 mb-3">
+            勾選 0–1 項 = 低負荷 ／ 2–3 項 = 中負荷 ／ 4 項以上 = 高負荷
+          </p>
+          <div class="space-y-2">
+            {[
+              '不規律的工作（含輪班、夜班、隨機排班）',
+              '經常出差的工作',
+              '異常溫度環境中的工作（高溫、低溫）',
+              '噪音超過 80 分貝環境的工作',
+              '伴隨時差的工作（時差超過 5 小時）',
+              '伴隨精神緊張的工作（高壓決策、高責任感）',
+            ].map((item, i) => (
+              <label class="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" name="workType" value={i} class="mt-0.5 accent-teal-600">
+                <span class="text-sm text-slate-700">{item}</span>
+              </label>
+            ))}
+          </div>
+          <div id="wt-preview" class="mt-2 text-xs text-slate-500"></div>
+        </div>
+      </section>
+
+      <!-- 送出 -->
+      <div class="flex justify-center">
+        <button
+          type="button"
+          id="calc-btn"
+          class="bg-teal-700 hover:bg-teal-800 text-white font-bold px-10 py-3 rounded-full text-sm tracking-wide transition-colors"
+        >
+          計算風險等級
+        </button>
+      </div>
+
+    </form>
+
+    <!-- 結果區塊（初始隱藏） -->
+    <section id="results" class="hidden mt-10">
+      <div id="result-card" class="rounded-2xl border-2 p-6 md:p-8 mb-6">
+        <h2 class="text-lg font-bold text-blue-950 font-headline mb-4">評估結果</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center">
+            <p class="text-xs text-slate-500 mb-1">心血管風險</p>
+            <p id="cv-result-label" class="text-lg font-bold text-blue-950"></p>
+            <p id="cv-result-score" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center">
+            <p class="text-xs text-slate-500 mb-1">工作負荷程度</p>
+            <p id="work-result-label" class="text-lg font-bold text-blue-950"></p>
+            <p id="work-result-detail" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center">
+            <p class="text-xs text-slate-500 mb-1">最終風險等級</p>
+            <p id="final-result-label" class="text-2xl font-bold"></p>
+            <p id="final-result-score" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+        </div>
+
+        <div id="interview-box" class="rounded-xl p-4 mb-4">
+          <p class="text-sm font-bold mb-1" id="interview-title"></p>
+          <p class="text-sm chinese-line-height" id="interview-desc"></p>
+        </div>
+
+        <div id="work-detail-breakdown" class="text-xs text-slate-500 space-y-1"></div>
+      </div>
+
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-5 text-sm text-slate-700 chinese-line-height">
+        <p class="font-semibold text-blue-950 mb-2">結果說明</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li><strong>低度風險</strong>：目前不需特別安排健康面談，建議持續追蹤。</li>
+          <li><strong>中度風險</strong>：<span class="text-amber-700 font-medium">建議安排</span>職業醫師健康面談，評估是否需調整工作條件。</li>
+          <li><strong>高度風險</strong>：<span class="text-red-700 font-medium">需要安排</span>職業醫師健康面談，依結果採取必要處置（工作調整、藥物追蹤、轉介）。</li>
+        </ul>
+        <p class="mt-3 text-xs text-slate-500">
+          依據：勞動部職業安全衛生署《異常工作負荷促發疾病預防指引第二版》（108年4月），Table 4、Table 5。
+        </p>
+      </div>
+
+      <div class="mt-4 text-center">
+        <button
+          type="button"
+          id="reset-btn"
+          class="text-sm text-teal-700 underline hover:text-teal-900"
+        >
+          重新計算
+        </button>
+      </div>
+    </section>
+
+    <!-- 計分邏輯說明 -->
+    <article class="mt-12 space-y-6">
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">計分邏輯說明</h2>
+        <p class="text-sm text-slate-600 chinese-line-height mb-4">
+          依指引，最終風險由兩個維度各取分數後相加（共 0–4 分）：
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-blue-950">
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">維度</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">低（0分）</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">中（1分）</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">高（2分）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2 text-slate-700">10年心血管風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">&lt;10%</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">10–20%</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">&gt;20%</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2 text-slate-700">工作負荷（取四項最高）</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">低負荷</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">中負荷</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">高負荷</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-blue-950">
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">合計分數</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">最終風險</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">面談建議</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2">0 分</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-green-700 font-medium">低度風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">不需安排</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2">1–2 分</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-amber-700 font-medium">中度風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">建議面談</td>
+              </tr>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2">3–4 分</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-red-700 font-medium">高度風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">需要面談</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">為什麼不能只看 Framingham 低風險就放行？</h2>
+        <p class="text-sm text-slate-600 chinese-line-height">
+          Framingham 心血管風險分數對糖尿病（DM）非常敏感。若廠護在計算時漏填 DM、未確認用藥狀況，
+          或直接目測「看起來沒問題」，就容易把本應屬中高度心血管風險的員工誤判為低風險。
+          此外，即使 Framingham 分數真的是低度，只要工作負荷屬高負荷（月加班 &gt;80 小時、過勞分數偏高等），
+          最終風險仍可能落在中度，依然需要安排健康面談。
+          這就是指引設計成「雙維度相加」的原因：不讓任何一個維度的低分，遮蔽另一個維度的高風險。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸閱讀</h2>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 chinese-line-height">
+          <li><a href="/blog/overwork-prevention-plan/" class="text-teal-700 underline">異常工作負荷促發疾病預防計劃｜廠護實作重點</a></li>
+          <li><a href="/blog/four-plans-occupational-health-overview/" class="text-teal-700 underline">職安四大計劃總覽：什麼是四大計劃？</a></li>
+          <li><a href="/blog/ergonomic-hazard-prevention-plan/" class="text-teal-700 underline">人因性危害預防計劃</a></li>
+        </ul>
+      </section>
+    </article>
+
+    <!-- CTA -->
+    <section class="mt-12 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-6 md:p-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-2 font-headline">需要到廠進行臨場職業醫學服務？</h2>
+      <p class="text-on-primary-container chinese-line-height mb-5">
+        陳昱彰醫師提供企業臨場服務，協助廠護執行四大計劃評估、健康面談、結果判讀與後續追蹤建議。
+        歡迎洽詢合作。
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/workplace-health/" class="inline-block bg-white text-primary px-6 py-3 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-opacity no-underline">
+          了解職業健康服務
+        </a>
+        <a href="/speaking/" class="inline-block bg-white/10 border border-white/30 text-white px-6 py-3 rounded-full font-bold text-sm tracking-tight hover:bg-white/15 transition-colors no-underline">
+          邀請演講 / 教育訓練
+        </a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mt-12 border-t border-outline-variant pt-8">
+      <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">常見問題</h2>
+      <div class="space-y-4 text-slate-700 chinese-line-height">
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">這個計算機適用於哪些對象？</h3>
+          <p class="text-sm">適用於廠護、職安人員、人資或職業醫師，協助對勞工進行異常工作負荷促發疾病的預防評估，以決定是否需要安排醫師健康面談。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">什麼是過勞量表（個人過勞 / 工作過勞）分數？</h3>
+          <p class="text-sm">指勞動部指引採用的工作過勞量表（如哥本哈根過勞量表 CBI）中的個人過勞及工作相關過勞子量表分數，分數 0–100，由健康檢查或問卷調查取得。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">廠護常用 Framingham 評估為低風險，這樣對嗎？</h3>
+          <p class="text-sm">不一定。Framingham 評分若沒有正確輸入糖尿病（DM）、高血壓用藥等資訊，容易低估心血管風險。此外，光有 Framingham 分數還不夠，需同時考量工作負荷程度，兩者合算才是正確的最終風險等級。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">評估出中度或高度風險後，下一步是什麼？</h3>
+          <p class="text-sm">中度風險建議安排職業醫師健康面談；高度風險則需要安排面談，並依結果採取必要的工作調整、追蹤或轉介措施。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  // ── 工具函式 ──────────────────────────────────────────────────────────
+  function levelLabel(score: number): string {
+    return score === 0 ? '低負荷' : score === 1 ? '中負荷' : '高負荷';
+  }
+
+  function cvLevelLabel(score: number): string {
+    return score === 0 ? '低度（<10%）' : score === 1 ? '中度（10–20%）' : '高度（>20%）';
+  }
+
+  // ── 即時預覽 ──────────────────────────────────────────────────────────
+  function updateCVPreview() {
+    const hasCVD = (document.querySelector('input[name="hasCVD"]:checked') as HTMLInputElement)?.value;
+    const input = document.getElementById('cvRisk') as HTMLInputElement;
+    const preview = document.getElementById('cv-preview')!;
+
+    if (hasCVD === 'yes' || !input.value) { preview.textContent = ''; return; }
+    const pct = parseFloat(input.value);
+    if (isNaN(pct)) { preview.textContent = ''; return; }
+
+    const score = pct < 10 ? 0 : pct <= 20 ? 1 : 2;
+    const labels = ['低度心血管風險', '中度心血管風險', '高度心血管風險'];
+    preview.textContent = `→ ${labels[score]}`;
+  }
+
+  function updateIndPreview() {
+    const el = document.getElementById('individualBurnout') as HTMLInputElement;
+    const preview = document.getElementById('ind-preview')!;
+    const v = parseFloat(el.value);
+    if (isNaN(v)) { preview.textContent = ''; return; }
+    const s = v < 50 ? 0 : v <= 70 ? 1 : 2;
+    preview.textContent = `→ ${levelLabel(s)}`;
+  }
+
+  function updateWorkPreview() {
+    const el = document.getElementById('workBurnout') as HTMLInputElement;
+    const preview = document.getElementById('work-preview')!;
+    const v = parseFloat(el.value);
+    if (isNaN(v)) { preview.textContent = ''; return; }
+    const s = v < 45 ? 0 : v <= 60 ? 1 : 2;
+    preview.textContent = `→ ${levelLabel(s)}`;
+  }
+
+  function updateOTPreview() {
+    const el = document.getElementById('overtimeHours') as HTMLInputElement;
+    const preview = document.getElementById('ot-preview')!;
+    const v = parseFloat(el.value);
+    if (isNaN(v)) { preview.textContent = ''; return; }
+    const s = v < 45 ? 0 : v <= 80 ? 1 : 2;
+    preview.textContent = `→ ${levelLabel(s)}`;
+  }
+
+  function updateWTPreview() {
+    const checked = document.querySelectorAll('input[name="workType"]:checked').length;
+    const preview = document.getElementById('wt-preview')!;
+    const s = checked <= 1 ? 0 : checked <= 3 ? 1 : 2;
+    preview.textContent = `已勾選 ${checked} 項 → ${levelLabel(s)}`;
+  }
+
+  // ── CVD 切換顯示 ───────────────────────────────────────────────────────
+  function handleCVDToggle() {
+    const hasCVD = (document.querySelector('input[name="hasCVD"]:checked') as HTMLInputElement)?.value;
+    const pctRow = document.getElementById('cv-percent-row')!;
+    const medNote = document.getElementById('cv-medication-note')!;
+    if (hasCVD === 'yes') {
+      pctRow.classList.add('hidden');
+      medNote.classList.remove('hidden');
+    } else {
+      pctRow.classList.remove('hidden');
+      medNote.classList.add('hidden');
+    }
+    updateCVPreview();
+  }
+
+  // ── 主計算 ────────────────────────────────────────────────────────────
+  function calculate() {
+    const hasCVD = (document.querySelector('input[name="hasCVD"]:checked') as HTMLInputElement)?.value;
+    const cvRiskInput = parseFloat((document.getElementById('cvRisk') as HTMLInputElement).value);
+    const indBurnout = parseFloat((document.getElementById('individualBurnout') as HTMLInputElement).value);
+    const workBurnout = parseFloat((document.getElementById('workBurnout') as HTMLInputElement).value);
+    const overtime = parseFloat((document.getElementById('overtimeHours') as HTMLInputElement).value);
+    const workTypeCount = document.querySelectorAll('input[name="workType"]:checked').length;
+
+    // CV score
+    let cvScore: number;
+    let cvLabel: string;
+    if (hasCVD === 'yes') {
+      cvScore = 1;
+      cvLabel = '中高度（確診/用藥）';
+    } else {
+      if (isNaN(cvRiskInput)) { alert('請輸入 10 年心血管風險 %'); return; }
+      cvScore = cvRiskInput < 10 ? 0 : cvRiskInput <= 20 ? 1 : 2;
+      cvLabel = cvLevelLabel(cvScore);
+    }
+
+    // Work scores
+    const indScore = isNaN(indBurnout) ? 0 : indBurnout < 50 ? 0 : indBurnout <= 70 ? 1 : 2;
+    const workScore = isNaN(workBurnout) ? 0 : workBurnout < 45 ? 0 : workBurnout <= 60 ? 1 : 2;
+    const otScore = isNaN(overtime) ? 0 : overtime < 45 ? 0 : overtime <= 80 ? 1 : 2;
+    const wtScore = workTypeCount <= 1 ? 0 : workTypeCount <= 3 ? 1 : 2;
+    const finalWorkScore = Math.max(indScore, workScore, otScore, wtScore);
+
+    const workLabels = ['低負荷', '中負荷', '高負荷'];
+    const workLabel = workLabels[finalWorkScore];
+
+    // Final
+    const total = cvScore + finalWorkScore;
+    const finalRisk = total === 0 ? 'low' : total <= 2 ? 'medium' : 'high';
+
+    const riskMap = {
+      low: { label: '低度風險', color: 'text-green-700', border: 'border-green-300 bg-green-50', badge: 'bg-green-100 text-green-800' },
+      medium: { label: '中度風險', color: 'text-amber-700', border: 'border-amber-300 bg-amber-50', badge: 'bg-amber-100 text-amber-800' },
+      high: { label: '高度風險', color: 'text-red-700', border: 'border-red-300 bg-red-50', badge: 'bg-red-100 text-red-800' },
+    };
+
+    const interviewMap = {
+      low: {
+        title: '建議：目前不需安排健康面談',
+        desc: '持續定期追蹤，若工作條件或健康狀況有重大改變，重新評估。',
+        boxClass: 'bg-green-50 border border-green-200 text-green-900',
+      },
+      medium: {
+        title: '建議：安排職業醫師健康面談',
+        desc: '請安排職業醫師進行健康面談，評估現有工作條件是否需要調整，並確認是否有症狀或需追蹤的慢性病。',
+        boxClass: 'bg-amber-50 border border-amber-200 text-amber-900',
+      },
+      high: {
+        title: '需要：立即安排職業醫師健康面談',
+        desc: '屬高度風險，必須安排職業醫師面談。依結果採取工作調整、藥物追蹤或轉介措施，並留存相關紀錄。',
+        boxClass: 'bg-red-50 border border-red-200 text-red-900',
+      },
+    };
+
+    const risk = riskMap[finalRisk];
+    const interview = interviewMap[finalRisk];
+
+    // Render
+    document.getElementById('cv-result-label')!.textContent = cvLabel;
+    document.getElementById('cv-result-score')!.textContent = `計分 = ${cvScore}`;
+    document.getElementById('work-result-label')!.textContent = workLabel;
+    document.getElementById('work-result-detail')!.textContent = `計分 = ${finalWorkScore}（取四項最高）`;
+    document.getElementById('final-result-label')!.className = `text-2xl font-bold ${risk.color}`;
+    document.getElementById('final-result-label')!.textContent = risk.label;
+    document.getElementById('final-result-score')!.textContent = `合計 ${total} 分（${cvScore} + ${finalWorkScore}）`;
+
+    const interviewBox = document.getElementById('interview-box')!;
+    interviewBox.className = `rounded-xl p-4 mb-4 ${interview.boxClass}`;
+    document.getElementById('interview-title')!.textContent = interview.title;
+    document.getElementById('interview-desc')!.textContent = interview.desc;
+
+    const card = document.getElementById('result-card')!;
+    card.className = `rounded-2xl border-2 p-6 md:p-8 mb-6 ${risk.border}`;
+
+    // Breakdown
+    const breakdown = document.getElementById('work-detail-breakdown')!;
+    const componentLines = [
+      `個人過勞分數：${isNaN(indBurnout) ? '未填' : indBurnout} → ${levelLabel(indScore)}（${indScore}分）`,
+      `工作過勞分數：${isNaN(workBurnout) ? '未填' : workBurnout} → ${levelLabel(workScore)}（${workScore}分）`,
+      `月加班時數：${isNaN(overtime) ? '未填' : overtime}小時 → ${levelLabel(otScore)}（${otScore}分）`,
+      `工作型態項目：${workTypeCount}項 → ${levelLabel(wtScore)}（${wtScore}分）`,
+    ];
+    breakdown.innerHTML = componentLines.map((l) => `<p>${l}</p>`).join('');
+
+    document.getElementById('results')!.classList.remove('hidden');
+    document.getElementById('results')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── 重設 ──────────────────────────────────────────────────────────────
+  function resetForm() {
+    (document.getElementById('overwork-form') as HTMLFormElement).reset();
+    document.getElementById('results')!.classList.add('hidden');
+    handleCVDToggle();
+    document.querySelectorAll('[id$="-preview"]').forEach((el) => { (el as HTMLElement).textContent = ''; });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── 事件綁定 ──────────────────────────────────────────────────────────
+  document.querySelectorAll('input[name="hasCVD"]').forEach((r) => r.addEventListener('change', handleCVDToggle));
+  document.getElementById('cvRisk')!.addEventListener('input', updateCVPreview);
+  document.getElementById('individualBurnout')!.addEventListener('input', updateIndPreview);
+  document.getElementById('workBurnout')!.addEventListener('input', updateWorkPreview);
+  document.getElementById('overtimeHours')!.addEventListener('input', updateOTPreview);
+  document.querySelectorAll('input[name="workType"]').forEach((cb) => cb.addEventListener('change', updateWTPreview));
+  document.getElementById('calc-btn')!.addEventListener('click', calculate);
+  document.getElementById('reset-btn')!.addEventListener('click', resetForm);
+
+  // 初始化
+  handleCVDToggle();
+</script>
