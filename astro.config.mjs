@@ -7,8 +7,6 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [sitemap(), tailwind()],
   redirects: {
-    '/workplace-health': '/services',
-    '/community-health': '/services',
     '/health-tools': '/blog/health-tools/',
     '/health-tools/tdee-calculator': '/blog/health-tools/tdee-calculator/',
     '/tools/tdee': '/blog/health-tools/tdee-calculator/',
