@@ -301,6 +301,97 @@ const faqSchema = {
       </div>
     </section>
 
+    <!-- 過勞量表填答區 -->
+    <div class="mt-10 space-y-4">
+      <p class="text-sm font-semibold text-blue-950">還沒有量表分數？可以在這裡填答，自動計算後帶入上方欄位：</p>
+
+      <!-- 個人過勞量表 -->
+      <details class="rounded-2xl border border-slate-200 bg-white overflow-hidden" id="ind-burnout-details">
+        <summary class="cursor-pointer px-6 py-4 font-semibold text-blue-950 text-sm flex items-center justify-between select-none">
+          <span>個人過勞量表（6 題）</span>
+          <span class="text-xs text-slate-400 font-normal" id="ind-score-preview"></span>
+        </summary>
+        <div class="px-6 pb-6 space-y-4 border-t border-slate-100 pt-4">
+          <p class="text-xs text-slate-500 chinese-line-height">
+            以下每題依實際感受勾選，系統會自動算出個人過勞分數（0–100）。<br>
+            計分方式：總是＝100、經常＝75、有時＝50、很少＝25、從不＝0，取六題平均。
+          </p>
+          {[
+            '您多常感到疲倦？',
+            '您多常感到身體上精疲力竭？',
+            '您多常感到情緒上精疲力竭？',
+            '您多常心想「我再也撐不下去了」？',
+            '您多常感到力竭？',
+            '您多常覺得虛弱、容易生病？',
+          ].map((q, i) => (
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <span class="text-sm text-slate-700 flex-1">{i + 1}. {q}</span>
+              <select class="ind-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none">
+                <option value="">— 請選擇 —</option>
+                <option value="100">總是</option>
+                <option value="75">經常</option>
+                <option value="50">有時</option>
+                <option value="25">很少</option>
+                <option value="0">從不 / 幾乎從不</option>
+              </select>
+            </div>
+          ))}
+          <div class="flex items-center gap-4 mt-2">
+            <span class="text-sm text-slate-600">個人過勞分數：<strong id="ind-calc-score" class="text-blue-950">—</strong></span>
+            <button type="button" id="ind-apply-btn" disabled
+              class="bg-teal-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-xs font-bold px-4 py-2 rounded-full transition-colors">
+              帶入計算機
+            </button>
+          </div>
+        </div>
+      </details>
+
+      <!-- 工作相關過勞量表 -->
+      <details class="rounded-2xl border border-slate-200 bg-white overflow-hidden" id="work-burnout-details">
+        <summary class="cursor-pointer px-6 py-4 font-semibold text-blue-950 text-sm flex items-center justify-between select-none">
+          <span>工作相關過勞量表（7 題）</span>
+          <span class="text-xs text-slate-400 font-normal" id="work-score-preview"></span>
+        </summary>
+        <div class="px-6 pb-6 space-y-4 border-t border-slate-100 pt-4">
+          <p class="text-xs text-slate-500 chinese-line-height">
+            以下每題依實際感受勾選。第 7 題為反向計分（答「總是」得 0 分）。<br>
+            計分方式：取七題平均（0–100）。
+          </p>
+          {[
+            { q: '您的工作讓您情緒上感到精疲力竭嗎？', reverse: false },
+            { q: '您覺得因工作而感到身心俱疲嗎？', reverse: false },
+            { q: '您的工作讓您感到沮喪嗎？', reverse: false },
+            { q: '工作一天結束後，您覺得力竭嗎？', reverse: false },
+            { q: '早上一想到又要工作一整天，您感到疲憊嗎？', reverse: false },
+            { q: '整個工作時間都讓您感到疲累嗎？', reverse: false },
+            { q: '工作之餘，您是否有足夠的精力陪伴家人和朋友？', reverse: true },
+          ].map(({ q, reverse }, i) => (
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <span class="text-sm text-slate-700 flex-1">
+                {i + 1}. {q}
+                {reverse && <span class="ml-1 text-xs text-amber-600">（反向計分）</span>}
+              </span>
+              <select class="work-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none" data-reverse={reverse ? 'true' : 'false'}>
+                <option value="">— 請選擇 —</option>
+                <option value="100">總是</option>
+                <option value="75">經常</option>
+                <option value="50">有時</option>
+                <option value="25">很少</option>
+                <option value="0">從不 / 幾乎從不</option>
+              </select>
+            </div>
+          ))}
+          <div class="flex items-center gap-4 mt-2">
+            <span class="text-sm text-slate-600">工作過勞分數：<strong id="work-calc-score" class="text-blue-950">—</strong></span>
+            <button type="button" id="work-apply-btn" disabled
+              class="bg-teal-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-xs font-bold px-4 py-2 rounded-full transition-colors">
+              帶入計算機
+            </button>
+          </div>
+        </div>
+      </details>
+    </div>
+
     <!-- 計分邏輯說明 -->
     <article class="mt-12 space-y-6">
       <section>
@@ -594,6 +685,74 @@ const faqSchema = {
     document.getElementById('results')!.classList.remove('hidden');
     document.getElementById('results')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // ── 過勞量表計算 ───────────────────────────────────────────────────────
+  function calcBurnoutSubscale(selector: string): number | null {
+    const items = Array.from(document.querySelectorAll(selector)) as HTMLSelectElement[];
+    const values = items.map((el) => {
+      const raw = parseFloat(el.value);
+      const isReverse = el.dataset.reverse === 'true';
+      if (isNaN(raw)) return null;
+      return isReverse ? 100 - raw : raw;
+    });
+    if (values.some((v) => v === null)) return null;
+    return Math.round(values.reduce((sum, v) => sum! + v!, 0)! / values.length);
+  }
+
+  function updateIndBurnout() {
+    const score = calcBurnoutSubscale('.ind-item');
+    const scoreEl = document.getElementById('ind-calc-score')!;
+    const btn = document.getElementById('ind-apply-btn') as HTMLButtonElement;
+    const preview = document.getElementById('ind-score-preview')!;
+    if (score === null) {
+      scoreEl.textContent = '—';
+      btn.disabled = true;
+      preview.textContent = '';
+    } else {
+      scoreEl.textContent = String(score);
+      btn.disabled = false;
+      const level = score < 50 ? '低負荷' : score <= 70 ? '中負荷' : '高負荷';
+      preview.textContent = `分數 ${score}（${level}）`;
+    }
+  }
+
+  function updateWorkBurnout() {
+    const score = calcBurnoutSubscale('.work-item');
+    const scoreEl = document.getElementById('work-calc-score')!;
+    const btn = document.getElementById('work-apply-btn') as HTMLButtonElement;
+    const preview = document.getElementById('work-score-preview')!;
+    if (score === null) {
+      scoreEl.textContent = '—';
+      btn.disabled = true;
+      preview.textContent = '';
+    } else {
+      scoreEl.textContent = String(score);
+      btn.disabled = false;
+      const level = score < 45 ? '低負荷' : score <= 60 ? '中負荷' : '高負荷';
+      preview.textContent = `分數 ${score}（${level}）`;
+    }
+  }
+
+  document.querySelectorAll('.ind-item').forEach((el) => el.addEventListener('change', updateIndBurnout));
+  document.querySelectorAll('.work-item').forEach((el) => el.addEventListener('change', updateWorkBurnout));
+
+  document.getElementById('ind-apply-btn')!.addEventListener('click', () => {
+    const score = calcBurnoutSubscale('.ind-item');
+    if (score !== null) {
+      (document.getElementById('individualBurnout') as HTMLInputElement).value = String(score);
+      updateIndPreview();
+      document.getElementById('overwork-form')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  document.getElementById('work-apply-btn')!.addEventListener('click', () => {
+    const score = calcBurnoutSubscale('.work-item');
+    if (score !== null) {
+      (document.getElementById('workBurnout') as HTMLInputElement).value = String(score);
+      updateWorkPreview();
+      document.getElementById('overwork-form')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 
   // ── 重設 ──────────────────────────────────────────────────────────────
   function resetForm() {
