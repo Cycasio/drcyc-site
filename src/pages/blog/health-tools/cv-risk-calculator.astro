@@ -1,0 +1,561 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/health-tools/cv-risk-calculator/`;
+const title = '10 年心血管風險計算機（Framingham）｜職場健康風險評估 | 陳昱彰醫師';
+const description =
+  '依 NCEP ATP III Framingham 風險評分計算 10 年冠心病發病機率，符合勞動部「異常工作負荷促發疾病預防指引」建議工具。輸出 OSHA 三色風險分級，可直接銜接過勞促發疾病風險計算機。';
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: '健康工具', item: `${SITE}/blog/health-tools/` },
+    { '@type': 'ListItem', position: 4, name: '10 年心血管風險計算機', item: pageUrl },
+  ],
+};
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: '10 年心血管風險計算機（Framingham ATP III）',
+  description,
+  inLanguage: 'zh-Hant',
+  about: { '@type': 'MedicalEntity', name: '心血管風險評估 Framingham' },
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  isAccessibleForFree: true,
+};
+
+const softwareApp = {
+  '@type': 'SoftwareApplication',
+  '@id': `${pageUrl}#calculator`,
+  name: '10 年心血管風險計算機',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'TWD' },
+  creator: { '@id': `${SITE}/#person` },
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '這個計算機用的是哪個版本的 Framingham？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '使用 NCEP ATP III（2001）所採用的 Framingham 心血管風險評分，也是勞動部職安署「異常工作負荷促發疾病預防指引」建議的評估工具。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '糖尿病對 Framingham 分數影響有多大？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '糖尿病在 Framingham ATP III 計分系統中是獨立項目，本身不直接以點數加總，但有糖尿病的人在臨床上等同於已發生心血管事件的風險等級，指引建議直接歸類為中高度風險。若未正確輸入糖尿病狀態，計算結果會嚴重低估實際風險。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '已確診心血管疾病或在服藥，還需要算 Framingham 嗎？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '依勞動部指引，已確診心臟病、腦血管疾病、腎臟病，或正在使用降壓藥、降血脂藥、降血糖藥者，直接歸類為中高度心血管風險，不需要再跑 Framingham 計算。',
+      },
+    },
+  ],
+};
+---
+
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema, medicalWebPage, softwareApp, faqSchema]}>
+  <main class="max-w-4xl mx-auto px-6 md:px-10 py-12">
+
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/health-tools/" class="hover:text-teal-700">健康工具</a>
+      <span class="mx-2">／</span>
+      <span>10 年心血管風險計算機</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">職業健康工具 · 陳昱彰醫師整理</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">10 年心血管風險計算機<br class="hidden md:block"><span class="text-xl font-normal text-slate-500">（Framingham ATP III）</span></h1>
+      <p class="text-slate-600 chinese-line-height">
+        依 NCEP ATP III Framingham 風險評分計算 10 年冠心病發病機率，
+        並對應勞動部職安署《異常工作負荷促發疾病預防指引》的三色風險分級（低 / 中 / 高度）。
+        計算結果可直接帶入「過勞促發疾病風險計算機」。
+      </p>
+    </header>
+
+    <!-- 重要提醒 -->
+    <div class="rounded-xl border border-red-200 bg-red-50 p-4 mb-6 text-sm text-red-900 chinese-line-height">
+      <strong>糖尿病（DM）是最常被漏填的欄位，也是影響最大的單一變項。</strong>
+      有糖尿病但未填寫，計算結果可能嚴重低估風險——即使其他指標看起來正常。
+      請務必確認糖尿病狀態已正確輸入。
+    </div>
+
+    <!-- 已有 CVD / 用藥者提示 -->
+    <div class="rounded-xl border border-blue-200 bg-blue-50 p-4 mb-8 text-sm text-blue-900 chinese-line-height">
+      <strong>已確診心血管疾病或正在使用降壓 / 降血脂 / 降血糖藥物者：</strong>
+      依指引直接歸類為<strong>中高度心血管風險</strong>，不需要進行 Framingham 計算，
+      可直接前往
+      <a href="/blog/health-tools/overwork-risk-calculator/" class="underline font-medium">過勞促發疾病風險計算機</a>
+      選擇「確診 / 用藥」選項繼續評估。
+    </div>
+
+    <!-- 計算表單 -->
+    <form id="cv-form" class="space-y-6" novalidate>
+
+      <div class="rounded-2xl bg-surface-container p-6 md:p-8">
+        <h2 class="text-lg font-bold text-blue-950 font-headline mb-5">基本資料與危險因子</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <!-- 性別 -->
+          <fieldset>
+            <legend class="text-sm font-semibold text-blue-900 mb-2">性別</legend>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="sex" value="male" class="accent-teal-600" checked>
+                <span class="text-sm">男性</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="sex" value="female" class="accent-teal-600">
+                <span class="text-sm">女性</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- 年齡 -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="age">
+              年齡（歲）
+            </label>
+            <p class="text-xs text-slate-500 mb-1">適用範圍：20–79 歲</p>
+            <input type="number" id="age" name="age" min="20" max="79" step="1" placeholder="例如：45"
+              class="w-28 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- 總膽固醇 -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="tc">
+              總膽固醇（mg/dL）
+            </label>
+            <input type="number" id="tc" name="tc" min="100" max="500" step="1" placeholder="例如：210"
+              class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- HDL -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="hdl">
+              HDL 膽固醇（mg/dL）
+            </label>
+            <input type="number" id="hdl" name="hdl" min="20" max="120" step="1" placeholder="例如：50"
+              class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- 收縮壓 -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="sbp">
+              收縮壓 SBP（mmHg）
+            </label>
+            <input type="number" id="sbp" name="sbp" min="80" max="220" step="1" placeholder="例如：135"
+              class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- 服用降壓藥 -->
+          <fieldset>
+            <legend class="text-sm font-semibold text-blue-900 mb-2">目前是否服用降壓藥？</legend>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="bpTx" value="no" class="accent-teal-600" checked>
+                <span class="text-sm">否</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="bpTx" value="yes" class="accent-teal-600">
+                <span class="text-sm">是</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- 吸菸 -->
+          <fieldset>
+            <legend class="text-sm font-semibold text-blue-900 mb-2">目前是否吸菸？</legend>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="smoking" value="no" class="accent-teal-600" checked>
+                <span class="text-sm">否</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="smoking" value="yes" class="accent-teal-600">
+                <span class="text-sm">是（目前有在吸）</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- 糖尿病 -->
+          <fieldset>
+            <legend class="text-sm font-semibold text-blue-900 mb-2">
+              是否有糖尿病？
+              <span class="text-red-600 font-bold ml-1">（必填，影響最大）</span>
+            </legend>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="diabetes" value="no" class="accent-teal-600" checked>
+                <span class="text-sm">否</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="diabetes" value="yes" class="accent-teal-600">
+                <span class="text-sm">是</span>
+              </label>
+            </div>
+          </fieldset>
+
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="button" id="calc-btn"
+          class="bg-teal-700 hover:bg-teal-800 text-white font-bold px-10 py-3 rounded-full text-sm tracking-wide transition-colors">
+          計算 10 年心血管風險
+        </button>
+      </div>
+
+    </form>
+
+    <!-- 結果 -->
+    <section id="results" class="hidden mt-10">
+      <div id="result-card" class="rounded-2xl border-2 p-6 md:p-8 mb-6">
+        <h2 class="text-lg font-bold text-blue-950 font-headline mb-5">評估結果</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center">
+            <p class="text-xs text-slate-500 mb-1">Framingham 點數</p>
+            <p id="total-points" class="text-2xl font-bold text-blue-950"></p>
+          </div>
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center">
+            <p class="text-xs text-slate-500 mb-1">10 年心血管風險</p>
+            <p id="risk-pct" class="text-2xl font-bold text-blue-950"></p>
+          </div>
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center col-span-2">
+            <p class="text-xs text-slate-500 mb-1">OSHA 風險等級</p>
+            <p id="risk-grade" class="text-xl font-bold"></p>
+            <p id="risk-threshold" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+        </div>
+
+        <!-- 糖尿病警告 -->
+        <div id="dm-warning" class="hidden rounded-xl bg-red-50 border border-red-200 p-4 mb-4 text-sm text-red-900 chinese-line-height">
+          <strong>注意：</strong>此員工有糖尿病。依 NCEP ATP III，糖尿病患者被視為「冠心病等危症」，
+          臨床風險等同於已有心血管疾病——指引建議直接歸類為<strong>中高度心血管風險</strong>，
+          實際處置應不低於中度風險的應對措施。
+        </div>
+
+        <!-- 點數明細 -->
+        <details class="mb-4">
+          <summary class="cursor-pointer text-sm font-semibold text-blue-900 mb-2 select-none">展開點數計算明細</summary>
+          <div id="points-breakdown" class="mt-3 rounded-xl bg-white border border-slate-200 overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-slate-50 text-blue-950">
+                  <th class="px-4 py-2 text-left font-semibold">項目</th>
+                  <th class="px-4 py-2 text-right font-semibold">點數</th>
+                </tr>
+              </thead>
+              <tbody id="breakdown-body" class="divide-y divide-slate-100"></tbody>
+              <tfoot>
+                <tr class="bg-blue-50">
+                  <td class="px-4 py-2 font-bold text-blue-950">合計</td>
+                  <td class="px-4 py-2 text-right font-bold text-blue-950" id="breakdown-total"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </details>
+
+        <!-- 帶入過勞計算機 -->
+        <div class="flex flex-wrap gap-3">
+          <a id="goto-overwork-btn" href="#"
+            class="inline-block bg-teal-700 text-white font-bold px-6 py-3 rounded-full text-sm tracking-tight hover:bg-teal-800 transition-colors no-underline">
+            帶入過勞促發疾病風險計算機 →
+          </a>
+          <button type="button" id="reset-btn"
+            class="text-sm text-teal-700 underline hover:text-teal-900">
+            重新計算
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 說明 -->
+    <article class="mt-12 space-y-6">
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">計分說明</h2>
+        <p class="text-sm text-slate-600 chinese-line-height mb-3">
+          Framingham ATP III 採用點數加總法，依性別、年齡、總膽固醇（與年齡交互作用）、HDL、
+          收縮壓（有無用藥分開計算）、吸菸（與年齡交互作用）、糖尿病各別計分後加總，
+          再對應至 10 年風險百分比表。
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-blue-950">
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">10 年風險</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">OSHA 分級</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">過勞指引計分</th>
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">面談建議方向</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2">&lt; 10%</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-green-700 font-medium">低度風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">0 分</td>
+                <td class="border border-slate-200 px-3 py-2">依工作負荷合計決定</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2">10–20%</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-amber-700 font-medium">中度風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">1 分</td>
+                <td class="border border-slate-200 px-3 py-2">依工作負荷合計決定</td>
+              </tr>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2">&gt; 20%</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-red-700 font-medium">高度風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">2 分</td>
+                <td class="border border-slate-200 px-3 py-2">依工作負荷合計決定</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸工具</h2>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 chinese-line-height">
+          <li><a href="/blog/health-tools/overwork-risk-calculator/" class="text-teal-700 underline">異常工作負荷促發疾病風險分級計算機</a>——將心血管風險 % 加上工作負荷，計算最終過勞風險等級</li>
+          <li><a href="/blog/overwork-prevention-plan/" class="text-teal-700 underline">異常工作負荷促發疾病預防計劃｜廠護實作重點</a></li>
+        </ul>
+      </section>
+
+    </article>
+
+    <!-- FAQ -->
+    <section class="mt-12 border-t border-outline-variant pt-8">
+      <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">常見問題</h2>
+      <div class="space-y-4 text-slate-700 chinese-line-height">
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">這個計算機用的是哪個版本的 Framingham？</h3>
+          <p class="text-sm">使用 NCEP ATP III（2001）所採用的 Framingham 心血管風險評分，也是勞動部職安署「異常工作負荷促發疾病預防指引」建議的評估工具。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">糖尿病對 Framingham 分數影響有多大？</h3>
+          <p class="text-sm">糖尿病在 NCEP ATP III 中被視為「冠心病等危症」，意即其風險等同於已發生心血管疾病。若未正確輸入糖尿病狀態，計算結果會嚴重低估實際風險。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">已確診心血管疾病或在服藥，還需要算 Framingham 嗎？</h3>
+          <p class="text-sm">依勞動部指引，已確診心臟病、腦血管疾病、腎臟病，或正在使用降壓藥、降血脂藥、降血糖藥者，直接歸類為中高度心血管風險，不需要再跑 Framingham。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  // ── 點數表 ────────────────────────────────────────────────────────────
+
+  // 年齡點數 (index: 0=20-34, 1=35-39, 2=40-44, 3=45-49, 4=50-54, 5=55-59, 6=60-64, 7=65-69, 8=70-74, 9=75-79)
+  const MEN_AGE_PTS   = [-9, -4, 0, 3, 6, 8, 10, 11, 12, 13];
+  const WOMEN_AGE_PTS = [-7, -3, 0, 3, 6, 8, 10, 12, 14, 16];
+
+  // 總膽固醇點數 [tcAgeGroup 0-4][tcBracket 0-4]
+  // tcAgeGroup: 0=20-39, 1=40-49, 2=50-59, 3=60-69, 4=70-79
+  // tcBracket:  0=<160, 1=160-199, 2=200-239, 3=240-279, 4=≥280
+  const MEN_TC_PTS = [
+    [0, 4, 7, 9, 11],
+    [0, 3, 5, 6,  8],
+    [0, 2, 3, 4,  5],
+    [0, 1, 1, 2,  3],
+    [0, 0, 0, 1,  1],
+  ];
+  const WOMEN_TC_PTS = [
+    [0,  4,  8, 11, 13],
+    [0,  3,  6,  8, 10],
+    [0,  2,  4,  5,  7],
+    [0,  1,  2,  3,  4],
+    [0,  1,  1,  2,  2],
+  ];
+
+  // 吸菸點數 [smokeAgeGroup 0-4]（非吸菸=0）
+  const MEN_SMOKE_PTS   = [8, 5, 3, 1, 1];
+  const WOMEN_SMOKE_PTS = [9, 7, 4, 2, 1];
+
+  // HDL 點數
+  function hdlPoints(hdl: number): number {
+    if (hdl >= 60) return -1;
+    if (hdl >= 50) return  0;
+    if (hdl >= 40) return  1;
+    return 2;
+  }
+
+  // SBP 點數（男）
+  function menSBPPoints(sbp: number, treated: boolean): number {
+    if (!treated) return sbp < 120 ? 0 : sbp < 130 ? 0 : sbp < 140 ? 1 : sbp < 160 ? 1 : 2;
+    return               sbp < 120 ? 0 : sbp < 130 ? 1 : sbp < 140 ? 2 : sbp < 160 ? 2 : 3;
+  }
+
+  // SBP 點數（女）
+  function womenSBPPoints(sbp: number, treated: boolean): number {
+    if (!treated) return sbp < 120 ? 0 : sbp < 130 ? 1 : sbp < 140 ? 2 : sbp < 150 ? 3 : sbp < 160 ? 4 : 5;
+    return               sbp < 120 ? 0 : sbp < 130 ? 3 : sbp < 140 ? 4 : sbp < 150 ? 5 : sbp < 160 ? 6 : 7;
+  }
+
+  // 點數 → 10 年風險 %（男）
+  function menPointsToRisk(pts: number): number {
+    if (pts <= 0) return 1;
+    if (pts >= 17) return 30;
+    const tbl = [1, 1, 1, 1, 2, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 25];
+    return tbl[pts - 1];
+  }
+
+  // 點數 → 10 年風險 %（女）
+  function womenPointsToRisk(pts: number): number {
+    if (pts <= 8) return 1;
+    if (pts >= 25) return 30;
+    const tbl = [1, 1, 1, 1, 2, 2, 3, 4, 5, 6, 8, 11, 14, 17, 22, 27];
+    return tbl[pts - 9];
+  }
+
+  // ── 輔助函式 ──────────────────────────────────────────────────────────
+  function getAgeBracket(age: number): number {
+    if (age < 35) return 0; if (age < 40) return 1; if (age < 45) return 2;
+    if (age < 50) return 3; if (age < 55) return 4; if (age < 60) return 5;
+    if (age < 65) return 6; if (age < 70) return 7; if (age < 75) return 8;
+    return 9;
+  }
+
+  function getTCAgeGroup(age: number): number {
+    if (age < 40) return 0; if (age < 50) return 1; if (age < 60) return 2;
+    if (age < 70) return 3; return 4;
+  }
+
+  function getTCBracket(tc: number): number {
+    if (tc < 160) return 0; if (tc < 200) return 1; if (tc < 240) return 2;
+    if (tc < 280) return 3; return 4;
+  }
+
+  const TC_BRACKET_LABELS = ['< 160', '160–199', '200–239', '240–279', '≥ 280'];
+  const HDL_BRACKET_LABEL = (hdl: number) =>
+    hdl >= 60 ? '≥ 60' : hdl >= 50 ? '50–59' : hdl >= 40 ? '40–49' : '< 40';
+
+  // ── 計算主函式 ────────────────────────────────────────────────────────
+  function calculate() {
+    const sex      = (document.querySelector('input[name="sex"]:checked') as HTMLInputElement).value;
+    const bpTx     = (document.querySelector('input[name="bpTx"]:checked') as HTMLInputElement).value === 'yes';
+    const smoking  = (document.querySelector('input[name="smoking"]:checked') as HTMLInputElement).value === 'yes';
+    const diabetes = (document.querySelector('input[name="diabetes"]:checked') as HTMLInputElement).value === 'yes';
+
+    const age = parseInt((document.getElementById('age') as HTMLInputElement).value);
+    const tc  = parseInt((document.getElementById('tc') as HTMLInputElement).value);
+    const hdl = parseInt((document.getElementById('hdl') as HTMLInputElement).value);
+    const sbp = parseInt((document.getElementById('sbp') as HTMLInputElement).value);
+
+    if ([age, tc, hdl, sbp].some((v) => isNaN(v))) {
+      alert('請填寫所有數值欄位（年齡、總膽固醇、HDL、收縮壓）');
+      return;
+    }
+    if (age < 20 || age > 79) { alert('年齡請輸入 20–79 歲'); return; }
+
+    const isMale     = sex === 'male';
+    const ageBracket = getAgeBracket(age);
+    const tcAgeGrp   = getTCAgeGroup(age);
+    const tcBracket  = getTCBracket(tc);
+
+    const agePts   = isMale ? MEN_AGE_PTS[ageBracket]                : WOMEN_AGE_PTS[ageBracket];
+    const tcPts    = isMale ? MEN_TC_PTS[tcAgeGrp][tcBracket]        : WOMEN_TC_PTS[tcAgeGrp][tcBracket];
+    const smokePts = smoking ? (isMale ? MEN_SMOKE_PTS[tcAgeGrp] : WOMEN_SMOKE_PTS[tcAgeGrp]) : 0;
+    const hdlPts   = hdlPoints(hdl);
+    const sbpPts   = isMale ? menSBPPoints(sbp, bpTx) : womenSBPPoints(sbp, bpTx);
+    const dmPts    = 0; // DM is handled as a risk modifier note, not a direct point in ATP III
+
+    const total    = agePts + tcPts + smokePts + hdlPts + sbpPts;
+    const riskPct  = isMale ? menPointsToRisk(total) : womenPointsToRisk(total);
+
+    // OSHA grade (DM → at least 中度)
+    let grade: 'low' | 'medium' | 'high';
+    if (riskPct < 10 && !diabetes) grade = 'low';
+    else if (riskPct <= 20) grade = 'medium';
+    else grade = 'high';
+    // If DM, minimum 中度 (per NCEP ATP III "CHD risk equivalent")
+    if (diabetes && grade === 'low') grade = 'medium';
+
+    // Render
+    document.getElementById('total-points')!.textContent = `${total} 分`;
+    document.getElementById('risk-pct')!.textContent = riskPct >= 30 ? '≥ 30%' : `${riskPct}%`;
+
+    const gradeEl = document.getElementById('risk-grade')!;
+    const threshEl = document.getElementById('risk-threshold')!;
+    const cardEl   = document.getElementById('result-card')!;
+
+    if (grade === 'low') {
+      gradeEl.textContent = '低度心血管風險';
+      gradeEl.className = 'text-xl font-bold text-green-700';
+      threshEl.textContent = '< 10%　OSHA 計分 = 0';
+      cardEl.className = 'rounded-2xl border-2 border-green-300 bg-green-50 p-6 md:p-8 mb-6';
+    } else if (grade === 'medium') {
+      gradeEl.textContent = '中度心血管風險';
+      gradeEl.className = 'text-xl font-bold text-amber-700';
+      threshEl.textContent = '10–20%　OSHA 計分 = 1';
+      cardEl.className = 'rounded-2xl border-2 border-amber-300 bg-amber-50 p-6 md:p-8 mb-6';
+    } else {
+      gradeEl.textContent = '高度心血管風險';
+      gradeEl.className = 'text-xl font-bold text-red-700';
+      threshEl.textContent = '> 20%　OSHA 計分 = 2';
+      cardEl.className = 'rounded-2xl border-2 border-red-300 bg-red-50 p-6 md:p-8 mb-6';
+    }
+
+    // DM warning
+    const dmWarn = document.getElementById('dm-warning')!;
+    diabetes ? dmWarn.classList.remove('hidden') : dmWarn.classList.add('hidden');
+
+    // Points breakdown
+    const breakdownRows = [
+      { label: `年齡（${age} 歲）`, pts: agePts },
+      { label: `總膽固醇（${tc} mg/dL = ${TC_BRACKET_LABELS[tcBracket]}）`, pts: tcPts },
+      { label: `HDL（${hdl} mg/dL = ${HDL_BRACKET_LABEL(hdl)}）`, pts: hdlPts },
+      { label: `收縮壓（${sbp} mmHg，${bpTx ? '有' : '無'}用藥）`, pts: sbpPts },
+      { label: `吸菸（${smoking ? '是' : '否'}）`, pts: smokePts },
+    ];
+    const tbody = document.getElementById('breakdown-body')!;
+    tbody.innerHTML = breakdownRows.map(({ label, pts }) =>
+      `<tr><td class="px-4 py-2 text-slate-700">${label}</td><td class="px-4 py-2 text-right font-mono ${pts > 0 ? 'text-red-700' : pts < 0 ? 'text-green-700' : 'text-slate-500'}">${pts > 0 ? '+' : ''}${pts}</td></tr>`
+    ).join('');
+    document.getElementById('breakdown-total')!.textContent = `${total > 0 ? '+' : ''}${total} 分`;
+
+    // "帶入" button
+    const linkBtn = document.getElementById('goto-overwork-btn') as HTMLAnchorElement;
+    linkBtn.href = `/blog/health-tools/overwork-risk-calculator/?cv=${riskPct}`;
+
+    document.getElementById('results')!.classList.remove('hidden');
+    document.getElementById('results')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function resetForm() {
+    (document.getElementById('cv-form') as HTMLFormElement).reset();
+    document.getElementById('results')!.classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('calc-btn')!.addEventListener('click', calculate);
+  document.getElementById('reset-btn')!.addEventListener('click', resetForm);
+</script>
