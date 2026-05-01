@@ -1,0 +1,375 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/faq/`;
+
+const categories = [
+  {
+    id: 'location',
+    title: '看診地點與預約',
+    link: null,
+    faqs: [
+      {
+        q: '陳醫師有哪些看診地點？',
+        a: '兩個地點，同一位醫師。(1) 義大醫院家庭暨社區醫學部：週一、週二上午高階健檢報告解說；週五上午家醫科門診；週五下午減重中心。(2) 旗山大政診所：每週五 18:00–21:00 夜診，提供家醫科、三高慢性病追蹤與藥物減重。',
+      },
+      {
+        q: '義大醫院跟旗山大政診所，哪邊比較適合我？',
+        a: '兩邊是同一位醫師，定位不同。義大有醫學中心等級的影像與檢查設備，適合第一次完整評估、高階健檢、複雜個案。旗山大政是週五夜診，適合已規劃好療程需固定回診、或住在旗山/美濃/田寮/內門一帶白天不便就診的居民。慢性病與減重療程在兩邊都能繼續。',
+      },
+      {
+        q: '陳醫師的專長有哪些？',
+        a: '家庭醫學、肥胖醫學（含 GLP-1/猛健樂藥物減重）、運動醫學、職業醫學、骨質疏鬆、行為科學應用（COM-B 模型、動機式晤談）、實證醫學。具備 ACE-CPT 美國運動委員會認證教練執照。',
+      },
+      {
+        q: '什麼是行為科學導向的醫療？',
+        a: '結合 COM-B 模型、動機式晤談（Motivational Interviewing）等行為改變技術，找出阻礙健康行為的真正原因——是知識不足、能力限制，還是動機或環境問題——再針對性介入，而非單純衛教或開藥。',
+      },
+      {
+        q: '如何預約陳醫師？',
+        a: '義大醫院門診可透過義大醫院官網線上掛號；旗山大政診所請電話預約 07-662-2588。也可透過 Facebook 粉專 @lazydr 或電子信箱 cyc@edfm.org 聯繫諮詢。',
+      },
+    ],
+  },
+  {
+    id: 'weight-loss',
+    title: '藥物減重（猛健樂 / GLP-1）',
+    link: '/blog/mounjaro-weight-loss/',
+    faqs: [
+      {
+        q: '猛健樂（Mounjaro）是什麼？跟 Ozempic 差在哪？',
+        a: '猛健樂主成分 tirzepatide 同時作用於 GIP 和 GLP-1 兩個受體；Ozempic 主成分 semaglutide 只作用於 GLP-1 受體。雙受體機制讓猛健樂在降血糖與減重效果上均優於同劑量的 semaglutide，但個體差異仍大，適合哪種藥物需與醫師討論。',
+      },
+      {
+        q: '猛健樂真的能瘦多少？SURMOUNT-1 試驗數據是什麼？',
+        a: 'SURMOUNT-1 試驗（72週）：5mg 組平均減重 15%、10mg 組 19.5%、15mg 組 20.9%。這是有飲食與運動介入的受試者數據，現實條件下效果因個人執行程度而異。',
+      },
+      {
+        q: '停藥後會復胖嗎？',
+        a: '多數人在停藥後一年內會恢復約 50% 的減重幅度。這類藥物宜視為長期慢性病管理工具，而非短期療程。若體重已對健康構成威脅，與醫師討論長期維持計劃很重要。',
+      },
+      {
+        q: '猛健樂有哪些禁忌症？',
+        a: '禁用於：甲狀腺髓質癌（MTC）個人或家族史、多發性內分泌腫瘤第 2 型（MEN 2）、對成分過敏、懷孕期間。胰臟炎病史者需謹慎評估。',
+      },
+      {
+        q: '常見副作用有哪些？會不會很嚴重？',
+        a: '最常見是胃腸道副作用：噁心、腹瀉、便秘，多在劑量調整期間出現，通常隨時間減輕。嚴重副作用（胰臟炎、膽囊疾病）相對少見。透過緩慢滴定劑量可顯著降低副作用頻率。',
+      },
+      {
+        q: '誰適合用猛健樂？台灣有健保給付嗎？',
+        a: '一般建議適用於 BMI ≥30，或 BMI ≥27 且合併糖尿病、高血壓、血脂異常等共病者。台灣目前僅在特定條件下的第二型糖尿病患者有健保給付，單純減重適應症尚無健保給付，屬自費項目。',
+      },
+      {
+        q: '只打猛健樂不改變生活習慣可以嗎？',
+        a: '藥物是五大減重支柱之一（飲食、運動、行為改變、睡眠、藥物），單靠藥物停藥後復胖風險更高。行為改變——尤其是飲食習慣與活動量——是維持成果的關鍵，COM-B 模型分析後針對個人障礙介入效果最佳。',
+      },
+    ],
+  },
+  {
+    id: 'exercise',
+    title: '運動與體重管理',
+    link: '/blog/exercise-glp1-weight-loss/',
+    faqs: [
+      {
+        q: '用 GLP-1 減重藥為什麼一定要配運動？',
+        a: '藥物造成的體重下降中，有相當比例來自肌肉流失，而非純脂肪。運動——尤其是阻力訓練——可保留瘦體組織、維持基礎代謝率、改善胰島素敏感性。2024年 Diabetes Care 建議 GLP-1 使用期間搭配阻力訓練。',
+      },
+      {
+        q: '吃猛健樂或 Ozempic 減重會流失多少肌肉？',
+        a: '研究顯示 semaglutide 減重中約 40% 來自瘦體組織；tirzepatide 約 24%。兩者差異在 GIP 受體對脂肪組織的選擇性作用。無論使用哪種藥物，都應搭配足夠蛋白質攝取（1.2–1.6 g/kg 體重）與阻力訓練。',
+      },
+      {
+        q: '阻力訓練還是有氧比較重要？',
+        a: '在 GLP-1 藥物使用期間，阻力訓練優先於有氧。建議每週 2–3 次重訓，加上每週 150 分鐘中等強度有氧。兩者並非互斥，而是互補。',
+      },
+      {
+        q: '停藥後復胖，復回來的是脂肪還是肌肉？',
+        a: 'STEP-1 延伸研究顯示，停用 semaglutide 後一年，約 2/3 體重回到原點，且回復的以脂肪為主而非肌肉，導致體組成比停藥前更差。這更加凸顯藥物期間保存肌肉的重要性。',
+      },
+      {
+        q: '減重時怎麼吃才能保住肌肉？蛋白質要多少？',
+        a: '每日蛋白質目標 1.2–1.6 g/kg 體重，分散於三餐攝取（每餐 25–40g），有助於最大化肌肉蛋白合成。使用 GLP-1 藥物時因食慾被抑制，更需刻意確保蛋白質攝取。',
+      },
+    ],
+  },
+  {
+    id: 'checkup',
+    title: '義大醫院高階健檢',
+    link: '/health-checkup/',
+    faqs: [
+      {
+        q: '義大醫院的健檢套餐怎麼挑最簡單？',
+        a: '先看三件事：年齡（50 歲以上優先考慮含大腸鏡的 H、舒適健檢）、是否吸菸（有吸菸史優先考慮含 LDCT 的 C、健康活力、菁采人生）、預算（公教人員專案 A–H 同等級最便宜）。若完全沒方向，建議從 C 或 H 開始評估。',
+      },
+      {
+        q: '健檢前要空腹多久？藥可以繼續吃嗎？',
+        a: '一般健檢需空腹至少 8 小時（白開水除外）。長期用藥如血壓、心臟、甲狀腺藥物照常服用；但如果要做含顯影劑的 CT 或 MRI，且平常在吃 metformin 類糖尿病藥，檢查當日與次日需暫停（請事先與主治醫師討論）。',
+      },
+      {
+        q: '為什麼無痛胃腸鏡當天不能自己開車？',
+        a: '無痛胃腸鏡會使用麻醉鎮靜藥物（通常是 propofol 或 midazolam），即使結束後感覺清醒，判斷力與反應速度在 24 小時內仍可能下降。請務必安排家人接送或搭乘大眾運輸。',
+      },
+      {
+        q: '健檢報告出來後可以找陳醫師解說嗎？',
+        a: '可以。預約時直接向義大健診中心表達「希望由家醫科陳昱彰醫師解說報告」即可。具備家庭醫學、實證醫學與行為科學訓練的醫師可把數字跟個人病史、生活型態連結，而不是逐項對照正常值。',
+      },
+      {
+        q: '有吸菸史但年紀還不到 50，需要做 LDCT 嗎？',
+        a: 'USPSTF 正式建議條件是 50–80 歲、20 包年吸菸史、現仍吸菸或戒菸未滿 15 年。若你年齡不符但有肺癌家族史、重度職業暴露（石綿、氡氣、粉塵），可與醫師討論是否提早自費。完全無風險因子的年輕人做 LDCT 效益有限，還可能被偶發結節追蹤綁住。',
+      },
+      {
+        q: '無痛大腸鏡的清腸藥怎麼挑？',
+        a: '義大健診中心會依狀況開立富利瀉（Fulisay）、耐福力散（Niflec Powder）或保可淨（Bowklean Powder）。三種效果差不多，差別在口味與飲用量。敏感胃、容易噁心的人可向醫師反應，通常會安排少量分次的配方。',
+      },
+    ],
+  },
+  {
+    id: 'workplace',
+    title: '企業臨場健康服務與職業醫學',
+    link: '/workplace-health/',
+    faqs: [
+      {
+        q: '什麼是臨場健康服務？企業為什麼需要？',
+        a: '依據《勞工健康保護規則》，僱用勞工達一定人數之企業須聘請醫師提供臨場健康服務。醫師定期到場協助健康諮詢、職業病預防、工作適性評估等，幫助企業降低職災風險、提升員工健康。',
+      },
+      {
+        q: '職安法四大計劃是什麼？企業都要做嗎？',
+        a: '依《職業安全衛生法》第6條第2項，雇主應訂定：(1) 異常工作負荷促發疾病預防計劃（過勞預防）、(2) 人因性危害預防計劃、(3) 執行職務遭受不法侵害預防計劃（職場暴力/霸凌）、(4) 母性保護計劃。適用對象依勞工人數與行業別有不同門檻，且計劃書須由職業醫學醫師簽核才符合法規，單純套用範本無法替代專業判斷。',
+      },
+      {
+        q: '聽力保護計劃是什麼？哪些工廠需要？',
+        a: '噪音作業場所（工作日8小時暴露超過85分貝）依法應訂定聽力保護計劃，涵蓋噪音評估、聽力檢查、工程控制、個人防護具管理與員工教育訓練。製造業、加工廠、機械室等高噪音環境必備。',
+      },
+      {
+        q: '可以協助企業辦四大計劃或聽力保護的職場講座嗎？',
+        a: '可以。陳醫師提供四大計劃說明、過勞預防、人因性危害、聽力保護、職場心理健康等職安教育訓練課程，可依貴公司產業別、勞工類型客製化內容。南部企業洽詢：cyc@edfm.org。',
+      },
+      {
+        q: '可以協助處理職業傷病認定嗎？',
+        a: '可以。協助勞工進行職業傷病因果關係評估、開立診斷證明、並提供復工評估與工作調整建議。',
+      },
+      {
+        q: '臨場服務的範圍和費用？',
+        a: '主要服務高雄市、屏東縣企業，包含楠梓加工區、屏東工業區等。服務頻率依法規通常每月 1–4 次；費用依服務內容與頻率議定，歡迎來信 cyc@edfm.org 索取報價。',
+      },
+    ],
+  },
+  {
+    id: 'speaking',
+    title: '演講與企業健康講座',
+    link: '/speaking/',
+    faqs: [
+      {
+        q: '陳醫師的演講費用怎麼算？',
+        a: '依主題深度、演講時長、地點與客製化程度而異。請來信 cyc@edfm.org 說明貴單位的時段、主題、聽眾人數與地點，我會在 1–2 個工作天內回覆可行時段與報價。',
+      },
+      {
+        q: '可以客製化講題內容嗎？',
+        a: '可以也建議。企業場次我會先了解貴公司員工的健檢數據重點、職場健康痛點、已做過的健康促進活動，把內容調整到「員工真的關心的問題」。客製比標準化演講效果好很多，這是行為改變的關鍵。',
+      },
+      {
+        q: '服務範圍到哪裡？北部也接嗎？',
+        a: '以南部（高雄、台南、屏東、嘉義）為主；中部（台中、彰化）視場次時段也可討論。北部原則上以線上演講為主。線上場次使用 Google Meet / Teams / Zoom 皆可。',
+      },
+      {
+        q: '可以同時安排現場健康諮詢嗎？',
+        a: '可以。部分企業場次會搭配演講後的「一對一健康諮詢站」（每人 5–10 分鐘），讓員工針對個別健檢數據提問。這項服務需要額外時段，請在邀約時一併說明。',
+      },
+      {
+        q: '通常需要提前多久預約？',
+        a: '一般建議提前 2–4 週，方便雙方確認主題、客製內容、準備資料。急件（2 週內）也歡迎來信，我會看診表空檔盡量配合；客製化深度會略少一些，但品質維持。',
+      },
+    ],
+  },
+  {
+    id: 'community',
+    title: '社區健康營造',
+    link: '/community-health/',
+    faqs: [
+      {
+        q: '什麼是社區健康營造？',
+        a: '社區健康營造是由社區居民主動參與，結合專業醫療資源，共同辨識健康問題、規劃行動方案、改善社區整體健康的過程。不是由上而下的政策，而是由下而上的社區力量。',
+      },
+      {
+        q: '社區或里辦公處如何跟我們合作？',
+        a: '歡迎社區發展協會、里辦公處、衛生所來信洽詢。我們會先進行社區訪視與需求評估，再提出客製化的健康營造方案。',
+      },
+      {
+        q: '居民需要具備什麼條件才能參與？',
+        a: '不需要任何專業背景！社區健康營造的核心就是讓一般居民參與，我們會提供完整的引導與支持。',
+      },
+      {
+        q: '計畫經費來源？',
+        a: '可透過國健署社區健康營造計畫、地方政府衛生局補助、或醫院社會責任（CSR）等管道取得經費支持。我們協助社區撰寫計畫書與申請補助。',
+      },
+    ],
+  },
+];
+
+// Flatten all FAQs for JSON-LD
+const allFaqs = categories.flatMap(c => c.faqs);
+
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  url: pageUrl,
+  name: '常見問題 FAQ｜陳昱彰醫師',
+  mainEntity: allFaqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '常見問題', item: pageUrl },
+  ],
+};
+
+const title = '常見問題 FAQ｜陳昱彰醫師・減重・職業醫學・健檢・演講';
+const description = '陳昱彰醫師常見問題彙整：藥物減重（猛健樂/GLP-1）、高階健檢、企業臨場服務、四大計劃、職場演講、社區健康等所有主題的完整解答。';
+---
+
+<Layout
+  title={title}
+  description={description}
+  jsonLd={[faqPageSchema, breadcrumbSchema]}
+>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">YC Chen, MD</a>
+      <div class="nav-links">
+        <a href="/">首頁</a>
+        <a href="/workplace-health">臨場服務</a>
+        <a href="/health-checkup">高階健檢</a>
+        <a href="/speaking">演講</a>
+        <a href="/blog">衛教專欄</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-badge">FAQ</p>
+      <h1>常見問題</h1>
+      <p class="hero-subtitle">所有主題的完整解答，從減重、健檢到職業醫學</p>
+    </div>
+  </section>
+
+  <!-- Jump links -->
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <nav class="faq-nav" aria-label="FAQ 分類導覽">
+        {categories.map(c => (
+          <a href={`#${c.id}`} class="faq-nav-chip">{c.title}</a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  <!-- FAQ categories -->
+  {categories.map(cat => (
+    <section class="section" id={cat.id}>
+      <div class="container" style="max-width: 800px;">
+        <div class="faq-category-header">
+          <h2 class="section-title" style="margin-bottom: 0;">{cat.title}</h2>
+          {cat.link && (
+            <a href={cat.link} class="faq-more-link">詳細說明 →</a>
+          )}
+        </div>
+        <div class="space-y-4" style="margin-top: 1.5rem;">
+          {cat.faqs.map(f => (
+            <details class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
+              <summary class="px-8 py-6 cursor-pointer font-bold text-primary text-lg list-none flex items-center justify-between">
+                {f.q}
+                <span class="text-secondary transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
+              </summary>
+              <div class="px-8 pb-6">
+                <p class="text-on-surface-variant chinese-line-height">{f.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--md-sys-color-primary-container, #e0f2fe);">
+    <div class="container" style="max-width: 600px; text-align: center;">
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">還有其他問題？</h2>
+      <p class="text-on-surface-variant chinese-line-height" style="margin-bottom: 1.5rem;">
+        歡迎透過以下管道直接聯繫陳醫師
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="mailto:cyc@edfm.org" class="btn btn-primary">寄信給我</a>
+        <a href="https://www.facebook.com/lazydr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Facebook @lazydr</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .faq-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-nav-chip {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: var(--md-sys-color-secondary-container, #e0f0e8);
+    color: var(--md-sys-color-on-secondary-container, #1a3d2b);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .faq-nav-chip:hover {
+    opacity: 0.75;
+  }
+
+  .faq-category-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .faq-more-link {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-primary, #0d9488);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .faq-more-link:hover {
+    text-decoration: underline;
+  }
+
+  details > summary {
+    list-style: none;
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary span {
+    transform: rotate(180deg);
+  }
+</style>

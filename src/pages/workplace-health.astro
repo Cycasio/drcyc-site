@@ -10,6 +10,45 @@ const services = [
   { icon: '📊', title: '健康管理系統', desc: '導入數位化員工健康管理平台，健康數據追蹤、衛教推播、慢性病管理。' },
 ];
 
+const articles = [
+  {
+    href: '/blog/four-plans-occupational-health-overview/',
+    tag: '法規總覽',
+    title: '職安法四大計劃是什麼？哪些企業要做、勞動部查什麼',
+    desc: '一文搞懂四大計劃法源、適用門檻、稽查重點，以及為什麼套範本不算數。',
+  },
+  {
+    href: '/blog/overwork-prevention-plan/',
+    tag: '過勞預防',
+    title: '異常工作負荷促發疾病預防計劃：從評估到執行',
+    desc: '月加班幾小時算高風險？計劃書要寫什麼？稽查員最常抓的五個缺失。',
+  },
+  {
+    href: '/blog/ergonomic-hazard-prevention-plan/',
+    tag: '人因危害',
+    title: '人因性危害預防計劃：辦公室與工廠各怎麼做',
+    desc: '從 REBA/RULA 風險評估到工程改善，兩種職場的實作差異一次說清楚。',
+  },
+  {
+    href: '/blog/workplace-violence-prevention-plan/',
+    tag: '不法侵害',
+    title: '職場不法侵害預防計劃：HR 最常問的問題',
+    desc: '客戶辱罵算嗎？主管霸凌怎麼處理？事件後的心理支持流程。',
+  },
+  {
+    href: '/blog/maternity-protection-plan/',
+    tag: '母性保護',
+    title: '母性保護計劃：從危害評估到工作調整的完整流程',
+    desc: '懷孕、哺乳、人工生殖三大族群的保護義務，以及雇主最常犯的被動錯誤。',
+  },
+  {
+    href: '/blog/hearing-conservation-program/',
+    tag: '聽力保護',
+    title: '聽力保護計劃：噪音作業場所一次搞懂',
+    desc: '85 dB 門檻、NRR 值計算、特殊健檢頻率、分級管理，製造業必讀。',
+  },
+];
+
 const faqs = [
   { q: '什麼是臨場健康服務？企業為什麼需要？', a: '依據《勞工健康保護規則》，僱用勞工達一定人數之企業須聘請醫師提供臨場健康服務。醫師定期到場協助健康諮詢、職業病預防、工作適性評估等，幫助企業降低職災風險、提升員工健康與生產力。' },
   { q: '服務範圍涵蓋哪些地區？', a: '主要服務高雄市、屏東縣企業，包括但不限於楠梓加工區、屏東工業區、臨海工業區等。其他地區歡迎來信洽詢。' },
@@ -106,8 +145,28 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- Articles -->
   <section class="section">
+    <div class="container">
+      <h2 class="section-title">職業醫學衛教文章</h2>
+      <p style="text-align:center;color:var(--text-light);margin-top:-2rem;margin-bottom:2.5rem;font-size:1rem;">
+        四大計劃、聽力保護的完整說明——給 HR、安衛人員、工廠主管
+      </p>
+      <div class="articles-grid">
+        {articles.map(a => (
+          <a href={a.href} class="article-card">
+            <span class="article-tag">{a.tag}</span>
+            <h3>{a.title}</h3>
+            <p>{a.desc}</p>
+            <span class="article-read">閱讀全文 →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt">
     <div class="container">
       <h2 class="section-title">常見問題</h2>
       <div class="faq-list">
@@ -185,6 +244,14 @@ const faqs = [
   .faq-item summary::before { content:'＋ ';color:var(--primary); }
   .faq-item[open] summary::before { content:'－ '; }
   .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
+
+  .articles-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem; }
+  .article-card { display:flex;flex-direction:column;gap:0.5rem;background:white;padding:1.75rem;border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:box-shadow 0.2s; }
+  .article-card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08);text-decoration:none; }
+  .article-tag { display:inline-block;background:var(--primary);color:white;padding:0.2rem 0.65rem;border-radius:99px;font-size:0.75rem;font-weight:600;width:fit-content; }
+  .article-card h3 { font-size:1rem;font-weight:700;line-height:1.4;margin:0; }
+  .article-card p { color:var(--text-light);font-size:0.9rem;line-height:1.55;flex:1;margin:0; }
+  .article-read { font-size:0.85rem;font-weight:600;color:var(--primary); }
 
   .footer { padding:2rem 0;text-align:center;color:var(--text-light);font-size:0.9rem;border-top:1px solid var(--border); }
 
