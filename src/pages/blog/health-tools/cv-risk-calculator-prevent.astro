@@ -1,0 +1,216 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/health-tools/cv-risk-calculator-prevent/`;
+const title = 'AHA PREVENT 心血管風險計算機｜10 年 ASCVD＋心衰竭風險 | 陳昱彰醫師';
+const description =
+  'AHA 2022 PREVENT 心血管風險評估工具，比 Framingham 更完整——納入腎功能（eGFR）、血糖（HbA1c）、心衰竭風險，適合門診初級預防諮詢。了解 PREVENT 與 Framingham 的差異，前往官方計算機。';
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: '健康工具', item: `${SITE}/blog/health-tools/` },
+    { '@type': 'ListItem', position: 4, name: 'AHA PREVENT 心血管風險計算機', item: pageUrl },
+  ],
+};
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: 'AHA PREVENT 心血管風險計算機',
+  description,
+  inLanguage: 'zh-Hant',
+  about: { '@type': 'MedicalEntity', name: 'AHA PREVENT 心血管風險評估' },
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  isAccessibleForFree: true,
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'PREVENT 和 Framingham 有什麼不同？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Framingham（NCEP ATP III 2001）是台灣勞動部職場過勞指引的法定工具，計算 10 年冠心病風險。PREVENT（AHA 2022）是新一代評估模型，加入腎功能（eGFR）、血糖（HbA1c）等代謝指標，並分別估算 ASCVD 與心衰竭風險，更適合一般門診的初級預防諮詢。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '職場健康評估該用哪一個？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '依台灣勞動部「異常工作負荷促發疾病預防指引」，職場過勞評估仍須使用 Framingham ATP III，輸出結果才能對應勞動部三色風險分級。PREVENT 適合一般門診的個人化心血管風險諮詢，兩者用途不同，可並行使用。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'PREVENT 需要哪些檢驗數值？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PREVENT 基本版需要：年齡、性別、總膽固醇、HDL、收縮壓、是否使用降壓藥、是否糖尿病、是否抽菸。進階版可額外輸入 eGFR（腎絲球過濾率）與 HbA1c，讓估算更精準。',
+      },
+    },
+  ],
+};
+---
+
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema, medicalWebPage, faqSchema]}>
+  <main class="max-w-4xl mx-auto px-6 md:px-10 py-12">
+
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/health-tools/" class="hover:text-teal-700">健康工具</a>
+      <span class="mx-2">／</span>
+      <span>AHA PREVENT 心血管風險計算機</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">心血管預防 · 陳昱彰醫師整理</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">AHA PREVENT<br class="hidden md:block"><span class="text-xl font-normal text-slate-500">心血管風險計算機（2022）</span></h1>
+      <p class="text-slate-600 chinese-line-height">
+        美國心臟協會（AHA）於 2022 年發布 PREVENT（Predicting Risk of cardiovascular disease EVENTs）模型，
+        取代舊版的 Pooled Cohort Equations（PCE），納入腎功能（eGFR）與心衰竭風險，
+        是目前一般門診初級預防諮詢最推薦的評估工具。
+      </p>
+    </header>
+
+    <!-- 用途說明提示 -->
+    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-8 text-sm text-amber-900 chinese-line-height">
+      <strong>職場過勞評估請使用 Framingham：</strong>
+      依台灣勞動部「異常工作負荷促發疾病預防指引」，職場健康評估須用
+      <a href="/blog/health-tools/cv-risk-calculator/" class="underline font-medium">Framingham ATP III 計算機</a>
+      輸出三色分級，才符合法定格式。PREVENT 適合一般門診諮詢，不能取代職場指引的 Framingham。
+    </div>
+
+    <!-- 前往官方計算機 -->
+    <section class="rounded-2xl bg-surface-container p-6 md:p-8 mb-10 text-center">
+      <p class="text-sm text-slate-600 mb-4 chinese-line-height">
+        PREVENT 計算機由 AHA 官方維護，演算法持續更新，建議直接使用官方版本：
+      </p>
+      <a
+        href="https://professional.heart.org/en/guidelines-and-statements/prevent-calculator"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block rounded-xl bg-teal-700 px-8 py-3 text-white font-semibold text-sm hover:bg-teal-800 transition-colors"
+      >
+        前往 AHA PREVENT 官方計算機 ↗
+      </a>
+      <p class="text-xs text-slate-400 mt-3">professional.heart.org · 英文介面 · 免費使用</p>
+    </section>
+
+    <!-- 比較表 -->
+    <article class="mt-4 space-y-8">
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">PREVENT vs Framingham：怎麼選？</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-blue-950">
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold"></th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">Framingham ATP III（2001）</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">AHA PREVENT（2022）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2 font-medium text-blue-900">主要用途</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">職場過勞評估、勞動部指引</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">門診初級預防、個人諮詢</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2 font-medium text-blue-900">評估範圍</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">10 年冠心病事件</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">10 年 ASCVD＋<strong>心衰竭</strong></td>
+              </tr>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2 font-medium text-blue-900">額外變項</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">—</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">eGFR、HbA1c（可選）</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2 font-medium text-blue-900">適用年齡</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">20–79 歲</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">30–79 歲</td>
+              </tr>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2 font-medium text-blue-900">法規依據</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">台灣勞動部指引（必用）</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">AHA/ACC 2019 指引更新版</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2 font-medium text-blue-900">輸出格式</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">點數＋風險 %＋三色分級</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">ASCVD % ＋ 心衰竭 %</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">PREVENT 需要哪些數值？</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <h3 class="text-sm font-bold text-blue-900 mb-2">基本版（必填）</h3>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-4 chinese-line-height">
+              <li>年齡（30–79 歲）</li>
+              <li>性別</li>
+              <li>總膽固醇、HDL 膽固醇</li>
+              <li>收縮壓、是否使用降壓藥</li>
+              <li>是否糖尿病、是否抽菸</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-teal-200 bg-teal-50 p-4">
+            <h3 class="text-sm font-bold text-teal-800 mb-2">進階版（可選，更精準）</h3>
+            <ul class="text-sm text-teal-900 space-y-1 list-disc pl-4 chinese-line-height">
+              <li>eGFR（腎絲球過濾率）</li>
+              <li>HbA1c（糖化血色素）</li>
+            </ul>
+            <p class="text-xs text-teal-700 mt-2">有腎功能異常或糖尿病患者，建議填入以提高準確度</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸工具</h2>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 chinese-line-height">
+          <li><a href="/blog/health-tools/cv-risk-calculator/" class="text-teal-700 underline">10 年心血管風險計算機（Framingham ATP III）</a>——職場過勞評估用，符合勞動部指引格式</li>
+          <li><a href="/blog/health-tools/overwork-risk-calculator/" class="text-teal-700 underline">異常工作負荷促發疾病風險分級計算機</a>——結合工作負荷與心血管風險，計算最終過勞等級</li>
+        </ul>
+      </section>
+
+    </article>
+
+    <!-- FAQ -->
+    <section class="mt-12 border-t border-outline-variant pt-8">
+      <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">常見問題</h2>
+      <div class="space-y-4 text-slate-700 chinese-line-height">
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">PREVENT 和 Framingham 有什麼不同？</h3>
+          <p class="text-sm">Framingham（NCEP ATP III 2001）是台灣勞動部職場過勞指引的法定工具，計算 10 年冠心病風險。PREVENT（AHA 2022）是新一代評估模型，加入腎功能（eGFR）、血糖（HbA1c）等代謝指標，並分別估算 ASCVD 與心衰竭風險，更適合一般門診的初級預防諮詢。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">職場健康評估該用哪一個？</h3>
+          <p class="text-sm">依台灣勞動部「異常工作負荷促發疾病預防指引」，職場過勞評估仍須使用 Framingham ATP III，輸出結果才能對應勞動部三色風險分級。PREVENT 適合一般門診個人化心血管風險諮詢，兩者用途不同，可並行使用。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">PREVENT 需要哪些檢驗數值？</h3>
+          <p class="text-sm">基本版需要：年齡、性別、總膽固醇、HDL、收縮壓、是否使用降壓藥、是否糖尿病、是否抽菸。進階版可額外輸入 eGFR 與 HbA1c，讓估算更精準。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
