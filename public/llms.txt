@@ -62,6 +62,7 @@
 - [打猛健樂為什麼更需要找健身教練?](/blog/mounjaro-needs-personal-trainer) — 2025 新研究：打 1.5 年藥流失的肌肉 ≈ 20 年自然老化、Jabbour RCT 六組對照、TriNetX 骨鬆 HR 1.44
 - [FITT-VP 運動處方](/blog/fitt-vp-exercise-prescription) — ACSM 運動醫學標準架構：頻率/強度/時間/類型/總量/進階，含 Tanaka 心跳公式、實戰案例
 - [超慢跑（Slow Jogging）](/blog/slow-jogging) — 田中宏暁的低衝擊有氧，METs ~6，前足著地 + 步頻 180+，膝蓋不好也能跑
+- [跑步真的會傷膝蓋嗎？20 萬人實證打破 30 年迷思](/blog/running-knee-myth-evidence) — Williams 2013（7.4 萬人，↓OA 15% ↓髖置換 35%）/ Alentorn-Geli 2017（11.4 萬人，休閒跑者 OA 3.5% vs 久坐 10.2%）/ Hartwell 2024（3,804 馬拉松跑者，跑量跑齡都不是 OA 預測因子）；1989 Marti BMJ 誤讀史；真正風險因子（舊傷 OR 5.85、家族史 3.47、BMI、年齡）；給社團跑者的核心訊息
 - [第二型糖尿病可以逆轉嗎？](/blog/type-2-diabetes-remission) — DiRECT / STEP-1 / SURMOUNT-4 / STAMPEDE 實際數字，減重 vs 緩解率對照
 - [GLP-1 減重藥要搭配運動](/blog/exercise-glp1-weight-loss) — 猛健樂 / Ozempic 瘦掉的有 24–40% 是肌肉，阻力訓練是關鍵
 - [猛健樂 Mounjaro 完整指南](/blog/mounjaro-weight-loss) — SURMOUNT-1 數據、GIP/GLP-1 雙受體機轉、副作用與禁忌症
