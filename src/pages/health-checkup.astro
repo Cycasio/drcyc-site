@@ -49,11 +49,35 @@ const itemListSchema = {
     '@type': 'ListItem',
     position: i + 1,
     name: `${p.name}（${p.theme}）`,
+    url: `${pageUrl}#pkg-${p.id}`,
     item: {
       '@type': 'MedicalProcedure',
+      '@id': `${pageUrl}#pkg-${p.id}-procedure`,
       name: p.name,
       description: p.theme,
+      url: `${pageUrl}#pkg-${p.id}`,
       procedureType: 'Diagnostic',
+      offers: {
+        '@type': 'Offer',
+        price: p.price.toString(),
+        priceCurrency: 'TWD',
+        availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'Hospital',
+          name: '義大醫院',
+          url: OFFICIAL_URL,
+        },
+        url: `${pageUrl}#pkg-${p.id}`,
+      },
+      review: {
+        '@type': 'Review',
+        '@id': `${pageUrl}#pkg-${p.id}-review`,
+        itemReviewed: { '@id': `${pageUrl}#pkg-${p.id}-procedure` },
+        author: { '@id': `${SITE}/#person` },
+        publisher: { '@id': `${SITE}/#person` },
+        datePublished: LAST_UPDATED,
+        reviewBody: p.chenNote,
+      },
     },
   })),
 };
@@ -76,6 +100,29 @@ const breadcrumbSchema = {
   ],
 };
 
+const bowelPrepHowToSchemas = BOWEL_PREP_DRUGS.map((d) => ({
+  '@type': 'HowTo',
+  '@id': `${pageUrl}#howto-${d.englishName.toLowerCase().replace(/\s+/g, '-')}`,
+  name: `${d.name} ${d.englishName} 服藥時程`,
+  description: `義大醫院健診中心無痛大腸鏡前清腸藥「${d.name}（${d.englishName}，${d.generic}）」服藥時程,依藥品仿單與醫院衛教單整理。`,
+  inLanguage: 'zh-Hant',
+  totalTime: 'PT12H',
+  supply: [
+    { '@type': 'HowToSupply', name: `${d.name}（${d.englishName}）` },
+    { '@type': 'HowToSupply', name: '白開水或無渣流質' },
+  ],
+  tool: [{ '@type': 'HowToTool', name: '量杯 / 飲水容器' }],
+  step: d.steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.time,
+    text: s.action,
+  })),
+  author: { '@id': `${SITE}/#person` },
+  publisher: { '@id': `${SITE}/#person` },
+  about: { '@type': 'MedicalProcedure', name: '無痛大腸鏡前清腸 Bowel Preparation' },
+}));
+
 const title = '義大醫院健檢套餐完整指南 2026｜家醫科陳昱彰醫師實證比較';
 const description =
   '高雄義大醫院健診中心 2025–2026 年度 16 個健檢套餐完整比較,含公教人員專案 A–H 與精選套餐價格、項目、適合對象、陳醫師 USPSTF 實證點評、健檢前準備、清腸藥 SOP、交通與預約資訊。';
@@ -84,7 +131,7 @@ const description =
 <Layout
   title={title}
   description={description}
-  jsonLd={[medicalWebPage, itemListSchema, faqSchema, breadcrumbSchema]}
+  jsonLd={[medicalWebPage, itemListSchema, faqSchema, breadcrumbSchema, ...bowelPrepHowToSchemas]}
 >
   <main class="max-w-6xl mx-auto px-6 md:px-10 py-12">
     <!-- Breadcrumb -->
@@ -315,31 +362,40 @@ const description =
       </div>
 
       <h3 class="text-lg font-bold text-blue-950 mt-8 mb-4">三種清腸藥的服用時程</h3>
-      <p class="text-sm text-slate-600 mb-4">
-        義大健診中心依個別情況開立下列其中一種,飲用時程大致如下(實際以健診中心說明為準):
+      <p class="text-sm text-slate-600 mb-6">
+        義大健診中心依個別情況開立下列其中一種。以下時程依各藥品仿單與醫院衛教單整理,實際服藥指示請以健診中心開立的單張與專人說明為準。
       </p>
-      <div class="overflow-x-auto rounded-xl border border-slate-200">
-        <table class="w-full text-sm">
-          <thead class="bg-slate-50 text-blue-950">
-            <tr>
-              <th class="text-left p-3 font-bold">清腸藥</th>
-              <th class="text-left p-3 font-bold">服用時程</th>
-            </tr>
-          </thead>
-          <tbody>
-            {BOWEL_PREP_DRUGS.map((d) => (
-              <tr class="border-t border-slate-100 align-top">
-                <td class="p-3 font-semibold text-blue-950 whitespace-nowrap">{d.name}</td>
-                <td class="p-3 text-slate-700">
-                  <ul class="list-disc list-inside space-y-1 chinese-line-height">
-                    {d.schedule.map((s) => <li>{s}</li>)}
-                  </ul>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div class="grid lg:grid-cols-3 gap-5">
+        {BOWEL_PREP_DRUGS.map((d) => (
+          <article id={`prep-${d.englishName.toLowerCase().replace(/\s+/g, '-')}`} class="rounded-2xl border border-slate-200 bg-white p-5 scroll-mt-24">
+            <header class="mb-4 pb-3 border-b border-slate-100">
+              <h4 class="text-lg font-bold text-blue-950">
+                {d.name} <span class="text-sm text-slate-500 font-normal">{d.englishName}</span>
+              </h4>
+              <p class="text-xs text-slate-500 mt-1">{d.generic}</p>
+            </header>
+            <ol class="space-y-3 text-sm text-slate-700 chinese-line-height">
+              {d.steps.map((s, i) => (
+                <li class="flex gap-3">
+                  <span class="shrink-0 w-6 h-6 rounded-full bg-teal-50 text-teal-700 text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+                  <div>
+                    <div class="font-semibold text-blue-950 text-xs uppercase tracking-wide mb-0.5">{s.time}</div>
+                    <div>{s.action}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <aside class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-600 chinese-line-height">
+              <p class="font-semibold text-blue-950 mb-1">⚠️ 注意</p>
+              <p>{d.note}</p>
+            </aside>
+            <p class="mt-3 text-[10px] text-slate-400">{d.source}</p>
+          </article>
+        ))}
       </div>
+      <p class="text-xs text-slate-500 mt-4 chinese-line-height">
+        <strong>共通禁忌</strong>:腎臟疾病、先天性巨結腸症、腸阻塞或腸穿孔、嚴重肝硬化合併腹水、癲癇病史、孕婦或無法配合大量飲水者,請於預約時告知,健診中心會評估改用其他清腸劑。如服用抗血小板或抗凝血劑(Aspirin、Clopidogrel、Warfarin、Dabigatran、Rivaroxaban、Apixaban 等),請與原處方醫師討論是否可停藥 7 天。
+      </p>
     </section>
 
     <!-- Transit -->
