@@ -112,14 +112,6 @@
 1. Chen YC et al. (2023). Comparative effectiveness of pharmacological interventions for sarcopenia: SR/NMA. *European Journal of Applied Physiology and Occupational Physiology (EJAPA)*. (40+ citations)
 2. Chen YC et al. (2018). Continuance compliance of privacy policy of electronic medical records. *BMC Medical Informatics and Decision Making*. doi:10.1186/s12911-018-0722-7 (27+ citations)
 
-### 進行中研究
-- BMI 與髖關節骨關節炎 Meta-Analysis
-- 白噪音與 ADHD 兒童工作記憶 Meta-Analysis
-- Varenicline 完整療程戒菸成功率 Meta-Analysis
-- 足球/橄欖球與髖膝 OA Meta-Analysis（目標期刊：BJSM）
-- NHANES LDL-PA-Mortality 世代研究（目標期刊：JAMA Internal Medicine）
-- SCI 脊髓損傷 HSUV Meta-Analysis
-
 ## 常見問答
 
 **Q: 陳醫師的門診在哪裡？**
