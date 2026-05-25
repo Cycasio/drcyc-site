@@ -2,8 +2,33 @@
 import Layout from '../../layouts/Layout.astro';
 import { TOOLS, TOOL_GROUPS, TOOLS_SITE, TOOLS_DASHBOARD_URL } from '../../data/tools';
 
-const title = '醫療計算機｜減重 / 肥胖 / 代謝指標｜陳昱彰醫師';
-const description = '義大醫院家醫科陳昱彰醫師整理的線上醫療計算機合集：BMI、TDEE、體脂率、腰圍身高比、GLP-1 適應症、減重進度等 8 個計算機，採用衛福部國健署與國際公認標準，所有資料只在你的瀏覽器，不上傳。';
+const title = '醫療計算機合集｜減重 / 代謝 / 心血管 / 職場健康風險｜陳昱彰醫師';
+const description = '義大醫院家醫科陳昱彰醫師整理的線上醫療計算機合集：BMI、TDEE、體脂率、腰圍身高比、GLP-1 適應症、減重進度、Framingham 與 AHA PREVENT 心血管風險、過勞風險等 11 個計算機，採用衛福部國健署與國際公認標準，所有資料只在你的瀏覽器，不上傳。';
+
+// 臨床風險評估計算機（位於 /blog/health-tools/，配有完整衛教文）
+const riskTools = [
+  {
+    href: '/blog/health-tools/cv-risk-calculator-prevent/',
+    title: 'AHA PREVENT 心血管風險計算機',
+    emoji: '❤️',
+    audience: '30–79 歲，最新 2023 AHA 公式',
+    description: 'American Heart Association 2023 年發表的 PREVENT 風險計算機，估算 10 年與 30 年的心血管疾病風險，包含心臟病、中風與心衰竭。涵蓋族群更廣、納入腎功能與代謝指標。',
+  },
+  {
+    href: '/blog/health-tools/cv-risk-calculator/',
+    title: 'Framingham ATP III 心血管風險',
+    emoji: '🩺',
+    audience: '20–79 歲，經典心血管風險工具',
+    description: '美國 NIH NHLBI 採用的經典 Framingham 風險計算機（ATP III 版），估算 10 年內心血管事件（心肌梗塞、冠心病死亡）的風險百分比，臨床上仍廣泛使用。',
+  },
+  {
+    href: '/blog/health-tools/overwork-risk-calculator/',
+    title: '過勞風險評估計算機',
+    emoji: '⚠️',
+    audience: '勞工健康四大計畫：過勞預防',
+    description: '依勞動部「異常工作負荷促發疾病預防指引」附表 8 整理，輸入加班時數、輪班、CBI 過勞分數，自動評估你的過勞風險等級與後續建議。',
+  },
+];
 
 const collectionSchema = {
   '@type': 'CollectionPage',
@@ -43,7 +68,7 @@ const breadcrumb = {
         醫療計算機合集
       </h1>
       <p class="text-slate-600 chinese-line-height max-w-3xl">
-        家醫科 / 肥胖醫學常用的 8 個臨床指標，採用衛福部國民健康署與國際公認標準，附臨床點評。所有輸入只儲存在您的瀏覽器，不上傳任何資料。
+        家醫科 / 肥胖醫學 / 心血管 / 職業醫學常用的 11 個臨床指標與風險評估，採用衛福部國民健康署、美國心臟協會、勞動部與國際公認標準，附臨床點評。所有輸入只儲存在您的瀏覽器，不上傳任何資料。
       </p>
     </header>
 
@@ -83,6 +108,26 @@ const breadcrumb = {
         </div>
       </section>
     ))}
+
+    <section class="mb-10">
+      <div class="flex items-end justify-between mb-4 gap-4 flex-wrap">
+        <h2 class="text-xl font-bold text-blue-950 font-headline">臨床風險評估</h2>
+        <p class="text-xs text-slate-500">每個工具皆配有完整衛教說明</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {riskTools.map((t) => (
+          <a
+            href={t.href}
+            class="block p-5 rounded-2xl bg-white border border-outline-variant hover:border-primary hover:shadow-md transition-all no-underline"
+          >
+            <span class="text-3xl">{t.emoji}</span>
+            <h3 class="text-base font-bold text-blue-950 mt-3 font-headline">{t.title}</h3>
+            <p class="text-xs text-teal-700 font-medium mt-1">適合：{t.audience}</p>
+            <p class="text-sm text-slate-600 mt-2 chinese-line-height line-clamp-4">{t.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <section class="mt-12 rounded-2xl bg-surface-container p-6 md:p-8">
       <h2 class="text-lg font-bold text-blue-950 mb-3 font-headline">關於這些計算機</h2>

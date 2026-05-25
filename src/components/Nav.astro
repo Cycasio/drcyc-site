@@ -3,15 +3,21 @@ const pathname = Astro.url.pathname;
 
 const primaryLinks = [
   { href: '/', label: '首頁' },
+  { href: '/about', label: '關於' },
   {
-    href: '/blog',
-    label: '衛教專欄',
+    href: '/services',
+    label: '服務項目',
     children: [
-      { href: '/blog/', label: '全部文章' },
-      { href: '/blog/health-tools/', label: '健康工具' },
+      { href: '/services/', label: '服務總覽' },
+      { href: '/health-checkup/', label: '義大健檢指南' },
+      { href: '/qishan-clinic/', label: '旗山夜診' },
+      { href: '/workplace-health/', label: '職場健康' },
+      { href: '/speaking/', label: '衛教演講' },
+      { href: '/community-health/', label: '社區營造' },
     ],
   },
-  { href: '/services', label: '服務項目' },
+  { href: '/blog', label: '衛教專欄' },
+  { href: '/tools', label: '健康工具' },
 ];
 
 function normalize(path: string): string {
@@ -28,8 +34,8 @@ function isActive(href: string): boolean {
 function isChildActive(parentHref: string, childHref: string): boolean {
   const current = normalize(pathname);
 
-  if (parentHref === '/blog' && childHref === '/blog/') {
-    return current === '/blog/' || (current.startsWith('/blog/') && !current.startsWith('/blog/health-tools/'));
+  if (parentHref === '/services' && childHref === '/services/') {
+    return current === '/services/';
   }
 
   return isActive(childHref);
@@ -45,7 +51,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
     <a href="/" class="text-xl font-bold tracking-tighter text-blue-950 hover:no-underline">陳昱彰醫師 Chen, Yu-Chang, MD</a>
 
     <!-- Desktop Links -->
-    <div class="hidden md:flex items-center gap-10">
+    <div class="hidden lg:flex items-center gap-7">
       {primaryLinks.map(link => (
         link.children ? (
           <details class="relative group">
@@ -98,7 +104,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
       href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
       target="_blank"
       rel="noopener"
-      class="hidden md:inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
+      class="hidden lg:inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
     >
       預約掛號
     </a>
@@ -106,7 +112,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
     <!-- Mobile Hamburger -->
     <button
       id="mobile-menu-btn"
-      class="md:hidden flex flex-col gap-1.5 p-2"
+      class="lg:hidden flex flex-col gap-1.5 p-2"
       aria-label="開啟選單"
     >
       <span class="block w-6 h-0.5 bg-on-surface transition-transform" id="bar1"></span>
@@ -116,7 +122,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
+  <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
     <div class="flex flex-col gap-4 pt-4">
       {primaryLinks.map(link => (
         link.children ? (
