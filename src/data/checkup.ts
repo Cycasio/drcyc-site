@@ -4,7 +4,7 @@
 // 免責聲明:價格與內容以義大醫院健診中心官方最新公告為準
 //          本資料由義大家醫科陳昱彰醫師整理,不收取任何轉介佣金
 
-export const LAST_UPDATED = '2026-04-13';
+export const LAST_UPDATED = '2026-05-26';
 export const OFFICIAL_URL = 'https://www.edah.org.tw';
 export const BOOKING_PHONE = '07-615-0011';
 export const BOOKING_EXTENSIONS = ['5706', '5708', '5715', '5716', '5735'];

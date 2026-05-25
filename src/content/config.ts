@@ -19,6 +19,11 @@ const blog = defineCollection({
         }),
       )
       .optional(),
+    // 設為 true 會把 schema.org 類型從 BlogPosting 升級為 MedicalScholarlyArticle
+    // (給引用 RCT / 系統性回顧 / meta-analysis 的文章使用，增加醫療內容權威信號)
+    scholarly: z.boolean().optional().default(false),
+    // 文章主要關聯的醫療議題（用於 MedicalScholarlyArticle.about 與 MedicalCondition）
+    medicalCondition: z.string().optional(),
   }),
 });
 

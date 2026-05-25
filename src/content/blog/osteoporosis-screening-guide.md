@@ -5,6 +5,8 @@ pubDate: 2026-03-11
 author: "陳昱彰醫師"
 tags: ["骨質疏鬆", "骨密度", "DXA", "骨鬆預防"]
 category: "骨質疏鬆"
+scholarly: true
+medicalCondition: "骨質疏鬆 Osteoporosis"
 faq:
   - q: "健檢報告說我骨密度偏低,要吃藥嗎?"
     a: "不一定。要看 T-score 數值、有沒有骨折風險因子。T-score 在 -1 到 -2.5 之間屬於『骨質缺乏』,通常先從飲食運動改善、定期追蹤,不一定要立即用藥;T-score ≤ -2.5 才算骨鬆,建議跟骨鬆科醫師討論藥物治療選項。"

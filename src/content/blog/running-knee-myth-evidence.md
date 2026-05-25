@@ -17,6 +17,8 @@ tags:
   - Hartwell 2024
   - ACE-CPT
 category: "運動醫學"
+scholarly: true
+medicalCondition: "退化性關節炎 Osteoarthritis"
 image: ""
 faq:
   - q: "跑步真的會傷膝蓋嗎？"

@@ -32,12 +32,70 @@ const medicalWebPage = {
   name: '義大醫院健檢套餐完整指南 2026',
   description:
     '義大醫院家醫科陳昱彰醫師整理的 16 個健檢套餐完整比較,含 USPSTF 實證醫學點評、健檢前準備、清腸藥 SOP、交通與預約資訊。',
+  datePublished: '2026-04-13',
+  dateModified: LAST_UPDATED,
   lastReviewed: LAST_UPDATED,
-  author: { '@id': `${SITE}/#person` },
   reviewedBy: { '@id': `${SITE}/#person` },
+  author: { '@id': `${SITE}/#person` },
+  publisher: { '@id': `${SITE}/#person` },
   about: { '@type': 'MedicalProcedure', name: '健康檢查 Health Checkup' },
   specialty: 'FamilyPractice',
   inLanguage: 'zh-Hant',
+  // Speakable: 朗讀 FAQ 答案、套餐標題、實證醫學摘要
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', 'h2', '[data-speakable="true"]'],
+  },
+};
+
+// USPSTF 評等專有名詞（DefinedTermSet）— 讓 AI 理解這些是專業術語
+const uspstfTermSet = {
+  '@type': 'DefinedTermSet',
+  '@id': `${pageUrl}#uspstf-grades`,
+  name: 'USPSTF 預防服務工作小組建議等級',
+  inDefinedTermSet: 'https://www.uspreventiveservicestaskforce.org/uspstf/grade-definitions',
+  hasDefinedTerm: [
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${pageUrl}#uspstf-grade-a`,
+      name: 'Grade A',
+      description: 'USPSTF 強烈建議該預防服務。有高度確信淨效益顯著。',
+      termCode: 'A',
+      inDefinedTermSet: { '@id': `${pageUrl}#uspstf-grades` },
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${pageUrl}#uspstf-grade-b`,
+      name: 'Grade B',
+      description: 'USPSTF 建議該預防服務。有高度確信淨效益中等,或中度確信淨效益顯著。',
+      termCode: 'B',
+      inDefinedTermSet: { '@id': `${pageUrl}#uspstf-grades` },
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${pageUrl}#uspstf-grade-c`,
+      name: 'Grade C',
+      description: 'USPSTF 建議僅在個別情況下進行,根據專業判斷與病人偏好決定。淨效益小。',
+      termCode: 'C',
+      inDefinedTermSet: { '@id': `${pageUrl}#uspstf-grades` },
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${pageUrl}#uspstf-grade-d`,
+      name: 'Grade D',
+      description: 'USPSTF 不建議該預防服務。有中度或高度確信此服務無淨效益,或可能造成傷害。',
+      termCode: 'D',
+      inDefinedTermSet: { '@id': `${pageUrl}#uspstf-grades` },
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${pageUrl}#uspstf-grade-i`,
+      name: 'I Statement',
+      description: 'USPSTF 認為目前證據不足以評估該預防服務的利弊平衡。',
+      termCode: 'I',
+      inDefinedTermSet: { '@id': `${pageUrl}#uspstf-grades` },
+    },
+  ],
 };
 
 const itemListSchema = {
@@ -90,6 +148,10 @@ const faqSchema = {
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['[data-faq-question]', '[data-faq-answer]'],
+  },
 };
 
 const breadcrumbSchema = {
@@ -131,7 +193,7 @@ const description =
 <Layout
   title={title}
   description={description}
-  jsonLd={[medicalWebPage, itemListSchema, faqSchema, breadcrumbSchema, ...bowelPrepHowToSchemas]}
+  jsonLd={[medicalWebPage, uspstfTermSet, itemListSchema, faqSchema, breadcrumbSchema, ...bowelPrepHowToSchemas]}
 >
   <main class="max-w-6xl mx-auto px-6 md:px-10 py-12">
     <!-- Breadcrumb -->

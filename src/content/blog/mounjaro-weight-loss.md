@@ -5,6 +5,8 @@ pubDate: 2026-04-10
 author: "陳昱彰醫師"
 tags: ["減重", "猛健樂", "Mounjaro", "tirzepatide", "肥胖醫學", "GLP-1", "藥物治療"]
 category: "減重管理"
+scholarly: true
+medicalCondition: "肥胖症 Obesity"
 image: ""
 faq:
   - q: "猛健樂(Mounjaro)是什麼?跟 Ozempic 差在哪?"

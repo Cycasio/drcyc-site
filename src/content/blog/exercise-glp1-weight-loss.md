@@ -5,6 +5,8 @@ pubDate: 2026-04-10
 author: "陳昱彰醫師"
 tags: ["減重", "運動", "猛健樂", "Mounjaro", "GLP-1", "肌少症", "阻力訓練", "骨質疏鬆"]
 category: "減重管理"
+scholarly: true
+medicalCondition: "肥胖症 Obesity"
 image: ""
 faq:
   - q: "吃猛健樂或 Ozempic 減重會流失多少肌肉?"

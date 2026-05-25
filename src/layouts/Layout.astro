@@ -99,6 +99,25 @@ const personSchema = {
     'https://www.instagram.com/lazydr.cyc',
     'https://orcid.org/0009-0005-2506-1058',
   ],
+  subjectOf: [
+    {
+      '@type': 'MedicalScholarlyArticle',
+      headline: 'Comparative effectiveness of pharmacological interventions for sarcopenia: A systematic review and network meta-analysis',
+      author: { '@id': `${SITE}/#person` },
+      datePublished: '2023',
+      isPartOf: { '@type': 'Periodical', name: 'European Journal of Applied Physiology and Occupational Physiology' },
+      about: { '@type': 'MedicalCondition', name: 'Sarcopenia' },
+    },
+    {
+      '@type': 'ScholarlyArticle',
+      headline: 'Continuance compliance of privacy policy of electronic medical records',
+      author: { '@id': `${SITE}/#person` },
+      datePublished: '2018',
+      isPartOf: { '@type': 'Periodical', name: 'BMC Medical Informatics and Decision Making' },
+      identifier: '10.1186/s12911-018-0722-7',
+      url: 'https://doi.org/10.1186/s12911-018-0722-7',
+    },
+  ],
 };
 
 const physicianSchema = {
