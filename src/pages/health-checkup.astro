@@ -109,12 +109,19 @@ const itemListSchema = {
     name: `${p.name}（${p.theme}）`,
     url: `${pageUrl}#pkg-${p.id}`,
     item: {
-      '@type': 'MedicalProcedure',
+      // 雙重 @type:MedicalProcedure 保留醫療語意,Service 讓 Google 認得 Review 與 Offer 父類型
+      '@type': ['MedicalProcedure', 'Service'],
       '@id': `${pageUrl}#pkg-${p.id}-procedure`,
       name: p.name,
       description: p.theme,
       url: `${pageUrl}#pkg-${p.id}`,
       procedureType: 'Diagnostic',
+      serviceType: '健康檢查 Health Checkup',
+      provider: {
+        '@type': 'Hospital',
+        name: '義大醫院',
+        url: OFFICIAL_URL,
+      },
       offers: {
         '@type': 'Offer',
         price: p.price.toString(),
@@ -130,7 +137,7 @@ const itemListSchema = {
       review: {
         '@type': 'Review',
         '@id': `${pageUrl}#pkg-${p.id}-review`,
-        itemReviewed: { '@id': `${pageUrl}#pkg-${p.id}-procedure` },
+        // 巢狀在 review 屬性內時,itemReviewed 是隱含的,不可重複指定(否則 GSC 報「方向衝突」)
         author: { '@id': `${SITE}/#person` },
         publisher: { '@id': `${SITE}/#person` },
         datePublished: LAST_UPDATED,
