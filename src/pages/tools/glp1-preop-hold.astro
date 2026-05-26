@@ -1,0 +1,310 @@
+---
+import ToolLayout from '../../components/tools/ToolLayout.astro';
+import { findTool } from '../../data/tools';
+
+const tool = findTool('glp1-preop-hold');
+---
+
+<ToolLayout tool={tool}>
+  <!-- Clinical disclaimer -->
+  <aside class="rounded-xl border-l-4 border-amber-500 bg-amber-50 p-5 mb-6 text-sm chinese-line-height">
+    <p class="font-bold text-amber-900 mb-1">⚠️ 臨床決策支援工具</p>
+    <p class="text-amber-900">
+      此工具供醫療專業人員與了解自身病況的患者參考。<strong>最終停藥決定須由負責麻醉的醫師、原處方醫師與外科醫師共同評估</strong>，
+      不建議單憑此工具自行停藥。若您是患者，請列印此頁結果，於術前評估時與醫療團隊討論。
+    </p>
+  </aside>
+
+  <!-- Input form -->
+  <form id="glp1-form" class="bg-white rounded-2xl border border-slate-200 p-6 space-y-6 print:hidden">
+    <h2 class="text-lg font-bold text-blue-950 font-headline">輸入資料</h2>
+
+    <div>
+      <label for="drug" class="block text-sm font-semibold text-slate-700 mb-2">藥物</label>
+      <select id="drug" name="drug" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-primary focus:outline-none">
+        <option value="">— 請選擇 —</option>
+        <optgroup label="週注射型(half-life 較長,須提前停藥)">
+          <option value="semaglutide-weekly" data-freq="weekly">Semaglutide(Wegovy / Ozempic / Rybelsus 口服)</option>
+          <option value="tirzepatide" data-freq="weekly">Tirzepatide(Mounjaro / Zepbound)</option>
+          <option value="dulaglutide" data-freq="weekly">Dulaglutide(Trulicity)</option>
+        </optgroup>
+        <optgroup label="日注射型">
+          <option value="liraglutide" data-freq="daily">Liraglutide(Saxenda / Victoza)</option>
+          <option value="lixisenatide" data-freq="daily">Lixisenatide(Lyxumia)</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label for="lastDose" class="block text-sm font-semibold text-slate-700 mb-2">上次注射 / 服藥日期</label>
+        <input type="date" id="lastDose" name="lastDose" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-primary focus:outline-none">
+      </div>
+      <div>
+        <label for="surgeryDate" class="block text-sm font-semibold text-slate-700 mb-2">預定手術 / 內視鏡日期</label>
+        <input type="date" id="surgeryDate" name="surgeryDate" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-primary focus:outline-none">
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-2">麻醉類型</label>
+      <div class="space-y-2">
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="radio" name="anesthesia" value="ga" class="mt-1">
+          <div>
+            <div class="font-medium text-slate-900">全身麻醉 / 深度鎮靜</div>
+            <div class="text-xs text-slate-500">含無痛胃腸鏡(Propofol)、ERCP、開腹/腹腔鏡手術</div>
+          </div>
+        </label>
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="radio" name="anesthesia" value="moderate" class="mt-1">
+          <div>
+            <div class="font-medium text-slate-900">中度鎮靜</div>
+            <div class="text-xs text-slate-500">部分內視鏡 / 牙科鎮靜</div>
+          </div>
+        </label>
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="radio" name="anesthesia" value="regional" class="mt-1">
+          <div>
+            <div class="font-medium text-slate-900">區域麻醉 / 神經阻斷</div>
+            <div class="text-xs text-slate-500">脊椎麻醉、硬膜外、神經阻斷</div>
+          </div>
+        </label>
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="radio" name="anesthesia" value="local" class="mt-1">
+          <div>
+            <div class="font-medium text-slate-900">局部麻醉(無鎮靜)</div>
+            <div class="text-xs text-slate-500">皮膚小手術、白內障、靜脈導管</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <p class="block text-sm font-semibold text-slate-700 mb-2">高吸入性肺炎風險因子(勾選所有適用)</p>
+      <div class="space-y-2 text-sm">
+        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" name="risk" value="bmi"> BMI ≥ 35</label>
+        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" name="risk" value="gerd"> 嚴重胃食道逆流(GERD)</label>
+        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" name="risk" value="gastroparesis"> 糖尿病性胃輕癱 / 已知胃排空延遲</label>
+        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" name="risk" value="symptoms"> 現有噁心 / 嘔吐 / 上腹悶脹</label>
+        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" name="risk" value="bariatric"> 過去做過減重手術(bypass / sleeve)</label>
+      </div>
+    </div>
+
+    <button type="submit" class="w-full bg-primary text-on-primary font-bold py-3 rounded-full hover:opacity-90 transition-opacity">
+      計算停藥建議
+    </button>
+  </form>
+
+  <!-- Result -->
+  <div id="glp1-result" class="hidden mt-6"></div>
+
+  <article class="max-w-none mt-10 print:hidden space-y-4">
+    <h2 class="text-xl font-bold text-blue-950 font-headline">為什麼 GLP-1 患者麻醉前要停藥？</h2>
+    <p class="chinese-line-height text-slate-700">
+      GLP-1 受體促效劑(Wegovy、Ozempic、Mounjaro、Saxenda、Trulicity 等)會<strong>顯著延緩胃排空</strong>，可達正常人 2–4 倍時間。
+      在<strong>全身麻醉或深度鎮靜時</strong>，即使按一般禁食指引（固體 8 小時、清流質 2 小時），胃部仍可能殘留大量食物或液體，
+      導致麻醉誘導時的<strong>吸入性肺炎風險顯著上升</strong>(2023 年多篇 case series 與 cohort 顯示風險比約 3–5 倍)。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">兩派指引並存(2023 vs 2024)</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-2">
+      <li>
+        <strong>ASA 2023 共識聲明(保守版)</strong>:週注射 GLP-1 至少停藥 1 週、日注射停當天劑量。
+        對所有需鎮靜/全身麻醉的選擇性手術皆適用。
+      </li>
+      <li>
+        <strong>2024 AGA / ASA / ASMBS 多會聯合更新(個別化版)</strong>:不再一律要求停藥 1 週。
+        改以<strong>「症狀 + 風險因子 + 麻醉類型」分層處置</strong>:
+        無症狀低風險者可不停藥但術前 24h 改清流質;有症狀或高風險者考慮延後手術、做胃部超音波或仍照原停藥建議執行。
+      </li>
+    </ul>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">本工具的建議邏輯</h3>
+    <p class="chinese-line-height text-slate-700">
+      預設採 2024 個別化路徑(較新且降低不必要的高血糖風險),但在以下情況回到 ASA 2023 保守路徑:
+      <strong>全身麻醉/深度鎮靜 + 有任一高風險因子或症狀</strong>。麻醉醫師可考慮術中 RSI(快速序列誘導)、胃部超音波評估或延後手術。
+    </p>
+
+    <h3 class="text-lg font-bold text-blue-950 mt-6">主要參考文獻</h3>
+    <ul class="chinese-line-height text-slate-700 list-disc pl-5 space-y-1 text-sm">
+      <li>ASA. American Society of Anesthesiologists Consensus-Based Guidance on Preoperative Management of Patients on GLP-1 Receptor Agonists. <em>ASA Newsletter</em>. June 2023.</li>
+      <li>Kindel TL, et al. Multisociety Clinical Practice Guidance for the Safe Use of Glucagon-like Peptide-1 Receptor Agonists in the Perioperative Period. <em>Surg Obes Relat Dis</em>. 2024.</li>
+      <li>Wang AY, et al. AGA Rapid Clinical Practice Update on the Use of GLP-1 Receptor Agonists Prior to Endoscopic Procedures. <em>Clin Gastroenterol Hepatol</em>. 2024.</li>
+      <li>Stark E, et al. Aspiration Pneumonitis in Patients Taking GLP-1 Receptor Agonists. <em>Br J Anaesth</em>. 2023.</li>
+    </ul>
+  </article>
+
+  <script is:inline>
+    const form = document.getElementById('glp1-form');
+    const result = document.getElementById('glp1-result');
+
+    // 半衰期 (天)
+    const halfLife = {
+      'semaglutide-weekly': 7,
+      'tirzepatide': 5,
+      'dulaglutide': 5,
+      'liraglutide': 0.5,
+      'lixisenatide': 0.13, // 約 3 小時
+    };
+
+    // 5 個半衰期 ≈ 完全清除
+    const fullClearanceDays = {
+      'semaglutide-weekly': 35,
+      'tirzepatide': 25,
+      'dulaglutide': 25,
+      'liraglutide': 2,
+      'lixisenatide': 1,
+    };
+
+    const drugDisplay = {
+      'semaglutide-weekly': 'Semaglutide (Wegovy / Ozempic)',
+      'tirzepatide': 'Tirzepatide (Mounjaro / Zepbound)',
+      'dulaglutide': 'Dulaglutide (Trulicity)',
+      'liraglutide': 'Liraglutide (Saxenda / Victoza)',
+      'lixisenatide': 'Lixisenatide (Lyxumia)',
+    };
+
+    function formatDate(d) {
+      return d.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+    }
+
+    function diffDays(a, b) {
+      return Math.round((a - b) / (1000 * 60 * 60 * 24));
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const drug = form.drug.value;
+      const lastDose = form.lastDose.value ? new Date(form.lastDose.value) : null;
+      const surgeryDate = form.surgeryDate.value ? new Date(form.surgeryDate.value) : null;
+      const anesthesia = form.anesthesia.value;
+      const risks = Array.from(form.querySelectorAll('input[name="risk"]:checked')).map(c => c.value);
+
+      if (!drug || !surgeryDate || !anesthesia) {
+        result.innerHTML = '<div class="rounded-xl border-l-4 border-red-500 bg-red-50 p-4 text-red-900">請完整選擇藥物、手術日期與麻醉類型。</div>';
+        result.classList.remove('hidden');
+        return;
+      }
+
+      const freq = form.drug.options[form.drug.selectedIndex].dataset.freq;
+      const hasRisk = risks.length > 0;
+      const symptomatic = risks.includes('symptoms') || risks.includes('gastroparesis');
+      const needsSedation = (anesthesia === 'ga' || anesthesia === 'moderate');
+
+      // 決定 ASA 2023 保守路徑或 2024 個別化路徑
+      let path, holdDays, gradeClass, gradeLabel, recommendations;
+
+      if (!needsSedation) {
+        // 區域 / 局部麻醉 — 一般不需停藥
+        path = '局部 / 區域麻醉(吸入風險低)';
+        holdDays = 0;
+        gradeClass = 'bg-green-50 border-green-500 text-green-900';
+        gradeLabel = '🟢 一般不需停藥';
+        recommendations = [
+          '局部麻醉與區域麻醉(脊麻、硬膜外、神經阻斷)不會降低保護氣道反射,GLP-1 一般無需停藥',
+          '若手術可能轉為深度鎮靜或全身麻醉,請依該情境重新評估',
+          '其他降血糖藥的調整(如 metformin 含顯影劑時)仍照原規定',
+        ];
+      } else if (needsSedation && (symptomatic || (hasRisk && freq === 'weekly'))) {
+        // 高風險 → ASA 2023 保守
+        path = 'ASA 2023 保守路徑(全身麻醉 + 高吸入風險)';
+        holdDays = freq === 'weekly' ? 7 : 1;
+        gradeClass = 'bg-red-50 border-red-500 text-red-900';
+        gradeLabel = '🔴 建議充分停藥(高風險)';
+        recommendations = [
+          `${freq === 'weekly' ? '週注射' : '日注射'} GLP-1 至少於手術前 ${holdDays} 天停用`,
+          symptomatic ? '由於目前有腸胃道症狀(噁心/嘔吐/腹脹)或已知胃排空延遲,強烈建議延長停藥或延後手術' : null,
+          '術前 24 小時改為清流質飲食(可降低胃內殘留)',
+          '麻醉醫師應評估:術中 RSI(快速序列誘導)、考慮術前胃部超音波量化胃內容物',
+          freq === 'weekly' ? `本藥半衰期約 ${halfLife[drug]} 天,完全清除約需 ${fullClearanceDays[drug]} 天;${holdDays} 天為實務折衷` : null,
+          '原處方醫師需要評估停藥期間的血糖控制(尤其同時糖尿病患者)',
+        ].filter(Boolean);
+      } else if (needsSedation) {
+        // 中度風險 → 2024 個別化
+        path = '2024 AGA/ASA 個別化路徑(全身麻醉 + 低吸入風險)';
+        holdDays = freq === 'weekly' ? 7 : 1;
+        gradeClass = 'bg-amber-50 border-amber-500 text-amber-900';
+        gradeLabel = '🟡 建議停藥 + 清流質緩衝';
+        recommendations = [
+          `${freq === 'weekly' ? '週注射' : '日注射'} GLP-1 建議停藥 ${holdDays} 天(保守做法仍以 1 個半衰期為基準)`,
+          '術前 24 小時改為清流質飲食',
+          '若臨手術日仍有腸胃道症狀,通知麻醉醫師,可能需要胃部超音波或 RSI',
+          '2024 多會更新允許低風險、無症狀者經個別評估後可不停藥,但須與麻醉醫師明確記錄',
+          '原處方醫師需評估停藥期間的血糖控制(尤其同時糖尿病患者)',
+        ];
+      }
+
+      // 計算建議停藥日
+      const holdStartDate = new Date(surgeryDate);
+      holdStartDate.setDate(holdStartDate.getDate() - holdDays);
+      const lastDoseAcceptableLabel = holdDays > 0 ? formatDate(holdStartDate) : '無須調整';
+
+      // 若有提供 lastDose,評估是否足夠
+      let lastDoseAnalysis = null;
+      if (lastDose && holdDays > 0) {
+        const daysGap = diffDays(surgeryDate, lastDose);
+        if (daysGap >= holdDays) {
+          lastDoseAnalysis = `✅ 上次劑量至手術已 ${daysGap} 天,符合建議停藥區間(≥ ${holdDays} 天)`;
+        } else {
+          lastDoseAnalysis = `⚠️ 上次劑量至手術僅 ${daysGap} 天,不足建議停藥區間(${holdDays} 天)。請與麻醉醫師討論是否延後手術或執行高風險路徑(RSI / 胃部超音波)`;
+        }
+      }
+
+      const recHtml = recommendations.map(r => `<li>${r}</li>`).join('');
+
+      result.innerHTML = `
+        <div class="space-y-4">
+          <div class="rounded-2xl border-l-4 ${gradeClass} p-5">
+            <p class="font-bold text-lg mb-1">${gradeLabel}</p>
+            <p class="text-sm">${path}</p>
+          </div>
+
+          <div class="rounded-2xl bg-white border border-slate-200 p-5">
+            <h3 class="font-bold text-blue-950 mb-3 font-headline">📅 建議時程</h3>
+            <dl class="space-y-3 text-sm">
+              <div class="grid sm:grid-cols-3 gap-2">
+                <dt class="text-slate-500">藥物</dt>
+                <dd class="sm:col-span-2 text-slate-900 font-medium">${drugDisplay[drug]}(${freq === 'weekly' ? '週注射' : '日注射'})</dd>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-2">
+                <dt class="text-slate-500">手術 / 內視鏡日</dt>
+                <dd class="sm:col-span-2 text-slate-900 font-medium">${formatDate(surgeryDate)}</dd>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-2">
+                <dt class="text-slate-500">建議停藥起始</dt>
+                <dd class="sm:col-span-2 text-blue-950 font-bold">${holdDays > 0 ? `${formatDate(holdStartDate)}起 (即停藥 ${holdDays} 天)` : '不需停藥'}</dd>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-2">
+                <dt class="text-slate-500">藥物動力學參考</dt>
+                <dd class="sm:col-span-2 text-slate-700">半衰期 ${halfLife[drug]} 天 · 完全清除約 ${fullClearanceDays[drug]} 天</dd>
+              </div>
+              ${lastDoseAnalysis ? `
+              <div class="grid sm:grid-cols-3 gap-2 pt-2 border-t border-slate-100">
+                <dt class="text-slate-500">您的停藥狀態</dt>
+                <dd class="sm:col-span-2 text-slate-900 font-medium">${lastDoseAnalysis}</dd>
+              </div>` : ''}
+            </dl>
+          </div>
+
+          <div class="rounded-2xl bg-white border border-slate-200 p-5">
+            <h3 class="font-bold text-blue-950 mb-3 font-headline">📋 具體建議</h3>
+            <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700 chinese-line-height">${recHtml}</ul>
+          </div>
+
+          <div class="rounded-2xl bg-surface-container p-5 text-sm text-slate-700 chinese-line-height">
+            <p class="font-semibold text-blue-950 mb-2">⚖️ 重要提醒</p>
+            <p>此結果為依公開指引整理的<strong>決策支援建議</strong>,不可取代麻醉醫師、原處方醫師與外科醫師之個別評估。請列印此頁帶至術前麻醉評估門診共同討論。糖尿病同時使用 GLP-1 者,停藥期間的血糖控制(可能改回 metformin / insulin)需與內分泌或家醫科醫師另行規劃。</p>
+          </div>
+
+          <div class="flex flex-wrap gap-3 print:hidden">
+            <button type="button" onclick="window.print()" class="bg-blue-950 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:opacity-90">🖨 列印帶到診間</button>
+            <a href="/tools/anticoagulant-hold/" class="bg-white border border-primary text-primary px-5 py-2.5 rounded-full text-sm font-bold hover:bg-primary hover:text-on-primary no-underline">下一步:抗凝血藥停藥工具 →</a>
+          </div>
+        </div>
+      `;
+      result.classList.remove('hidden');
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+</ToolLayout>

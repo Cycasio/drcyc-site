@@ -14,7 +14,10 @@ export type ToolSlug =
   | 'body-fat'
   | 'waist-ratio'
   | 'glp1-eligibility'
-  | 'weight-progress';
+  | 'weight-progress'
+  | 'glp1-preop-hold'
+  | 'anticoagulant-hold'
+  | 'eras-protocol';
 
 export interface ToolMeta {
   slug: ToolSlug;
@@ -25,7 +28,7 @@ export interface ToolMeta {
   description: string;    // meta description / 卡片副標
   keyword: string;        // 主打關鍵字
   emoji: string;
-  category: '減重核心' | '進階指標' | '臨床評估';
+  category: '減重核心' | '進階指標' | '臨床評估' | '圍術期決策';
   audience: string;       // 卡片標語
 }
 
@@ -126,6 +129,43 @@ export const TOOLS: ToolMeta[] = [
     category: '臨床評估',
     audience: '減重療程中追蹤進度',
   },
+  // ── 圍術期決策工具(perioperative decision support) ──
+  {
+    slug: 'glp1-preop-hold',
+    url: `${TOOLS_SITE}/tools/glp1-preop-hold/`,
+    title: 'GLP-1 術前停藥計算器｜瘦瘦針麻醉前安全停藥｜陳昱彰醫師',
+    pageHeading: 'GLP-1 術前停藥計算器',
+    shortLabel: 'GLP-1 術前停藥',
+    description: '依 ASA 2023 共識與 2024 AGA/ASA 更新,計算 Wegovy / Ozempic / Mounjaro / Saxenda / Trulicity 等 GLP-1 / GIP 類藥物在手術或無痛內視鏡前該停藥多久,降低麻醉吸入性肺炎風險。義大醫院家醫科陳昱彰醫師整理。',
+    keyword: 'GLP-1 術前停藥',
+    emoji: '🎯',
+    category: '圍術期決策',
+    audience: '即將開刀或做無痛內視鏡的 GLP-1 使用者',
+  },
+  {
+    slug: 'anticoagulant-hold',
+    url: `${TOOLS_SITE}/tools/anticoagulant-hold/`,
+    title: '抗凝血藥術前停藥工具｜Warfarin DOAC Aspirin Plavix 停藥時程｜陳昱彰醫師',
+    pageHeading: '抗凝血藥術前停藥工具',
+    shortLabel: '抗凝血停藥',
+    description: '依 ACC/AHA 2017 與 2022 圍術期指引,計算 Warfarin、Apixaban、Dabigatran、Rivaroxaban、Aspirin、Clopidogrel 等抗凝血/抗血小板藥物在低/中/高出血風險手術前該停多久,並判斷是否需要 LMWH bridging。',
+    keyword: '抗凝血藥停藥',
+    emoji: '💊',
+    category: '圍術期決策',
+    audience: '抗凝血/抗血小板藥使用者面臨手術或內視鏡',
+  },
+  {
+    slug: 'eras-protocol',
+    url: `${TOOLS_SITE}/tools/eras-protocol/`,
+    title: '個人化 ERAS 術前準備產生器｜禁食時程 + 碳水負荷｜陳昱彰醫師',
+    pageHeading: '個人化 ERAS Protocol 產生器',
+    shortLabel: 'ERAS 術前準備',
+    description: '依 ERAS Society 2018/2023 + ASA 禁食指引,輸入手術類型與時間,自動產生個人化術前 24 小時禁食時程、清流質與固體截止時間、碳水負荷建議、慢性病藥物調整與 ERAS bundle。',
+    keyword: 'ERAS 術前準備',
+    emoji: '🍽️',
+    category: '圍術期決策',
+    audience: '即將手術者 / 麻醉前團隊 / 護理',
+  },
 ];
 
 export function findTool(slug: ToolSlug): ToolMeta {
@@ -136,21 +176,25 @@ export function findTool(slug: ToolSlug): ToolMeta {
 
 // 分組（給索引頁、儀表板用）
 export const TOOL_GROUPS: { category: ToolMeta['category']; tools: ToolMeta[] }[] = [
-  { category: '減重核心',  tools: TOOLS.filter((t) => t.category === '減重核心') },
-  { category: '進階指標',  tools: TOOLS.filter((t) => t.category === '進階指標') },
-  { category: '臨床評估',  tools: TOOLS.filter((t) => t.category === '臨床評估') },
+  { category: '減重核心',     tools: TOOLS.filter((t) => t.category === '減重核心') },
+  { category: '進階指標',     tools: TOOLS.filter((t) => t.category === '進階指標') },
+  { category: '臨床評估',     tools: TOOLS.filter((t) => t.category === '臨床評估') },
+  { category: '圍術期決策',   tools: TOOLS.filter((t) => t.category === '圍術期決策') },
 ];
 
 // 相關連結建議（每頁底部）
 const RELATED: Record<ToolSlug, ToolSlug[]> = {
-  'bmi':              ['ideal-weight', 'tdee', 'glp1-eligibility'],
-  'ideal-weight':     ['bmi', 'tdee', 'weight-progress'],
-  'bmr':              ['tdee', 'bmi', 'body-fat'],
-  'tdee':             ['bmr', 'bmi', 'weight-progress'],
-  'body-fat':         ['bmi', 'waist-ratio', 'tdee'],
-  'waist-ratio':      ['bmi', 'body-fat', 'glp1-eligibility'],
-  'glp1-eligibility': ['bmi', 'waist-ratio', 'weight-progress'],
-  'weight-progress':  ['tdee', 'bmi', 'glp1-eligibility'],
+  'bmi':                ['ideal-weight', 'tdee', 'glp1-eligibility'],
+  'ideal-weight':       ['bmi', 'tdee', 'weight-progress'],
+  'bmr':                ['tdee', 'bmi', 'body-fat'],
+  'tdee':               ['bmr', 'bmi', 'weight-progress'],
+  'body-fat':           ['bmi', 'waist-ratio', 'tdee'],
+  'waist-ratio':        ['bmi', 'body-fat', 'glp1-eligibility'],
+  'glp1-eligibility':   ['bmi', 'waist-ratio', 'glp1-preop-hold'],
+  'weight-progress':    ['tdee', 'bmi', 'glp1-eligibility'],
+  'glp1-preop-hold':    ['anticoagulant-hold', 'eras-protocol', 'glp1-eligibility'],
+  'anticoagulant-hold': ['glp1-preop-hold', 'eras-protocol', 'bmi'],
+  'eras-protocol':      ['glp1-preop-hold', 'anticoagulant-hold', 'bmi'],
 };
 
 export function relatedTools(slug: ToolSlug): ToolMeta[] {
