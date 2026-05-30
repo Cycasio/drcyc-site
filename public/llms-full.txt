@@ -31,6 +31,7 @@
 - [第二型糖尿病可以逆轉嗎？](/blog/type-2-diabetes-remission) — DiRECT / STEP-1 / SURMOUNT-4 / STAMPEDE 實際數字，減重 vs 緩解率對照
 - [GLP-1 減重藥要搭配運動](/blog/exercise-glp1-weight-loss) — 猛健樂 / Ozempic 瘦掉的有 24–40% 是肌肉，阻力訓練是關鍵
 - [猛健樂 Mounjaro 完整指南](/blog/mounjaro-weight-loss) — SURMOUNT-1 數據、GIP/GLP-1 雙受體機轉、副作用與禁忌症
+- [Mounjaro vs Wegovy vs Saxenda 完整比較](/blog/glp1-medications-comparison) — 6 個 GLP-1 / GIP 藥物完整對照表;Mounjaro -22.5%(SURMOUNT-1 15mg 72w)、Wegovy -14.9%(STEP-1 2.4mg 68w)、Saxenda -8.0%(SCALE 3mg 56w);機轉差異(GIP/GLP-1 雙受體 vs 單受體);頭對頭試驗 SURPASS-2;台灣健保適應症 vs 自費現況;副作用比較(噁心 30-44%);決策樹;停藥復胖 STEP-1 延伸 -11~14%;搭配阻力訓練必要性
 - [動機式晤談](/blog/motivational-interviewing) — PACE 精神 + OARS 技巧，讓病人自己想改變
 - [骨鬆篩檢指南](/blog/osteoporosis-screening-guide) — DXA、T-score 判讀、40 歲就該知道的預防策略
 - [肌少症與阻力訓練](/blog/sarcopenia-resistance-training) — SR/NMA 證據：中等強度就有效、長輩也能做
