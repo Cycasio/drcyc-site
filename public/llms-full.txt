@@ -23,10 +23,7 @@
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診：藥物減重、三高慢性病追蹤、家醫科，適合旗山/美濃/田寮/內門居民與下班後就診的上班族
 - [衛教演講 / 企業健康講座](/speaking/) — 曾合作中鋼、中油、國巨、李長榮、英特格、麥當勞、東海/義大/高科大/中正大學等；主題含減重、三高、骨鬆、行為科學、職場健康四大計畫；南部為主、線上可接；邀約 cyc@edfm.org
 - [衛教專欄](/blog) — 健康衛教文章
-- [醫療計算機合集](/tools/) — 11 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症、AHA PREVENT 心血管風險、Framingham、過勞風險評估,以及手術前後決策三件套(GLP-1 術前停藥、抗凝血藥停藥、ERAS Protocol)
-- [GLP-1 術前停藥計算器](/tools/glp1-preop-hold/) — ASA 2023 + 2024 AGA/ASA 更新:週注射 GLP-1 至少停 1 週、日注射停當天;若有 GERD/胃輕癱/減重手術史或現有腸胃道症狀,回到保守路徑;低風險可改 24 小時清流質緩衝。Wegovy/Ozempic/Mounjaro/Saxenda/Trulicity 全涵蓋,半衰期與完全清除時間皆列出。
-- [抗凝血藥術前停藥工具](/tools/anticoagulant-hold/) — Warfarin 停 5 天 + INR 監測;DOAC 依出血風險(24h/48h/96h)+ CrCl(Dabigatran 特別敏感);Aspirin 二級預防多繼續服用;Clopidogrel/Ticagrelor 停 5-7 天;近期支架患者擅停可能致死;Bridging 限於機械二尖瓣 / 急性 VTE / CHA₂DS₂-VASc ≥ 7。依據 ACC 2017、CHEST 2022、BRIDGE 試驗 NEJM 2015。
-- [個人化 ERAS Protocol 產生器](/tools/eras-protocol/) — 輸入手術類型 + 時間 + 患者狀況 → 產出術前 24 小時時程(固體 6/8h、清液 2/6h、碳水負荷 2h)、藥物調整(metformin/GLP-1/降血壓/抗凝血)、ERAS bundle(預防低體溫/PONV/VTE/多模式止痛/早期下床/早期口進食)。依據 ERAS Society 2018、ASA 2017 禁食指引、Joshi GP 2024 GLP-1 手術前後管理。
+- [醫療計算機合集](/tools/) — 11 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT 心血管風險、Framingham、過勞風險評估等衛教工具
 - [為什麼 Equinox、NASM、NESTA 都推出 GLP-1 訓練課程?](/blog/mounjaro-needs-personal-trainer) — 2025 國際健身產業轉變、NASM 500 人教練調查、Mechanick 2025 （1.5 年治療 ≈ 20 年自然老化）、TriNetX Mounjaro 骨鬆 HR 1.44
 - [FITT-VP 運動處方](/blog/fitt-vp-exercise-prescription) — ACSM 運動醫學標準架構：頻率/強度/時間/類型/總量/進階，含 Tanaka 心跳公式、實戰案例
 - [超慢跑（Slow Jogging）](/blog/slow-jogging) — 田中宏暁的低衝擊有氧，METs ~6，前足著地 + 步頻 180+，膝蓋不好也能跑

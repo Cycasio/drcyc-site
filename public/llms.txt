@@ -23,15 +23,7 @@
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診：減重、三高、家醫科
 - [衛教演講 / 企業健康講座](/speaking/) — 企業、公所、學校、社區的健康講座邀約
 - [衛教專欄](/blog/) — 健康衛教文章
-- [醫療計算機合集](/tools/) — 11 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症等
-
-## 手術前後決策工具(新)
-
-針對即將開刀 / 做無痛胃腸鏡的患者,陳昱彰醫師整理三個臨床決策工具:
-
-- [GLP-1 術前停藥計算器](/tools/glp1-preop-hold/) — 依 ASA 2023 與 2024 AGA/ASA 更新,計算 Wegovy / Ozempic / Mounjaro / Saxenda 等該停藥多久,降低麻醉吸入性肺炎風險
-- [抗凝血藥術前停藥工具](/tools/anticoagulant-hold/) — 依 ACC/AHA 2017 與 CHEST 2022,計算 Warfarin / Apixaban / Dabigatran / Rivaroxaban / Aspirin / Plavix 等該停多久,並評估是否需要 LMWH bridging
-- [個人化 ERAS Protocol 產生器](/tools/eras-protocol/) — 依 ERAS Society 2018 與 ASA 2017 禁食指引,產生個人化術前 24 小時時程、碳水負荷建議、慢病藥物調整與 ERAS bundle
+- [醫療計算機合集](/tools/) — 11 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT、Framingham 心血管風險、過勞風險評估等
 
 ## 衛教演講 / 企業健康講座
 
