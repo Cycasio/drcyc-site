@@ -113,9 +113,9 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
   jsonLd={postJsonLd}
 >
   <main class="max-w-7xl mx-auto px-6 md:px-12 py-16">
-    <div class="flex flex-col lg:flex-row gap-16 relative">
+    <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
       <!-- Article Canvas -->
-      <article class="flex-1 max-w-[720px] mx-auto lg:mx-0">
+      <article class="max-w-[720px] mx-auto lg:mx-0 min-w-0">
         <!-- Category Label + Date + Last Updated -->
         <div class="flex items-center gap-3 mb-6 flex-wrap">
           {firstTag && (
@@ -146,7 +146,7 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
               {post.data.tldr.map((point) => (
                 <li class="flex gap-2 text-slate-800">
                   <span class="text-teal-600 mt-1 shrink-0">●</span>
-                  <span>{point}</span>
+                  <span set:html={point}></span>
                 </li>
               ))}
             </ul>
