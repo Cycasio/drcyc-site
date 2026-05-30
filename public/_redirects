@@ -3,3 +3,11 @@ https://drcyc.io/* https://www.drcyc.io/:splat 301
 
 # Sitemap alias — some bots probe /sitemap.xml first
 /sitemap.xml /sitemap-index.xml 301
+
+# 已下架工具(2026-05 手術前後決策三件套演講後拿掉)— 301 導回工具索引
+/tools/glp1-preop-hold/ /tools/ 301
+/tools/anticoagulant-hold/ /tools/ 301
+/tools/eras-protocol/ /tools/ 301
+/tools/glp1-preop-hold /tools/ 301
+/tools/anticoagulant-hold /tools/ 301
+/tools/eras-protocol /tools/ 301
