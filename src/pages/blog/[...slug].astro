@@ -6,19 +6,41 @@ export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
     params: { slug: post.slug },
-    props: post,
+    props: { post, allPosts: posts },
   }));
 }
 
-const post = Astro.props;
+const { post, allPosts } = Astro.props;
 const { Content, headings } = await post.render();
 const h2Headings = headings.filter(h => h.depth === 2);
+
+// 自動找 3 篇相關文章:優先同 category + 重疊 tag 多者
+function findRelated(currentSlug: string, currentCategory: string | undefined, currentTags: string[] | undefined, all: typeof allPosts) {
+  const tags = currentTags ?? [];
+  const scored = all
+    .filter((p) => p.slug !== currentSlug)
+    .map((p) => {
+      let score = 0;
+      if (currentCategory && p.data.category === currentCategory) score += 10;
+      const overlap = (p.data.tags ?? []).filter((t) => tags.includes(t)).length;
+      score += overlap * 3;
+      return { post: p, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, 3).map((x) => x.post);
+}
+
+const relatedPosts = findRelated(post.slug, post.data.category, post.data.tags, allPosts);
 
 const dateStr = post.data.pubDate.toLocaleDateString('zh-TW', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
+const updatedStr = post.data.updatedDate
+  ? post.data.updatedDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })
+  : null;
 const firstTag = post.data.tags?.[0];
 
 const SITE = 'https://www.drcyc.io';
@@ -94,20 +116,42 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
     <div class="flex flex-col lg:flex-row gap-16 relative">
       <!-- Article Canvas -->
       <article class="flex-1 max-w-[720px] mx-auto lg:mx-0">
-        <!-- Category Label + Date -->
+        <!-- Category Label + Date + Last Updated -->
         <div class="flex items-center gap-3 mb-6 flex-wrap">
           {firstTag && (
             <span class="text-xs font-bold tracking-widest text-on-surface-variant uppercase bg-surface-container-low px-3 py-1 rounded-full">
               {firstTag}
             </span>
           )}
-          <span class="text-xs text-outline">{dateStr}</span>
+          <span class="text-xs text-outline">發布 {dateStr}</span>
+          {updatedStr && updatedStr !== dateStr && (
+            <span class="text-xs text-teal-700 font-medium">· 最後更新 {updatedStr}</span>
+          )}
         </div>
 
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-8 leading-tight font-headline">
           {post.data.title}
         </h1>
+
+        <!-- TL;DR callout(AI 摘要引擎與行動讀者的「30 秒答案」) -->
+        {post.data.tldr && post.data.tldr.length > 0 && (
+          <aside
+            class="mb-10 rounded-2xl border-l-4 border-teal-500 bg-teal-50/60 p-5 md:p-6"
+            aria-label="重點摘要"
+            data-speakable="true"
+          >
+            <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">⚡ 重點 {post.data.tldr.length} 句話</p>
+            <ul class="space-y-2 chinese-line-height">
+              {post.data.tldr.map((point) => (
+                <li class="flex gap-2 text-slate-800">
+                  <span class="text-teal-600 mt-1 shrink-0">●</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
 
         <!-- Featured Image -->
         {post.data.image && (
@@ -125,6 +169,27 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
         <div class="article-content">
           <Content />
         </div>
+
+        <!-- 自動延伸閱讀(主題網絡 + 內鏈密度) -->
+        {relatedPosts.length > 0 && (
+          <section class="mt-16 pt-10 border-t border-slate-200" aria-label="延伸閱讀">
+            <h2 class="text-2xl font-bold text-blue-950 font-headline mb-6">延伸閱讀</h2>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((r) => (
+                <a
+                  href={`/blog/${r.slug}/`}
+                  class="block p-5 rounded-2xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all no-underline"
+                >
+                  {r.data.category && (
+                    <span class="text-xs font-bold tracking-widest text-teal-700 uppercase">{r.data.category}</span>
+                  )}
+                  <h3 class="text-base font-bold text-blue-950 mt-2 font-headline line-clamp-2">{r.data.title}</h3>
+                  <p class="text-sm text-slate-600 mt-2 line-clamp-3 chinese-line-height">{r.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
         <!-- Bottom CTA Card -->
         <section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">

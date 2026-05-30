@@ -11,6 +11,8 @@ const blog = defineCollection({
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
     image: z.string().optional(),
+    // TL;DR 重點 3 句話(顯示在文章開頭,AI 摘要引擎喜歡抓的「30 秒回答版」)
+    tldr: z.array(z.string()).min(2).max(5).optional(),
     faq: z
       .array(
         z.object({
