@@ -106,7 +106,7 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
 ---
 
 <Layout
-  title={`${post.data.title} | 陳昱彰醫師`}
+  title={`${post.data.title}｜陳昱彰醫師`}
   description={post.data.description}
   ogImage={postImage}
   ogType="article"
@@ -170,6 +170,29 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
           <Content />
         </div>
 
+        <!-- 可見 FAQ(同一份 frontmatter 同時餵 FAQPage schema 與頁面可見內容,符合 Google 規範 + AI 可截取) -->
+        {post.data.faq && post.data.faq.length > 0 && (
+          <section class="mt-16 pt-10 border-t border-slate-200" aria-label="常見問題" id="faq">
+            <h2 class="text-2xl font-bold text-blue-950 font-headline mb-6">常見問題</h2>
+            <div class="space-y-3">
+              {post.data.faq.map((item) => (
+                <details class="group rounded-2xl border border-slate-200 bg-white p-5 open:bg-teal-50/30 open:border-teal-200">
+                  <summary class="flex items-start gap-3 cursor-pointer list-none font-bold text-blue-950 chinese-line-height">
+                    <span class="text-teal-600 shrink-0 mt-0.5 transition-transform group-open:rotate-45">＋</span>
+                    <span set:html={item.q}></span>
+                  </summary>
+                  <div class="mt-3 pl-7 text-slate-700 chinese-line-height" set:html={item.a}></div>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- 醫療免責聲明(每篇文末顯性呈現,因 AI 摘要常只截正文不含 Footer) -->
+        <aside class="mt-12 rounded-xl border-l-4 border-slate-300 bg-slate-50 p-5 text-sm text-slate-600 chinese-line-height" aria-label="醫療免責聲明">
+          <p><strong class="text-slate-700">醫療免責聲明</strong>：本文由義大醫院家庭暨社區醫學部 <a href="/about/" rel="author" class="text-teal-700 underline">陳昱彰醫師</a> 整理，基於發表時的實證醫學文獻，僅供衛教參考，<strong>不能取代醫師對個別狀況的診斷與治療建議</strong>。實際用藥、檢查與治療請與您的主治醫師討論，並以醫療院所最新公告為準。</p>
+        </aside>
+
         <!-- 自動延伸閱讀(主題網絡 + 內鏈密度) -->
         {relatedPosts.length > 0 && (
           <section class="mt-16 pt-10 border-t border-slate-200" aria-label="延伸閱讀">
@@ -230,20 +253,26 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
           )}
 
           <!-- Author Bio Card -->
-          <div class="p-6 bg-surface-container-low rounded-xl">
+          <a href="/about/" rel="author" class="block p-6 bg-surface-container-low rounded-xl no-underline hover:bg-surface-container transition-colors">
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-white font-bold">
-                YC
-              </div>
+              <img
+                src="/images/portrait.jpg"
+                alt="陳昱彰醫師 Dr. Yu-Chang Chen"
+                class="w-12 h-12 rounded-full object-cover shrink-0"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
               <div>
-                <p class="text-sm font-bold text-primary">陳醫師 YC Chen</p>
-                <p class="text-xs text-outline">家庭醫學科</p>
+                <p class="text-sm font-bold text-primary">陳昱彰醫師 YC Chen, MD</p>
+                <p class="text-xs text-outline">家醫 / 肥胖 / 骨鬆 三專科</p>
               </div>
             </div>
             <p class="text-xs text-on-surface-variant leading-relaxed chinese-line-height">
-              致力於將複雜的醫學知識轉化為生活實踐，協助每一位病患找回健康的自主權。
+              義大醫院家庭暨社區醫學部主治醫師，結合行為科學與實證醫學。國家醫療品質獎實證銀獎、ACE-CPT 認證教練。
             </p>
-          </div>
+            <p class="text-xs font-bold text-teal-700 mt-3">了解更多 →</p>
+          </a>
         </div>
       </aside>
     </div>

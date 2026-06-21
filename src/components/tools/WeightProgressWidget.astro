@@ -16,7 +16,7 @@ const { heading = '減重進度', showHeading = true } = Astro.props as Props;
     請輸入起始、目前、目標體重。
   </div>
 
-  <div data-state="result" class="hidden">
+  <div data-state="result" class="hidden" role="status" aria-live="polite" aria-atomic="true">
     <!-- 進度條 -->
     <div class="mb-2 flex justify-between text-xs text-slate-500">
       <span data-start-label>起始 — kg</span>

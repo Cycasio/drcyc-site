@@ -6,7 +6,11 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
   ogType?: 'website' | 'article';
+  noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -14,13 +18,21 @@ const {
   title = '陳昱彰醫師 Dr. Yu-Chang Chen｜義大醫院家醫科・減重門診',
   description = '義大醫院家醫科主治醫師陳昱彰，三專科醫師（家醫、肥胖、骨鬆），結合 COM-B 行為科學與實證醫學，提供高雄減重門診、骨質疏鬆、企業臨場與職業醫學服務。國家醫療品質獎實證銀獎。',
   ogImage = '/images/portrait.jpg',
+  // 預設肖像圖實際為 533×800 直式;若頁面帶專屬橫式 OG 圖,從 props 覆寫尺寸
+  ogImageWidth = 533,
+  ogImageHeight = 800,
+  ogImageAlt = '陳昱彰醫師 Dr. Yu-Chang Chen — 義大醫院家庭暨社區醫學部主治醫師',
   ogType = 'website',
+  noindex = false,
   jsonLd,
 } = Astro.props as Props;
 
 const SITE = 'https://www.drcyc.io';
 const canonical = new URL(Astro.url.pathname, SITE).toString();
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE).toString();
+// 肖像為直式,用 summary 卡片;若帶橫式專屬圖(寬>=1200)用 large_image
+const twitterCard = ogImageWidth >= 1200 ? 'summary_large_image' : 'summary';
+const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1';
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -148,8 +160,8 @@ const physicianSchema = {
   },
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '燕巢區角宿里義大路 1 號',
-    addressLocality: '高雄市',
+    streetAddress: '角宿里義大路 1 號(A 棟)',
+    addressLocality: '燕巢區',
     addressRegion: '高雄市',
     postalCode: '82445',
     addressCountry: 'TW',
@@ -159,6 +171,16 @@ const physicianSchema = {
     latitude: 22.7345,
     longitude: 120.3882,
   },
+  // 同一位醫師有兩個看診點,workLocation 讓搜尋引擎正確理解
+  workLocation: [
+    { '@id': `${SITE}/#edah-clinic` },
+    { '@id': `${SITE}/#qishan-clinic` },
+  ],
+  areaServed: [
+    { '@type': 'City', name: '高雄市' },
+    { '@type': 'AdministrativeArea', name: '高雄市燕巢區' },
+    { '@type': 'AdministrativeArea', name: '高雄市旗山區' },
+  ],
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:30', closes: '12:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:30', closes: '12:00' },
@@ -170,6 +192,42 @@ const physicianSchema = {
     target: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
     name: '線上預約掛號',
   },
+};
+
+// 義大看診點(獨立 MedicalClinic,供 Physician.workLocation 引用)
+const edahClinicSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalClinic',
+  '@id': `${SITE}/#edah-clinic`,
+  name: '義大醫院 家庭暨社區醫學部 / 減重中心(陳昱彰醫師)',
+  url: SITE,
+  telephone: '+886-7-615-0011',
+  hasMap: 'https://maps.app.goo.gl/Qf7E1ZuDcFaAQBhW6',
+  medicalSpecialty: ['https://schema.org/PrimaryCare'],
+  employee: { '@id': `${SITE}/#person` },
+  parentOrganization: { '@type': 'Hospital', name: '義大醫院', url: 'https://www.edah.org.tw' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '角宿里義大路 1 號(A 棟)',
+    addressLocality: '燕巢區',
+    addressRegion: '高雄市',
+    postalCode: '82445',
+    addressCountry: 'TW',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 22.7345, longitude: 120.3882 },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: '高雄市燕巢區' },
+    { '@type': 'AdministrativeArea', name: '高雄市楠梓區' },
+    { '@type': 'AdministrativeArea', name: '高雄市岡山區' },
+    { '@type': 'AdministrativeArea', name: '高雄市橋頭區' },
+    { '@type': 'AdministrativeArea', name: '高雄市左營區' },
+  ],
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:30', closes: '12:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:30', closes: '12:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:30', closes: '12:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '13:30', closes: '17:00' },
+  ],
 };
 
 const qishanClinicSchema = {
@@ -184,7 +242,7 @@ const qishanClinicSchema = {
   employee: { '@id': `${SITE}/#person` },
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '旗山區',
+    streetAddress: '瑞吉里延平一路 337 號',
     addressLocality: '旗山區',
     addressRegion: '高雄市',
     postalCode: '842',
@@ -226,6 +284,7 @@ const schemaGraph = {
   '@graph': [
     personSchema,
     physicianSchema,
+    edahClinicSchema,
     qishanClinicSchema,
     websiteSchema,
     ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
@@ -240,7 +299,7 @@ const schemaGraph = {
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="author" content="陳昱彰醫師 Dr. Yu-Chang Chen" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="robots" content={robotsContent} />
   <link rel="canonical" href={canonical} />
 
   <!-- Favicons -->
@@ -264,14 +323,16 @@ const schemaGraph = {
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content="zh_TW" />
   <meta property="og:image" content={ogImageAbs} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content={String(ogImageWidth)} />
+  <meta property="og:image:height" content={String(ogImageHeight)} />
+  <meta property="og:image:alt" content={ogImageAlt} />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content={twitterCard} />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImageAbs} />
+  <meta name="twitter:image:alt" content={ogImageAlt} />
 
   <!-- JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
@@ -287,8 +348,11 @@ const schemaGraph = {
   )}
 </head>
 <body class="bg-surface text-on-surface font-body antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-primary focus:text-on-primary focus:px-4 focus:py-2 focus:rounded-full focus:font-bold focus:no-underline">跳到主要內容</a>
   <Nav />
-  <slot />
+  <div id="main">
+    <slot />
+  </div>
   <Footer />
 </body>
 </html>

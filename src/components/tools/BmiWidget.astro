@@ -48,7 +48,7 @@ const dotClass: Record<string, string> = {
     請先輸入身高與體重。
   </div>
 
-  <div data-state="result" class="hidden">
+  <div data-state="result" class="hidden" role="status" aria-live="polite" aria-atomic="true">
     <div class="flex items-baseline gap-3 mb-3">
       <span class="text-5xl font-bold text-blue-950 font-headline tabular-nums" data-bmi>—</span>
       <span class="text-sm text-slate-500">kg/m²</span>

@@ -109,11 +109,12 @@ const itemListSchema = {
     name: `${p.name}（${p.theme}）`,
     url: `${pageUrl}#pkg-${p.id}`,
     item: {
-      // 雙重 @type:MedicalProcedure 保留醫療語意,Service 讓 Google 認得 Review 與 Offer 父類型
       '@type': ['MedicalProcedure', 'Service'],
       '@id': `${pageUrl}#pkg-${p.id}-procedure`,
       name: p.name,
-      description: p.theme,
+      // 把陳醫師的實證點評併入 description(不再用 Review 型別:Review 須由第三方評、
+      // 且 MedicalProcedure 不在 Google 評論富結果支援的父型別清單裡,自評用 Review 語意也錯)
+      description: `${p.theme}。${p.chenNote}`,
       url: `${pageUrl}#pkg-${p.id}`,
       procedureType: 'Diagnostic',
       serviceType: '健康檢查 Health Checkup',
@@ -133,15 +134,6 @@ const itemListSchema = {
           url: OFFICIAL_URL,
         },
         url: `${pageUrl}#pkg-${p.id}`,
-      },
-      review: {
-        '@type': 'Review',
-        '@id': `${pageUrl}#pkg-${p.id}-review`,
-        // 巢狀在 review 屬性內時,itemReviewed 是隱含的,不可重複指定(否則 GSC 報「方向衝突」)
-        author: { '@id': `${SITE}/#person` },
-        publisher: { '@id': `${SITE}/#person` },
-        datePublished: LAST_UPDATED,
-        reviewBody: p.chenNote,
       },
     },
   })),

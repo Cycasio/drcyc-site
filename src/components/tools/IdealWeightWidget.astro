@@ -16,7 +16,7 @@ const { heading = '理想體重結果', showHeading = true } = Astro.props as Pr
     請先輸入性別與身高。
   </div>
 
-  <div data-state="result" class="hidden">
+  <div data-state="result" class="hidden" role="status" aria-live="polite" aria-atomic="true">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
       <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4">
         <p class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-1">健康體重（BMI 22）</p>

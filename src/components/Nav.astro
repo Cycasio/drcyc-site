@@ -114,6 +114,8 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
       id="mobile-menu-btn"
       class="lg:hidden flex flex-col gap-1.5 p-2"
       aria-label="開啟選單"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
     >
       <span class="block w-6 h-0.5 bg-on-surface transition-transform" id="bar1"></span>
       <span class="block w-6 h-0.5 bg-on-surface transition-opacity" id="bar2"></span>
@@ -185,7 +187,9 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
   const menu = document.getElementById('mobile-menu');
   if (btn && menu) {
     btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+      const isHidden = menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isHidden));
+      btn.setAttribute('aria-label', isHidden ? '開啟選單' : '關閉選單');
     });
   }
 </script>

@@ -36,8 +36,8 @@ export const EDAH: ClinicLocation = {
   shortName: '義大醫院',
   role: 'primary',
   address: {
-    streetAddress: '燕巢區角宿里義大路 1 號(A 棟)',
-    addressLocality: '高雄市',
+    streetAddress: '角宿里義大路 1 號(A 棟)',
+    addressLocality: '燕巢區',
     addressRegion: '高雄市',
     postalCode: '82445',
     addressCountry: 'TW',
@@ -101,7 +101,7 @@ export const DAZHENG: ClinicLocation = {
   shortName: '旗山大政診所',
   role: 'satellite',
   address: {
-    streetAddress: '旗山區',
+    streetAddress: '瑞吉里延平一路 337 號',
     addressLocality: '旗山區',
     addressRegion: '高雄市',
     postalCode: '842',

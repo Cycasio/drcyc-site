@@ -16,7 +16,7 @@ const { heading = 'TDEE 與減重熱量', showHeading = true } = Astro.props as 
     請先輸入性別、年齡、身高、體重，並選擇活動量。
   </div>
 
-  <div data-state="result" class="hidden">
+  <div data-state="result" class="hidden" role="status" aria-live="polite" aria-atomic="true">
     <div class="grid grid-cols-2 gap-3 mb-5">
       <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
         <p class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">BMR 基礎代謝</p>
