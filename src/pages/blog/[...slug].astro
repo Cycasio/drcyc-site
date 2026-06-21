@@ -45,9 +45,11 @@ const firstTag = post.data.tags?.[0];
 
 const SITE = 'https://www.drcyc.io';
 const postUrl = `${SITE}/blog/${post.slug}/`;
+// 優先用文章自訂圖;否則用 build 期自動生成的標題卡 OG 圖(1200×630)
 const postImage = post.data.image && post.data.image.length > 0
   ? (post.data.image.startsWith('http') ? post.data.image : `${SITE}${post.data.image}`)
-  : `${SITE}/images/portrait.jpg`;
+  : `${SITE}/og/blog/${post.slug}.png`;
+const usingGeneratedOg = !(post.data.image && post.data.image.length > 0);
 
 const articleType = post.data.scholarly ? 'MedicalScholarlyArticle' : 'BlogPosting';
 const blogPostingSchema = {
@@ -109,6 +111,9 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
   title={`${post.data.title}｜陳昱彰醫師`}
   description={post.data.description}
   ogImage={postImage}
+  ogImageWidth={usingGeneratedOg ? 1200 : undefined}
+  ogImageHeight={usingGeneratedOg ? 630 : undefined}
+  ogImageAlt={usingGeneratedOg ? `${post.data.title}｜陳昱彰醫師` : undefined}
   ogType="article"
   jsonLd={postJsonLd}
 >
