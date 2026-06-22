@@ -11,3 +11,15 @@ https://drcyc.io/* https://www.drcyc.io/:splat 301
 /tools/glp1-preop-hold /tools/ 301
 /tools/anticoagulant-hold /tools/ 301
 /tools/eras-protocol /tools/ 301
+
+# 舊版 drcyc.io 殘留網址(改版後孤兒)— 301 接住流量,撿回連結權重
+# 舊 LINE LIFF 端點(改版未遷移,現以最接近的工具承接;如需恢復真正 LIFF 功能需另建)
+/liff/tdee /blog/health-tools/tdee-calculator/ 301
+/liff/tdee/ /blog/health-tools/tdee-calculator/ 301
+/liff/weight /tools/dashboard/ 301
+/liff/weight/ /tools/dashboard/ 301
+# 舊文章
+/碎碎念 /blog/ 301
+/碎碎念/ /blog/ 301
+/升糖指數的終結 /blog/ 301
+/升糖指數的終結/ /blog/ 301
