@@ -72,7 +72,7 @@
 - [骨鬆篩檢指南](/blog/osteoporosis-screening-guide) — DXA、T-score 判讀、40 歲就該知道的預防策略
 - [肌少症與阻力訓練](/blog/sarcopenia-resistance-training) — SR/NMA 證據：中等強度就有效、長輩也能做
 - [減重 COM-B 模型](/blog/weight-loss-comb-model) — 行為科學三要素：能力 / 機會 / 動機
-- [多囊性卵巢症候群 PCOS：胰島素阻抗才是核心](/blog/pcos-polycystic-ovary-syndrome) — 育齡女性最常見內分泌疾病(8-13%)；核心是胰島素阻抗+雄性素過高而非「卵巢水泡」；舊名 Stein-Leventhal 與國際改名討論；Rotterdam 三選二診斷(2023 更新含 AMH)；減重 5-10% 為第一線；依目標(月經/多毛/懷孕用 letrozole/代謝)分別處理；GLP-1 新興角色；4 倍糖尿病風險
+- [PCOS 正式改名 PMOS：為什麼換名字、對你有什麼影響](/blog/pcos-polycystic-ovary-syndrome) — 2026/5/12 PCOS(多囊性卵巢症候群)正式更名 PMOS(Polyendocrine Metabolic Ovarian Syndrome 多內分泌代謝卵巢症候群)，The Lancet 論文+50 多組織、歷時 14 年、2 萬人共識；改名原因(「囊」是誤稱、不一定有多囊卵巢、舊名害七成延遲診斷)；診斷治療現在不變、3 年過渡期到 2028；核心是胰島素阻抗+雄性素過高的代謝病；減重 5-10% 第一線、懷孕用 letrozole、GLP-1 新興角色；4 倍糖尿病風險
 - [職場健康指南](/blog/workplace-health-guide) — 勞工健康保護四大計畫懶人包
 
 ## 核心服務
