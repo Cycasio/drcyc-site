@@ -1,6 +1,6 @@
 ---
 title: "猛健樂（Mounjaro）減重藥物完整指南：效果、副作用、誰適合用？"
-description: "猛健樂（Mounjaro/tirzepatide）是什麼？跟 Ozempic 差在哪？肥胖專科醫師用臨床試驗數據告訴你真實的減重效果、副作用、禁忌症，以及為什麼藥物只是減重的其中一環。"
+description: "猛健樂（Mounjaro/tirzepatide）是什麼？跟 Ozempic 差在哪？用臨床試驗數據拆解真實的減重效果、副作用、禁忌症，以及為什麼藥物只是減重的其中一環。"
 pubDate: 2026-04-10
 updatedDate: 2026-05-31
 author: "陳昱彰醫師"

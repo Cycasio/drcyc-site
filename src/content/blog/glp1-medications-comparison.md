@@ -1,6 +1,6 @@
 ---
 title: "Mounjaro vs Wegovy vs Saxenda：GLP-1 減重藥物完整比較（2026）"
-description: "猛健樂、瘦瘦針、Saxenda、Ozempic 到底差在哪？肥胖醫學專科醫師整理 6 個 GLP-1 / GIP 類藥物的成分、機轉、給藥頻率、SURMOUNT/STEP/SCALE 臨床試驗減重幅度、副作用、禁忌症、台灣健保與自費現況，附決策樹幫你挑出最適合的方案。"
+description: "猛健樂、瘦瘦針、Saxenda、Ozempic 到底差在哪？完整對照 6 個 GLP-1 / GIP 類藥物的成分、機轉、給藥頻率、SURMOUNT/STEP/SCALE 臨床試驗減重幅度、副作用、禁忌症、台灣健保與自費現況，附決策樹幫你挑出最適合的方案。"
 pubDate: 2026-05-31
 updatedDate: 2026-05-31
 author: "陳昱彰醫師"

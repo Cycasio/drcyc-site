@@ -1,6 +1,6 @@
 ---
 title: "為什麼 Equinox、NASM、NESTA 都推出 GLP-1 訓練課程？2025 健身教練必須了解的猛健樂（Mounjaro）知識"
-description: "Equinox 2024 年起在全球 80 家分店推行 GLP-1 protocol、NESTA 2025 年推出 GLP-1 Specialist 證照、NASM 對 500 位教練的調查顯示 70% 認為 GLP-1 將永久改變健身產業。打猛健樂（Mounjaro / Ozempic）的客戶來找教練時，教練該知道哪些事？家醫科 + ACE-CPT 認證醫師整理 2025 國際業界數據與最新醫學研究。"
+description: "Equinox 2024 年起在全球 80 家分店推行 GLP-1 protocol、NESTA 2025 年推出 GLP-1 Specialist 證照、NASM 對 500 位教練的調查顯示 70% 認為 GLP-1 將永久改變健身產業。打猛健樂（Mounjaro / Ozempic）的客戶來找教練時，教練該知道哪些事？完整整理 2025 國際業界數據與最新醫學研究。"
 pubDate: 2026-04-21
 updatedDate: 2026-04-21
 author: "陳昱彰醫師"
