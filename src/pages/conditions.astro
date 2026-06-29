@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/conditions/`;
+const BOOKING = 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675';
+
+// 主治項目（依「病」分類，第一人稱）。description 為事實陳述，不含療效或價格。
+const groups = [
+  {
+    icon: 'monitor_heart',
+    title: '三高與慢性病',
+    intro: '三高是家醫科的核心。我幫你把血壓、血糖、血脂一起管理，從生活型態到藥物整合處理，而不是頭痛醫頭。',
+    items: [
+      { name: '高血壓', note: '血壓控制、用藥調整、心血管風險評估' },
+      { name: '糖尿病', note: '第二型糖尿病、糖尿病前期、血糖控制與共病管理', link: '/blog/type-2-diabetes-remission/', linkText: '糖尿病能逆轉嗎？' },
+      { name: '高血脂 / 高膽固醇', note: '血脂異常、膽固醇、三酸甘油脂管理與心血管預防' },
+      { name: '高尿酸 / 痛風', note: '尿酸控制、急性痛風處理與飲食調整' },
+      { name: '代謝症候群', note: '腰圍、血壓、血糖、血脂的整體代謝風險把關' },
+    ],
+  },
+  {
+    icon: 'science',
+    title: '甲狀腺與代謝內分泌',
+    intro: '很多代謝問題其實互相牽連。甲狀腺、胰島素阻抗、脂肪肝我會放在一起看，找出背後共同的代謝根源。',
+    items: [
+      { name: '甲狀腺亢進 / 低下', note: '甲狀腺功能異常的評估、追蹤與用藥' },
+      { name: '胰島素阻抗', note: '代謝核心問題，與肥胖、糖尿病前期、PCOS 密切相關' },
+      { name: '脂肪肝', note: '非酒精性脂肪肝的代謝管理' },
+      { name: '多囊性卵巢（PCOS / PMOS）代謝面', note: '從胰島素阻抗與體重切入，協助整體代謝改善', link: '/blog/pcos-polycystic-ovary-syndrome/', linkText: 'PCOS 改名 PMOS' },
+    ],
+  },
+  {
+    icon: 'monitor_weight',
+    title: '體重管理與減重',
+    intro: '我的減重不是只開一支針。整合飲食、運動、睡眠、壓力與必要時的藥物（含 GLP-1 類），用行為科學幫你建立能長期維持的習慣。',
+    items: [
+      { name: '肥胖症 / 減重', note: 'GLP-1 藥物 ＋ 行為治療的個人化療程，目標是可持續而非速成', link: '/blog/glp1-medications-comparison/', linkText: 'GLP-1 藥物比較' },
+      { name: '減重停滯 / 反覆復胖', note: '用 COM-B 行為模型拆解卡關點', link: '/blog/weight-loss-comb-model/', linkText: '為什麼總是減肥失敗' },
+    ],
+  },
+  {
+    icon: 'exercise',
+    title: '骨骼、肌肉與運動',
+    intro: '結合骨鬆專科與運動訓練學（ACE-CPT），我幫你顧好骨頭與肌肉，並開出你做得到的運動處方。',
+    items: [
+      { name: '骨質疏鬆', note: '骨密度（DXA）評估、骨折風險與治療', link: '/blog/osteoporosis-screening-guide/', linkText: '骨密度檢查指南' },
+      { name: '肌少症', note: '肌肉流失評估與阻力訓練介入', link: '/blog/sarcopenia-resistance-training/', linkText: '肌少症與阻力訓練' },
+      { name: '運動處方 / 運動傷害預防', note: '依 FITT-VP 架構設計個人化運動計畫', link: '/blog/fitt-vp-exercise-prescription/', linkText: 'FITT-VP 運動處方' },
+    ],
+  },
+  {
+    icon: 'bedtime',
+    title: '睡眠與預防保健',
+    intro: '預防勝於治療。睡不好、想戒菸、想打疫苗、健檢報告看不懂，都可以找我。',
+    items: [
+      { name: '失眠 / 睡眠問題', note: '睡眠困擾的評估、生活型態調整與必要時的處置' },
+      { name: '成人疫苗施打', note: '流感、新冠、肺炎鏈球菌、帶狀疱疹、Tdap（百日咳/白喉/破傷風）、A/B 型肝炎、HPV（依診所實際供應）' },
+      { name: '戒菸', note: '戒菸治療與藥物協助（戒菸治療認證醫師）' },
+      { name: '健檢報告判讀', note: '把一堆紅字翻譯成你實際該怎麼做', link: '/health-checkup/', linkText: '義大健檢指南' },
+    ],
+  },
+  {
+    icon: 'stethoscope',
+    title: '一般家庭醫學',
+    intro: '身為家醫科醫師，我是你的「健康第一站」——不確定該看哪科時，先來找我釐清方向。',
+    items: [
+      { name: '慢性病整合追蹤', note: '多重慢性病、多重用藥的整合管理' },
+      { name: '一般急慢性問題', note: '常見急慢性症狀的評估與處置，旗山週五夜診特別方便', link: '/qishan-clinic/', linkText: '旗山週五夜診' },
+    ],
+  },
+  {
+    icon: 'business_center',
+    title: '企業臨場健康服務',
+    intro: '具備勞工健康服務醫師資格，依《職業安全衛生法》協助企業推動勞工健康保護四大計畫。',
+    items: [
+      { name: '勞工健康保護四大計畫', note: '人因性危害、異常工作負荷、職場不法侵害、母性健康保護', link: '/workplace-health/', linkText: '職場健康' },
+    ],
+  },
+];
+
+// 主要 MedicalCondition（給 schema，協助「某病要找誰」的搜尋與 AI 推薦）
+const conditionSchemaNames = [
+  '高血壓 Hypertension',
+  '第二型糖尿病 Type 2 Diabetes',
+  '高血脂 / 高膽固醇 Dyslipidemia',
+  '高尿酸血症 / 痛風 Gout',
+  '代謝症候群 Metabolic Syndrome',
+  '甲狀腺功能異常 Thyroid disorder',
+  '肥胖症 Obesity',
+  '非酒精性脂肪肝 NAFLD',
+  '多囊性卵巢症候群 PCOS / PMOS',
+  '骨質疏鬆 Osteoporosis',
+  '肌少症 Sarcopenia',
+  '失眠 Insomnia',
+];
+
+const title = '主治項目｜糖尿病、三高、甲狀腺、減重、骨鬆、失眠｜陳昱彰醫師';
+const description =
+  '不知道糖尿病、高血壓、高血脂／高膽固醇、高尿酸痛風、甲狀腺、減重、骨質疏鬆、失眠該看哪科？義大醫院家醫科陳昱彰醫師的主治項目一次看清楚。家醫科是你的健康第一站，三高慢性病、代謝內分泌、體重管理、骨骼肌肉、睡眠與成人疫苗都能整合處理。';
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: '陳昱彰醫師 主治項目',
+  description,
+  inLanguage: 'zh-Hant',
+  datePublished: '2026-06-30',
+  dateModified: '2026-06-30',
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  about: { '@id': `${SITE}/#physician` },
+};
+
+const conditionsList = {
+  '@type': 'ItemList',
+  '@id': `${pageUrl}#conditions`,
+  name: '主治項目（可協助評估與管理的疾病）',
+  numberOfItems: conditionSchemaNames.length,
+  itemListElement: conditionSchemaNames.map((n, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: { '@type': 'MedicalCondition', name: n },
+  })),
+};
+
+const breadcrumb = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '主治項目', item: pageUrl },
+  ],
+};
+---
+
+<Layout title={title} description={description} jsonLd={[medicalWebPage, conditionsList, breadcrumb]}>
+  <main class="max-w-6xl mx-auto px-6 md:px-10 py-12">
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <span>主治項目</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="mb-10">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">主治項目 · 看診範圍</p>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-5 font-headline">
+        不知道要看哪科？<br />先來找家醫科
+      </h1>
+      <p class="text-lg text-slate-700 leading-relaxed max-w-3xl chinese-line-height">
+        糖尿病、高血壓、高血脂、痛風、甲狀腺、減重、骨鬆、失眠……很多人卡在「這個病到底要看哪一科」。
+        身為<strong>家庭醫學科</strong>醫師，我是你的「健康第一站」——下面這些我都能直接幫你評估與管理，
+        需要時再協助轉介。以下依「病」分類，方便你對照自己的狀況。
+      </p>
+    </header>
+
+    <!-- Condition groups -->
+    <div class="space-y-6">
+      {groups.map((g) => (
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 md:p-7">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="material-symbols-outlined text-secondary shrink-0" style="font-size:32px;">{g.icon}</span>
+            <div>
+              <h2 class="text-xl md:text-2xl font-bold text-blue-950 font-headline">{g.title}</h2>
+              <p class="text-sm text-slate-600 mt-1 chinese-line-height">{g.intro}</p>
+            </div>
+          </div>
+          <ul class="grid sm:grid-cols-2 gap-3 mt-4">
+            {g.items.map((it) => (
+              <li class="rounded-xl bg-surface-container-low p-4">
+                <div class="flex items-baseline justify-between gap-2 flex-wrap">
+                  <span class="font-bold text-blue-950">{it.name}</span>
+                  {it.link && (
+                    <a href={it.link} class="text-xs text-teal-700 font-medium hover:underline whitespace-nowrap">{it.linkText} →</a>
+                  )}
+                </div>
+                <p class="text-sm text-slate-600 mt-1 chinese-line-height">{it.note}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <!-- 看診地點 + 預約 -->
+    <section class="mt-10 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-7 md:p-9">
+      <h2 class="text-2xl font-bold font-headline mb-4">想找我看診？兩個地點</h2>
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <div class="bg-white/10 rounded-xl p-5">
+          <h3 class="font-bold mb-1">義大醫院 家醫科 / 減重中心</h3>
+          <p class="text-sm text-on-primary-container chinese-line-height">高雄市燕巢區義大路 1 號 A 棟。週五上午家醫科、週五下午減重中心；週一、週二上午健檢報告解說。</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-5">
+          <h3 class="font-bold mb-1">大政診所（旗山週五夜診）</h3>
+          <p class="text-sm text-on-primary-container chinese-line-height">高雄市旗山區瑞吉里延平一路 337 號。每週五 18:00–21:00。電話 07-662-2588。適合下班後就診、旗山美濃田寮內門居民。</p>
+        </div>
+      </div>
+      <a href={BOOKING} target="_blank" rel="noopener" class="inline-block bg-white text-primary px-7 py-3 rounded-full font-bold hover:opacity-90 transition-opacity no-underline">義大醫院線上掛號</a>
+    </section>
+
+    <p class="text-xs text-slate-500 mt-6 chinese-line-height">
+      本頁為看診範圍的說明，僅供參考，不構成療效保證；實際診斷與治療需經醫師個別評估。部分項目（如疫苗供應、特定檢查）以醫療院所實際提供為準。
+    </p>
+  </main>
+</Layout>
