@@ -371,7 +371,7 @@ const faqSchema = {
       grade.className = 'text-2xl font-bold text-emerald-700';
       grade.textContent = '低風險';
       nextStep.className = 'rounded-xl p-4 mb-4 text-sm chinese-line-height bg-white border border-emerald-200 text-emerald-900';
-      nextStep.innerHTML = '進階肝纖維化不太可能（陰性預測值高）。<strong>但這不代表沒有脂肪肝</strong>——仍要控制體重與代謝（血糖、血壓、血脂），定期追蹤肝功能與腹部超音波。';
+      nextStep.innerHTML = '進階肝纖維化不太可能（陰性預測值高）。<strong>但這不代表沒有脂肪肝</strong>——仍要控制體重與代謝（血糖、血壓、血脂）。定期追蹤肝功能與腹部超音波、隔一段時間重算 FIB-4：有糖尿病或多項代謝風險者約每 1–2 年，否則約每 2–3 年。';
     } else if (band === 'indeterminate') {
       card.className = 'rounded-2xl border-2 border-amber-300 bg-amber-50 p-6 md:p-8 mb-6';
       grade.className = 'text-2xl font-bold text-amber-700';
@@ -383,12 +383,17 @@ const faqSchema = {
       grade.className = 'text-2xl font-bold text-rose-700';
       grade.textContent = '高風險';
       nextStep.className = 'rounded-xl p-4 mb-4 text-sm chinese-line-height bg-white border border-rose-200 text-rose-900';
-      nextStep.innerHTML = '進階肝纖維化可能性高，<strong>建議儘快至肝膽腸胃科評估</strong>（可能安排 FibroScan 或其他檢查）。高分代表需進一步確認，並不等於已經肝硬化，別自己嚇自己，但務必就醫。';
+      nextStep.innerHTML = '<strong>有可能</strong>存在進階肝纖維化，<strong>建議儘快至肝膽腸胃科評估</strong>（可能安排 FibroScan 或其他檢查確認）。高分只是「提高機率、需進一步確認」，在一般民眾族群陽性預測力有限，並不等於已經肝硬化——別自己嚇自己，但務必就醫。';
     }
 
-    if (age >= 65) {
+    if (age < 35) {
+      ageNote.className = 'text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3 chinese-line-height mb-4';
+      ageNote.innerHTML = '※ 你未滿 35 歲：FIB-4 在年輕族群容易「假陰性」（敏感度很低），<strong>就算算出低分，也不能就此排除肝纖維化</strong>。若有肥胖、代謝異常或肝指數偏高，建議直接做 FibroScan 或就醫評估，別只看這個分數。';
       ageNote.classList.remove('hidden');
+    } else if (age >= 65) {
+      ageNote.className = 'text-xs text-slate-500 chinese-line-height mb-4';
       ageNote.textContent = '※ 你 65 歲（含）以上，低風險切點已自動提高到 2.0（而非 1.3），以避免年長者被高估。';
+      ageNote.classList.remove('hidden');
     } else {
       ageNote.classList.add('hidden');
     }
