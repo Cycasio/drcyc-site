@@ -1,0 +1,408 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/health-tools/fib4-calculator/`;
+const title = 'FIB-4 肝纖維化指數計算機｜脂肪肝 MASLD 纖維化風險自我評估 | 陳昱彰醫師';
+const description =
+  'FIB-4 肝纖維化指數線上計算機：輸入年齡、AST（GOT）、ALT（GPT）、血小板，免費估算脂肪肝（MASLD）的進階肝纖維化風險。< 1.3 低風險、1.3–2.67 中間需 FibroScan、> 2.67 高風險應轉肝膽科；65 歲以上採 2.0 切點。義大醫院家醫科陳昱彰醫師整理，資料只在你的瀏覽器不上傳。';
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: `${SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: '健康工具', item: `${SITE}/blog/health-tools/` },
+    { '@type': 'ListItem', position: 4, name: 'FIB-4 肝纖維化指數計算機', item: pageUrl },
+  ],
+};
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: 'FIB-4 肝纖維化指數計算機',
+  description,
+  inLanguage: 'zh-Hant',
+  about: { '@type': 'MedicalEntity', name: 'FIB-4 肝纖維化指數（Fibrosis-4 Index）' },
+  author: { '@id': `${SITE}/#person` },
+  reviewedBy: { '@id': `${SITE}/#person` },
+  isAccessibleForFree: true,
+};
+
+const softwareApp = {
+  '@type': 'SoftwareApplication',
+  '@id': `${pageUrl}#calculator`,
+  name: 'FIB-4 肝纖維化指數計算機',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'TWD' },
+  creator: { '@id': `${SITE}/#person` },
+  url: pageUrl,
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'FIB-4 是什麼？可以拿來做什麼？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'FIB-4（Fibrosis-4 Index）是用年齡、AST（GOT）、ALT（GPT）、血小板四個數值算出來的分數，用來評估肝臟有沒有「進階纖維化」的風險。它最大的價值是當篩檢分流工具：FIB-4 低於切點時，進階纖維化的可能性很低（陰性預測值高，約 90%），可以先在基層追蹤；偏高則需要 FibroScan 或轉肝膽科進一步評估。它是脂肪肝（MASLD）評估的第一線工具，但不是確診工具。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'FIB-4 的切點怎麼看？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '一般成人（未滿 65 歲）：FIB-4 < 1.3 為低風險（進階纖維化不太可能）、1.3–2.67 為中間地帶（需進一步評估）、> 2.67 為高風險（進階纖維化可能性高，建議轉肝膽科）。65 歲以上為了維持準確度，低風險切點提高到 2.0（即 < 2.0 才算低風險），上限一樣是 2.67。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '血小板要填哪個數字？單位怎麼看？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '直接填健檢或抽血報告上「血小板 Platelet」的那個數字即可，例如 250。台灣報告的血小板單位通常是 ×10³/µL（或寫成 K/µL、10^3/uL），數值上剛好等於公式需要的 10⁹/L，所以不用換算，看到幾就填幾。AST、ALT 則是肝功能報告上的 GOT、GPT，單位 U/L。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'FIB-4 什麼情況下不準？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'FIB-4 在幾種情況下會失準，不能單看分數：急性肝炎或肝指數（AST/ALT）急性飆高時；血小板因其他原因異常時（如免疫性血小板低下、化療、脾腫大、其他血液疾病）；年紀太輕（約 35 歲以下）信度較差。此外 FIB-4 高分（> 2.67）的陽性預測力只是中等，代表「需要進一步確認」，並不等於已經肝硬化。所有結果都應由醫師綜合判讀。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'FIB-4 算出來偏高，我該怎麼辦？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '別自己嚇自己，但也別忽略。中間地帶（1.3–2.67，65 歲以上 2.0–2.67）建議安排 FibroScan（肝纖維化超音波）進一步評估；高風險（> 2.67）建議儘快至肝膽腸胃科評估。同時無論分數高低，控制體重與代謝（血糖、血壓、血脂）都是脂肪肝治療的核心。',
+      },
+    },
+  ],
+};
+---
+
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema, medicalWebPage, softwareApp, faqSchema]}>
+  <main class="max-w-4xl mx-auto px-6 md:px-10 py-12">
+
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
+      <span class="mx-2">／</span>
+      <a href="/blog/health-tools/" class="hover:text-teal-700">健康工具</a>
+      <span class="mx-2">／</span>
+      <span>FIB-4 肝纖維化指數計算機</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">肝纖維化評估 · 陳昱彰醫師整理</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">
+        FIB-4 肝纖維化指數計算機
+        <span class="block text-xl font-normal text-slate-500 mt-1">脂肪肝（MASLD）纖維化風險自我評估</span>
+      </h1>
+      <p class="text-slate-600 chinese-line-height">
+        健檢說你有脂肪肝，最該問的不是「有沒有脂肪」，而是<strong>「有沒有走到肝纖維化」</strong>——因為決定預後的是纖維化程度。
+        FIB-4 用年齡、AST（GOT）、ALT（GPT）、血小板四個數值就能估算進階纖維化風險，是脂肪肝評估的第一線篩檢工具。
+        想了解脂肪肝的完整觀念，先看
+        <a href="/blog/masld-mash-fatty-liver/" class="text-teal-700 underline">脂肪肝其實是代謝病：MASLD／MASH</a>。
+      </p>
+    </header>
+
+    <!-- 使用前提示 -->
+    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-8 text-sm text-amber-900 chinese-line-height">
+      <strong>這是篩檢分流工具，不是確診：</strong>
+      FIB-4 適合「排除」進階纖維化——分數低時很有幫助（陰性預測值高）。
+      分數偏高只代表需要進一步用 FibroScan 或轉肝膽科確認，<strong>不等於已經肝硬化</strong>。
+      急性肝炎、肝指數急性飆高、血小板因其他疾病異常（如免疫性血小板低下、化療、脾腫大）時，結果會失準，請交由醫師判讀。
+    </div>
+
+    <!-- 計算表單 -->
+    <form id="fib4-form" class="space-y-6" novalidate>
+      <div class="rounded-2xl bg-surface-container p-6 md:p-8">
+        <h2 class="text-lg font-bold text-blue-950 font-headline mb-5">輸入你的抽血數值</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <!-- 年齡 -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="age">年齡（歲）</label>
+            <p class="text-xs text-slate-500 mb-1">約 35 歲以下 FIB-4 信度較差</p>
+            <input type="number" id="age" name="age" min="18" max="100" step="1" placeholder="例如：55"
+              class="w-28 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- AST -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="ast">AST（GOT）（U/L）</label>
+            <p class="text-xs text-slate-500 mb-1">肝功能報告上的 GOT</p>
+            <input type="number" id="ast" name="ast" min="1" max="2000" step="1" placeholder="例如：40"
+              class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- ALT -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="alt">ALT（GPT）（U/L）</label>
+            <p class="text-xs text-slate-500 mb-1">肝功能報告上的 GPT</p>
+            <input type="number" id="alt" name="alt" min="1" max="2000" step="1" placeholder="例如：50"
+              class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+          <!-- 血小板 -->
+          <div>
+            <label class="block text-sm font-semibold text-blue-900 mb-1" for="plt">血小板 Platelet（×10³/µL）</label>
+            <p class="text-xs text-slate-500 mb-1">報告上的數字直接填，例如 250（不用換算）</p>
+            <input type="number" id="plt" name="plt" min="10" max="1000" step="1" placeholder="例如：250"
+              class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
+          </div>
+
+        </div>
+
+        <p id="input-error" class="hidden mt-4 text-sm text-rose-700 font-medium"></p>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="button" id="calc-btn"
+          class="bg-teal-700 hover:bg-teal-800 text-white font-bold px-10 py-3 rounded-full text-sm tracking-wide transition-colors">
+          計算 FIB-4 肝纖維化指數
+        </button>
+      </div>
+    </form>
+
+    <!-- 結果 -->
+    <section id="results" class="hidden mt-10" role="status" aria-live="polite" aria-atomic="true">
+      <div id="result-card" class="rounded-2xl border-2 p-6 md:p-8 mb-6">
+        <h2 class="text-lg font-bold text-blue-950 font-headline mb-5">評估結果</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center">
+            <p class="text-xs text-slate-500 mb-1">你的 FIB-4 分數</p>
+            <p id="fib4-value" class="text-3xl font-bold text-blue-950"></p>
+          </div>
+          <div class="rounded-xl bg-white border border-slate-200 p-4 text-center md:col-span-2">
+            <p class="text-xs text-slate-500 mb-1">進階肝纖維化風險</p>
+            <p id="risk-grade" class="text-2xl font-bold"></p>
+            <p id="risk-cutoff" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+        </div>
+
+        <!-- 建議 -->
+        <div id="next-step" class="rounded-xl p-4 mb-4 text-sm chinese-line-height"></div>
+
+        <!-- 65 歲切點提示 -->
+        <p id="age-note" class="hidden text-xs text-slate-500 chinese-line-height mb-4"></p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="/health-checkup/"
+            class="inline-block bg-teal-700 text-white font-bold px-6 py-3 rounded-full text-sm tracking-tight hover:bg-teal-800 transition-colors no-underline">
+            了解義大健檢（含 FibroScan） →
+          </a>
+          <button type="button" id="reset-btn"
+            class="text-sm text-teal-700 underline hover:text-teal-900">
+            重新計算
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 說明 -->
+    <article class="mt-12 space-y-8">
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">FIB-4 怎麼算的？</h2>
+        <p class="text-sm text-slate-600 chinese-line-height mb-3">
+          FIB-4 由 Sterling 等人（2006）提出，公式如下：
+        </p>
+        <div class="rounded-xl bg-slate-900 text-slate-100 p-4 text-sm font-mono overflow-x-auto mb-3">
+          FIB-4 = （年齡 × AST）÷（血小板 × √ALT）
+        </div>
+        <p class="text-sm text-slate-600 chinese-line-height">
+          其中 AST、ALT 單位為 U/L；血小板在公式中的單位是 10⁹/L，剛好等於台灣報告上「×10³/µL（K/µL）」的數值，所以直接填報告數字即可。
+          它只用四個「本來就會驗」的常規數值，不需額外抽血，這是它適合當第一線篩檢的原因。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">切點與判讀</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-blue-950">
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">FIB-4 分數</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">風險判讀</th>
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">後續建議</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2">&lt; 1.3<br><span class="text-xs text-slate-500">（≥ 65 歲：&lt; 2.0）</span></td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-green-700 font-medium">低風險</td>
+                <td class="border border-slate-200 px-3 py-2">進階纖維化不太可能。控制代謝與體重、定期追蹤肝功能與超音波即可。</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="border border-slate-200 px-3 py-2">1.3–2.67<br><span class="text-xs text-slate-500">（≥ 65 歲：2.0–2.67）</span></td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-amber-700 font-medium">中間地帶</td>
+                <td class="border border-slate-200 px-3 py-2">無法排除，建議安排 FibroScan（肝纖維化超音波）或轉肝膽科進一步評估。</td>
+              </tr>
+              <tr>
+                <td class="border border-slate-200 px-3 py-2">&gt; 2.67</td>
+                <td class="border border-slate-200 px-3 py-2 text-center text-red-700 font-medium">高風險</td>
+                <td class="border border-slate-200 px-3 py-2">進階纖維化可能性高，建議儘快至肝膽腸胃科評估，可能需要進一步檢查。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 mt-3 chinese-line-height">
+          65 歲以上將低風險切點提高到 2.0，是為了避免年長者被高估（McPherson 等，2017）。此判讀依 AGA 臨床照護路徑與 AASLD 2023 MASLD 指引整理。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸閱讀與工具</h2>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 chinese-line-height">
+          <li><a href="/blog/masld-mash-fatty-liver/" class="text-teal-700 underline">脂肪肝其實是代謝病：從 NAFLD 到 MASLD／MASH</a>——脂肪肝完整觀念、五項代謝診斷條件與治療</li>
+          <li><a href="/health-checkup/" class="text-teal-700 underline">義大健檢指南</a>——部分套餐含 FibroScan（肝纖維化超音波）</li>
+          <li><a href="/blog/hyperlipidemia-ldl-lower-better/" class="text-teal-700 underline">高血脂：LDL 愈低愈好</a>、<a href="/blog/hypertension-when-to-see-doctor/" class="text-teal-700 underline">什麼是高血壓</a>、<a href="/blog/type-2-diabetes-remission/" class="text-teal-700 underline">第二型糖尿病</a>——脂肪肝常與三高同行</li>
+          <li><a href="/tools/" class="text-teal-700 underline">醫療計算機合集</a>——BMI、腰圍身高比、GLP-1 適應症等</li>
+        </ul>
+      </section>
+
+    </article>
+
+    <!-- FAQ -->
+    <section class="mt-12 border-t border-outline-variant pt-8">
+      <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">常見問題</h2>
+      <div class="space-y-4 text-slate-700 chinese-line-height">
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">FIB-4 是什麼？可以拿來做什麼？</h3>
+          <p class="text-sm">用年齡、AST、ALT、血小板算出的分數，評估肝臟有沒有「進階纖維化」風險。最大價值是當篩檢分流：分數低時進階纖維化可能性很低（陰性預測值約 90%），可先在基層追蹤；偏高則需 FibroScan 或轉肝膽科。它是脂肪肝評估的第一線工具，不是確診工具。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">切點怎麼看？</h3>
+          <p class="text-sm">一般成人：&lt; 1.3 低風險、1.3–2.67 中間地帶、&gt; 2.67 高風險。65 歲以上低風險切點提高到 2.0（即 &lt; 2.0 才算低），上限一樣 2.67。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">血小板要填哪個數字？</h3>
+          <p class="text-sm">直接填報告上「血小板 Platelet」的數字，例如 250。台灣單位 ×10³/µL（K/µL）數值上等於公式的 10⁹/L，不用換算。AST、ALT 就是報告上的 GOT、GPT，單位 U/L。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">FIB-4 什麼情況下不準？</h3>
+          <p class="text-sm">急性肝炎或肝指數急性飆高、血小板因其他疾病異常（免疫性血小板低下、化療、脾腫大）、年紀太輕（約 35 歲以下）時信度較差。高分（&gt; 2.67）陽性預測力中等，代表「需進一步確認」，不等於肝硬化。結果都應由醫師綜合判讀。</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-1">算出來偏高怎麼辦？</h3>
+          <p class="text-sm">中間地帶建議 FibroScan 進一步評估；高風險建議儘快至肝膽腸胃科。無論分數高低，控制體重與代謝（血糖、血壓、血脂）都是脂肪肝治療的核心。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 免責 -->
+    <footer class="mt-12 text-xs text-slate-500 chinese-line-height border-t border-outline-variant pt-6">
+      <p class="font-bold mb-2 text-slate-700">⚠️ 醫療免責聲明</p>
+      <p>
+        本計算機採用 Sterling（2006）FIB-4 公式與 AGA／AASLD 建議之切點，僅供健康評估參考，
+        <strong>不能取代醫師診斷或治療建議</strong>。FIB-4 是篩檢分流工具而非確診工具，結果須由醫師結合病史、其他檢查綜合判讀。
+      </p>
+      <p class="mt-2">
+        本網站不儲存任何個人資料，所有輸入僅在你的瀏覽器即時運算，不會上傳。
+      </p>
+    </footer>
+
+  </main>
+</Layout>
+
+<script>
+  function calcFib4(age: number, ast: number, alt: number, plt: number): number {
+    return (age * ast) / (plt * Math.sqrt(alt));
+  }
+
+  function interpret(fib4: number, age: number): 'low' | 'indeterminate' | 'high' {
+    const lowerCut = age >= 65 ? 2.0 : 1.3;
+    if (fib4 < lowerCut) return 'low';
+    if (fib4 <= 2.67) return 'indeterminate';
+    return 'high';
+  }
+
+  const $ = (id: string) => document.getElementById(id)!;
+
+  function calculate() {
+    const age = parseFloat((document.getElementById('age') as HTMLInputElement).value);
+    const ast = parseFloat((document.getElementById('ast') as HTMLInputElement).value);
+    const alt = parseFloat((document.getElementById('alt') as HTMLInputElement).value);
+    const plt = parseFloat((document.getElementById('plt') as HTMLInputElement).value);
+
+    const err = $('input-error');
+    const valid =
+      Number.isFinite(age) && age >= 18 && age <= 100 &&
+      Number.isFinite(ast) && ast > 0 && ast <= 2000 &&
+      Number.isFinite(alt) && alt > 0 && alt <= 2000 &&
+      Number.isFinite(plt) && plt >= 10 && plt <= 1000;
+
+    if (!valid) {
+      err.textContent = '請確認四個欄位都已填寫且在合理範圍（年齡 18–100 歲、AST／ALT 1–2000、血小板 10–1000）。';
+      err.classList.remove('hidden');
+      return;
+    }
+    err.classList.add('hidden');
+
+    const fib4 = calcFib4(age, ast, alt, plt);
+    const band = interpret(fib4, age);
+
+    ($('fib4-value') as HTMLElement).textContent = fib4.toFixed(2);
+
+    const card = $('result-card');
+    const grade = $('risk-grade');
+    const cutoff = $('risk-cutoff');
+    const nextStep = $('next-step');
+    const ageNote = $('age-note');
+
+    const lowerCut = age >= 65 ? '2.0' : '1.3';
+    cutoff.textContent = `你的切點：低風險 < ${lowerCut}、中間 ${lowerCut}–2.67、高風險 > 2.67`;
+
+    if (band === 'low') {
+      card.className = 'rounded-2xl border-2 border-emerald-300 bg-emerald-50 p-6 md:p-8 mb-6';
+      grade.className = 'text-2xl font-bold text-emerald-700';
+      grade.textContent = '低風險';
+      nextStep.className = 'rounded-xl p-4 mb-4 text-sm chinese-line-height bg-white border border-emerald-200 text-emerald-900';
+      nextStep.innerHTML = '進階肝纖維化不太可能（陰性預測值高）。<strong>但這不代表沒有脂肪肝</strong>——仍要控制體重與代謝（血糖、血壓、血脂），定期追蹤肝功能與腹部超音波。';
+    } else if (band === 'indeterminate') {
+      card.className = 'rounded-2xl border-2 border-amber-300 bg-amber-50 p-6 md:p-8 mb-6';
+      grade.className = 'text-2xl font-bold text-amber-700';
+      grade.textContent = '中間地帶（無法排除）';
+      nextStep.className = 'rounded-xl p-4 mb-4 text-sm chinese-line-height bg-white border border-amber-200 text-amber-900';
+      nextStep.innerHTML = '單靠 FIB-4 無法排除進階纖維化，<strong>建議安排 FibroScan（肝纖維化超音波）</strong>或至肝膽腸胃科進一步評估。同時積極控制體重與代謝。';
+    } else {
+      card.className = 'rounded-2xl border-2 border-rose-300 bg-rose-50 p-6 md:p-8 mb-6';
+      grade.className = 'text-2xl font-bold text-rose-700';
+      grade.textContent = '高風險';
+      nextStep.className = 'rounded-xl p-4 mb-4 text-sm chinese-line-height bg-white border border-rose-200 text-rose-900';
+      nextStep.innerHTML = '進階肝纖維化可能性高，<strong>建議儘快至肝膽腸胃科評估</strong>（可能安排 FibroScan 或其他檢查）。高分代表需進一步確認，並不等於已經肝硬化，別自己嚇自己，但務必就醫。';
+    }
+
+    if (age >= 65) {
+      ageNote.classList.remove('hidden');
+      ageNote.textContent = '※ 你 65 歲（含）以上，低風險切點已自動提高到 2.0（而非 1.3），以避免年長者被高估。';
+    } else {
+      ageNote.classList.add('hidden');
+    }
+
+    $('results').classList.remove('hidden');
+    $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function resetForm() {
+    (document.getElementById('fib4-form') as HTMLFormElement).reset();
+    $('results').classList.add('hidden');
+    $('input-error').classList.add('hidden');
+  }
+
+  document.getElementById('calc-btn')!.addEventListener('click', calculate);
+  document.getElementById('reset-btn')!.addEventListener('click', resetForm);
+</script>
