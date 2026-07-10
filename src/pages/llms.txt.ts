@@ -1,4 +1,10 @@
-# 陳昱彰醫師（Yu-Chang Chen, MD）
+import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
+
+// ⚠️ 此檔 build 時自動生成 /llms.txt。文章索引由 getCollection('blog') 產生,永不漂移。
+// HEADER / FOOTER 為手動維護的靜態內容(醫師資訊、服務、證照、Q&A);新增文章「不需」改這裡。
+
+const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 
 > 義大醫院家醫科主治醫師，整合行為科學推動減重、慢性病管理與職場健康。
 > Family medicine physician at E-Da Hospital, Kaohsiung, Taiwan. Specializes in obesity medicine, osteoporosis, and occupational health integrated with behavioral science approaches.
@@ -62,39 +68,9 @@
 - 時段：每週五 18:00–21:00 夜診
 - 服務：家庭醫學、三高慢性病追蹤、藥物減重（含 GLP-1 類）
 - 適合：住旗山、美濃、田寮、內門一帶的居民；白天要上班、只能晚上看診的人；需要穩定回診 GLP-1 減重療程但不想跑醫學中心的人
+`;
 
-## 衛教專欄文章
-
-### 減重、代謝與三高
-- [打猛健樂為什麼更需要找健身教練?](/blog/mounjaro-needs-personal-trainer) — 2025 新研究：打 1.5 年藥流失的肌肉 ≈ 20 年自然老化、Jabbour RCT 六組對照、TriNetX 骨鬆 HR 1.44
-- [FITT-VP 運動處方](/blog/fitt-vp-exercise-prescription) — ACSM 運動醫學標準架構：頻率/強度/時間/類型/總量/進階，含 Tanaka 心跳公式、實戰案例
-- [超慢跑（Slow Jogging）](/blog/slow-jogging) — 田中宏暁的低衝擊有氧，METs ~6，前足著地 + 步頻 180+，膝蓋不好也能跑
-- [跑步真的會傷膝蓋嗎？20 萬人實證打破 30 年迷思](/blog/running-knee-myth-evidence) — Williams 2013（7.4 萬人，↓OA 15% ↓髖置換 35%）/ Alentorn-Geli 2017（11.4 萬人，休閒跑者 OA 3.5% vs 久坐 10.2%）/ Hartwell 2024（3,804 馬拉松跑者，跑量跑齡都不是 OA 預測因子）；1989 Marti BMJ 誤讀史；真正風險因子（舊傷 OR 5.85、家族史 3.47、BMI、年齡）；給社團跑者的核心訊息
-- [第二型糖尿病可以逆轉嗎？](/blog/type-2-diabetes-remission) — DiRECT / STEP-1 / SURMOUNT-4 / STAMPEDE 實際數字，減重 vs 緩解率對照
-- [GLP-1 減重藥要搭配運動](/blog/exercise-glp1-weight-loss) — 猛健樂 / Ozempic 瘦掉的有 24–40% 是肌肉，阻力訓練是關鍵
-- [猛健樂 Mounjaro 完整指南](/blog/mounjaro-weight-loss) — SURMOUNT-1 數據、GIP/GLP-1 雙受體機轉、副作用與禁忌症
-- [減重藥物完整比較:GLP-1 與 Orlistat、Contrave](/blog/glp1-medications-comparison) — GLP-1/GIP(Mounjaro SURMOUNT-1 -22.5% / Wegovy STEP-1 -14.9% / Ozempic / 口服 Rybelsus)+ 非 GLP-1 口服(Orlistat 羅氏鮮脂肪酶抑制劑 3-5% / Contrave naltrexone+bupropion 壓食慾 5-9%);機轉、副作用、禁忌(GLP-1 禁 MTC/胰臟炎;Contrave 禁癲癇/未控高血壓)、台灣健保自費、四步驟決策樹
-- [動機式晤談](/blog/motivational-interviewing) — PACE 精神 + OARS 技巧，讓病人自己想改變
-- [骨鬆篩檢指南](/blog/osteoporosis-screening-guide) — DXA、T-score 判讀、40 歲就該知道的預防策略
-- [肌少症與阻力訓練](/blog/sarcopenia-resistance-training) — SR/NMA 證據：中等強度就有效、長輩也能做
-- [減重 COM-B 模型](/blog/weight-loss-comb-model) — 行為科學三要素：能力 / 機會 / 動機
-- [PCOS 正式改名 PMOS：為什麼換名字、對你有什麼影響](/blog/pcos-polycystic-ovary-syndrome) — 2026/5/12 PCOS(多囊性卵巢症候群)正式更名 PMOS(Polyendocrine Metabolic Ovarian Syndrome 多內分泌代謝卵巢症候群)，The Lancet 論文+50 多組織、歷時 14 年、2 萬人共識；改名原因(「囊」是誤稱、不一定有多囊卵巢、舊名害七成延遲診斷)；診斷治療現在不變、3 年過渡期到 2028；核心是胰島素阻抗+雄性素過高的代謝病；減重 5-10% 第一線、懷孕用 letrozole、GLP-1 新興角色；4 倍糖尿病風險
-- [高血脂：LDL 越低越好？目標值、Lp(a) 與健保落後](/blog/hyperlipidemia-ldl-lower-better) — LDL 壞膽固醇是動脈硬化元兇,「越低越好越久越好」(CTT/FOURIER/ODYSSEY 證據,川普 LDL 51);目標看風險不看正常值(ESC 2019:很高風險<55/高<70/中<100);一生至少驗一次 Lp(a)(基因決定的獨立風險);台灣健保落後國際(治療門檻寬鬆、PCSK9 給付嚴格 2025/9 才放寬至 LDL 100、Lp(a) 不給付要自費);statin+ezetimibe+PCSK9 藥物階梯;statin 安全性(SAMSON)
-- [痛風與高尿酸：尿酸降到多少、飲食迷思、用藥前基因檢測](/blog/gout-hyperuricemia) — 高尿酸≠痛風;急性發作時尿酸可能正常(需事後2-4週再驗);ACR 2020 治療達標尿酸<6(有痛風石<5)、ULT 適應症(≥2次/年/痛風石/腎結石/CKD)、啟動時預防性抗發炎3-6個月;台灣關鍵:用 allopurinol 前驗 HLA-B*5801(漢人約1/5帶因、SJS/TEN風險上百倍、健保給付);飲食迷思(豆腐香菇沒關係,酒精果糖體重才重要);急性三選一(NSAID/colchicine/類固醇)
-- [脂肪肝其實是代謝病：NAFLD→MASLD/MASH 改名與纖維化風險](/blog/masld-mash-fatty-liver) — 2023 脂肪肝改名 NAFLD→MASLD、NASH→MASH,本質是代謝病非「喝不喝酒」;新診斷=脂肪肝+至少一項代謝異常(BMI腰圍/血糖/血壓/三酸甘油脂/HDL 五選一,即三高);進展單純脂肪肝→MASH→纖維化→肝硬化肝癌,頭號死因是心血管;關鍵評估纖維化(FIB-4 <1.3低/1.3-2.67中/>2.67高、FibroScan);減重 5/7/10% 分別改善脂肪/MASH/纖維化;GLP-1、resmetirom(2024 FDA 首個 MASH 藥、甲狀腺受體促效劑);脂肪肝可吃 statin
-- [甲狀腺亢進與低下：症狀、抽血怎麼看、何時治療](/blog/thyroid-hyperthyroidism-hypothyroidism) — 甲狀腺是代謝油門:亢進(心悸/瘦/怕熱/手抖,Graves最常見)vs低下(累/胖/怕冷/便秘,橋本氏最常見);TSH 高=低下、TSH 低=亢進(常記反);治療:甲亢用 methimazole/放射碘/手術、甲低補 levothyroxine;亞臨床甲低通常 TSH>10 才治療、懷孕備孕更積極;結節多良性(超音波+FNA);紅旗:甲狀腺風暴、抗甲狀腺藥致顆粒球缺乏
-- [什麼是高血壓？血壓多少算高、何時找醫生](/blog/hypertension-when-to-see-doctor) — 沉默殺手、靠量不靠感覺；台灣 2022 標準下修居家血壓 130/80(STEP 試驗)；722 量測原則；分級表；何時就醫(722 平均≥130/80 評估、≥180/120 或中風/胸痛症狀掛急診);白袍/隱匿性高血壓;次發性高血壓;不一定馬上吃藥;減鹽減重運動 DASH
-- [職場健康指南](/blog/workplace-health-guide) — 勞工健康保護四大計畫懶人包
-
-### 職業醫學與職場健康（企業／HR／廠護）
-- [職業安全衛生法四大計劃是什麼？HR 與安衛人員必讀](/blog/four-plans-occupational-health-overview) — 勞工健康保護四大計畫總覽:人因性危害、異常工作負荷促發疾病(過勞)、母性健康保護、職場不法侵害預防;法源、適用門檻(依勞工人數)、罰則、廠護實作重點
-- [異常工作負荷促發疾病（過勞）預防計劃](/blog/overwork-prevention-plan) — 過勞預防不是只要有計劃書:加班時數、輪班、Framingham 心血管風險 + 工作負荷評估、勞動部三色分級、面談與工時調整實務
-- [人因性危害預防計劃：從腰痛到手麻](/blog/ergonomic-hazard-prevention-plan) — 職場肌肉骨骼傷害(MSD):人因工程、KIM/RULA/REBA 評估工具、腰痛/腕隧道/肩頸、改善對策
-- [母性健康保護計劃：懷孕、哺乳、試管療程](/blog/maternity-protection-plan) — 對懷孕/產後/哺乳女性勞工的危害評估與工作調整、風險分級管理、法規與企業實務
-- [職場不法侵害（職場霸凌）預防計劃](/blog/workplace-violence-prevention-plan) — 職場暴力/霸凌預防:內部與外部不法侵害、風險辨識、申訴管道、雇主法定責任、HR 實務
-- [聽力保護計劃：噪音作業場所](/blog/hearing-conservation-program) — 噪音危害預防:85 分貝管理值、聽力檢查、噪音工程控制與防護具、特別危害健康作業實務
-
-## 核心服務
+const FOOTER = `## 核心服務
 
 1. **企業臨場健康服務** — 依《職業安全衛生法》提供勞工健康保護四大計畫、工作環境危害評估、員工健康管理
 2. **減重管理門診** — 整合飲食、運動、壓力管理、睡眠調整與藥物治療（含 Contrave 猛健樂等），以行為科學方法輔助
@@ -157,3 +133,39 @@ A: Facebook 粉專 @lazydr、Email cyc@edfm.org，或直接至義大醫院門診
 ## 關鍵字
 
 陳昱彰醫師， 義大醫院家庭醫學科， 減重門診高雄， 肥胖專科醫師， 骨質疏鬆門診， 企業臨場健康服務， 職業醫學， 運動醫學， 行為科學減重， COM-B模型， 動機式晤談， 實證醫學銀獎， Contrave猛健樂， 義大減重中心
+`;
+
+// 分類 → 索引小標(涵蓋所有現有 category;未對應者自動歸入「其他衛教」,確保永不漏文)
+const SECTIONS: { title: string; cats: string[] }[] = [
+  { title: '減重與體重管理', cats: ['減重管理'] },
+  { title: '三高與慢性病', cats: ['三高與慢性病', '糖尿病與代謝'] },
+  { title: '內分泌與代謝', cats: ['內分泌代謝'] },
+  { title: '運動、骨骼與肌肉', cats: ['運動醫學', '骨質疏鬆'] },
+  { title: '婦女健康', cats: ['婦女健康'] },
+  { title: '行為科學', cats: ['行為科學'] },
+  { title: '職業醫學與職場健康（企業／HR／廠護）', cats: ['職業醫學', '職場健康'] },
+];
+
+export const GET: APIRoute = async () => {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const line = (p: (typeof posts)[number]) =>
+    `- [${p.data.title}](/blog/${p.slug}/) — ${p.data.description}`;
+
+  const used = new Set<string>();
+  const blocks: string[] = [];
+  for (const s of SECTIONS) {
+    const items = posts.filter((p) => s.cats.includes(p.data.category));
+    items.forEach((p) => used.add(p.slug));
+    if (items.length) blocks.push(`### ${s.title}\n${items.map(line).join('\n')}`);
+  }
+  const rest = posts.filter((p) => !used.has(p.slug));
+  if (rest.length) blocks.push(`### 其他衛教\n${rest.map(line).join('\n')}`);
+
+  const out = `${HEADER}\n## 衛教專欄文章\n\n${blocks.join('\n\n')}\n\n${FOOTER}`;
+  return new Response(out, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+};
