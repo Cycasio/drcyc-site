@@ -142,6 +142,7 @@ const SECTIONS: { title: string; cats: string[] }[] = [
   { title: '內分泌與代謝', cats: ['內分泌代謝'] },
   { title: '運動、骨骼與肌肉', cats: ['運動醫學', '骨質疏鬆'] },
   { title: '婦女健康', cats: ['婦女健康'] },
+  { title: '預防保健與疫苗', cats: ['預防保健'] },
   { title: '行為科學', cats: ['行為科學'] },
   { title: '職業醫學與職場健康（企業／HR／廠護）', cats: ['職業醫學', '職場健康'] },
 ];
