@@ -62,6 +62,10 @@
 - 時段：每週五 18:00–21:00 夜診
 - 服務：家庭醫學、三高慢性病追蹤、藥物減重（含 GLP-1 類）
 - 適合：住旗山、美濃、田寮、內門一帶的居民；白天要上班、只能晚上看診的人；需要穩定回診 GLP-1 減重療程但不想跑醫學中心的人
+
+## 衛教專欄文章
+
+### 減重、代謝與三高
 - [打猛健樂為什麼更需要找健身教練?](/blog/mounjaro-needs-personal-trainer) — 2025 新研究：打 1.5 年藥流失的肌肉 ≈ 20 年自然老化、Jabbour RCT 六組對照、TriNetX 骨鬆 HR 1.44
 - [FITT-VP 運動處方](/blog/fitt-vp-exercise-prescription) — ACSM 運動醫學標準架構：頻率/強度/時間/類型/總量/進階，含 Tanaka 心跳公式、實戰案例
 - [超慢跑（Slow Jogging）](/blog/slow-jogging) — 田中宏暁的低衝擊有氧，METs ~6，前足著地 + 步頻 180+，膝蓋不好也能跑
@@ -81,6 +85,14 @@
 - [甲狀腺亢進與低下：症狀、抽血怎麼看、何時治療](/blog/thyroid-hyperthyroidism-hypothyroidism) — 甲狀腺是代謝油門:亢進(心悸/瘦/怕熱/手抖,Graves最常見)vs低下(累/胖/怕冷/便秘,橋本氏最常見);TSH 高=低下、TSH 低=亢進(常記反);治療:甲亢用 methimazole/放射碘/手術、甲低補 levothyroxine;亞臨床甲低通常 TSH>10 才治療、懷孕備孕更積極;結節多良性(超音波+FNA);紅旗:甲狀腺風暴、抗甲狀腺藥致顆粒球缺乏
 - [什麼是高血壓？血壓多少算高、何時找醫生](/blog/hypertension-when-to-see-doctor) — 沉默殺手、靠量不靠感覺；台灣 2022 標準下修居家血壓 130/80(STEP 試驗)；722 量測原則；分級表；何時就醫(722 平均≥130/80 評估、≥180/120 或中風/胸痛症狀掛急診);白袍/隱匿性高血壓;次發性高血壓;不一定馬上吃藥;減鹽減重運動 DASH
 - [職場健康指南](/blog/workplace-health-guide) — 勞工健康保護四大計畫懶人包
+
+### 職業醫學與職場健康（企業／HR／廠護）
+- [職業安全衛生法四大計劃是什麼？HR 與安衛人員必讀](/blog/four-plans-occupational-health-overview) — 勞工健康保護四大計畫總覽:人因性危害、異常工作負荷促發疾病(過勞)、母性健康保護、職場不法侵害預防;法源、適用門檻(依勞工人數)、罰則、廠護實作重點
+- [異常工作負荷促發疾病（過勞）預防計劃](/blog/overwork-prevention-plan) — 過勞預防不是只要有計劃書:加班時數、輪班、Framingham 心血管風險 + 工作負荷評估、勞動部三色分級、面談與工時調整實務
+- [人因性危害預防計劃：從腰痛到手麻](/blog/ergonomic-hazard-prevention-plan) — 職場肌肉骨骼傷害(MSD):人因工程、KIM/RULA/REBA 評估工具、腰痛/腕隧道/肩頸、改善對策
+- [母性健康保護計劃：懷孕、哺乳、試管療程](/blog/maternity-protection-plan) — 對懷孕/產後/哺乳女性勞工的危害評估與工作調整、風險分級管理、法規與企業實務
+- [職場不法侵害（職場霸凌）預防計劃](/blog/workplace-violence-prevention-plan) — 職場暴力/霸凌預防:內部與外部不法侵害、風險辨識、申訴管道、雇主法定責任、HR 實務
+- [聽力保護計劃：噪音作業場所](/blog/hearing-conservation-program) — 噪音危害預防:85 分貝管理值、聽力檢查、噪音工程控制與防護具、特別危害健康作業實務
 
 ## 核心服務
 

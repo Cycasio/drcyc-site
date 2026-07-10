@@ -70,12 +70,10 @@ const blogPostingSchema = {
   ...(post.data.medicalCondition
     ? { about: { '@type': 'MedicalCondition', name: post.data.medicalCondition } }
     : {}),
-  ...(post.data.scholarly
-    ? {
-        specialty: 'FamilyPractice',
-        reviewedBy: { '@id': `${SITE}/#person` },
-      }
-    : {}),
+  // 醫療內容(YMYL)信任訊號:所有文章都標註審閱者與最後審閱日
+  reviewedBy: { '@id': `${SITE}/#person` },
+  lastReviewed: (post.data.updatedDate ?? post.data.pubDate).toISOString().slice(0, 10),
+  ...(post.data.scholarly ? { specialty: 'https://schema.org/PrimaryCare' } : {}),
   // Speakable: 朗讀標題與 FAQ 答案（Google Assistant / Siri 等語音助手）
   speakable: {
     '@type': 'SpeakableSpecification',

@@ -23,3 +23,7 @@ https://drcyc.io/* https://www.drcyc.io/:splat 301
 /碎碎念/ /blog/ 301
 /升糖指數的終結 /blog/ 301
 /升糖指數的終結/ /blog/ 301
+# 舊版 WordPress 殘留網址(/me、/小工具/*)— 301 接住殘留權重
+/me /about/ 301
+/me/ /about/ 301
+/小工具/* /tools/ 301
