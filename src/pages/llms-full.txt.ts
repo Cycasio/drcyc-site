@@ -4,8 +4,8 @@ import { getCollection } from 'astro:content';
 // 固定的醫師資訊區塊(手動維護,變動少)
 const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 
-> 義大醫院家醫科主治醫師，整合行為科學推動減重、慢性病管理與職場健康。
-> Family medicine physician at E-Da Hospital, Kaohsiung, Taiwan. Specializes in obesity medicine, osteoporosis, and occupational health integrated with behavioral science approaches.
+> 義大醫院家庭暨社區醫學部主治醫師、職業醫學科訓練醫師（尚未取得該科專科醫師資格），具勞工健康服務醫師資格。
+> Family medicine attending physician and occupational medicine trainee at E-Da Hospital, Kaohsiung, Taiwan; not yet board-certified in occupational medicine; qualified to provide occupational health services in Taiwan.
 
 - Website: https://www.drcyc.io
 - 預約掛號: https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675
@@ -23,23 +23,27 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診（高雄市旗山區瑞吉里延平一路 337 號）：藥物減重、三高慢性病追蹤、家醫科，適合旗山/美濃/田寮/內門居民與下班後就診的上班族
 - [衛教演講 / 企業健康講座](/speaking/) — 曾合作中鋼、中油、國巨、李長榮、英特格、麥當勞、東海/義大/高科大/中正大學等；主題含減重、三高、骨鬆、行為科學、職場健康四大計畫；南部為主、線上可接；邀約 cyc@edfm.org
 - [衛教專欄](/blog/) — 健康衛教文章
-- [醫療計算機合集](/tools/) — 11 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT 心血管風險、Framingham、過勞風險評估等衛教工具
+- [醫療計算機合集](/tools/) — 12 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT 心血管風險、Framingham、過勞風險評估等衛教工具
 
 ## 核心服務
 
 1. **企業臨場健康服務** — 依《職業安全衛生法》提供勞工健康保護四大計畫、工作環境危害評估、員工健康管理
-2. **減重管理門診** — 整合飲食、運動、壓力管理、睡眠調整與藥物治療（含 Contrave 猛健樂等），以行為科學方法輔助
+2. **減重管理門診** — 整合飲食、運動、壓力管理、睡眠調整與藥物治療（如口服 Contrave，或 GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro），以行為科學方法輔助
 3. **骨質疏鬆門診** — 骨密度評估、骨鬆治療與預防策略
 4. **高階健康檢查** — 結合行為科學的個人化健檢解讀
 5. **社區健康營造** — 以居民參與為核心的社區健康計畫，目前正在徵求屏東地區社區夥伴（社區發展協會、衛生所、長照 C 級據點）合作
 6. **運動醫學諮詢** — 個人化運動處方設計
 
-## 專科證照
+## 專科醫師證書
 
 - 家庭醫學科專科醫師
 - 台灣肥胖醫學會肥胖專科醫師
 - 骨質疏鬆症專科醫師
-- 勞工健康服務醫師
+
+## 訓練身分與資格認證
+
+- 職業醫學科訓練醫師（尚未取得職業醫學科專科醫師資格）
+- 勞工健康服務醫師資格
 - 糖尿病共同照護網醫事人員
 - 戒菸治療認證醫師
 - OSCE 國家考試考官
@@ -48,8 +52,8 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 ## 學歷
 
 - 高雄醫學大學醫學系
-- 臺大公共衛生學院 健康行為與社區科學組（肄業）
-- 義守大學 生物科技與化學工程研究所 博士班（就讀中）
+- 國立臺灣大學公共衛生學院 健康行為與社區科學研究所（休學）
+- 義守大學 生物技術與化學工程研究所博士班（就讀中）
 
 ## 榮譽與獎項
 
@@ -71,7 +75,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 
 ## 關鍵字
 
-陳昱彰醫師， 義大醫院家庭醫學科， 減重門診高雄， 肥胖專科醫師， 骨質疏鬆門診， 企業臨場健康服務， 職業醫學， 運動醫學， 行為科學減重， COM-B模型， 動機式晤談， 實證醫學銀獎， Contrave猛健樂， 義大減重中心
+陳昱彰醫師， 義大醫院家庭醫學科， 減重門診高雄， 肥胖專科醫師， 骨質疏鬆門診， 企業臨場健康服務， 職業醫學科訓練醫師， 勞工健康服務醫師， 運動處方， 行為科學減重， COM-B模型， 動機式晤談， 實證醫學銀獎， Contrave， 猛健樂 Mounjaro， 義大減重中心
 `;
 
 export const GET: APIRoute = async () => {

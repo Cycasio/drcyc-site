@@ -2,7 +2,7 @@
 title: "不想吃藥、不想運動？醫師如何用『動機式晤談』讓你自己想改變"
 description: "醫病溝通卡關？動機式晤談是一種以患者為中心的對話技術，讓改變的動力從你心中長出來。"
 pubDate: 2026-03-11
-updatedDate: 2026-05-31
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags: ["動機式晤談", "行為改變", "醫病溝通", "健康行為"]
 category: "行為科學"
@@ -22,7 +22,7 @@ faq:
 tldr:
   - "動機式晤談（MI）是以患者為中心的對話技術，讓改變動機從患者心中長出來，而非醫師硬塞"
   - "核心是 OARS（開放問題、肯定、反映、總結）+ 引發改變語言，禁止說教與威脅"
-  - "Cochrane meta-analysis 顯示 MI 在戒菸、減重、糖尿病自我管理皆達中度效果"
+  - "MI 的效果會因行為、族群、介入品質與比較方式而異；不能把單一領域的證據外推成所有健康行為都有效"
 ---
 
 「我知道要控制飲食，但就是做不到。」
@@ -45,7 +45,7 @@ tldr:
 
 動機式晤談是 1980 年代由心理學家 William Miller 和 Stephen Rollnick 發展出來的對話技術。
 
-一開始是用在戒酒治療，後來發現對各種行為改變都有效：戒菸、減重、運動、服藥遵從等等。
+一開始是用在酒精使用問題，後來被應用到戒菸、減重、運動與服藥遵從等不同情境。研究結果並不完全一致，效果大小會受到對象、晤談品質、介入強度與比較組影響，因此不宜把 MI 說成對所有行為都同樣有效。
 
 **核心理念：**
 
@@ -171,7 +171,15 @@ A: 當然可以！你可以說：「醫生，我知道該怎麼做，但我需�
 
 歡迎來門診聊聊，我們一起探索。
 
-我是陳昱彰醫師，義大醫院家醫科主治醫師。曾於臺大公衛學院研修健康行為與社區科學，專長是將行為科學導入臨床實踐。
+我是陳昱彰醫師，義大醫院家醫科主治醫師。曾就讀國立臺灣大學公共衛生學院健康行為與社區科學研究所（現為休學），現就讀義守大學生物技術與化學工程研究所博士班，專長是將行為科學導入臨床實踐。
 
 📧 Email: cyc@edfm.org  
 🏥 義大醫院 家庭暨社區醫學部｜義大減重中心
+
+---
+
+## 參考資料
+
+1. Miller WR, Rose GS. [Toward a Theory of Motivational Interviewing](https://pubmed.ncbi.nlm.nih.gov/19739882/). *Am Psychol.* 2009;64(6):527-537. doi: [10.1037/a0016830](https://doi.org/10.1037/a0016830). PMID: 19739882.
+2. Miller WR, Rollnick S. [Ten Things That Motivational Interviewing Is Not](https://pubmed.ncbi.nlm.nih.gov/19364414/). *Behav Cogn Psychother.* 2009;37(2):129-140. doi: [10.1017/S1352465809005128](https://doi.org/10.1017/S1352465809005128). PMID: 19364414.
+3. Lindson N, et al. [Motivational Interviewing for Smoking Cessation](https://pubmed.ncbi.nlm.nih.gov/31425622/). *Cochrane Database Syst Rev.* 2019;7:CD006936. doi: [10.1002/14651858.CD006936.pub4](https://doi.org/10.1002/14651858.CD006936.pub4). PMID: 31425622.

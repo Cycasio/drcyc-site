@@ -2,7 +2,7 @@
 title: "脂肪肝其實是代謝病：從 NAFLD 到 MASLD／MASH 的改名，與你該知道的纖維化風險"
 description: "健檢說你有脂肪肝，卻以為「不痛不癢沒關係」？2023 年脂肪肝正式改名：NAFLD→MASLD、NASH→MASH，點出重點——它不是「喝不喝酒」的問題，而是代謝功能障礙在肝臟的表現。家醫科醫師說明新命名、五項代謝診斷條件、如何用免費的 FIB-4 評估肝纖維化、減重能不能逆轉，以及美國 2024 核准的首個 MASH 新藥。"
 pubDate: 2026-07-01
-updatedDate: 2026-07-01
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - 脂肪肝
@@ -20,7 +20,6 @@ tags:
   - 內分泌
   - 家庭醫學
 category: "內分泌代謝"
-scholarly: true
 medicalCondition: "代謝功能障礙相關脂肪肝病 MASLD"
 image: ""
 tldr:
@@ -172,7 +171,7 @@ faq:
 
 ### 主要參考文獻
 
-1. **Rinella ME, et al. A multisociety Delphi consensus statement on new fatty liver disease nomenclature. *Hepatology / Journal of Hepatology*. 2023.**（NAFLD→MASLD、NASH→MASH 的國際共識改名）
+1. **Rinella ME, et al. [A Multisociety Delphi Consensus Statement on New Fatty Liver Disease Nomenclature](https://pubmed.ncbi.nlm.nih.gov/37363821/). *Hepatology.* 2023;78(6):1966-1986. doi: [10.1097/HEP.0000000000000520](https://doi.org/10.1097/HEP.0000000000000520). PMID: 37363821.**（NAFLD→MASLD、NASH→MASH 的國際共識改名）
 2. **Harrison SA, et al. A Phase 3, Randomized, Controlled Trial of Resmetirom in NASH with Liver Fibrosis (MAESTRO-NASH). *N Engl J Med*. 2024;390:497-509.**（首個 MASH 藥物）
 3. Rinella ME, et al. AASLD Practice Guidance on the clinical assessment and management of nonalcoholic/metabolic dysfunction-associated fatty liver disease. *Hepatology*. 2023.
 4. Vilar-Gomez E, et al. Weight Loss Through Lifestyle Modification Significantly Reduces Features of Nonalcoholic Steatohepatitis. *Gastroenterology*. 2015;149(2):367-378.（減重劑量與 MASH 改善）

@@ -41,12 +41,12 @@ const faqs = [
     ],
   },
   {
-    q: '猛健樂（Mounjaro）GLP-1 減重在哪邊比較方便？',
+    q: '猛健樂（Mounjaro）減重在哪邊比較方便？',
     a: '如果你住在旗山、美濃、田寮、內門，或是白天要上班不方便請假，週五晚上到旗山大政診所最順。如果你想搭配完整健檢一起做、或住在楠梓/左營/岡山/橋頭/燕巢一帶，義大減重中心比較近。兩邊都能做減重療程，不會因為換地點而中斷。',
   },
   {
     q: '陳醫師的專長有哪些？',
-    a: '家庭醫學、肥胖醫學、運動醫學、職業醫學、骨質疏鬆、行為科學、實證醫學。持有家庭醫學、肥胖醫學、骨質疏鬆症三專科證照，榮獲國家醫療品質獎實證醫學類臨床組銀獎。',
+    a: '家庭醫學、肥胖醫學、運動處方、骨質疏鬆、行為科學與實證醫學。持有家庭醫學、肥胖醫學、骨質疏鬆症三專科證照；現為職業醫學科訓練醫師（尚未取得該科專科醫師資格），並具勞工健康服務醫師資格。',
   },
   {
     q: '什麼是行為科學導向的醫療？',
@@ -54,7 +54,7 @@ const faqs = [
   },
   {
     q: '減重門診的方式？',
-    a: '採用實證醫學方法，結合營養、行為科學、運動處方與藥物治療（含 Contrave、GLP-1 類如猛健樂），制定個人化減重策略。不是單靠一支針就解決，是整套可持續的生活改變。',
+    a: '採用實證醫學方法，結合營養、行為科學、運動處方與藥物治療；藥物可能包含非 GLP-1 口服藥 Contrave、GIP/GLP-1 雙受體促效劑猛健樂（Mounjaro），或其他 GLP-1 類藥物。實際選擇需個別評估。',
   },
   {
     q: '如何預約、聯絡陳醫師？',
@@ -74,7 +74,7 @@ const homepageSchema = {
   inLanguage: 'zh-Hant',
   isPartOf: { '@id': `${SITE}/#website` },
   about: { '@id': `${SITE}/#person` },
-  mainEntity: { '@id': `${SITE}/#physician` },
+  mainEntity: { '@id': `${SITE}/#person` },
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['h1', '.chinese-line-height'],
@@ -187,7 +187,7 @@ const homepageFaqSchema = {
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
             <p class="chinese-line-height mb-4">
-              整合飲食、運動、壓力管理、睡眠調整與藥物治療（含 Contrave、GLP-1 類），以行為科學方法協助建立可持續的健康習慣。
+              整合飲食、運動、壓力管理、睡眠調整與藥物治療（含非 GLP-1 口服藥 Contrave、GIP/GLP-1 雙受體促效劑猛健樂，以及 GLP-1 類藥物），以行為科學方法協助建立可持續的健康習慣。
             </p>
             <div class="space-y-2 text-sm">
               <div>📍 <strong>義大減重中心</strong>・週五下午</div>

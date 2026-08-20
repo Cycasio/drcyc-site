@@ -2,7 +2,7 @@
 title: "跑步真的會傷膝蓋嗎？20 萬人實證打破 30 年迷思"
 description: "Williams 2013（7.4 萬人）、Alentorn-Geli 2017（11.4 萬人）、Hartwell 2024（3,804 位馬拉松跑者）三大研究告訴你：休閒跑者的膝關節炎風險比久坐者更低。完整梳理 30 年觀念翻轉、訓練量安全分界與真正的退化風險因子。"
 pubDate: 2026-05-25
-updatedDate: 2026-05-31
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - 跑步
@@ -18,7 +18,6 @@ tags:
   - Hartwell 2024
   - ACE-CPT
 category: "運動醫學"
-scholarly: true
 medicalCondition: "退化性關節炎 Osteoarthritis"
 image: ""
 faq:
@@ -218,7 +217,7 @@ tldr:
 
 1. Marti B, et al. *BMJ*. 1989;299:91-93.
 2. Chakravarty EF, et al. *Am J Prev Med*. 2008;35(2):133-138.
-3. **Williams PT. *Med Sci Sports Exerc*. 2013;45(7):1292-1297.**
+3. **Williams PT. [Effects of Running and Walking on Osteoarthritis and Hip Replacement Risk](https://pubmed.ncbi.nlm.nih.gov/23377837/). *Med Sci Sports Exerc.* 2013;45(7):1292-1297. doi: [10.1249/MSS.0b013e3182885f26](https://doi.org/10.1249/MSS.0b013e3182885f26). PMID: 23377837.**
 4. Miller RH, et al. *Med Sci Sports Exerc*. 2014;46(3):572-579.
 5. Plack LA. *ACSM's Health & Fitness Journal*. 2015;19(1):23-28.
 6. **Alentorn-Geli E, et al. *J Orthop Sports Phys Ther*. 2017;47(6):373-390.**

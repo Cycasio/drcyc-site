@@ -223,7 +223,7 @@ FITT-VP 讓你把「我要運動」變成：
 
 ### 延伸閱讀
 
-- [猛健樂（Mounjaro）完整指南](/blog/mounjaro-weight-loss/) — GLP-1 減重藥要搭配運動，效果才會好
+- [猛健樂（Mounjaro）完整指南](/blog/mounjaro-weight-loss/) — 腸泌素類減重藥仍應搭配運動與營養管理
 - [吃猛健樂就不用運動了？](/blog/exercise-glp1-weight-loss/) — 為什麼減重藥配運動才能守住肌肉
 - [肌少症與阻力訓練](/blog/sarcopenia-resistance-training/) — 50 歲後為什麼一定要練重訓
 - [第二型糖尿病可以逆轉嗎？](/blog/type-2-diabetes-remission/) — DiRECT 研究背後的減重關鍵

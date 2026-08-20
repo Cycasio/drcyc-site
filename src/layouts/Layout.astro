@@ -41,14 +41,14 @@ const personSchema = {
   name: '陳昱彰',
   alternateName: ['Yu-Chang Chen', 'Chen Yu-Chang'],
   honorificSuffix: 'MD',
-  jobTitle: '家庭醫學科主治醫師',
+  jobTitle: ['家庭醫學科主治醫師', '職業醫學科訓練醫師'],
   image: `${SITE}/images/portrait.jpg`,
-  url: SITE,
+  url: `${SITE}/about/`,
   email: 'mailto:cyc@edfm.org',
   gender: 'Male',
   nationality: 'Taiwanese',
   description:
-    '義大醫院家庭暨社區醫學部主治醫師與減重中心醫師，整合家庭醫學、肥胖醫學、運動醫學與職業醫學，以行為科學為核心協助民眾進行減重治療與慢性病管理。國家醫療品質獎實證醫學臨床組銀獎。',
+    '義大醫院家庭暨社區醫學部主治醫師與減重中心醫師，持有家庭醫學、肥胖醫學與骨質疏鬆症三張專科證書；目前為職業醫學科訓練醫師，尚未取得該科專科醫師資格，並具勞工健康服務醫師資格。現就讀義守大學生物技術與化學工程研究所博士班；國立臺灣大學公共衛生學院健康行為與社區科學研究所為休學狀態。',
   knowsAbout: [
     '家庭醫學',
     '肥胖醫學',
@@ -68,18 +68,28 @@ const personSchema = {
   ],
   alumniOf: [
     { '@type': 'CollegeOrUniversity', name: '高雄醫學大學', url: 'https://www.kmu.edu.tw' },
-    { '@type': 'CollegeOrUniversity', name: '國立臺灣大學公共衛生學院' },
+  ],
+  workLocation: [
+    { '@id': `${SITE}/#edah-clinic` },
+    { '@id': `${SITE}/#qishan-clinic` },
   ],
   worksFor: {
     '@type': 'Hospital',
     name: '義大醫院',
     url: 'https://www.edah.org.tw',
   },
-  affiliation: {
-    '@type': 'Hospital',
-    name: '義大醫院家庭暨社區醫學部',
-    url: 'https://www.edah.org.tw',
-  },
+  affiliation: [
+    {
+      '@type': 'Hospital',
+      name: '義大醫院家庭暨社區醫學部',
+      url: 'https://www.edah.org.tw',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: '義守大學',
+      url: 'https://www.isu.edu.tw',
+    },
+  ],
   memberOf: [
     { '@type': 'Organization', name: '台灣家庭醫學醫學會' },
     { '@type': 'Organization', name: '台灣肥胖醫學會' },
@@ -89,7 +99,7 @@ const personSchema = {
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '家庭醫學科專科醫師' },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '肥胖醫學專科醫師' },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '骨質疏鬆症專科醫師' },
-    { '@type': 'EducationalOccupationalCredential', credentialCategory: '認證', name: '勞工健康服務醫師' },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: '資格', name: '勞工健康服務醫師資格' },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '認證', name: '戒菸治療認證醫師' },
     {
       '@type': 'EducationalOccupationalCredential',
@@ -110,95 +120,10 @@ const personSchema = {
     'https://www.facebook.com/lazydr',
     'https://www.instagram.com/lazydr.cyc',
     'https://orcid.org/0009-0005-2506-1058',
-    // 學術身分驗證連結(供 AI 與搜尋引擎驗證作者真實性 / E-E-A-T)
-    'https://pubmed.ncbi.nlm.nih.gov/?term=Chen+Yu-Chang+E-Da',
-    'https://scholar.google.com/scholar?q=Chen+Yu-Chang+sarcopenia+E-Da',
-    'https://www.researchgate.net/profile/Yu-Chang-Chen',
-  ],
-  subjectOf: [
-    {
-      '@type': 'MedicalScholarlyArticle',
-      headline: 'Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs',
-      author: { '@id': `${SITE}/#person` },
-      datePublished: '2023-11-29',
-      isPartOf: { '@type': 'Periodical', name: 'European Review of Aging and Physical Activity' },
-      identifier: '10.1186/s11556-023-00333-4',
-      url: 'https://doi.org/10.1186/s11556-023-00333-4',
-      sameAs: 'https://pubmed.ncbi.nlm.nih.gov/38030985/',
-      about: { '@type': 'MedicalCondition', name: 'Sarcopenia' },
-    },
-    {
-      '@type': 'ScholarlyArticle',
-      headline: 'Continuance compliance of privacy policy of electronic medical records: the roles of both motivation and habit',
-      author: { '@id': `${SITE}/#person` },
-      datePublished: '2018-12-18',
-      isPartOf: { '@type': 'Periodical', name: 'BMC Medical Informatics and Decision Making' },
-      identifier: '10.1186/s12911-018-0722-7',
-      url: 'https://doi.org/10.1186/s12911-018-0722-7',
-      sameAs: 'https://pubmed.ncbi.nlm.nih.gov/30563500/',
-    },
   ],
 };
 
-const physicianSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Physician',
-  '@id': `${SITE}/#physician`,
-  name: '陳昱彰醫師門診 - 義大醫院',
-  url: SITE,
-  image: `${SITE}/images/portrait.jpg`,
-  telephone: '+886-7-615-0011',
-  priceRange: '$$',
-  medicalSpecialty: ['https://schema.org/PrimaryCare', 'https://schema.org/Endocrine'],
-  availableService: [
-    { '@type': 'MedicalProcedure', name: '減重管理門診', description: '結合 COM-B 行為科學、營養、運動處方與藥物治療（Contrave、Mounjaro 等 GLP-1）的個人化減重療程' },
-    { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
-    { '@type': 'MedicalProcedure', name: '企業臨場健康服務', description: '依《職業安全衛生法》提供勞工健康保護四大計畫' },
-    { '@type': 'MedicalProcedure', name: '高階健康檢查解讀', description: '結合行為科學的個人化健檢諮詢' },
-    { '@type': 'MedicalProcedure', name: '運動處方 (FITT-VP)', description: '以 ACSM FITT-VP 架構設計個人化運動處方,結合 ACE-CPT 訓練學觀點涵蓋心肺、阻力、柔軟度與進階進程' },
-  ],
-  parentOrganization: {
-    '@type': 'Hospital',
-    name: '義大醫院',
-    url: 'https://www.edah.org.tw',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '角宿里義大路 1 號(A 棟)',
-    addressLocality: '燕巢區',
-    addressRegion: '高雄市',
-    postalCode: '82445',
-    addressCountry: 'TW',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 22.7345,
-    longitude: 120.3882,
-  },
-  // 同一位醫師有兩個看診點,workLocation 讓搜尋引擎正確理解
-  workLocation: [
-    { '@id': `${SITE}/#edah-clinic` },
-    { '@id': `${SITE}/#qishan-clinic` },
-  ],
-  areaServed: [
-    { '@type': 'City', name: '高雄市' },
-    { '@type': 'AdministrativeArea', name: '高雄市燕巢區' },
-    { '@type': 'AdministrativeArea', name: '高雄市旗山區' },
-  ],
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:30', closes: '12:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:30', closes: '12:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:30', closes: '12:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '13:30', closes: '17:00' },
-  ],
-  potentialAction: {
-    '@type': 'ReserveAction',
-    target: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
-    name: '線上預約掛號',
-  },
-};
-
-// 義大看診點(獨立 MedicalClinic,供 Physician.workLocation 引用)
+// 義大看診點（獨立 MedicalClinic，以 employee 連回同一位醫師）
 const edahClinicSchema = {
   '@context': 'https://schema.org',
   '@type': 'MedicalClinic',
@@ -209,6 +134,13 @@ const edahClinicSchema = {
   hasMap: 'https://maps.app.goo.gl/Qf7E1ZuDcFaAQBhW6',
   medicalSpecialty: ['https://schema.org/PrimaryCare'],
   employee: { '@id': `${SITE}/#person` },
+  availableService: [
+    { '@type': 'MedicalProcedure', name: '減重管理門診', description: '結合 COM-B 行為科學、營養、運動處方與藥物治療的個人化減重療程' },
+    { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
+    { '@type': 'MedicalProcedure', name: '企業臨場健康服務', description: '依《職業安全衛生法》提供勞工健康服務' },
+    { '@type': 'MedicalProcedure', name: '高階健康檢查解讀', description: '結合行為科學的個人化健檢諮詢' },
+    { '@type': 'MedicalProcedure', name: '運動處方 FITT-VP', description: '依個人健康與體適能狀況規劃心肺、阻力、柔軟度與進階進程' },
+  ],
   parentOrganization: { '@type': 'Hospital', name: '義大醫院', url: 'https://www.edah.org.tw' },
   address: {
     '@type': 'PostalAddress',
@@ -232,6 +164,11 @@ const edahClinicSchema = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:30', closes: '12:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '13:30', closes: '17:00' },
   ],
+  potentialAction: {
+    '@type': 'ReserveAction',
+    target: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
+    name: '線上預約掛號',
+  },
 };
 
 const qishanClinicSchema = {
@@ -287,7 +224,6 @@ const schemaGraph = {
   '@context': 'https://schema.org',
   '@graph': [
     personSchema,
-    physicianSchema,
     edahClinicSchema,
     qishanClinicSchema,
     websiteSchema,

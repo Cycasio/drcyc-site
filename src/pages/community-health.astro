@@ -27,11 +27,7 @@ const faqs = [
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "社區健康營造計畫",
-    "provider": {
-      "@type": "Person",
-      "name": "陳昱彰",
-      "jobTitle": "家庭醫學科醫師"
-    },
+    "provider": { "@id": "https://www.drcyc.io/#person" },
     "areaServed": ["屏東縣", "高雄市"],
     "description": "推動社區健康營造，結合長者健康促進、慢性病管理、運動處方等，以居民參與為核心，打造由下而上的健康社區。",
     "url": "https://www.drcyc.io/community-health/"
@@ -46,19 +42,6 @@ const faqs = [
       "acceptedAnswer": { "@type": "Answer", "text": f.a }
     }))
   })} />
-
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="nav-brand">YC Chen, MD</a>
-      <div class="nav-links">
-        <a href="/">首頁</a>
-        <a href="/workplace-health">臨場服務</a>
-        <a href="/health-checkup">高階健檢</a>
-        <a href="/community-health">社區營造</a>
-        <a href="/blog">衛教專欄</a>
-      </div>
-    </div>
-  </nav>
 
   <section class="page-hero">
     <div class="container">
@@ -128,21 +111,9 @@ const faqs = [
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 陳昱彰醫師｜守護健康，從理解與溝通開始。</p>
-    </div>
-  </footer>
 </Layout>
 
 <style>
-  .nav { position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border); }
-  .nav-inner { display:flex;align-items:center;justify-content:space-between;height:64px; }
-  .nav-brand { font-weight:700;font-size:1.15rem;color:var(--text); }
-  .nav-brand:hover { text-decoration:none; }
-  .nav-links { display:flex;gap:1.5rem; }
-  .nav-links a { color:var(--text-light);font-size:0.95rem; }
-  .nav-links a:hover { color:var(--primary);text-decoration:none; }
   .page-hero { padding:5rem 0 4rem;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fe 100%);text-align:center; }
   .page-hero h1 { font-size:2.5rem;font-weight:800;margin-bottom:1rem; }
   .hero-badge { display:inline-block;background:var(--primary);color:white;padding:0.35rem 1rem;border-radius:99px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem; }
@@ -172,11 +143,8 @@ const faqs = [
   .faq-item summary::before { content:'＋ ';color:var(--primary); }
   .faq-item[open] summary::before { content:'－ '; }
   .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
-  .footer { padding:2rem 0;text-align:center;color:var(--text-light);font-size:0.9rem;border-top:1px solid var(--border); }
   @media (max-width:768px) {
     .page-hero h1 { font-size:1.8rem; }
-    .nav-links { gap:0.8rem; }
-    .nav-links a { font-size:0.8rem; }
     .section { padding:3rem 0; }
   }
 </style>

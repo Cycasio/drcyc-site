@@ -2,7 +2,7 @@
 title: "甲狀腺亢進與低下：症狀、抽血怎麼看、什麼時候該治療"
 description: "心悸變瘦怕熱，還是疲倦變胖怕冷？可能都是甲狀腺在作怪。家醫科醫師白話說明甲狀腺亢進與低下的症狀差異、一張抽血（TSH＋free T4）怎麼判讀、為什麼 TSH 高反而是「低下」、亞臨床要不要治療、脖子摸到結節是不是癌症，以及什麼情況要趕快就醫。"
 pubDate: 2026-07-01
-updatedDate: 2026-07-01
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - 甲狀腺
@@ -19,7 +19,6 @@ tags:
   - 內分泌
   - 家庭醫學
 category: "內分泌代謝"
-scholarly: true
 medicalCondition: "甲狀腺疾病 Thyroid disease"
 image: ""
 tldr:
@@ -152,7 +151,7 @@ faq:
 
 ### 主要參考文獻
 
-1. **Ross DS, et al. 2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis. *Thyroid*. 2016;26(10):1343-1421.**
+1. **Ross DS, et al. [2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis](https://pubmed.ncbi.nlm.nih.gov/27521067/). *Thyroid.* 2016;26(10):1343-1421. doi: [10.1089/thy.2016.0229](https://doi.org/10.1089/thy.2016.0229). PMID: 27521067.**
 2. **Jonklaas J, et al. Guidelines for the Treatment of Hypothyroidism (American Thyroid Association Task Force). *Thyroid*. 2014;24(12):1670-1751.**
 3. Kahaly GJ, et al. 2018 European Thyroid Association Guideline for the Management of Graves' Hyperthyroidism. *Eur Thyroid J*. 2018;7(4):167-186.
 4. Haugen BR, et al. 2015 American Thyroid Association Management Guidelines for Adult Patients with Thyroid Nodules and Differentiated Thyroid Cancer. *Thyroid*. 2016;26(1):1-133.

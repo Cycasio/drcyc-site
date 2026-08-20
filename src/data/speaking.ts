@@ -57,10 +57,10 @@ export interface Topic {
 export const TOPICS: Topic[] = [
   {
     icon: 'monitor_weight',
-    title: '減重醫學與 GLP-1 新藥',
+    title: '減重醫學與腸泌素類新藥',
     subtitle: '猛健樂、Ozempic、Wegovy 的真相',
     description:
-      '從肥胖醫學專科角度,講清楚 GLP-1 類藥物(semaglutide、tirzepatide)的作用機轉、真實效果、副作用、停藥反彈與適用對象。員工最想知道的「那支減重針到底能不能打」,我用臨床試驗數據告訴你。',
+      '從肥胖醫學專科角度，講清楚 GLP-1 受體促效劑 semaglutide 與 GIP/GLP-1 雙重受體促效劑 tirzepatide 的作用機轉、真實效果、副作用、停藥反彈與適用對象。員工最想知道的「那支減重針到底能不能打」，我用臨床試驗數據說明。',
     keywords: ['肥胖醫學', '猛健樂', 'GLP-1', '行為改變', 'COM-B'],
   },
   {

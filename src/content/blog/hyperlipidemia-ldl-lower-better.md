@@ -2,7 +2,7 @@
 title: "高血脂：壞膽固醇 LDL 真的「越低越好」嗎？談目標值、Lp(a) 與健保的落後"
 description: "連 78 歲的美國總統川普都把壞膽固醇 LDL 壓到 51。高血脂的主角是 LDL，大量證據支持「越低越好、降得越久越好」。家醫科醫師用 ESC 指引與大型試驗告訴你：血脂報告怎麼看、你的 LDL 目標該是多少、為什麼一生至少要驗一次 Lp(a)，以及台灣健保在血脂治療上跟不上國際的地方。"
 pubDate: 2026-07-01
-updatedDate: 2026-07-01
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - 高血脂
@@ -22,7 +22,6 @@ tags:
   - 心血管
   - 家庭醫學
 category: "三高與慢性病"
-scholarly: true
 medicalCondition: "高血脂 / 血脂異常 Dyslipidemia"
 image: ""
 tldr:
@@ -169,7 +168,7 @@ LDL 在血中待得越久、濃度越高，斑塊就堆得越多。所以血脂�
 
 ### 主要參考文獻
 
-1. **Mach F, et al. 2019 ESC/EAS Guidelines for the management of dyslipidaemias: lipid modification to reduce cardiovascular risk. *Eur Heart J*. 2020;41(1):111-188.**（含 LDL 風險分層目標、Lp(a) 一生驗一次建議；2025 已有 focused update）
+1. **Mach F, et al. [2019 ESC/EAS Guidelines for the Management of Dyslipidaemias: Lipid Modification to Reduce Cardiovascular Risk](https://pubmed.ncbi.nlm.nih.gov/31504418/). *Eur Heart J.* 2020;41(1):111-188. doi: [10.1093/eurheartj/ehz455](https://doi.org/10.1093/eurheartj/ehz455). PMID: 31504418.**（含 LDL 風險分層目標、Lp(a) 一生驗一次建議；2025 已有 focused update）
 2. **Cholesterol Treatment Trialists' (CTT) Collaboration. Efficacy and safety of more intensive lowering of LDL cholesterol: a meta-analysis of data from 170,000 participants in 26 randomised trials. *Lancet*. 2010;376(9753):1670-1681.**
 3. **Sabatine MS, et al. Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease (FOURIER). *N Engl J Med*. 2017;376(18):1713-1722.**
 4. Schwartz GG, et al. Alirocumab and Cardiovascular Outcomes after Acute Coronary Syndrome (ODYSSEY OUTCOMES). *N Engl J Med*. 2018;379(22):2097-2107.

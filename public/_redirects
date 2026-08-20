@@ -1,10 +1,7 @@
-# Redirect apex to www (preserving path)
-https://drcyc.io/* https://www.drcyc.io/:splat 301
-
 # Sitemap alias — some bots probe /sitemap.xml first
 /sitemap.xml /sitemap-index.xml 301
 
-# 已下架工具(2026-05 手術前後決策三件套演講後拿掉)— 301 導回工具索引
+# Retired tools
 /tools/glp1-preop-hold/ /tools/ 301
 /tools/anticoagulant-hold/ /tools/ 301
 /tools/eras-protocol/ /tools/ 301
@@ -12,18 +9,27 @@ https://drcyc.io/* https://www.drcyc.io/:splat 301
 /tools/anticoagulant-hold /tools/ 301
 /tools/eras-protocol /tools/ 301
 
-# 舊版 drcyc.io 殘留網址(改版後孤兒)— 301 接住流量,撿回連結權重
-# 舊 LINE LIFF 端點(改版未遷移,現以最接近的工具承接;如需恢復真正 LIFF 功能需另建)
+# Legacy health-tool aliases
+/health-tools /blog/health-tools/ 301
+/health-tools/ /blog/health-tools/ 301
+/health-tools/tdee-calculator /blog/health-tools/tdee-calculator/ 301
+/health-tools/tdee-calculator/ /blog/health-tools/tdee-calculator/ 301
+/tools/tdee /blog/health-tools/tdee-calculator/ 301
+/tools/tdee/ /blog/health-tools/tdee-calculator/ 301
+
+# Legacy LINE LIFF endpoints
 /liff/tdee /blog/health-tools/tdee-calculator/ 301
 /liff/tdee/ /blog/health-tools/tdee-calculator/ 301
 /liff/weight /tools/dashboard/ 301
 /liff/weight/ /tools/dashboard/ 301
-# 舊文章
+
+# Legacy article slugs
 /碎碎念 /blog/ 301
 /碎碎念/ /blog/ 301
 /升糖指數的終結 /blog/ 301
 /升糖指數的終結/ /blog/ 301
-# 舊版 WordPress 殘留網址(/me、/小工具/*)— 301 接住殘留權重
+
+# Legacy WordPress routes
 /me /about/ 301
 /me/ /about/ 301
 /小工具/* /tools/ 301

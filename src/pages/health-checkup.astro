@@ -39,13 +39,8 @@ const medicalWebPage = {
   author: { '@id': `${SITE}/#person` },
   publisher: { '@id': `${SITE}/#person` },
   about: { '@type': 'MedicalProcedure', name: '健康檢查 Health Checkup' },
-  specialty: 'FamilyPractice',
+  specialty: 'https://schema.org/PrimaryCare',
   inLanguage: 'zh-Hant',
-  // Speakable: 朗讀 FAQ 答案、套餐標題、實證醫學摘要
-  speakable: {
-    '@type': 'SpeakableSpecification',
-    cssSelector: ['h1', 'h2', '[data-speakable="true"]'],
-  },
 };
 
 // USPSTF 評等專有名詞（DefinedTermSet）— 讓 AI 理解這些是專業術語
@@ -53,7 +48,7 @@ const uspstfTermSet = {
   '@type': 'DefinedTermSet',
   '@id': `${pageUrl}#uspstf-grades`,
   name: 'USPSTF 預防服務工作小組建議等級',
-  inDefinedTermSet: 'https://www.uspreventiveservicestaskforce.org/uspstf/grade-definitions',
+  sameAs: 'https://www.uspreventiveservicestaskforce.org/uspstf/grade-definitions',
   hasDefinedTerm: [
     {
       '@type': 'DefinedTerm',
@@ -116,7 +111,6 @@ const itemListSchema = {
       // 且 MedicalProcedure 不在 Google 評論富結果支援的父型別清單裡,自評用 Review 語意也錯)
       description: `${p.theme}。${p.chenNote}`,
       url: `${pageUrl}#pkg-${p.id}`,
-      procedureType: 'Diagnostic',
       serviceType: '健康檢查 Health Checkup',
       provider: {
         '@type': 'Hospital',
@@ -147,10 +141,6 @@ const faqSchema = {
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
-  speakable: {
-    '@type': 'SpeakableSpecification',
-    cssSelector: ['[data-faq-question]', '[data-faq-answer]'],
-  },
 };
 
 const breadcrumbSchema = {
@@ -455,7 +445,7 @@ const description =
         ))}
       </div>
       <p class="text-xs text-slate-500 mt-4 chinese-line-height">
-        <strong>共通禁忌</strong>:腎臟疾病、先天性巨結腸症、腸阻塞或腸穿孔、嚴重肝硬化合併腹水、癲癇病史、孕婦或無法配合大量飲水者,請於預約時告知,健診中心會評估改用其他清腸劑。如服用抗血小板或抗凝血劑(Aspirin、Clopidogrel、Warfarin、Dabigatran、Rivaroxaban、Apixaban 等),請與原處方醫師討論是否可停藥 7 天。
+        <strong>預約時需先告知</strong>:腎臟疾病、先天性巨結腸症、腸阻塞或腸穿孔、嚴重肝硬化合併腹水、癲癇病史、懷孕或無法配合大量飲水者,健診中心會評估適合的清腸方式。如服用抗血小板或抗凝血藥物(Aspirin、Clopidogrel、Warfarin、Dabigatran、Rivaroxaban、Apixaban 等),不可自行停藥;是否調整與停用多久取決於藥物、腎功能、預計內視鏡處置及個人出血/血栓風險,應由原處方醫師與內視鏡團隊共同決定。
       </p>
     </section>
 

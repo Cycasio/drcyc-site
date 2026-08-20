@@ -20,14 +20,21 @@ const aboutPageSchema = {
 
 const title = '關於陳昱彰醫師｜義大醫院家醫科・三專科醫師・實證銀獎';
 const description =
-  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師，並具備 ACE-CPT 美國運動委員會認證私人教練執照。高雄醫學大學畢業，整合行為科學與實證醫學，榮獲國家醫療品質獎實證醫學類臨床組銀獎。發表 SCI 期刊論文 2 篇。';
+  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師。現為職業醫學科訓練醫師（尚未取得該科專科醫師資格），並具勞工健康服務醫師資格與 ACE-CPT 認證。榮獲國家醫療品質獎實證醫學類臨床組銀獎，發表 SCI 期刊論文 2 篇。';
 
 const credentials = [
-  { category: '專科證照', items: [
+  { category: '現職與訓練', items: [
+    '義大醫院 家庭暨社區醫學部主治醫師',
+    '義大醫院 減重中心醫師',
+    '職業醫學科訓練醫師（尚未取得職業醫學科專科醫師資格）',
+  ]},
+  { category: '專科醫師證書', items: [
     '家庭醫學科專科醫師',
     '台灣肥胖醫學會 肥胖醫學專科醫師',
     '中華民國骨質疏鬆症學會 骨鬆專科醫師',
-    '勞工健康服務醫師',
+  ]},
+  { category: '資格與認證', items: [
+    '勞工健康服務醫師資格',
     '糖尿病共同照護網醫事人員',
     '戒菸治療認證醫師',
     'OSCE 國家考試考官',
@@ -35,8 +42,8 @@ const credentials = [
   ]},
   { category: '學歷', items: [
     '高雄醫學大學 醫學系',
-    '國立臺灣大學公共衛生學院 健康行為與社區科學組',
-    '義守大學 生物科技與化學工程研究所 博士班（就讀中）',
+    '國立臺灣大學公共衛生學院 健康行為與社區科學研究所（休學）',
+    '義守大學 生物技術與化學工程研究所博士班（就讀中）',
   ]},
   { category: '榮譽', items: [
     '國家醫療品質獎 實證醫學類 臨床組 銀獎',
@@ -59,9 +66,36 @@ const publications = [
   },
 ];
 
+// 只在有顯示完整論文清單的關於頁輸出，並以 author 連回作者實體。
+const publicationSchemas = [
+  {
+    '@type': 'MedicalScholarlyArticle',
+    '@id': 'https://doi.org/10.1186/s11556-023-00333-4',
+    headline: 'Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs',
+    author: { '@id': `${SITE}/#person` },
+    datePublished: '2023-11-29',
+    isPartOf: { '@type': 'Periodical', name: 'European Review of Aging and Physical Activity' },
+    identifier: '10.1186/s11556-023-00333-4',
+    url: 'https://doi.org/10.1186/s11556-023-00333-4',
+    sameAs: 'https://pubmed.ncbi.nlm.nih.gov/38030985/',
+    about: { '@type': 'MedicalCondition', name: 'Sarcopenia' },
+  },
+  {
+    '@type': 'ScholarlyArticle',
+    '@id': 'https://doi.org/10.1186/s12911-018-0722-7',
+    headline: 'Continuance compliance of privacy policy of electronic medical records: the roles of both motivation and habit',
+    author: { '@id': `${SITE}/#person` },
+    datePublished: '2018-12-18',
+    isPartOf: { '@type': 'Periodical', name: 'BMC Medical Informatics and Decision Making' },
+    identifier: '10.1186/s12911-018-0722-7',
+    url: 'https://doi.org/10.1186/s12911-018-0722-7',
+    sameAs: 'https://pubmed.ncbi.nlm.nih.gov/30563500/',
+  },
+];
+
 ---
 
-<Layout title={title} description={description} jsonLd={aboutPageSchema}>
+<Layout title={title} description={description} jsonLd={[aboutPageSchema, ...publicationSchemas]}>
   <main class="max-w-4xl mx-auto px-6 md:px-12 py-16">
     <nav class="text-sm text-outline mb-8" aria-label="breadcrumb">
       <a href="/" class="hover:text-primary">首頁</a>
@@ -76,7 +110,7 @@ const publications = [
         <span class="text-2xl md:text-3xl text-slate-600 font-bold">Yu-Chang Chen, MD</span>
       </h1>
       <p class="text-lg text-slate-700 chinese-line-height max-w-3xl">
-        義大醫院家庭暨社區醫學部主治醫師與減重中心醫師。整合家庭醫學、肥胖醫學、骨質疏鬆、運動醫學與職業醫學，
+        義大醫院家庭暨社區醫學部主治醫師與減重中心醫師。現為<strong>職業醫學科訓練醫師</strong>，具勞工健康服務醫師資格；尚未取得職業醫學科專科醫師資格。整合家庭醫學、肥胖醫學、骨質疏鬆、運動處方與職場健康，
         以 <strong>COM-B 行為改變模型</strong>與<strong>實證醫學</strong>為雙核心，協助民眾建立可持續的健康習慣，
         而非只靠藥物與意志力。
       </p>
@@ -134,7 +168,7 @@ const publications = [
 
     <section class="mb-16">
       <h2 class="text-2xl font-bold text-blue-950 mb-6">學經歷與證照</h2>
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 gap-8">
         {credentials.map(({category, items}) => (
           <div>
             <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">{category}</h3>
@@ -174,7 +208,6 @@ const publications = [
         <div><dt class="font-bold text-blue-950">ORCID</dt><dd><a class="text-teal-700 underline" href="https://orcid.org/0009-0005-2506-1058" target="_blank" rel="noopener">0009-0005-2506-1058</a></dd></div>
         <div><dt class="font-bold text-blue-950">PubMed</dt><dd><a class="text-teal-700 underline" href="https://pubmed.ncbi.nlm.nih.gov/?term=Chen+Yu-Chang+E-Da" target="_blank" rel="noopener">作者文章搜尋 →</a></dd></div>
         <div><dt class="font-bold text-blue-950">Google Scholar</dt><dd><a class="text-teal-700 underline" href="https://scholar.google.com/scholar?q=Chen+Yu-Chang+sarcopenia+E-Da" target="_blank" rel="noopener">學術文章搜尋 →</a></dd></div>
-        <div><dt class="font-bold text-blue-950">ResearchGate</dt><dd><a class="text-teal-700 underline" href="https://www.researchgate.net/profile/Yu-Chang-Chen" target="_blank" rel="noopener">研究者頁面 →</a></dd></div>
       </dl>
     </section>
 

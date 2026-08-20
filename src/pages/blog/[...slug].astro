@@ -51,11 +51,10 @@ const postImage = post.data.image && post.data.image.length > 0
   : `${SITE}/og/blog/${post.slug}.png`;
 const usingGeneratedOg = !(post.data.image && post.data.image.length > 0);
 
-const articleType = post.data.scholarly ? 'MedicalScholarlyArticle' : 'BlogPosting';
 const blogPostingSchema = {
-  '@type': articleType,
+  '@type': 'BlogPosting',
   '@id': `${postUrl}#article`,
-  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+  mainEntityOfPage: { '@id': `${postUrl}#webpage` },
   headline: post.data.title,
   description: post.data.description,
   image: postImage,
@@ -68,13 +67,26 @@ const blogPostingSchema = {
   articleSection: post.data.category,
   url: postUrl,
   ...(post.data.medicalCondition
-    ? { about: { '@type': 'MedicalCondition', name: post.data.medicalCondition } }
+    ? { about: { '@type': 'Thing', name: post.data.medicalCondition } }
     : {}),
-  // 醫療內容(YMYL)信任訊號:所有文章都標註審閱者與最後審閱日
-  reviewedBy: { '@id': `${SITE}/#person` },
-  lastReviewed: (post.data.updatedDate ?? post.data.pubDate).toISOString().slice(0, 10),
-  ...(post.data.scholarly ? { specialty: 'https://schema.org/PrimaryCare' } : {}),
-  // Speakable: 朗讀標題與 FAQ 答案（Google Assistant / Siri 等語音助手）
+};
+
+const medicalWebPageSchema = {
+  '@type': 'MedicalWebPage',
+  '@id': `${postUrl}#webpage`,
+  url: postUrl,
+  name: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  inLanguage: 'zh-Hant',
+  isPartOf: { '@id': `${SITE}/#website` },
+  author: { '@id': `${SITE}/#person` },
+  mainEntity: { '@id': `${postUrl}#article` },
+  ...(post.data.medicalCondition
+    ? { about: { '@type': 'Thing', name: post.data.medicalCondition } }
+    : {}),
+  // Speakable 是網頁層級的資訊，不放在 BlogPosting 上。
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['article h1', 'article h2', '[data-speakable="true"]'],
@@ -102,7 +114,7 @@ const faqSchema = post.data.faq && post.data.faq.length > 0
     }
   : null;
 
-const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
 ---
 
 <Layout
@@ -136,6 +148,11 @@ const postJsonLd = [blogPostingSchema, breadcrumbSchema, ...(faqSchema ? [faqSch
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-8 leading-tight font-headline">
           {post.data.title}
         </h1>
+
+        <p class="-mt-4 mb-8 text-sm text-slate-600 chinese-line-height">
+          作者：<a href="/about/" class="font-bold text-teal-700 underline">陳昱彰醫師</a>
+          ・義大醫院家庭醫學科主治醫師・職業醫學科訓練醫師
+        </p>
 
         <!-- TL;DR callout(AI 摘要引擎與行動讀者的「30 秒答案」) -->
         {post.data.tldr && post.data.tldr.length > 0 && (

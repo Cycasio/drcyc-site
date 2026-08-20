@@ -2,7 +2,7 @@
 title: "什麼是高血壓？血壓多少算高、何時該找醫生？"
 description: "高血壓平常幾乎沒症狀，卻是中風與心肌梗塞的頭號推手。台灣 2022 最新標準已下修到居家血壓 130/80。家醫科醫師用白話告訴你：血壓兩個數字代表什麼、最新標準怎麼看、怎麼用「722 原則」量才準、血壓多高要掛急診，以及何時該開始找醫生、是不是一定要吃藥。"
 pubDate: 2026-07-01
-updatedDate: 2026-07-01
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - 高血壓
@@ -19,7 +19,6 @@ tags:
   - 家庭醫學
   - 慢性病
 category: "三高與慢性病"
-scholarly: true
 medicalCondition: "高血壓 Hypertension"
 image: ""
 tldr:
@@ -176,7 +175,7 @@ faq:
 
 ### 主要參考文獻
 
-1. **2022 Taiwan Hypertension Guidelines of the Taiwan Society of Cardiology and the Taiwan Hypertension Society for the Management of Arterial Hypertension. *Acta Cardiologica Sinica*. 2022.**（台灣下修至居家血壓 130/80、722 原則）
+1. **Wang TD, et al. [2022 Guidelines of the Taiwan Society of Cardiology and the Taiwan Hypertension Society for the Management of Hypertension](https://pubmed.ncbi.nlm.nih.gov/35673334/). *Acta Cardiol Sin.* 2022;38(3):225-325. doi: [10.6515/ACS.202205_38(3).20220321A](https://doi.org/10.6515/ACS.202205_38(3).20220321A). PMID: 35673334.**（台灣居家血壓門檻與 722 原則）
 2. **The STEP Study Group. Trial of Intensive Blood-Pressure Control in Older Patients with Hypertension (STEP). *N Engl J Med*. 2021;385:1268-1279.**
 3. Whelton PK, et al. 2017 ACC/AHA Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults. *Hypertension*. 2018;71(6):e13-e115.
 4. SPRINT Research Group. A Randomized Trial of Intensive versus Standard Blood-Pressure Control (SPRINT). *N Engl J Med*. 2015;373:2103-2116.

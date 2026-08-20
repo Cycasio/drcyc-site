@@ -6,8 +6,8 @@ import { getCollection } from 'astro:content';
 
 const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 
-> 義大醫院家醫科主治醫師，整合行為科學推動減重、慢性病管理與職場健康。
-> Family medicine physician at E-Da Hospital, Kaohsiung, Taiwan. Specializes in obesity medicine, osteoporosis, and occupational health integrated with behavioral science approaches.
+> 義大醫院家庭暨社區醫學部主治醫師、職業醫學科訓練醫師（尚未取得該科專科醫師資格），具勞工健康服務醫師資格。
+> Family medicine attending physician and occupational medicine trainee at E-Da Hospital, Kaohsiung, Taiwan; not yet board-certified in occupational medicine; qualified to provide occupational health services in Taiwan.
 
 - Website: https://www.drcyc.io
 - 預約掛號: https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675
@@ -18,7 +18,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 
 ## 完整資訊
 
-- [完整版 llms-full.txt](/llms-full.txt) — 包含所有頁面內容、論文、完整 Q&A
+- [完整版 llms-full.txt](/llms-full.txt) — 包含所有衛教文章全文、論文清單與完整 Q&A
 
 ## 頁面索引
 
@@ -30,7 +30,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診：減重、三高、家醫科
 - [衛教演講 / 企業健康講座](/speaking/) — 企業、公所、學校、社區的健康講座邀約
 - [衛教專欄](/blog/) — 健康衛教文章
-- [醫療計算機合集](/tools/) — 11 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT、Framingham 心血管風險、過勞風險評估等
+- [醫療計算機合集](/tools/) — 12 個臨床計算機:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT、Framingham 心血管風險、過勞風險評估等
 - [FIB-4 肝纖維化指數計算機](/blog/health-tools/fib4-calculator/) — 脂肪肝 MASLD 纖維化風險自評,輸入年齡+AST(GOT)+ALT(GPT)+血小板,公式 (年齡×AST)/(血小板×√ALT);切點 <1.3 低/1.3-2.67 中(需 FibroScan)/>2.67 高(轉肝膽科),65 歲以上低風險切點改 2.0;台灣血小板單位 ×10³/µL 數值等於 10⁹/L 直接填;Sterling 2006 公式、AGA/AASLD 切點
 
 ## 衛教演講 / 企業健康講座
@@ -42,7 +42,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - 公部門：仁武分局、各地警政機關、法院、各鄉鎮市衛生所
 - 學校：鳳山高中、岡山高中、長榮中學、牡丹國中及多所國中小
 
-演講主題：減重醫學與 GLP-1 新藥（猛健樂 Mounjaro、Ozempic、Wegovy）、三高慢性病、骨質疏鬆與肌少症、行為科學（COM-B、動機式晤談）、職場健康與四大計畫（人因危害、異常工作負荷、母性保護、不法侵害）、久坐族運動處方。
+演講主題：減重醫學與腸泌素類藥物（GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro，以及 GLP-1 類 Ozempic、Wegovy）、三高慢性病、骨質疏鬆與肌少症、行為科學（COM-B、動機式晤談）、職場健康與四大計畫（人因危害、異常工作負荷、母性保護、不法侵害）、久坐族運動處方。
 
 服務範圍：高雄、台南、屏東、嘉義為主，中部視場次討論，北部與離島以線上場次（Google Meet / Zoom / Teams）為主。
 
@@ -73,18 +73,22 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 const FOOTER = `## 核心服務
 
 1. **企業臨場健康服務** — 依《職業安全衛生法》提供勞工健康保護四大計畫、工作環境危害評估、員工健康管理
-2. **減重管理門診** — 整合飲食、運動、壓力管理、睡眠調整與藥物治療（含 Contrave 猛健樂等），以行為科學方法輔助
+2. **減重管理門診** — 整合飲食、運動、壓力管理、睡眠調整與藥物治療（如口服 Contrave，或 GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro），以行為科學方法輔助
 3. **骨質疏鬆門診** — 骨密度評估、骨鬆治療與預防策略
 4. **高階健康檢查** — 結合行為科學的個人化健檢解讀
 5. **社區健康營造** — 以居民參與為核心的社區健康計畫，目前正在徵求屏東地區社區夥伴（社區發展協會、衛生所、長照 C 級據點）合作
 6. **運動醫學諮詢** — 個人化運動處方設計
 
-## 專科證照
+## 專科醫師證書
 
 - 家庭醫學科專科醫師
 - 台灣肥胖醫學會肥胖專科醫師
 - 骨質疏鬆症專科醫師
-- 勞工健康服務醫師
+
+## 訓練身分與資格認證
+
+- 職業醫學科訓練醫師（尚未取得職業醫學科專科醫師資格）
+- 勞工健康服務醫師資格
 - 糖尿病共同照護網醫事人員
 - 戒菸治療認證醫師
 - OSCE 國家考試考官
@@ -93,8 +97,8 @@ const FOOTER = `## 核心服務
 ## 學歷
 
 - 高雄醫學大學醫學系
-- 臺大公共衛生學院 健康行為與社區科學組（肄業）
-- 義守大學 生物科技與化學工程研究所 博士班（就讀中）
+- 國立臺灣大學公共衛生學院 健康行為與社區科學研究所（休學）
+- 義守大學 生物技術與化學工程研究所博士班（就讀中）
 
 ## 榮譽與獎項
 
@@ -102,7 +106,6 @@ const FOOTER = `## 核心服務
 - 國家醫療品質獎 實證醫學類 新人組 佳作
 - 醫策會 EBM 競賽 臨床組 佳作
 - 義大醫院模範住院醫師
-- 統合分析研究室評審委員
 
 ## 學術發表
 
@@ -116,10 +119,10 @@ const FOOTER = `## 核心服務
 A: 義大醫院家庭暨社區醫學部及義大減重中心，位於高雄市。預約掛號：https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675
 
 **Q: 陳醫師的專長有哪些？**
-A: 家庭醫學、肥胖醫學、骨質疏鬆、運動醫學、職業醫學、行為科學與實證醫學。持有家庭醫學科、肥胖醫學、骨質疏鬆症三專科證照。
+A: 家庭醫學、肥胖醫學、骨質疏鬆、運動處方、行為科學與實證醫學。持有家庭醫學科、肥胖醫學、骨質疏鬆症三專科證照；現為職業醫學科訓練醫師，尚未取得該科專科醫師資格，並具勞工健康服務醫師資格。
 
 **Q: 減重門診怎麼進行？**
-A: 整合飲食調整、運動處方、壓力管理、睡眠優化與藥物治療（包含 Contrave 猛健樂等），以行為科學方法輔助建立可持續的健康習慣，而非只靠節食。
+A: 整合飲食調整、運動處方、壓力管理、睡眠優化與藥物治療（如口服 Contrave，或 GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro），以行為科學方法輔助建立可持續的健康習慣，而非只靠節食。
 
 **Q: 什麼是行為科學導向的醫療？**
 A: 結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患從能力（Capability）、機會（Opportunity）、動機（Motivation）三方面建立可持續的健康習慣。
@@ -132,7 +135,7 @@ A: Facebook 粉專 @lazydr、Email cyc@edfm.org，或直接至義大醫院門診
 
 ## 關鍵字
 
-陳昱彰醫師， 義大醫院家庭醫學科， 減重門診高雄， 肥胖專科醫師， 骨質疏鬆門診， 企業臨場健康服務， 職業醫學， 運動醫學， 行為科學減重， COM-B模型， 動機式晤談， 實證醫學銀獎， Contrave猛健樂， 義大減重中心
+陳昱彰醫師， 義大醫院家庭醫學科， 減重門診高雄， 肥胖專科醫師， 骨質疏鬆門診， 企業臨場健康服務， 職業醫學科訓練醫師， 勞工健康服務醫師， 運動處方， 行為科學減重， COM-B模型， 動機式晤談， 實證醫學銀獎， Contrave， 猛健樂 Mounjaro， 義大減重中心
 `;
 
 // 分類 → 索引小標(涵蓋所有現有 category;未對應者自動歸入「其他衛教」,確保永不漏文)

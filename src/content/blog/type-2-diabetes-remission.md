@@ -33,7 +33,7 @@ faq:
 tldr:
   - "第二型糖尿病可以「緩解」（remission）：HbA1c < 6.5% 且停糖尿病藥物至少 3 個月"
   - "DiRECT 試驗顯示：減重 ≥ 15 kg 有 86% 達緩解、減 10–15 kg 57%、減 5–10 kg 34%"
-  - "GLP-1（Wegovy / Mounjaro）+ 行為治療目前是最接近不開刀達緩解的方法"
+  - "GLP-1 受體促效劑（如 Wegovy）或 GIP/GLP-1 雙重受體促效劑（Mounjaro）可協助部分適用者減重與控制血糖；能否達到糖尿病緩解仍取決於病程、體重變化與個人反應"
 ---
 
 「醫師，我糖尿病是不是就這樣一輩子了？」
@@ -226,7 +226,7 @@ tldr:
 ### 延伸閱讀
 
 - [猛健樂（Mounjaro）減重藥物完整指南](/blog/mounjaro-weight-loss/)
-- [吃猛健樂就不用運動了？GLP-1 與運動的真實關係](/blog/exercise-glp1-weight-loss/)
+- [吃猛健樂就不用運動了？腸泌素類減重藥與運動的真實關係](/blog/exercise-glp1-weight-loss/)
 - [為什麼你減重老是失敗？用 COM-B 模型幫你找出缺什麼](/blog/weight-loss-comb-model/)
 
 ---
@@ -246,7 +246,7 @@ tldr:
 
 1. Lean MEJ, et al. Primary care-led weight management for remission of type 2 diabetes (DiRECT): an open-label, cluster-randomised trial. *Lancet*. 2018. [PubMed](https://pubmed.ncbi.nlm.nih.gov/29221645/)
 2. Lean MEJ, et al. Durability of a primary care-led weight-management intervention for remission of type 2 diabetes: 2-year results of the DiRECT open-label, cluster-randomised trial. *Lancet Diabetes Endocrinol*. 2019. [PubMed](https://pubmed.ncbi.nlm.nih.gov/30852132/)
-3. Taylor R, et al. Remission of Human Type 2 Diabetes Requires Decrease in Liver and Pancreas Fat Content but Is Dependent upon Capacity for β Cell Recovery. *Cell Metab*. 2018. [PubMed](https://pubmed.ncbi.nlm.nih.gov/30318341/)
+3. Taylor R, et al. Remission of Human Type 2 Diabetes Requires Decrease in Liver and Pancreas Fat Content but Is Dependent upon Capacity for β Cell Recovery. *Cell Metab*. 2018. [PubMed](https://pubmed.ncbi.nlm.nih.gov/30078554/)
 4. Wilding JPH, et al. Weight regain and cardiometabolic effects after withdrawal of semaglutide: The STEP 1 trial extension. *Diabetes Obes Metab*. 2022. [PubMed](https://pubmed.ncbi.nlm.nih.gov/35441470/)
 5. Aronne LJ, et al. Continued Treatment With Tirzepatide for Maintenance of Weight Reduction in Adults With Obesity: The SURMOUNT-4 Randomized Clinical Trial. *JAMA*. 2024. [PubMed](https://pubmed.ncbi.nlm.nih.gov/38078870/)
 6. Schauer PR, et al. Bariatric Surgery versus Intensive Medical Therapy for Diabetes — 5-Year Outcomes. *N Engl J Med*. 2017. [PubMed](https://pubmed.ncbi.nlm.nih.gov/28199805/)

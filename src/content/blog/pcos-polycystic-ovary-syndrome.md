@@ -2,7 +2,7 @@
 title: "PCOS 正式改名 PMOS：多囊性卵巢症候群為什麼換名字，對你有什麼影響？"
 description: "2026 年 5 月，PCOS（多囊性卵巢症候群）正式改名為 PMOS（Polyendocrine Metabolic Ovarian Syndrome，多內分泌代謝卵巢症候群）——這是 The Lancet 論文＋50 多個國際組織、歷時 14 年、超過 2 萬人意見的全球共識。家醫科＋肥胖醫學醫師解析：為什麼非改不可、新名反映什麼、診斷與治療會不會變、3 年過渡期該注意什麼，以及它的代謝核心怎麼管理。"
 pubDate: 2026-06-24
-updatedDate: 2026-06-24
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - PCOS
@@ -18,7 +18,6 @@ tags:
   - 內分泌
   - 肥胖醫學
 category: "婦女健康"
-scholarly: true
 medicalCondition: "多囊性卵巢症候群 Polycystic Ovary Syndrome (PMOS)"
 image: ""
 tldr:
@@ -143,7 +142,7 @@ faq:
 
 **減重為什麼排第一？** 對體重過重的患者，**減 5–10% 體重**就能改善排卵、降雄性素、改善胰島素阻抗——往往比任何單一藥物有效，而且一次解決多個問題。方法要整合而非激烈節食，可參考 [COM-B 減重模型](/blog/weight-loss-comb-model/)。
 
-至於近年很熱的 GLP-1（[瘦瘦針 Mounjaro、Wegovy 等](/blog/glp1-medications-comparison/)）：對合併肥胖或胰島素阻抗的患者能有效減重、改善代謝，部分研究也看到月經與排卵改善——但**目前還不是正式適應症、也不是第一線**，有懷孕計畫者用藥要特別小心。想了解自己符不符合條件，可先用 [GLP-1 減重藥物資格評估](/tools/glp1-eligibility/) 評估，再到門診討論。
+至於近年的腸泌素類減重藥物（[GLP-1 受體促效劑 Wegovy，以及 GIP/GLP-1 雙重受體促效劑 Mounjaro](/blog/glp1-medications-comparison/)）：對合併肥胖或胰島素阻抗的患者可協助減重與改善代謝，部分研究也觀察到月經與排卵改善——但**目前不是 PCOS 的正式適應症，也不是 PCOS 第一線治療**，有懷孕計畫者用藥要特別小心。想了解自己是否符合體重管理適應症，可先用 [腸泌素類減重藥物資格評估](/tools/glp1-eligibility/) 初步了解，再到門診討論。
 
 ---
 
@@ -164,7 +163,7 @@ PCOS 改名為 PMOS，表面上只是「一個字母的改變」，背後卻是 
 1. **Polyendocrine metabolic ovarian syndrome, the new name for polycystic ovary syndrome: a multistep global consensus process. *The Lancet*. 2026.**（PCOS 正式更名 PMOS 的全球共識論文）
 2. **Endocrine Society 等 50+ 組織聯合聲明（2026 年 5 月 12 日）：Polyendocrine Metabolic Ovarian Syndrome — New name to improve diagnosis and care.**
 3. Teede HJ, et al. Recommendations from the 2023 International Evidence-Based Guideline for the Assessment and Management of Polycystic Ovary Syndrome. *J Clin Endocrinol Metab / Fertil Steril / Hum Reprod*. 2023.（最新診斷與治療指引）
-4. Legro RS, et al. Letrozole versus Clomiphene for Infertility in the Polycystic Ovary Syndrome. *N Engl J Med*. 2014;371:119-129.
+4. Legro RS, et al. [Letrozole versus Clomiphene for Infertility in the Polycystic Ovary Syndrome](https://pubmed.ncbi.nlm.nih.gov/25006718/). *N Engl J Med.* 2014;371(2):119-129. doi: [10.1056/NEJMoa1313517](https://doi.org/10.1056/NEJMoa1313517). PMID: 25006718.
 5. Rotterdam ESHRE/ASRM-Sponsored PCOS Consensus Workshop Group. Revised 2003 consensus on diagnostic criteria. *Fertil Steril*. 2004;81(1):19-25.
 6. Stein IF, Leventhal ML. Amenorrhea associated with bilateral polycystic ovaries. *Am J Obstet Gynecol*. 1935;29:181-191.（最初描述，即「最初的名字」由來）
 7. Azziz R, et al. Polycystic ovary syndrome. *Nat Rev Dis Primers*. 2016;2:16057.

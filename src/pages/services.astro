@@ -71,7 +71,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
             <p class="leading-relaxed mb-4 chinese-line-height">
-              整合飲食調整、運動處方、壓力管理、睡眠優化與藥物治療（含 Contrave、GLP-1 類如猛健樂 Mounjaro），以行為科學方法輔助建立可持續的健康習慣。
+              整合飲食調整、運動處方、壓力管理、睡眠優化與藥物治療（如非 GLP-1 口服藥 Contrave、GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro，或其他 GLP-1 類藥物），以行為科學方法輔助建立可持續的健康習慣。
             </p>
             <div class="text-sm space-y-2 border-t border-on-secondary-container/20 pt-4">
               <div><strong>📍 義大減重中心</strong>・週五下午</div>
@@ -143,7 +143,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="flex-1">
             <h3 class="text-2xl md:text-3xl font-bold mb-3 font-headline">衛教演講 / 企業健康講座</h3>
             <p class="leading-relaxed chinese-line-height opacity-90 mb-4">
-              曾赴中鋼、中油、國巨、李長榮、英特格、麥當勞、Anytime Fitness、東海大學、義守大學、高科大、中正大學、各地警政與衛生所及多所國高中演講。主題涵蓋減重醫學、GLP-1 新藥、三高、骨質疏鬆、行為科學、職場健康與四大計畫(含人因危害、異常工作負荷)。
+              曾赴中鋼、中油、國巨、李長榮、英特格、麥當勞、Anytime Fitness、東海大學、義守大學、高科大、中正大學、各地警政與衛生所及多所國高中演講。主題涵蓋減重醫學、腸泌素類新藥、三高、骨質疏鬆、行為科學、職場健康與四大計畫（含人因危害、異常工作負荷）。
             </p>
             <div class="flex flex-wrap gap-2 text-xs">
               <span class="px-3 py-1 bg-white/15 rounded-full font-medium">南部為主</span>
@@ -212,12 +212,7 @@ import Layout from '../layouts/Layout.astro';
     "@type": "MedicalBusiness",
     "name": "陳昱彰醫師 - 服務項目",
     "url": "https://www.drcyc.io/services/",
-    "provider": {
-      "@type": "Physician",
-      "name": "陳昱彰",
-      "alternateName": "Yu-Chang Chen",
-      "medicalSpecialty": "https://schema.org/PrimaryCare"
-    },
+    "employee": { "@id": "https://www.drcyc.io/#person" },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "醫療服務項目",
@@ -235,7 +230,7 @@ import Layout from '../layouts/Layout.astro';
         {
           "@type": "MedicalProcedure",
           "name": "減重管理門診",
-          "description": "整合飲食、運動、壓力、睡眠與藥物治療（含Contrave猛健樂），以行為科學方法輔助的實證減重。"
+          "description": "整合飲食、運動、壓力、睡眠與藥物治療（如口服 Contrave，或 GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro），以行為科學方法輔助的實證減重。"
         },
         {
           "@type": "MedicalProcedure",

@@ -2,17 +2,16 @@
 title: "骨質疏鬆不只是老人病：40 歲就該知道的骨密度檢查指南"
 description: "骨質疏鬆年輕化！完整說明誰該做骨密度檢查、怎麼看報告、如何預防與治療。"
 pubDate: 2026-03-11
-updatedDate: 2026-05-31
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags: ["骨質疏鬆", "骨密度", "DXA", "骨鬆預防"]
 category: "骨質疏鬆"
-scholarly: true
 medicalCondition: "骨質疏鬆 Osteoporosis"
 faq:
   - q: "健檢報告說我骨密度偏低,要吃藥嗎?"
-    a: "不一定。要看 T-score 數值、有沒有骨折風險因子。T-score 在 -1 到 -2.5 之間屬於『骨質缺乏』,通常先從飲食運動改善、定期追蹤,不一定要立即用藥;T-score ≤ -2.5 才算骨鬆,建議跟骨鬆科醫師討論藥物治療選項。"
+    a: "不一定。停經後女性與 50 歲以上男性可用 T-score 搭配骨折史及其他風險判讀；停經前女性與 50 歲以下男性通常優先看 Z-score，不能只憑骨密度數字診斷骨質疏鬆或決定用藥。請讓醫師依年齡、性別、是否停經、脆弱性骨折、用藥與共病整體評估。"
   - q: "T-score 怎麼判讀?幾分才算骨鬆?"
-    a: "T-score 是拿你的骨密度跟 30 歲年輕人的平均值比較。≥ -1.0 正常;-1.0 到 -2.5 骨質缺乏(骨鬆前期);≤ -2.5 骨質疏鬆;≤ -2.5 且有骨折為嚴重骨質疏鬆。例如 T-score = -1.5 代表骨質有點流失要注意,T-score = -3.0 就需要積極治療。"
+    a: "T-score 分類主要適用於停經後女性與 50 歲以上男性：≥ -1.0 為正常，-1.0 到 -2.5 為低骨量，≤ -2.5 符合骨質疏鬆的骨密度標準。停經前女性與 50 歲以下男性通常應優先使用 Z-score；Z-score ≤ -2.0 稱為『低於同齡預期範圍』，尤其 50 歲以下男性不能只靠骨密度診斷骨質疏鬆。"
   - q: "誰該做骨密度檢查?40 歲要做嗎?"
     a: "高風險族群建議主動檢查:65 歲以上女性、70 歲以上男性、停經後女性、曾經骨折、長期服用類固醇超過 3 個月、父母有髖部骨折史、BMI < 18.5、抽菸或過量飲酒、類風濕性關節炎。40–50 歲若無上述風險因子不一定要做,但有家族史、長期節食、很少曬太陽運動、長期服用某些藥物的人建議跟醫師討論是否提早檢查。"
   - q: "吃鈣片就能預防骨鬆嗎?"
@@ -25,7 +24,7 @@ faq:
     a: "極低。DXA(雙能量 X 光吸收儀)的輻射量比照一張胸部 X 光還少,全程約 10–15 分鐘,躺著掃描腰椎和髖部就完成。一般 1–2 年做一次即可,如果開始用藥通常 1 年後追蹤評估效果。"
 tldr:
   - "骨鬆年輕化：40 歲就應該關注骨密度，而非等到健保補助的 65 歲才篩檢"
-  - "DXA 是診斷骨鬆的黃金標準，T-score ≤ −2.5 為骨鬆，−1 到 −2.5 為骨量減少"
+  - "DXA 是重要評估工具；T-score 分類主要用於停經後女性與 50 歲以上男性，較年輕成人通常優先看 Z-score"
   - "有家族骨折史、早發性停經、長期類固醇、BMI < 18.5 者建議提早 5–10 年篩檢"
 ---
 
@@ -104,9 +103,9 @@ tldr:
 
 ---
 
-## T-score 怎麼看？
+## T-score 與 Z-score 怎麼看？
 
-T-score 是拿你的骨密度跟「30 歲年輕人的平均值」比較。
+T-score 是拿你的骨密度跟「年輕成人的平均值」比較。以下分類主要適用於**停經後女性與 50 歲以上男性**：
 
 | T-score | 診斷 |
 |---------|------|
@@ -119,6 +118,8 @@ T-score 是拿你的骨密度跟「30 歲年輕人的平均值」比較。
 - T-score = 0：跟年輕人一樣好
 - T-score = -1.5：骨質有點流失，要注意
 - T-score = -3.0：骨質疏鬆，需要治療
+
+停經前女性與 50 歲以下男性通常應優先看 **Z-score**，也就是與同年齡、同性別族群相比。Z-score ≤ -2.0 稱為「低於同齡預期範圍」；尤其 50 歲以下男性，不能只靠骨密度數字診斷骨質疏鬆。是否需要進一步檢查或治療，仍要合併脆弱性骨折、藥物、內分泌疾病與其他臨床風險判斷。
 
 ---
 
@@ -214,7 +215,7 @@ A: 一般 1-2 年做一次 DXA。如果開始用藥，通常 1 年後追蹤評�
 
 ### 主要參考文獻
 
-1. **US Preventive Services Task Force. Screening for Osteoporosis to Prevent Fractures: US Preventive Services Task Force Recommendation Statement. *JAMA*. 2025;333(6):498-508.**（65 歲以上女性、停經後有風險因子者篩檢，Grade B）
+1. **US Preventive Services Task Force. [Screening for Osteoporosis to Prevent Fractures: US Preventive Services Task Force Recommendation Statement](https://pubmed.ncbi.nlm.nih.gov/39808425/). *JAMA.* 2025;333(6):498-508. doi: [10.1001/jama.2024.27154](https://doi.org/10.1001/jama.2024.27154). PMID: 39808425.**（65 歲以上女性、停經後有風險因子者篩檢，Grade B）
 2. Kanis JA, et al. SCOPE 2021: a new scorecard for osteoporosis in Europe. *Arch Osteoporos*. 2021;16(1):82.（FRAX 風險評估架構）
 3. The International Society for Clinical Densitometry (ISCD). 2023 Official Positions — Adult.（DXA 量測與 T-score / Z-score 判讀準則）
 4. LeBoff MS, et al. The clinician's guide to prevention and treatment of osteoporosis. *Osteoporos Int*. 2022;33(10):2049-2102.（Bone Health and Osteoporosis Foundation 治療指引）

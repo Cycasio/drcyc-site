@@ -231,7 +231,7 @@ METs 是運動醫學衡量「運動強度」的國際標準，1 MET 代表坐著
 
 - [FITT-VP：醫師怎麼開運動處方](/blog/fitt-vp-exercise-prescription/) — 這篇的架構用在超慢跑上剛好
 - [肌少症與阻力訓練](/blog/sarcopenia-resistance-training/) — 超慢跑補有氧，阻力訓練補肌肉，一起做才完整
-- [猛健樂 Mounjaro 完整指南](/blog/mounjaro-weight-loss/) — GLP-1 減重藥搭配運動效果才會好
+- [猛健樂 Mounjaro 完整指南](/blog/mounjaro-weight-loss/) — 腸泌素類減重藥仍應搭配運動與營養管理
 - [第二型糖尿病可以逆轉嗎？](/blog/type-2-diabetes-remission/) — 減重 + 中強度運動是關鍵組合
 
 ---

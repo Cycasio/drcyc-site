@@ -2,7 +2,7 @@
 title: "痛風與高尿酸：尿酸要降到多少、飲食迷思，與吃藥前該做的基因檢測"
 description: "尿酸高就是痛風嗎？痛風發作抽血尿酸卻正常，怎麼回事？家醫科醫師用 ACR 2020 指引白話說明：高尿酸與痛風的差別、尿酸該降到多少、豆腐香菇到底能不能吃、痛風發作當下怎麼處理，以及台灣人用 allopurinol 前為什麼一定要先驗 HLA-B*5801 基因。"
 pubDate: 2026-07-01
-updatedDate: 2026-07-01
+updatedDate: 2026-08-21
 author: "陳昱彰醫師"
 tags:
   - 痛風
@@ -19,7 +19,6 @@ tags:
   - 代謝症候群
   - 家庭醫學
 category: "三高與慢性病"
-scholarly: true
 medicalCondition: "痛風 / 高尿酸血症 Gout / Hyperuricemia"
 image: ""
 tldr:
@@ -39,7 +38,7 @@ faq:
   - q: "痛風真的不能吃豆腐、香菇、菠菜嗎？"
     a: "這是最大的迷思。研究顯示<strong>植物性普林（豆製品、香菇、菠菜）與痛風風險關聯不大</strong>，適量吃不需要嚴格禁止。真正影響尿酸與痛風發作的是：<strong>酒精（尤其啤酒）、含糖飲料與高果糖、過量紅肉與內臟海鮮</strong>，以及更根本的——體重與代謝症候群。與其斤斤計較豆腐香菇，不如先戒含糖飲料、控制體重。"
   - q: "痛風發作當下怎麼辦？可以馬上吃降尿酸藥壓下去嗎？"
-    a: "<strong>不要在急性發作時新開始降尿酸藥</strong>——尿酸快速波動反而會加重或延長發作。急性期的重點是儘快（24 小時內）止痛消炎，三種選擇（消炎止痛藥 NSAID、低劑量秋水仙素 colchicine、類固醇）擇一即可，由醫師依你的腎功能與共病決定。但如果你原本就在規律吃降尿酸藥，發作時<strong>不需要停藥</strong>，繼續吃、另外加止痛消炎藥處理發作。"
+    a: "急性期的重點是儘快止痛消炎，由醫師依腎功能與共病選擇 NSAID、低劑量秋水仙素或類固醇。如果本來就在規律服用降尿酸藥，發作時通常不需停藥；若已符合開始長期降尿酸治療的適應症，也可以在急性發作期間開始，但要同時給予適當抗發炎治療與預防，並由醫師個別評估。"
   - q: "痛風可以根治嗎？要吃一輩子的藥嗎？"
     a: "痛風無法「根治」但可以「控制得很好」。關鍵是把尿酸長期維持在 < 6，讓已沉積的結晶慢慢溶解、不再發作、痛風石縮小。符合適應症者多半需要長期治療；能不能減藥要看尿酸是否穩定達標、有無痛風石與共病，由醫師評估——但請不要自己因為「不痛了」就停藥，那是復發最常見的原因。"
   - q: "什麼情況要趕快就醫或掛急診？"
@@ -129,13 +128,13 @@ faq:
 
 ## 六、痛風發作當下怎麼辦？
 
-**重點：急性期止痛消炎，不要動降尿酸藥。**
+**重點：急性期儘快止痛消炎，降尿酸治療則依適應症與醫師評估正確銜接。**
 
 - 越早（24 小時內）處理越好，三種選擇**擇一**即可，由醫師依腎功能與共病決定：
   1. 消炎止痛藥（NSAID）
   2. 低劑量**秋水仙素（colchicine）**
   3. 類固醇（口服或關節注射，適合腎功能差者）
-- **急性期不要新開始降尿酸藥**（尿酸波動會加重發作）；但原本規律在吃的人**不需停藥**。
+- 原本規律服用降尿酸藥者，發作時通常**不需停藥**。若已有開始長期降尿酸治療的適應症，也可在急性發作期間開始；需同時給予適當抗發炎治療與預防，並由醫師個別評估。
 - 開始降尿酸藥的初期，醫師會同時給**預防性抗發炎**（如低劑量 colchicine）持續至少 3–6 個月，避免尿酸下降過程誘發發作。
 
 ---
@@ -155,7 +154,7 @@ faq:
 
 ### 主要參考文獻
 
-1. **FitzGerald JD, et al. 2020 American College of Rheumatology Guideline for the Management of Gout. *Arthritis Care Res (Hoboken)*. 2020;72(6):744-760.**（treat-to-target < 6、ULT 適應症、預防性抗發炎 3–6 個月、急性三選一）
+1. **FitzGerald JD, et al. [2020 American College of Rheumatology Guideline for the Management of Gout](https://pubmed.ncbi.nlm.nih.gov/32391934/). *Arthritis Care Res (Hoboken).* 2020;72(6):744-760. doi: [10.1002/acr.24180](https://doi.org/10.1002/acr.24180). PMID: 32391934.**（treat-to-target < 6、ULT 適應症、預防性抗發炎 3–6 個月、急性三選一）
 2. Richette P, et al. 2016 updated EULAR evidence-based recommendations for the management of gout. *Ann Rheum Dis*. 2017;76(1):29-42.
 3. **Hung SI, et al. HLA-B*5801 allele as a genetic marker for severe cutaneous adverse reactions caused by allopurinol. *PNAS*. 2005;102(11):4134-4139.**（台灣研究，SJS/TEN 病人幾乎 100% 帶因、OR≈155）
 4. 台灣痛風與高尿酸血症診療指引（Taiwan Guideline for the Management of Gout and Hyperuricemia）。
