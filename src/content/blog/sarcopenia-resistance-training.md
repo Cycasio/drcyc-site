@@ -79,7 +79,7 @@ tldr:
 
 針對這個問題，我和研究團隊進行了一項系統性回顧與網絡統合分析，發表在國際期刊《European Review of Aging and Physical Activity》：
 
-> Chen YC, Chen WC, Liu CW, et al. (2023). *Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs.* European Review of Aging and Physical Activity, 20(1), 1-22.
+> Chen YC, Chen WC, Liu CW, et al. (2023). *Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs.* European Review of Aging and Physical Activity, 20, Article 22. doi:10.1186/s11556-023-00333-4. PMID:38030985.
 
 ### 研究發現：
 

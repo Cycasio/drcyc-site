@@ -20,7 +20,7 @@ const aboutPageSchema = {
 
 const title = '關於陳昱彰醫師｜義大醫院家醫科・三專科醫師・實證銀獎';
 const description =
-  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師，並具備 ACE-CPT 美國運動委員會認證私人教練執照。高雄醫學大學畢業，整合行為科學與實證醫學，榮獲國家醫療品質獎實證醫學類臨床組銀獎。發表 SCI 論文 2 篇（70+ 引用）。';
+  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師，並具備 ACE-CPT 美國運動委員會認證私人教練執照。高雄醫學大學畢業，整合行為科學與實證醫學，榮獲國家醫療品質獎實證醫學類臨床組銀獎。發表 SCI 期刊論文 2 篇。';
 
 const credentials = [
   { category: '專科證照', items: [
@@ -48,13 +48,14 @@ const credentials = [
 
 const publications = [
   {
-    citation: 'Chen YC, et al. (2023). Comparative effectiveness of pharmacological interventions for sarcopenia: a systematic review and network meta-analysis. European Journal of Applied Physiology and Occupational Physiology.',
-    cites: '40+ citations',
+    citation: 'Chen YC, Chen WC, Liu CW, Huang WY, Lu I, Lin CW, Huang RY, Chen JS, Huang CH. (2023). Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs. European Review of Aging and Physical Activity, 20, Article 22.',
+    doi: '10.1186/s11556-023-00333-4',
+    pubmed: '38030985',
   },
   {
-    citation: 'Chen YC, et al. (2018). Continuance compliance of privacy policy of electronic medical records. BMC Medical Informatics and Decision Making.',
+    citation: 'Kuo KM, Chen YC, Talley PC, Huang CH. (2018). Continuance compliance of privacy policy of electronic medical records: the roles of both motivation and habit. BMC Medical Informatics and Decision Making, 18, Article 135.',
     doi: '10.1186/s12911-018-0722-7',
-    cites: '27+ citations',
+    pubmed: '30563500',
   },
 ];
 
@@ -152,8 +153,11 @@ const publications = [
         {publications.map((p, i) => (
           <li class="pl-6 border-l-2 border-slate-200">
             <p class="text-slate-700 text-sm leading-relaxed">{p.citation}</p>
-            {p.doi && <p class="text-xs text-outline mt-1">DOI: {p.doi}</p>}
-            <p class="text-xs font-bold text-teal-700 mt-1">{p.cites}</p>
+            <p class="text-xs text-outline mt-1">
+              DOI: <a class="text-teal-700 underline" href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener">{p.doi}</a>
+              {' · '}
+              PMID: <a class="text-teal-700 underline" href={`https://pubmed.ncbi.nlm.nih.gov/${p.pubmed}/`} target="_blank" rel="noopener">{p.pubmed}</a>
+            </p>
           </li>
         ))}
       </ol>

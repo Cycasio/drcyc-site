@@ -107,8 +107,8 @@ const FOOTER = `## 核心服務
 ## 學術發表
 
 ### SCI 期刊論文
-1. Chen YC et al. (2023). Comparative effectiveness of pharmacological interventions for sarcopenia: SR/NMA. *European Journal of Applied Physiology and Occupational Physiology (EJAPA)*. (40+ citations)
-2. Chen YC et al. (2018). Continuance compliance of privacy policy of electronic medical records. *BMC Medical Informatics and Decision Making*. doi:10.1186/s12911-018-0722-7 (27+ citations)
+1. Chen YC, Chen WC, Liu CW, Huang WY, Lu I, Lin CW, Huang RY, Chen JS, Huang CH. (2023). Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs. *European Review of Aging and Physical Activity*, 20, Article 22. doi:10.1186/s11556-023-00333-4. PMID:38030985.
+2. Kuo KM, Chen YC, Talley PC, Huang CH. (2018). Continuance compliance of privacy policy of electronic medical records: the roles of both motivation and habit. *BMC Medical Informatics and Decision Making*, 18, Article 135. doi:10.1186/s12911-018-0722-7. PMID:30563500.
 
 ## 常見問答
 
