@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = '隱私權與網站使用說明｜陳昱彰醫師';
+const description = '說明 drcyc.io 的網站分析、健康工具本機儲存、外部聯絡服務與醫療資訊使用界線。';
+---
+
+<Layout title={title} description={description}>
+  <main class="max-w-4xl mx-auto px-6 md:px-12 py-16">
+    <header class="mb-12">
+      <p class="text-sm font-bold tracking-widest uppercase text-teal-700 mb-3">Privacy &amp; Website Use</p>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-blue-950 tracking-tight mb-5">隱私權與網站使用說明</h1>
+      <p class="text-slate-600 chinese-line-height">最後更新：2026 年 8 月 22 日</p>
+    </header>
+
+    <div class="space-y-10 text-slate-700 chinese-line-height">
+      <section aria-labelledby="scope">
+        <h2 id="scope" class="text-2xl font-bold text-blue-950 mb-4">適用範圍</h2>
+        <p>
+          本說明適用於 <strong>www.drcyc.io</strong>。本網站為公開衛教與專業資訊網站，頁面本身未設會員註冊、線上病歷或站內聯絡表單。
+        </p>
+      </section>
+
+      <section aria-labelledby="analytics">
+        <h2 id="analytics" class="text-2xl font-bold text-blue-950 mb-4">Cloudflare Web Analytics</h2>
+        <p>
+          本網站使用由托管平台啟用的 Cloudflare Web Analytics，以了解頁面瀏覽與載入效能。依 Cloudflare 官方說明，此分析服務不使用 cookie 或 localStorage 追蹤個別訪客，且不收集或使用訪客的個人資料。
+          詳細資料處理方式請參閱
+          <a href="https://developers.cloudflare.com/web-analytics/about/" target="_blank" rel="noopener noreferrer" class="text-teal-700 underline underline-offset-4">Cloudflare Web Analytics 官方說明</a>。
+        </p>
+      </section>
+
+      <section aria-labelledby="hosting">
+        <h2 id="hosting" class="text-2xl font-bold text-blue-950 mb-4">網站傳輸、代管與字型</h2>
+        <p>
+          為傳送網頁、快取內容及提供資安防護，Cloudflare 作為代管與 CDN 服務提供者，可能處理 IP 位址、瀏覽器或裝置資訊、請求時間、請求 URL 與安全事件等維持服務所需的技術資料；相關處理依
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" class="text-teal-700 underline underline-offset-4">Cloudflare 隱私權政策</a>辦理。
+        </p>
+        <p class="mt-3">
+          本網站載入英文字型時，瀏覽器也可能向 Google Fonts，或由 Cloudflare 代送的字型服務提出請求；相關資料處理依
+          <a href="https://policies.google.com/privacy?hl=zh-TW" target="_blank" rel="noopener noreferrer" class="text-teal-700 underline underline-offset-4">Google 隱私權政策</a>辦理。
+        </p>
+      </section>
+
+      <section aria-labelledby="tools">
+        <h2 id="tools" class="text-2xl font-bold text-blue-950 mb-4">健康工具與瀏覽器儲存</h2>
+        <p>
+          部分健康工具會將您主動輸入的數值儲存在目前裝置的瀏覽器 <code>localStorage</code>，方便下次開啟時繼續使用。本網站的健康工具程式不會將這些輸入值上傳至本網站伺服器。您可使用工具中的清除功能，或清除瀏覽器的網站資料。
+        </p>
+        <p class="mt-3">
+          健康工具的結果為一般性試算與衛教參考，不是診斷、處方或個別醫療建議。
+        </p>
+      </section>
+
+      <section aria-labelledby="external">
+        <h2 id="external" class="text-2xl font-bold text-blue-950 mb-4">聯絡方式與外部服務</h2>
+        <p>
+          當您點選線上掛號、社群媒體、地圖或其他外部連結時，將進入第三方服務，其資料處理依該服務的隱私政策辦理。若您主動來信，信件內容將由電子郵件服務傳送與保存；請勿以一般 Email 傳送不必要的身分證字號、完整病歷或其他敏感資料。
+        </p>
+        <p class="mt-3">
+          本網站內容與一般 Email 往來不建立醫病關係，也不提供個別診斷、處方或急診服務。如有就醫需求，請透過正式掛號流程取得評估；緊急狀況請立即撥打 119 或前往急診。
+        </p>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact" class="text-2xl font-bold text-blue-950 mb-4">聯絡與更新</h2>
+        <p>
+          如對本說明或網站資料處理有疑問，請來信
+          <!--email_off--><a href="mailto:cyc@edfm.org" class="text-teal-700 underline underline-offset-4">cyc@edfm.org</a><!--/email_off-->。本說明可能因網站功能或服務調整而更新，並於本頁標示最後更新日期。
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>

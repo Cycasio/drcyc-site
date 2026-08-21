@@ -35,16 +35,16 @@ const groups = [
     title: '體重管理與減重',
     intro: '我的減重不是只開一支針。整合飲食、運動、睡眠、壓力與必要時的藥物（含 GLP-1 類），用行為科學幫你建立能長期維持的習慣。',
     items: [
-      { name: '肥胖症 / 減重', note: 'GLP-1 藥物 ＋ 行為治療的個人化療程，目標是可持續而非速成', link: '/blog/glp1-medications-comparison/', linkText: 'GLP-1 藥物比較' },
+      { name: '肥胖症 / 減重', note: 'GLP-1 藥物 ＋ 行為治療的個人化療程，目標是可持續而非速成', link: '/weight-loss/', linkText: '高雄減重門診與評估方式' },
       { name: '減重停滯 / 反覆復胖', note: '用 COM-B 行為模型拆解卡關點', link: '/blog/weight-loss-comb-model/', linkText: '為什麼總是減肥失敗' },
     ],
   },
   {
     icon: 'exercise',
     title: '骨骼、肌肉與運動',
-    intro: '結合骨鬆專科與運動訓練學（ACE-CPT），我幫你顧好骨頭與肌肉，並開出你做得到的運動處方。',
+    intro: '結合家庭醫學科專業、骨鬆學會認證與運動訓練學（ACE-CPT），我幫你一起照顧骨頭與肌肉，並規劃能逐步調整的運動處方。',
     items: [
-      { name: '骨質疏鬆', note: '骨密度（DXA）評估、骨折風險與治療', link: '/blog/osteoporosis-screening-guide/', linkText: '骨密度檢查指南' },
+      { name: '骨質疏鬆', note: '骨密度（DXA）評估、骨折風險與治療', link: '/osteoporosis/', linkText: '骨鬆門診評估內容' },
       { name: '肌少症', note: '肌肉流失評估與阻力訓練介入', link: '/blog/sarcopenia-resistance-training/', linkText: '肌少症與阻力訓練' },
       { name: '運動處方 / 運動傷害預防', note: '依 FITT-VP 架構設計個人化運動計畫', link: '/blog/fitt-vp-exercise-prescription/', linkText: 'FITT-VP 運動處方' },
     ],
@@ -107,7 +107,7 @@ const medicalWebPage = {
   description,
   inLanguage: 'zh-Hant',
   datePublished: '2026-06-30',
-  dateModified: '2026-07-11',
+  dateModified: '2026-08-22',
   author: { '@id': `${SITE}/#person` },
   reviewedBy: { '@id': `${SITE}/#person` },
   about: { '@id': `${SITE}/#person` },
@@ -160,7 +160,7 @@ const breadcrumb = {
       {groups.map((g) => (
         <section class="rounded-2xl border border-slate-200 bg-white p-6 md:p-7">
           <div class="flex items-start gap-4 mb-4">
-            <span class="material-symbols-outlined text-secondary shrink-0" style="font-size:32px;">{g.icon}</span>
+            <span class="material-symbols-outlined text-secondary shrink-0" style="font-size:32px;" aria-hidden="true">{g.icon}</span>
             <div>
               <h2 class="text-xl md:text-2xl font-bold text-blue-950 font-headline">{g.title}</h2>
               <p class="text-sm text-slate-600 mt-1 chinese-line-height">{g.intro}</p>

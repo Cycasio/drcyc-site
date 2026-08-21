@@ -78,7 +78,7 @@ function card(title: string, category: string) {
                   style: { display: 'flex', flexDirection: 'column' },
                   children: [
                     { type: 'div', props: { style: { fontSize: '34px', fontWeight: 700 }, children: '陳昱彰醫師 Dr. Yu-Chang Chen' } },
-                    { type: 'div', props: { style: { fontSize: '24px', color: '#8aa4cf', marginTop: '6px' }, children: '義大醫院家醫科 · 家醫/肥胖/骨鬆三專科' } },
+                    { type: 'div', props: { style: { fontSize: '24px', color: '#8aa4cf', marginTop: '6px' }, children: '義大醫院家醫科 · 肥胖/骨鬆學會認證' } },
                   ],
                 },
               },

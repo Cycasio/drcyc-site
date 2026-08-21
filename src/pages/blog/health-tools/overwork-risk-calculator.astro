@@ -89,7 +89,7 @@ const faqSchema = {
       <span class="mx-2">／</span>
       <a href="/blog/" class="hover:text-teal-700">衛教專欄</a>
       <span class="mx-2">／</span>
-      <a href="/blog/health-tools/" class="hover:text-teal-700">健康工具</a>
+      <a href="/tools/" class="hover:text-teal-700">健康工具</a>
       <span class="mx-2">／</span>
       <span>異常工作負荷風險計算機</span>
     </nav>
@@ -314,8 +314,9 @@ const faqSchema = {
           <span>個人過勞量表（6 題）</span>
           <span class="text-xs text-slate-400 font-normal" id="ind-score-preview"></span>
         </summary>
-        <div class="px-6 pb-6 space-y-4 border-t border-slate-100 pt-4">
-          <p class="text-xs text-slate-500 chinese-line-height">
+        <fieldset class="min-w-0 px-6 pb-6 space-y-4 border-t border-slate-100 pt-4" aria-describedby="ind-burnout-instructions">
+          <legend class="sr-only">個人過勞量表題目</legend>
+          <p id="ind-burnout-instructions" class="text-xs text-slate-500 chinese-line-height">
             以下每題依實際感受勾選，系統會自動算出個人過勞分數（0–100）。<br>
             計分方式：總是＝100、經常＝75、有時＝50、很少＝25、從不＝0，取六題平均。
           </p>
@@ -328,8 +329,12 @@ const faqSchema = {
             '您多常覺得虛弱、容易生病？',
           ].map((q, i) => (
             <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-              <span class="text-sm text-slate-700 flex-1">{i + 1}. {q}</span>
-              <select class="ind-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none">
+              <label for={`individual-burnout-${i + 1}`} class="text-sm text-slate-700 flex-1">{i + 1}. {q}</label>
+              <select
+                id={`individual-burnout-${i + 1}`}
+                name={`individualBurnoutItem${i + 1}`}
+                class="ind-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none"
+              >
                 <option value="">— 請選擇 —</option>
                 <option value="100">總是</option>
                 <option value="75">經常</option>
@@ -346,7 +351,7 @@ const faqSchema = {
               帶入計算機
             </button>
           </div>
-        </div>
+        </fieldset>
       </details>
 
       <!-- 工作相關過勞量表 -->
@@ -355,8 +360,9 @@ const faqSchema = {
           <span>工作相關過勞量表（7 題）</span>
           <span class="text-xs text-slate-400 font-normal" id="work-score-preview"></span>
         </summary>
-        <div class="px-6 pb-6 space-y-4 border-t border-slate-100 pt-4">
-          <p class="text-xs text-slate-500 chinese-line-height">
+        <fieldset class="min-w-0 px-6 pb-6 space-y-4 border-t border-slate-100 pt-4" aria-describedby="work-burnout-instructions">
+          <legend class="sr-only">工作相關過勞量表題目</legend>
+          <p id="work-burnout-instructions" class="text-xs text-slate-500 chinese-line-height">
             以下每題依實際感受勾選。第 7 題為反向計分（答「總是」得 0 分）。<br>
             計分方式：取七題平均（0–100）。
           </p>
@@ -370,11 +376,16 @@ const faqSchema = {
             { q: '工作之餘，您是否有足夠的精力陪伴家人和朋友？', reverse: true },
           ].map(({ q, reverse }, i) => (
             <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-              <span class="text-sm text-slate-700 flex-1">
+              <label for={`work-burnout-${i + 1}`} class="text-sm text-slate-700 flex-1">
                 {i + 1}. {q}
                 {reverse && <span class="ml-1 text-xs text-amber-600">（反向計分）</span>}
-              </span>
-              <select class="work-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none" data-reverse={reverse ? 'true' : 'false'}>
+              </label>
+              <select
+                id={`work-burnout-${i + 1}`}
+                name={`workBurnoutItem${i + 1}`}
+                class="work-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none"
+                data-reverse={reverse ? 'true' : 'false'}
+              >
                 <option value="">— 請選擇 —</option>
                 <option value="100">總是</option>
                 <option value="75">經常</option>
@@ -391,7 +402,7 @@ const faqSchema = {
               帶入計算機
             </button>
           </div>
-        </div>
+        </fieldset>
       </details>
     </div>
 

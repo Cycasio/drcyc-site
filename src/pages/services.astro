@@ -15,6 +15,11 @@ import Layout from '../layouts/Layout.astro';
           <p class="text-lg text-on-surface-variant leading-relaxed max-w-lg chinese-line-height">
             從企業臨場健康服務到社區健康諮詢，我們致力於成為您與家人的長期健康守護者。透過專業的整合性醫療，為每一位患者提供個人化的健康對策。
           </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/weight-loss/" class="rounded-full bg-primary px-5 py-3 text-sm font-bold text-white no-underline">我要了解減重門診</a>
+            <a href="/osteoporosis/" class="rounded-full border border-primary/20 px-5 py-3 text-sm font-bold text-primary no-underline">骨質疏鬆評估</a>
+            <a href="/workplace-health/" class="rounded-full border border-primary/20 px-5 py-3 text-sm font-bold text-primary no-underline">企業健康服務</a>
+          </div>
         </div>
       </div>
       <div class="absolute -right-24 top-0 w-1/2 h-full opacity-10 pointer-events-none hidden md:block">
@@ -29,9 +34,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-10 flex flex-col justify-between group transition-all hover:bg-white border border-transparent hover:border-outline-variant/20">
           <div>
             <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
-              <span class="material-symbols-outlined" style="font-size:36px;">business_center</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">business_center</span>
             </div>
-            <h3 class="text-3xl font-bold text-primary mb-4 font-headline">企業臨場健康服務</h3>
+            <h2 class="text-3xl font-bold text-primary mb-4 font-headline">企業臨場健康服務</h2>
             <p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-2xl chinese-line-height">
               依據《職業安全衛生法》，為企業提供專業的臨場健康服務。包含勞工健康保護四大計畫（人因性危害預防、異常工作負荷促發疾病預防、職場不法侵害預防、母性健康保護），協助企業法規遵循、降低職災風險、提升員工健康。
             </p>
@@ -42,8 +47,8 @@ import Layout from '../layouts/Layout.astro';
               <span class="px-3 py-1 bg-surface-container-high rounded text-sm text-on-surface-variant">工作環境評估</span>
             </div>
           </div>
-          <a class="text-secondary font-bold inline-flex items-center gap-2 group-hover:underline no-underline" href="/blog/workplace-health-guide">
-            了解更多 →
+          <a class="text-secondary font-bold inline-flex items-center gap-2 group-hover:underline no-underline" href="/workplace-health/">
+            查看企業服務內容與洽詢方式 →
           </a>
         </div>
 
@@ -51,9 +56,9 @@ import Layout from '../layouts/Layout.astro';
         <a href="/health-checkup/" class="md:col-span-4 bg-primary text-on-primary rounded-xl p-10 flex flex-col justify-between no-underline group hover:opacity-95 transition-opacity">
           <div>
             <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white mb-8">
-              <span class="material-symbols-outlined" style="font-size:36px;">science</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">science</span>
             </div>
-            <h3 class="text-2xl font-bold mb-4 font-headline">義大健檢完整指南</h3>
+            <h2 class="text-2xl font-bold mb-4 font-headline">義大健檢完整指南</h2>
             <p class="text-on-primary-container leading-relaxed mb-6 chinese-line-height">
               義大醫院健診中心 16 個套餐一次比完，附 USPSTF 實證點評、健檢前準備、清腸藥時程與交通資訊。我幫你用家醫科的角度，告訴你哪個方案適合你，預約時也可指定由我為你解說報告。
             </p>
@@ -67,9 +72,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="md:col-span-4 bg-secondary-container text-on-secondary-container rounded-xl p-10 flex flex-col justify-between">
           <div>
             <div class="w-16 h-16 rounded-full bg-on-secondary-container/10 flex items-center justify-center text-on-secondary-container mb-8">
-              <span class="material-symbols-outlined" style="font-size:36px;">monitor_weight</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">monitor_weight</span>
             </div>
-            <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
+            <h2 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h2>
             <p class="leading-relaxed mb-4 chinese-line-height">
               整合飲食調整、運動處方、壓力管理、睡眠優化與藥物治療（如非 GLP-1 口服藥 Contrave、GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro，或其他 GLP-1 類藥物），以行為科學方法輔助建立可持續的健康習慣。
             </p>
@@ -78,8 +83,8 @@ import Layout from '../layouts/Layout.astro';
               <div><strong>📍 旗山大政診所</strong>・<a href="/qishan-clinic/" class="underline font-bold">週五夜診 18:00–21:00 →</a></div>
             </div>
           </div>
-          <a class="font-bold inline-flex items-center gap-2 no-underline text-on-secondary-container mt-4" href="/blog/weight-loss-comb-model">
-            了解 COM-B 行為科學 →
+          <a class="font-bold inline-flex items-center gap-2 no-underline text-on-secondary-container mt-4" href="/weight-loss/">
+            查看減重門診方式與地點 →
           </a>
         </div>
 
@@ -87,9 +92,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-10 flex flex-col md:flex-row gap-10 items-center border border-transparent hover:border-outline-variant/20">
           <div class="w-full md:w-1/2">
             <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
-              <span class="material-symbols-outlined" style="font-size:36px;">groups</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">groups</span>
             </div>
-            <h3 class="text-3xl font-bold text-primary mb-4 font-headline">社區健康營造</h3>
+            <h2 class="text-3xl font-bold text-primary mb-4 font-headline">社區健康營造</h2>
             <p class="text-on-surface-variant leading-relaxed mb-6 chinese-line-height">
               以居民參與為核心，推動由下而上的社區健康計畫。深入社區提供健康講座、諮詢與居家醫療評估，讓專業醫療資源不再有距離感。<strong class="text-primary">目前正在徵求屏東地區社區夥伴</strong>，歡迎社區發展協會、衛生所、長照 C 級據點來信討論合作。
             </p>
@@ -104,15 +109,15 @@ import Layout from '../layouts/Layout.astro';
         <div class="md:col-span-6 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between border border-transparent hover:border-outline-variant/20">
           <div>
             <div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container mb-8">
-              <span class="material-symbols-outlined" style="font-size:36px;">elderly</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">elderly</span>
             </div>
-            <h3 class="text-2xl font-bold text-primary mb-4 font-headline">骨質疏鬆門診</h3>
+            <h2 class="text-2xl font-bold text-primary mb-4 font-headline">骨質疏鬆門診</h2>
             <p class="text-on-surface-variant leading-relaxed mb-6 chinese-line-height">
               骨密度（DXA）評估、骨鬆風險篩檢與治療策略。40 歲以上即應關注骨骼健康，及早預防勝過事後治療。
             </p>
           </div>
-          <a class="text-secondary font-bold inline-flex items-center gap-2 no-underline" href="/blog/osteoporosis-screening-guide">
-            骨鬆篩檢指南 →
+          <a class="text-secondary font-bold inline-flex items-center gap-2 no-underline" href="/osteoporosis/">
+            查看骨鬆門診評估內容 →
           </a>
         </div>
 
@@ -120,17 +125,17 @@ import Layout from '../layouts/Layout.astro';
         <div class="md:col-span-6 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between border border-transparent hover:border-outline-variant/20">
           <div>
             <div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container mb-8">
-              <span class="material-symbols-outlined" style="font-size:36px;">directions_run</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">directions_run</span>
             </div>
-            <h3 class="text-2xl font-bold text-primary mb-4 font-headline">運動處方 FITT-VP</h3>
+            <h2 class="text-2xl font-bold text-primary mb-4 font-headline">運動處方 FITT-VP</h2>
             <p class="text-on-surface-variant leading-relaxed mb-4 chinese-line-height">
               用 ACSM 的 <strong>FITT-VP</strong>(頻率 Frequency、強度 Intensity、時間 Time、類型 Type、總量 Volume、進階 Progression)架構，依你的健檢數據、慢性病、關節狀況與目標，設計可以真正執行的運動處方。不是「多運動」這麼含糊，而是「每週幾次、幾分鐘、什麼心跳區間、做什麼動作、什麼時候加強」。
             </p>
             <p class="text-xs text-on-surface-variant/80 bg-surface-container-high px-4 py-2 rounded-lg mb-4 chinese-line-height">
-              🎓 陳醫師同時具備 <strong>ACE-CPT</strong>(美國運動委員會認證私人教練)執照，結合臨床醫學與訓練學觀點開立運動處方。
+              🎓 陳醫師同時具備 <strong>ACE-CPT</strong>（美國運動委員會認證私人教練）認證，結合臨床醫學與訓練學觀點開立運動處方。
             </p>
           </div>
-          <a class="text-secondary font-bold inline-flex items-center gap-2 no-underline" href="/blog/sarcopenia-resistance-training">
+          <a class="text-secondary font-bold inline-flex items-center gap-2 no-underline" href="/blog/sarcopenia-resistance-training/">
             肌少症與阻力訓練 →
           </a>
         </div>
@@ -138,10 +143,10 @@ import Layout from '../layouts/Layout.astro';
         <!-- 衛教演講 / 企業健康講座 (col-span-12 full-width banner) -->
         <a href="/speaking/" class="md:col-span-12 bg-on-secondary-container text-secondary-container rounded-xl p-10 flex flex-col md:flex-row items-start md:items-center gap-8 no-underline hover:opacity-95 transition-opacity">
           <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white flex-shrink-0">
-            <span class="material-symbols-outlined" style="font-size:36px;">campaign</span>
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">campaign</span>
           </div>
           <div class="flex-1">
-            <h3 class="text-2xl md:text-3xl font-bold mb-3 font-headline">衛教演講 / 企業健康講座</h3>
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 font-headline">衛教演講 / 企業健康講座</h2>
             <p class="leading-relaxed chinese-line-height opacity-90 mb-4">
               曾赴中鋼、中油、國巨、李長榮、英特格、麥當勞、Anytime Fitness、東海大學、義守大學、高科大、中正大學、各地警政與衛生所及多所國高中演講。主題涵蓋減重醫學、腸泌素類新藥、三高、骨質疏鬆、行為科學、職場健康與四大計畫（含人因危害、異常工作負荷）。
             </p>
@@ -195,12 +200,12 @@ import Layout from '../layouts/Layout.astro';
           >
             立即預約掛號
           </a>
-          <a
+          <!--email_off--><a
             href="mailto:cyc@edfm.org"
             class="border border-white/20 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all no-underline"
           >
             聯絡我們
-          </a>
+          </a><!--/email_off-->
         </div>
       </div>
     </section>
@@ -220,6 +225,7 @@ import Layout from '../layouts/Layout.astro';
         {
           "@type": "MedicalProcedure",
           "name": "企業臨場健康服務",
+          "url": "https://www.drcyc.io/workplace-health/",
           "description": "依據職業安全衛生法提供臨場健康服務，包含勞工健康保護四大計畫。"
         },
         {
@@ -230,6 +236,7 @@ import Layout from '../layouts/Layout.astro';
         {
           "@type": "MedicalProcedure",
           "name": "減重管理門診",
+          "url": "https://www.drcyc.io/weight-loss/",
           "description": "整合飲食、運動、壓力、睡眠與藥物治療（如口服 Contrave，或 GIP/GLP-1 雙受體促效劑猛健樂 Mounjaro），以行為科學方法輔助的實證減重。"
         },
         {
@@ -240,6 +247,7 @@ import Layout from '../layouts/Layout.astro';
         {
           "@type": "MedicalProcedure",
           "name": "骨質疏鬆門診",
+          "url": "https://www.drcyc.io/osteoporosis/",
           "description": "骨密度評估、骨鬆風險篩檢與治療策略。"
         },
         {

@@ -185,6 +185,10 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
           </div>
         )}
 
+        <aside class="mb-8 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600 chinese-line-height" aria-label="衛教提醒">
+          <strong class="text-slate-700">衛教提醒：</strong>本文供衛教參考，不取代個別診療；用藥或症狀請由醫師評估。
+        </aside>
+
         <!-- Article Content -->
         <div class="article-content">
           <Content />
@@ -285,7 +289,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
               />
               <div>
                 <p class="text-sm font-bold text-primary">陳昱彰醫師 YC Chen, MD</p>
-                <p class="text-xs text-outline">家醫 / 肥胖 / 骨鬆 三專科</p>
+                <p class="text-xs text-outline">家庭醫學科專科・肥胖與骨鬆學會認證</p>
               </div>
             </div>
             <p class="text-xs text-on-surface-variant leading-relaxed chinese-line-height">
@@ -342,6 +346,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
     color: #006a60;
     text-decoration: underline;
     text-underline-offset: 4px;
+    overflow-wrap: anywhere;
   }
   .article-content a:hover {
     color: #022448;
@@ -367,9 +372,40 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
   }
   .article-content table {
     width: 100%;
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
     font-size: 0.95rem;
+  }
+  .article-table-hint {
+    display: none;
+    margin: 0 0 0.5rem;
+    color: #64748b;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+  .article-table-scroll {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .article-table-scroll:focus-visible {
+    outline: 3px solid #0d9488;
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+  .article-table-scroll > table {
+    display: table;
+    width: 100%;
+    min-width: 100%;
+    max-width: none;
+    margin-bottom: 0;
+    overflow: visible;
   }
   .article-content th,
   .article-content td {
@@ -389,9 +425,34 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
     color: #006a60;
     font-weight: 700;
   }
+  @media (max-width: 639px) {
+    .article-table-hint {
+      display: block;
+    }
+  }
 </style>
 
 <script>
+  document.querySelectorAll<HTMLTableElement>('.article-content table').forEach((table, index) => {
+    if (table.closest('.article-table-scroll')) return;
+
+    const hint = document.createElement('p');
+    hint.id = `article-table-hint-${index + 1}`;
+    hint.className = 'article-table-hint';
+    hint.textContent = '表格可左右滑動查看完整內容';
+
+    const scrollRegion = document.createElement('div');
+    scrollRegion.className = 'article-table-scroll';
+    scrollRegion.tabIndex = 0;
+    scrollRegion.setAttribute('role', 'region');
+    scrollRegion.setAttribute('aria-label', `第 ${index + 1} 個資料表，可左右捲動查看完整內容`);
+    scrollRegion.setAttribute('aria-describedby', hint.id);
+
+    table.before(hint);
+    table.replaceWith(scrollRegion);
+    scrollRegion.appendChild(table);
+  });
+
   const tocLinks = document.querySelectorAll('.toc-link');
   if (tocLinks.length > 0) {
     const headingEls = Array.from(tocLinks).map(link => {

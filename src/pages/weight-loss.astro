@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const SITE = 'https://www.drcyc.io';
+const title = '高雄減重門診｜義大與旗山｜陳昱彰醫師';
+const description = '高雄與旗山減重門診：由義大醫院家醫科主治醫師陳昱彰（具台灣肥胖醫學會認證）評估，整合飲食、運動、睡眠、壓力、行為科學與適當藥物治療。';
+
+const faqs = [
+  {
+    q: '減重門診一定會使用藥物嗎？',
+    a: '不一定。第一次評估會先了解體重變化、飲食活動、睡眠、壓力、既往病史與目前用藥，再共同討論適合的策略。藥物只是可能選項之一，是否使用及選擇哪一類，都需要個別評估。',
+  },
+  {
+    q: '第一次看減重門診要準備什麼？',
+    a: '可攜帶近期健檢或抽血報告、目前藥物與保健品清單，以及過去嘗試過的減重方式。若沒有完整資料也可以先來，醫師會依實際狀況判斷還需要哪些資訊。',
+  },
+  {
+    q: '義大與旗山的門診怎麼選？',
+    a: '義大減重中心適合希望搭配完整健檢、住燕巢、楠梓、岡山、橋頭或左營一帶的人；旗山大政診所提供週五 18:00–21:00 夜診，較適合旗山、美濃、田寮、內門及白天不方便請假的人。',
+  },
+  {
+    q: '可以直接指定使用猛健樂或其他 GLP-1 類藥物嗎？',
+    a: '可以在看診時提出想了解的藥物，但能否使用仍需依核准適應症、共病、禁忌、目前用藥、副作用風險與可近性個別判斷；不建議自行購買或調整劑量。',
+  },
+];
+
+const schemas = [
+  {
+    '@type': 'MedicalWebPage',
+    '@id': `${SITE}/weight-loss/#webpage`,
+    url: `${SITE}/weight-loss/`,
+    name: title,
+    description,
+    inLanguage: 'zh-Hant',
+    isPartOf: { '@id': `${SITE}/#website` },
+    author: { '@id': `${SITE}/#person` },
+    about: { '@type': 'MedicalCondition', name: '肥胖症' },
+    mainEntity: { '@id': `${SITE}/weight-loss/#service` },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: '服務項目', item: `${SITE}/services/` },
+        { '@type': 'ListItem', position: 3, name: '減重門診', item: `${SITE}/weight-loss/` },
+      ],
+    },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE}/weight-loss/#service`,
+    name: '減重管理門診',
+    serviceType: '肥胖與體重管理',
+    provider: { '@id': `${SITE}/#person` },
+    areaServed: [
+      { '@type': 'AdministrativeArea', name: '高雄市' },
+      { '@type': 'AdministrativeArea', name: '屏東縣' },
+    ],
+    availableChannel: [
+      { '@type': 'ServiceChannel', serviceLocation: { '@id': `${SITE}/#edah-clinic` } },
+      { '@type': 'ServiceChannel', serviceLocation: { '@id': `${SITE}/#qishan-clinic` } },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${SITE}/weight-loss/#faq`,
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={schemas}>
+  <main>
+    <section class="bg-gradient-to-br from-blue-950 to-blue-900 py-16 text-white md:py-24">
+      <div class="mx-auto max-w-6xl px-6 md:px-8">
+        <nav class="mb-8 text-sm text-blue-100" aria-label="breadcrumb">
+          <a href="/" class="text-blue-100">首頁</a><span class="mx-2">／</span>
+          <a href="/services/" class="text-blue-100">服務項目</a><span class="mx-2">／</span>
+          <span>減重門診</span>
+        </nav>
+        <div class="max-w-3xl">
+          <p class="mb-4 text-sm font-bold tracking-[0.18em] text-teal-200">高雄・燕巢・旗山</p>
+          <h1 class="mb-6 text-4xl font-extrabold leading-tight md:text-6xl">減重不是只靠意志力<br/><span class="text-teal-200">先找出真正卡住你的地方</span></h1>
+          <p class="mb-8 text-lg leading-relaxed text-blue-50 md:text-xl">
+            由家庭醫學科專科醫師陳昱彰（具台灣肥胖醫學會認證）整合飲食、活動、睡眠、壓力、行為科學與適當的藥物選項，和你一起制定能執行、能追蹤的體重管理計畫。
+          </p>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener" class="rounded-full bg-teal-700 px-7 py-3.5 text-center font-bold text-white no-underline">義大線上掛號</a>
+            <a href="/qishan-clinic/" class="rounded-full border border-white/40 px-7 py-3.5 text-center font-bold text-white no-underline">旗山週五夜診</a>
+          </div>
+          <p class="mt-5 text-sm leading-relaxed text-blue-100">本頁為服務與就診資訊，不取代個別診療；實際治療與用藥須經醫師評估。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+      <div class="grid gap-8 md:grid-cols-3">
+        <article class="rounded-3xl bg-surface-container-low p-7">
+          <p class="mb-3 text-sm font-bold text-teal-700">01 理解</p>
+          <h2 class="mb-3 text-xl font-bold text-primary">不先責怪意志力</h2>
+          <p class="text-on-surface-variant chinese-line-height">先理解體重歷程、進食情境、工作型態、睡眠與壓力，找出真正影響改變的因素。</p>
+        </article>
+        <article class="rounded-3xl bg-surface-container-low p-7">
+          <p class="mb-3 text-sm font-bold text-teal-700">02 評估</p>
+          <h2 class="mb-3 text-xl font-bold text-primary">把健康風險一起看</h2>
+          <p class="text-on-surface-variant chinese-line-height">視需要整合血壓、血糖、血脂、脂肪肝、睡眠呼吸中止症、目前用藥與其他共病。</p>
+        </article>
+        <article class="rounded-3xl bg-surface-container-low p-7">
+          <p class="mb-3 text-sm font-bold text-teal-700">03 行動</p>
+          <h2 class="mb-3 text-xl font-bold text-primary">共同決定下一步</h2>
+          <p class="text-on-surface-variant chinese-line-height">把飲食、運動、睡眠、壓力與藥物選項整理成可執行的計畫，再依效果與副作用調整。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bg-surface-container-low py-16 md:py-24">
+      <div class="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:px-8">
+        <div>
+          <p class="mb-3 text-sm font-bold tracking-widest text-teal-700">門診內容</p>
+          <h2 class="mb-6 text-3xl font-bold text-primary">五個面向一起處理</h2>
+          <ul class="space-y-4 text-on-surface-variant">
+            <li class="rounded-2xl bg-white p-5"><strong class="text-primary">飲食：</strong>從實際生活與進食情境調整，不用套同一份菜單。</li>
+            <li class="rounded-2xl bg-white p-5"><strong class="text-primary">運動：</strong>依健康狀況與時間安排心肺、阻力與日常活動。</li>
+            <li class="rounded-2xl bg-white p-5"><strong class="text-primary">睡眠與壓力：</strong>辨認會影響食慾、活動與執行力的因素。</li>
+            <li class="rounded-2xl bg-white p-5"><strong class="text-primary">行為科學：</strong>用 COM-B 與動機式晤談，把目標拆成能開始的小步驟。</li>
+            <li class="rounded-2xl bg-white p-5"><strong class="text-primary">藥物：</strong>符合條件時討論口服藥、GLP-1 類或 GIP/GLP-1 雙受體促效劑等選項。</li>
+          </ul>
+        </div>
+        <div>
+          <p class="mb-3 text-sm font-bold tracking-widest text-teal-700">看診地點</p>
+          <h2 class="mb-6 text-3xl font-bold text-primary">選擇你能持續回診的地方</h2>
+          <div class="space-y-5">
+            <article class="rounded-3xl border border-outline-variant/30 bg-white p-7">
+              <h3 class="mb-2 text-xl font-bold text-primary">義大醫院減重中心</h3>
+              <p class="mb-4 text-on-surface-variant chinese-line-height">週五下午。適合希望搭配完整健檢，或住燕巢、楠梓、岡山、橋頭、左營一帶的人。</p>
+              <a href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener" class="font-bold text-teal-700">前往義大掛號 →</a>
+            </article>
+            <article class="rounded-3xl border border-outline-variant/30 bg-white p-7">
+              <h3 class="mb-2 text-xl font-bold text-primary">旗山大政診所</h3>
+              <p class="mb-4 text-on-surface-variant chinese-line-height">每週五 18:00–21:00。適合旗山、美濃、田寮、內門及白天不方便請假的人。</p>
+              <a href="/qishan-clinic/" class="font-bold text-teal-700">查看夜診與預約方式 →</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+      <h2 class="mb-8 text-3xl font-bold text-primary">就診前可以先看</h2>
+      <div class="grid gap-5 md:grid-cols-3">
+        <a href="/tools/bmi/" class="rounded-2xl border border-outline-variant/30 p-6 no-underline"><strong class="block text-primary">BMI 計算機</strong><span class="mt-2 block text-sm text-on-surface-variant">先了解目前體位</span></a>
+        <a href="/blog/mounjaro-weight-loss/" class="rounded-2xl border border-outline-variant/30 p-6 no-underline"><strong class="block text-primary">猛健樂完整指南</strong><span class="mt-2 block text-sm text-on-surface-variant">效果、風險與適用條件</span></a>
+        <a href="/blog/weight-loss-comb-model/" class="rounded-2xl border border-outline-variant/30 p-6 no-underline"><strong class="block text-primary">COM-B 行為科學</strong><span class="mt-2 block text-sm text-on-surface-variant">為什麼知道不等於做得到</span></a>
+      </div>
+    </section>
+
+    <section class="bg-blue-950 py-16">
+      <div class="mx-auto max-w-3xl px-6">
+        <h2 class="mb-8 text-center text-3xl font-bold text-white">常見問題</h2>
+        <div class="space-y-4">
+          {faqs.map((item) => (
+            <details class="rounded-2xl bg-white p-6">
+              <summary class="cursor-pointer font-bold text-primary">{item.q}</summary>
+              <p class="mt-4 text-on-surface-variant chinese-line-height">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

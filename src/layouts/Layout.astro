@@ -11,12 +11,13 @@ interface Props {
   ogImageAlt?: string;
   ogType?: 'website' | 'article';
   noindex?: boolean;
+  canonicalPath?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = '陳昱彰醫師 Dr. Yu-Chang Chen｜義大醫院家醫科・減重門診',
-  description = '義大醫院家醫科主治醫師陳昱彰，三專科醫師（家醫、肥胖、骨鬆），結合 COM-B 行為科學與實證醫學，提供高雄減重門診、骨質疏鬆、企業臨場與職業醫學服務。國家醫療品質獎實證銀獎。',
+  description = '義大醫院家醫科主治醫師陳昱彰，具家庭醫學科專科醫師資格及肥胖、骨鬆學會認證；結合 COM-B 行為科學與實證醫學，提供高雄減重門診、骨質疏鬆與企業臨場健康服務。國家醫療品質獎實證銀獎。',
   ogImage = '/images/portrait.jpg',
   // 預設肖像圖實際為 533×800 直式;若頁面帶專屬橫式 OG 圖,從 props 覆寫尺寸
   ogImageWidth = 533,
@@ -24,11 +25,12 @@ const {
   ogImageAlt = '陳昱彰醫師 Dr. Yu-Chang Chen — 義大醫院家庭暨社區醫學部主治醫師',
   ogType = 'website',
   noindex = false,
+  canonicalPath,
   jsonLd,
 } = Astro.props as Props;
 
 const SITE = 'https://www.drcyc.io';
-const canonical = new URL(Astro.url.pathname, SITE).toString();
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, SITE).toString();
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE).toString();
 // 肖像為直式,用 summary 卡片;若帶橫式專屬圖(寬>=1200)用 large_image
 const twitterCard = ogImageWidth >= 1200 ? 'summary_large_image' : 'summary';
@@ -48,7 +50,7 @@ const personSchema = {
   gender: 'Male',
   nationality: 'Taiwanese',
   description:
-    '義大醫院家庭暨社區醫學部主治醫師與減重中心醫師，持有家庭醫學、肥胖醫學與骨質疏鬆症三張專科證書；目前為職業醫學科訓練醫師，尚未取得該科專科醫師資格，並具勞工健康服務醫師資格。現就讀義守大學生物技術與化學工程研究所博士班；曾於國立臺灣大學公共衛生碩士學位學程（MPH）健康行為與社區科學組進修，修畢課程但未取得 MPH 學位。',
+    '義大醫院家庭暨社區醫學部主治醫師與減重中心醫師，具家庭醫學科專科醫師資格，並取得台灣肥胖醫學會與中華民國骨質疏鬆症學會認證；目前為職業醫學科訓練醫師，尚未取得該科專科醫師資格，並具勞工健康服務醫師資格。現就讀義守大學生物技術與化學工程研究所博士班；曾於國立臺灣大學公共衛生碩士學位學程（MPH）健康行為與社區科學組進修，修畢課程。',
   knowsAbout: [
     '家庭醫學',
     '肥胖醫學',
@@ -97,8 +99,8 @@ const personSchema = {
   ],
   hasCredential: [
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '家庭醫學科專科醫師' },
-    { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '肥胖醫學專科醫師' },
-    { '@type': 'EducationalOccupationalCredential', credentialCategory: '專科證照', name: '骨質疏鬆症專科醫師' },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: '學會認證', name: '台灣肥胖醫學會認證醫師', recognizedBy: { '@type': 'Organization', name: '台灣肥胖醫學會' } },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: '學會認證', name: '中華民國骨質疏鬆症學會認證醫師', recognizedBy: { '@type': 'Organization', name: '中華民國骨質疏鬆症學會' } },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '資格', name: '勞工健康服務醫師資格' },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: '認證', name: '戒菸治療認證醫師' },
     {
@@ -135,8 +137,8 @@ const edahClinicSchema = {
   medicalSpecialty: ['https://schema.org/PrimaryCare'],
   employee: { '@id': `${SITE}/#person` },
   availableService: [
-    { '@type': 'MedicalProcedure', name: '減重管理門診', description: '結合 COM-B 行為科學、營養、運動處方與藥物治療的個人化減重療程' },
-    { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
+    { '@type': 'MedicalProcedure', name: '減重管理門診', url: `${SITE}/weight-loss/`, description: '結合 COM-B 行為科學、營養、運動處方與藥物治療的個人化減重療程' },
+    { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', url: `${SITE}/osteoporosis/`, description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
     { '@type': 'MedicalProcedure', name: '企業臨場健康服務', description: '依《職業安全衛生法》提供勞工健康服務' },
     { '@type': 'MedicalProcedure', name: '高階健康檢查解讀', description: '結合行為科學的個人化健檢諮詢' },
     { '@type': 'MedicalProcedure', name: '運動處方 FITT-VP', description: '依個人健康與體適能狀況規劃心肺、阻力、柔軟度與進階進程' },
@@ -252,7 +254,7 @@ const schemaGraph = {
   <!-- Google Fonts (text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Public+Sans:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Material Symbols icons: self-hosted 5KB subset (28 glyphs, pinned opsz40/wght500) — replaces the 3.9MB variable font from Google Fonts -->
   <link rel="preload" href="/fonts/material-symbols-subset.woff2" as="font" type="font/woff2" crossorigin />
 
@@ -278,15 +280,12 @@ const schemaGraph = {
   <!-- JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 
-  <!-- Microsoft Clarity(行為錄影 + heatmap,免費) -->
-  <script set:html={`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xb35nupmp0");`} />
-
   <!-- Cloudflare Web Analytics:由 Cloudflare Pages 專案層級自動注入,不需在此手動加 beacon -->{/* 若改用手動 beacon,在此貼 token */}
 </head>
 <body class="bg-surface text-on-surface font-body antialiased">
   <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-primary focus:text-on-primary focus:px-4 focus:py-2 focus:rounded-full focus:font-bold focus:no-underline">跳到主要內容</a>
   <Nav />
-  <div id="main">
+  <div id="main" tabindex="-1">
     <slot />
   </div>
   <Footer />

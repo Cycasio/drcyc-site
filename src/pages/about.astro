@@ -4,10 +4,13 @@ import Layout from '../layouts/Layout.astro';
 const SITE = 'https://www.drcyc.io';
 
 const aboutPageSchema = {
-  '@type': 'AboutPage',
-  '@id': `${SITE}/about/#aboutpage`,
+  '@type': 'ProfilePage',
+  '@id': `${SITE}/about/#profilepage`,
   url: `${SITE}/about/`,
   name: '關於陳昱彰醫師',
+  description: '陳昱彰醫師的現職、專科資格、訓練身分、學歷與學術發表。',
+  dateModified: '2026-08-22',
+  isPartOf: { '@id': `${SITE}/#website` },
   mainEntity: { '@id': `${SITE}/#person` },
   breadcrumb: {
     '@type': 'BreadcrumbList',
@@ -18,9 +21,9 @@ const aboutPageSchema = {
   },
 };
 
-const title = '關於陳昱彰醫師｜義大醫院家醫科・三專科醫師・實證銀獎';
+const title = '關於陳昱彰醫師｜義大醫院家醫科・肥胖與骨鬆學會認證・實證銀獎';
 const description =
-  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師。現為職業醫學科訓練醫師（尚未取得該科專科醫師資格），並具勞工健康服務醫師資格與 ACE-CPT 認證。榮獲國家醫療品質獎實證醫學類臨床組銀獎，發表 SCI 期刊論文 2 篇。';
+  '陳昱彰醫師：義大醫院家庭暨社區醫學部主治醫師，具家庭醫學科專科醫師資格及肥胖、骨鬆學會認證。現為職業醫學科訓練醫師（尚未取得該科專科醫師資格），並具勞工健康服務醫師資格與 ACE-CPT 認證。榮獲國家醫療品質獎實證醫學類臨床組銀獎，發表 SCI 期刊論文 2 篇。';
 
 const credentials = [
   { category: '現職與訓練', items: [
@@ -30,10 +33,10 @@ const credentials = [
   ]},
   { category: '專科醫師證書', items: [
     '家庭醫學科專科醫師',
-    '台灣肥胖醫學會 肥胖醫學專科醫師',
-    '中華民國骨質疏鬆症學會 骨鬆專科醫師',
   ]},
   { category: '資格與認證', items: [
+    '台灣肥胖醫學會認證醫師',
+    '中華民國骨質疏鬆症學會認證醫師',
     '勞工健康服務醫師資格',
     '糖尿病共同照護網醫事人員',
     '戒菸治療認證醫師',
@@ -103,18 +106,45 @@ const publicationSchemas = [
       <span>關於</span>
     </nav>
 
-    <header class="mb-16">
-      <p class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">About</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-6">
-        陳昱彰 醫師<br/>
-        <span class="text-2xl md:text-3xl text-slate-600 font-bold">Yu-Chang Chen, MD</span>
-      </h1>
-      <p class="text-lg text-slate-700 chinese-line-height max-w-3xl">
-        義大醫院家庭暨社區醫學部主治醫師與減重中心醫師。現為<strong>職業醫學科訓練醫師</strong>，具勞工健康服務醫師資格；尚未取得職業醫學科專科醫師資格。整合家庭醫學、肥胖醫學、骨質疏鬆、運動處方與職場健康，
-        以 <strong>COM-B 行為改變模型</strong>與<strong>實證醫學</strong>為雙核心，協助民眾建立可持續的健康習慣，
-        而非只靠藥物與意志力。
-      </p>
+    <header class="mb-12 grid gap-8 md:grid-cols-[1fr_180px] md:items-center">
+      <div>
+        <p class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">About</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-6">
+          陳昱彰 醫師<br/>
+          <span class="text-2xl md:text-3xl text-slate-600 font-bold">Yu-Chang Chen, MD</span>
+        </h1>
+        <p class="text-lg text-slate-700 chinese-line-height max-w-3xl">
+          義大醫院家庭暨社區醫學部主治醫師與減重中心醫師。現為<strong>職業醫學科訓練醫師</strong>，具勞工健康服務醫師資格；尚未取得職業醫學科專科醫師資格。整合家庭醫學、肥胖醫學、骨質疏鬆、運動處方與職場健康，
+          以 <strong>COM-B 行為改變模型</strong>與<strong>實證醫學</strong>為雙核心，協助民眾建立可持續的健康習慣，
+          而非只靠藥物與意志力。
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/services/" class="rounded-full bg-blue-950 px-5 py-2.5 text-sm font-bold text-white no-underline">查看服務</a>
+          <a href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener" class="rounded-full border border-blue-950/20 px-5 py-2.5 text-sm font-bold text-blue-950 no-underline">義大線上掛號</a>
+        </div>
+      </div>
+      <img
+        src="/images/portrait.jpg"
+        alt="陳昱彰醫師"
+        width="180"
+        height="225"
+        class="mx-auto aspect-[4/5] w-40 rounded-3xl object-cover shadow-lg md:w-[180px]"
+      />
     </header>
+
+    <section class="mb-16 rounded-3xl bg-surface-container-low p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-blue-950 mb-6">現職、學歷與專業資格</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {credentials.map(({category, items}) => (
+          <div>
+            <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">{category}</h3>
+            <ul class="space-y-2 text-slate-700 text-sm leading-relaxed">
+              {items.map(item => <li>• {item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
 
     <section class="mb-16">
       <h2 class="text-2xl font-bold text-blue-950 mb-6">臨床理念</h2>
@@ -152,7 +182,7 @@ const publicationSchemas = [
         <div class="rounded-2xl bg-surface-container-low p-5">
           <div class="text-2xl mb-2">🥋</div>
           <h3 class="font-bold text-blue-950 mb-1">國術・搏擊・登山跑山</h3>
-          <p class="text-sm text-slate-600 chinese-line-height">我是真心相信「運動是藥」的人，所以去考了 ACE-CPT 教練證，能幫你開一張真的做得到的運動處方，而不是一句「多運動」。</p>
+          <p class="text-sm text-slate-600 chinese-line-height">我是真心相信「運動是藥」的人，所以取得 ACE-CPT 認證，能幫你規劃較貼近日常、能逐步調整的運動處方，而不是一句「多運動」。</p>
         </div>
         <div class="rounded-2xl bg-surface-container-low p-5">
           <div class="text-2xl mb-2">🎶</div>
@@ -164,20 +194,6 @@ const publicationSchemas = [
         所以「行為設計學」（COM-B、BJ Fogg 行為模型、動機式晤談）對我不是課本上的理論，而是我一直在做的事：
         <strong>理解一個系統怎麼運作，再設計出讓改變自然發生的方法。</strong>放到減重、戒菸、慢性病上，就是我的看診方式。
       </p>
-    </section>
-
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-blue-950 mb-6">學經歷與證照</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        {credentials.map(({category, items}) => (
-          <div>
-            <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">{category}</h3>
-            <ul class="space-y-2 text-slate-700 text-sm leading-relaxed">
-              {items.map(item => <li>• {item}</li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
     </section>
 
     <section class="mb-16">
@@ -202,7 +218,7 @@ const publicationSchemas = [
       <dl class="grid md:grid-cols-2 gap-4 text-sm">
         <div><dt class="font-bold text-blue-950">門診單位</dt><dd class="text-slate-700">義大醫院 家庭暨社區醫學部</dd></div>
         <div><dt class="font-bold text-blue-950">線上掛號</dt><dd><a class="text-teal-700 underline" href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675" target="_blank" rel="noopener">義大醫院預約系統</a></dd></div>
-        <div><dt class="font-bold text-blue-950">Email</dt><dd class="text-slate-700">cyc@edfm.org</dd></div>
+        <div><dt class="font-bold text-blue-950">Email</dt><dd><!--email_off--><a class="text-teal-700 underline" href="mailto:cyc@edfm.org">cyc@edfm.org</a><!--/email_off--></dd></div>
         <div><dt class="font-bold text-blue-950">Facebook</dt><dd><a class="text-teal-700 underline" href="https://www.facebook.com/lazydr" target="_blank" rel="noopener">@lazydr</a></dd></div>
         <div><dt class="font-bold text-blue-950">Instagram</dt><dd><a class="text-teal-700 underline" href="https://www.instagram.com/lazydr.cyc" target="_blank" rel="noopener">@lazydr.cyc</a></dd></div>
         <div><dt class="font-bold text-blue-950">ORCID</dt><dd><a class="text-teal-700 underline" href="https://orcid.org/0009-0005-2506-1058" target="_blank" rel="noopener">0009-0005-2506-1058</a></dd></div>

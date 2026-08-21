@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: '陳醫師的專長有哪些？',
-    a: '家庭醫學、肥胖醫學、運動處方、骨質疏鬆、行為科學與實證醫學。持有家庭醫學、肥胖醫學、骨質疏鬆症三專科證照；現為職業醫學科訓練醫師（尚未取得該科專科醫師資格），並具勞工健康服務醫師資格。',
+    a: '家庭醫學、肥胖醫學、運動處方、骨質疏鬆、行為科學與實證醫學。具家庭醫學科專科醫師資格，並取得台灣肥胖醫學會與中華民國骨質疏鬆症學會認證；現為職業醫學科訓練醫師（尚未取得該科專科醫師資格），並具勞工健康服務醫師資格。',
   },
   {
     q: '什麼是行為科學導向的醫療？',
@@ -70,7 +70,7 @@ const homepageSchema = {
   url: `${SITE}/`,
   name: '陳昱彰醫師 Dr. Yu-Chang Chen｜義大醫院家醫科・減重門診',
   description:
-    '義大醫院家醫科主治醫師陳昱彰，三專科醫師（家醫、肥胖、骨鬆），結合 COM-B 行為科學與實證醫學，提供高雄減重門診、骨質疏鬆、企業臨場與職業醫學服務。',
+    '義大醫院家醫科主治醫師陳昱彰，具家庭醫學科專科醫師資格及肥胖、骨鬆學會認證；結合 COM-B 行為科學與實證醫學，提供高雄減重門診、骨質疏鬆與企業臨場健康服務。',
   inLanguage: 'zh-Hant',
   isPartOf: { '@id': `${SITE}/#website` },
   about: { '@id': `${SITE}/#person` },
@@ -130,7 +130,7 @@ const homepageFaqSchema = {
         <div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl transform lg:rotate-2">
           <img
             src="/images/portrait.jpg"
-            alt="陳昱彰醫師 Dr. Yu-Chang Chen MD — 義大醫院家庭暨社區醫學部主治醫師，家庭醫學、肥胖醫學、骨質疏鬆三專科醫師，ACE-CPT 認證教練"
+            alt="陳昱彰醫師 Dr. Yu-Chang Chen MD — 義大醫院家庭暨社區醫學部主治醫師，具家庭醫學科專科資格、肥胖與骨鬆學會認證及 ACE-CPT 認證"
             class="w-full h-full object-cover"
             width="400"
             height="500"
@@ -150,10 +150,10 @@ const homepageFaqSchema = {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- 企業臨場健康服務 (large, col-span-2) -->
-        <a href="/services" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex flex-col justify-between hover:bg-white transition-colors no-underline group">
+        <a href="/workplace-health/" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex flex-col justify-between hover:bg-white transition-colors no-underline group">
           <div>
             <div class="w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined" style="font-size:32px;">business_center</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:32px;">business_center</span>
             </div>
             <h3 class="text-2xl font-bold text-primary mb-4 font-headline">企業臨場健康服務</h3>
             <p class="text-on-surface-variant chinese-line-height text-lg">
@@ -169,7 +169,7 @@ const homepageFaqSchema = {
         <a href="/health-checkup/" class="bg-primary text-on-primary p-10 rounded-3xl flex flex-col justify-between no-underline">
           <div>
             <div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined" style="font-size:32px;">science</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:32px;">science</span>
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">義大健檢完整指南</h3>
             <p class="text-on-primary-container chinese-line-height">
@@ -180,10 +180,10 @@ const homepageFaqSchema = {
         </a>
 
         <!-- 減重管理門診 — 兩地點 (teal secondary-container card) -->
-        <a href="/services" class="bg-secondary-container text-on-secondary-container p-10 rounded-3xl flex flex-col justify-between no-underline">
+        <a href="/weight-loss/" class="bg-secondary-container text-on-secondary-container p-10 rounded-3xl flex flex-col justify-between no-underline">
           <div>
             <div class="w-14 h-14 bg-on-secondary-container/10 text-on-secondary-container rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined" style="font-size:32px;">monitor_weight</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:32px;">monitor_weight</span>
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">減重管理門診</h3>
             <p class="chinese-line-height mb-4">
@@ -201,13 +201,13 @@ const homepageFaqSchema = {
         <a href="/qishan-clinic/" class="md:col-span-2 bg-surface-container-lowest p-10 rounded-3xl flex flex-col md:flex-row items-start md:items-center gap-10 hover:bg-white transition-colors no-underline group border border-outline-variant/10">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-3">
-              <span class="material-symbols-outlined text-secondary" style="font-size:28px;">bedtime</span>
+              <span class="material-symbols-outlined text-secondary" aria-hidden="true" style="font-size:28px;">bedtime</span>
               <span class="text-xs font-bold tracking-widest text-secondary uppercase">週五夜診・旗山・美濃・田寮・內門</span>
             </div>
             <h3 class="text-2xl font-bold text-primary mb-3 font-headline">旗山大政診所・週五夜診</h3>
             <p class="text-on-surface-variant chinese-line-height">
-              下班後 18:00–21:00 看診,不用特地請假跑義大。<strong>藥物減重(含 GLP-1)、三高慢性病追蹤、家醫科</strong>門診,
-              由陳醫師本人親自駐診。適合住在旗山、美濃、田寮、內門一帶的居民,以及白天要上班的朋友。
+              下班後 18:00–21:00 看診，不用特地請假跑義大。<strong>藥物減重（含 GLP-1）、三高慢性病追蹤、家醫科</strong>門診，
+              由陳醫師本人親自駐診。適合住在旗山、美濃、田寮、內門一帶的居民，以及白天要上班的朋友。
             </p>
             <div class="mt-4 flex flex-wrap gap-2 text-xs">
               <span class="px-3 py-1 bg-surface-container-high rounded-full font-medium">週五 18:00–21:00</span>
@@ -223,7 +223,7 @@ const homepageFaqSchema = {
         <a href="/speaking/" class="bg-on-secondary-container text-secondary-container p-10 rounded-3xl flex flex-col justify-between no-underline hover:opacity-95 transition-opacity">
           <div>
             <div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6">
-              <span class="material-symbols-outlined" style="font-size:32px;">campaign</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:32px;">campaign</span>
             </div>
             <h3 class="text-2xl font-bold mb-4 font-headline">衛教演講<br/>企業健康講座</h3>
             <p class="chinese-line-height text-sm opacity-90">
@@ -259,17 +259,17 @@ const homepageFaqSchema = {
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="text-center px-6">
-        <span class="material-symbols-outlined text-secondary mb-4 block mx-auto" style="font-size:48px;">workspace_premium</span>
+        <span class="material-symbols-outlined text-secondary mb-4 block mx-auto" aria-hidden="true" style="font-size:48px;">workspace_premium</span>
         <h3 class="text-xl font-bold text-primary mb-3 font-headline">國家級實證醫學獎項</h3>
         <p class="text-on-surface-variant chinese-line-height">國家醫療品質獎 EBM 臨床組銀獎，SCI 期刊論文發表，以研究實證為臨床決策基礎。</p>
       </div>
       <div class="text-center px-6">
-        <span class="material-symbols-outlined text-secondary mb-4 block mx-auto" style="font-size:48px;">verified</span>
-        <h3 class="text-xl font-bold text-primary mb-3 font-headline">三專科整合照護</h3>
-        <p class="text-on-surface-variant chinese-line-height">家庭醫學、肥胖醫學、骨質疏鬆三專科認證，一站式處理您的多面向健康問題。</p>
+        <span class="material-symbols-outlined text-secondary mb-4 block mx-auto" aria-hidden="true" style="font-size:48px;">verified</span>
+        <h3 class="text-xl font-bold text-primary mb-3 font-headline">專科與學會認證整合</h3>
+        <p class="text-on-surface-variant chinese-line-height">家庭醫學科專科醫師，另具肥胖醫學與骨質疏鬆症學會認證，整合處理多面向健康問題。</p>
       </div>
       <div class="text-center px-6">
-        <span class="material-symbols-outlined text-secondary mb-4 block mx-auto" style="font-size:48px;">psychology</span>
+        <span class="material-symbols-outlined text-secondary mb-4 block mx-auto" aria-hidden="true" style="font-size:48px;">psychology</span>
         <h3 class="text-xl font-bold text-primary mb-3 font-headline">行為科學驅動改變</h3>
         <p class="text-on-surface-variant chinese-line-height">不只開藥治療，運用行為科學方法協助您建立可持續的健康習慣，從根本改善生活型態。</p>
       </div>
@@ -284,7 +284,7 @@ const homepageFaqSchema = {
           <span class="text-on-surface-variant text-sm font-bold tracking-[0.2em] uppercase">Health Blog</span>
           <h2 class="text-4xl font-bold text-primary mt-2 font-headline">衛教專欄</h2>
         </div>
-        <a class="text-secondary font-bold hover:underline underline-offset-8 transition-all no-underline" href="/blog">查看所有文章</a>
+        <a class="text-secondary font-bold hover:underline underline-offset-8 transition-all no-underline" href="/blog/">查看所有文章</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         {posts.map((post) => (
@@ -320,7 +320,7 @@ const homepageFaqSchema = {
                     {f.locations.map((loc) => (
                       <div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-5">
                         <div class="flex items-center gap-2 mb-1">
-                          <span class="material-symbols-outlined text-secondary" style="font-size:22px;">{loc.symbol}</span>
+                          <span class="material-symbols-outlined text-secondary" aria-hidden="true" style="font-size:22px;">{loc.symbol}</span>
                           <h4 class="font-bold text-primary text-base">{loc.name}</h4>
                         </div>
                         <p class="text-xs text-on-surface-variant mb-4">{loc.subtitle}</p>
@@ -334,7 +334,7 @@ const homepageFaqSchema = {
                         </ul>
                         {loc.extraNote && (
                           <p class="text-xs text-secondary font-bold mb-3 flex items-center gap-1">
-                            <span class="material-symbols-outlined" style="font-size:16px;">schedule</span>
+                            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;">schedule</span>
                             {loc.extraNote}
                           </p>
                         )}
@@ -344,7 +344,7 @@ const homepageFaqSchema = {
                           rel={loc.bookingHref.startsWith('http') ? 'noopener' : undefined}
                           class="inline-flex items-center gap-2 text-sm font-bold text-secondary hover:underline no-underline"
                         >
-                          <span class="material-symbols-outlined" style="font-size:18px;">{loc.bookingSymbol}</span>
+                          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">{loc.bookingSymbol}</span>
                           {loc.bookingLabel} →
                         </a>
                       </div>
@@ -378,14 +378,14 @@ const homepageFaqSchema = {
               rel="noopener"
               class="inline-flex items-center gap-2 bg-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-on-secondary-container transition-all shadow-xl no-underline"
             >
-              <span class="material-symbols-outlined" style="font-size:22px;">calendar_month</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">calendar_month</span>
               義大線上掛號
             </a>
             <a
               href="tel:+886766225588"
               class="inline-flex items-center gap-2 bg-white/10 border border-white/40 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all no-underline"
             >
-              <span class="material-symbols-outlined" style="font-size:22px;">call</span>
+              <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">call</span>
               旗山大政 07-662-2588
             </a>
           </div>

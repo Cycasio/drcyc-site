@@ -154,7 +154,7 @@ A: 輕微痠痛正常，但如果是尖銳疼痛就要停止。建議調整動�
 
 我是陳昱彰醫師，義大醫院家醫科主治醫師、台灣運動醫學醫學會會員。專長是結合實證醫學的運動處方設計。
 
-📧 Email: cyc@edfm.org  
+📧 Email: <!--email_off-->[cyc@edfm.org](mailto:cyc@edfm.org)<!--/email_off--><br>
 🏥 義大醫院 家庭暨社區醫學部
 
 ---

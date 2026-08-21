@@ -307,7 +307,7 @@ tldr:
 
 我是陳昱彰醫師，義大醫院家庭暨社區醫學部主治醫師，具備勞工健康服務醫師資格，服務範圍涵蓋高雄、屏東的企業臨場健康服務。
 
-📧 cyc@edfm.org
+📧 <!--email_off-->[cyc@edfm.org](mailto:cyc@edfm.org)<!--/email_off-->
 
 ---
 

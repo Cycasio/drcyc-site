@@ -233,7 +233,7 @@ tldr:
 
 **陳昱彰醫師**  
 義大醫院家庭暨社區醫學部｜義大減重中心  
-家庭醫學科專科醫師・肥胖醫學專科醫師・骨質疏鬆症專科醫師
+家庭醫學科專科醫師・肥胖與骨鬆學會認證
 
 📋 [預約掛號](https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675)  
 📱 [Facebook 粉專 @lazydr](https://facebook.com/lazydr)

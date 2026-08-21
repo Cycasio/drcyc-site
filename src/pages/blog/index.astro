@@ -3,56 +3,207 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import BlogCard from '../../components/BlogCard.astro';
 
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/`;
+const title = '衛教專欄｜陳昱彰醫師';
+const description = '義大醫院家醫科陳昱彰醫師的實證衛教專欄：腸泌素類減重藥物、三高與代謝健康、運動處方、骨質疏鬆、成人預防保健與職場健康；整理研究證據、臨床指引與可追溯的參考來源。';
+
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
+const categoryMap: Record<string, string> = {
+  減重管理: '減重與代謝',
+  內分泌代謝: '減重與代謝',
+  糖尿病與代謝: '減重與代謝',
+  婦女健康: '減重與代謝',
+  三高與慢性病: '三高與慢性病',
+  運動醫學: '運動與骨骼',
+  骨質疏鬆: '運動與骨骼',
+  職業醫學: '職場健康',
+  職場健康: '職場健康',
+  預防保健: '預防保健',
+  行為科學: '行為與習慣',
+};
+
+const categoryOrder = [
+  '減重與代謝',
+  '三高與慢性病',
+  '運動與骨骼',
+  '職場健康',
+  '預防保健',
+  '行為與習慣',
+];
+
+const getMainCategory = (category?: string) => categoryMap[category ?? ''] ?? '其他健康主題';
+const getSearchText = (post: (typeof posts)[number]) => [
+  post.data.title,
+  post.data.description,
+  post.data.category,
+  getMainCategory(post.data.category),
+  ...(post.data.tags ?? []),
+].filter(Boolean).join(' ');
+
+const categoryOptions = categoryOrder
+  .map((name) => ({
+    name,
+    count: posts.filter((post) => getMainCategory(post.data.category) === name).length,
+  }))
+  .filter(({ count }) => count > 0);
+
 const featuredPost = posts[0];
 const remainingPosts = posts.slice(1);
 
-// Extract unique tags from all posts
-const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
+const collectionSchema = {
+  '@type': 'CollectionPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: title,
+  description,
+  inLanguage: 'zh-Hant',
+  isPartOf: { '@id': `${SITE}/#website` },
+  author: { '@id': `${SITE}/#person` },
+  mainEntity: { '@id': `${pageUrl}#articles` },
+};
+
+const articleListSchema = {
+  '@type': 'ItemList',
+  '@id': `${pageUrl}#articles`,
+  name: '陳昱彰醫師衛教文章',
+  numberOfItems: posts.length,
+  itemListOrder: 'https://schema.org/ItemListOrderDescending',
+  itemListElement: posts.map((post, index) => {
+    const postUrl = `${SITE}/blog/${post.slug}/`;
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'BlogPosting',
+        '@id': `${postUrl}#article`,
+        url: postUrl,
+        headline: post.data.title,
+        description: post.data.description,
+        datePublished: post.data.pubDate.toISOString(),
+        dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+        inLanguage: 'zh-Hant',
+        author: { '@id': `${SITE}/#person` },
+      },
+    };
+  }),
+};
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '衛教專欄', item: pageUrl },
+  ],
+};
 ---
 
-<Layout title="衛教專欄｜陳昱彰醫師" description="義大醫院家醫科陳昱彰醫師的實證衛教專欄：腸泌素類減重藥物（GIP/GLP-1 雙受體促效劑猛健樂、GLP-1 類 Wegovy）、肌少症、骨質疏鬆、超慢跑、運動處方、第二型糖尿病緩解、職場健康四大計畫等；整理研究證據、臨床指引與實務建議，並持續補齊可追溯的參考來源。">
-  <main class="max-w-7xl mx-auto px-8 py-16">
+<Layout title={title} description={description} jsonLd={[collectionSchema, articleListSchema, breadcrumbSchema]}>
+  <main class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16">
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2" aria-hidden="true">／</span>
+      <span aria-current="page">衛教專欄</span>
+    </nav>
+
     <!-- Header Section -->
-    <header class="mb-16">
-      <h1 class="text-5xl font-extrabold tracking-tight text-primary mb-4 font-headline">衛教專欄</h1>
+    <header class="mb-12 md:mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-4 font-headline">衛教專欄</h1>
       <p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl chinese-line-height">
-        在這裡，我們分享醫學新知與健康管理建議。透過臨床實踐與專業知識，協助您建立更健康的生活型態。
+        從研究證據與臨床實務出發，整理減重、慢性病、運動、預防保健與職場健康知識，協助你找到下一步可以採取的行動。
       </p>
     </header>
 
-    <section class="mb-14">
+    <section class="mb-14" aria-labelledby="health-tools-heading">
       <a
-        href="/blog/health-tools/"
+        href="/tools/"
         class="block rounded-3xl border border-outline-variant/30 bg-gradient-to-br from-surface-container-low to-white p-8 md:p-10 no-underline hover:shadow-lg transition-shadow"
       >
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div class="max-w-3xl">
-            <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">衛教專欄 · 健康工具</p>
-            <h2 class="text-2xl md:text-3xl font-bold text-primary mb-3 font-headline">健康工具：從文章走到可立即行動的試算</h2>
+            <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">免費健康工具</p>
+            <h2 id="health-tools-heading" class="text-2xl md:text-3xl font-bold text-primary mb-3 font-headline">把健康知識轉成可以立即使用的試算</h2>
             <p class="text-on-surface-variant chinese-line-height">
-              不知道一天該吃多少、減重熱量該怎麼抓？先從 <strong>TDEE 熱量需求計算機</strong> 開始。之後也會陸續整理更多體重管理與代謝健康工具。
+              集中使用 <strong>BMI、TDEE 熱量需求、心血管風險、FIB-4 肝纖維化與過勞風險</strong>等工具；所有試算只供健康教育與就醫討論參考。
             </p>
           </div>
           <span class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-on-primary font-bold whitespace-nowrap">
-            前往健康工具 →
+            查看全部健康工具 →
           </span>
         </div>
       </a>
     </section>
 
-    <!-- Featured Post (Editorial Style) -->
+    <!-- Search and topic filters. Without JavaScript, every article remains visible. -->
+    <section class="mb-10" aria-labelledby="article-search-heading">
+      <div class="rounded-2xl border border-outline-variant/40 bg-surface-container-low p-5 md:p-6">
+        <div class="flex flex-col lg:flex-row lg:items-end gap-5">
+          <div class="w-full lg:max-w-sm">
+            <label id="article-search-heading" for="blog-search" class="block text-sm font-bold text-primary mb-2">搜尋衛教文章</label>
+            <input
+              id="blog-search"
+              type="search"
+              inputmode="search"
+              autocomplete="off"
+              placeholder="輸入疾病、藥物或健康主題"
+              aria-controls="featured-post posts-grid"
+              aria-describedby="filter-result-status"
+              class="w-full rounded-xl border border-outline-variant bg-white px-4 py-3 text-base text-on-surface placeholder:text-outline focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
+          <div class="flex-1">
+            <p class="text-sm font-bold text-primary mb-2">依主題瀏覽</p>
+            <div class="flex flex-wrap gap-2" role="group" aria-label="文章主題篩選">
+              <button
+                type="button"
+                class="px-4 py-2 rounded-full bg-primary text-on-primary text-sm font-bold"
+                data-filter="all"
+                aria-pressed="true"
+                aria-controls="featured-post posts-grid"
+              >
+                全部文章 <span class="font-medium opacity-80">({posts.length})</span>
+              </button>
+              {categoryOptions.map(({ name, count }) => (
+                <button
+                  type="button"
+                  class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors"
+                  data-filter={name}
+                  aria-pressed="false"
+                  aria-controls="featured-post posts-grid"
+                >
+                  {name} <span class="opacity-70">({count})</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <p id="filter-result-status" class="mt-4 text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
+          共 {posts.length} 篇文章
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Post (included in search and topic filtering) -->
     {featuredPost && (
-      <section class="mb-24">
-        <a href={`/blog/${featuredPost.slug}`} class="no-underline group">
+      <section
+        id="featured-post"
+        class="mb-16 md:mb-24"
+        data-post-item
+        data-category={getMainCategory(featuredPost.data.category)}
+        data-search={getSearchText(featuredPost)}
+      >
+        <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">最新文章</p>
+        <a href={`/blog/${featuredPost.slug}/`} class="no-underline group">
           <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest flex flex-col md:flex-row shadow-[0_20px_40px_rgba(25,28,29,0.05)]">
             {featuredPost.data.image && (
               <div class="md:w-3/5 overflow-hidden">
                 <img
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 min-h-[400px]"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 min-h-[280px] md:min-h-[400px]"
                   src={featuredPost.data.image}
                   alt={featuredPost.data.title}
                   loading="eager"
@@ -60,29 +211,25 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
               </div>
             )}
             <div class:list={[
-              'p-12 flex flex-col justify-center',
+              'p-7 md:p-12 flex flex-col justify-center',
               featuredPost.data.image ? 'md:w-2/5' : 'w-full',
             ]}>
-              {featuredPost.data.tags?.[0] && (
-                <div class="inline-block px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold tracking-widest uppercase mb-6 w-fit">
-                  {featuredPost.data.tags[0]}
-                </div>
-              )}
-              <h2 class="text-3xl font-bold text-primary mb-6 leading-tight font-headline">
+              <div class="inline-block px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold tracking-widest mb-6 w-fit">
+                {getMainCategory(featuredPost.data.category)}
+              </div>
+              <h2 class="text-2xl md:text-3xl font-bold text-primary mb-6 leading-tight font-headline">
                 {featuredPost.data.title}
               </h2>
               <p class="text-on-surface-variant mb-8 line-clamp-3 leading-relaxed chinese-line-height">
                 {featuredPost.data.description}
               </p>
               <div class="flex items-center gap-6 mb-8 text-sm text-on-surface-variant font-medium">
-                <span class="flex items-center gap-1.5">
-                  →
+                <time datetime={featuredPost.data.pubDate.toISOString()}>
                   {featuredPost.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
-                </span>
+                </time>
               </div>
               <span class="text-secondary font-bold flex items-center gap-2">
-                閱讀更多
-                →
+                閱讀文章 →
               </span>
             </div>
           </div>
@@ -90,27 +237,18 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
       </section>
     )}
 
-    <!-- Category Filter -->
-    <div class="flex flex-wrap gap-4 mb-12">
-      <button class="px-6 py-2 rounded-full bg-primary text-on-primary text-sm font-bold" data-filter="all">全部文章</button>
-      {allTags.map(tag => (
-        <button
-          class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-variant transition-colors"
-          data-filter={tag}
-        >
-          {tag}
-        </button>
-      ))}
-    </div>
-
-    <!-- 3-Column Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="posts-grid">
+    <!-- Article Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="posts-grid">
       {remainingPosts.map((post) => (
-        <div data-tags={JSON.stringify(post.data.tags ?? [])}>
+        <div
+          data-post-item
+          data-category={getMainCategory(post.data.category)}
+          data-search={getSearchText(post)}
+        >
           <BlogCard
             title={post.data.title}
             description={post.data.description}
-            slug={post.slug}
+            slug={`${post.slug}/`}
             pubDate={post.data.pubDate}
             tags={post.data.tags}
             image={post.data.image}
@@ -118,32 +256,61 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
         </div>
       ))}
     </div>
+
+    <div id="filter-empty-state" class="rounded-2xl bg-surface-container-low p-8 text-center" hidden>
+      <h2 class="text-xl font-bold text-primary mb-2 font-headline">找不到符合條件的文章</h2>
+      <p class="text-on-surface-variant chinese-line-height">請改用較短的關鍵字，或選擇「全部文章」再試一次。</p>
+    </div>
   </main>
 </Layout>
 
 <script>
-  const filterBtns = document.querySelectorAll('[data-filter]');
-  const postItems = document.querySelectorAll('#posts-grid > div');
+  const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const postItems = Array.from(document.querySelectorAll<HTMLElement>('[data-post-item]'));
+  const searchInput = document.querySelector<HTMLInputElement>('#blog-search');
+  const resultStatus = document.querySelector<HTMLElement>('#filter-result-status');
+  const emptyState = document.querySelector<HTMLElement>('#filter-empty-state');
+  let activeFilter = 'all';
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
+  const normalizeText = (value: string) => value.trim().toLocaleLowerCase('zh-TW').replace(/\s+/g, ' ');
 
-      filterBtns.forEach(b => {
-        b.classList.remove('bg-primary', 'text-on-primary');
-        b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
-      });
-      btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
-      btn.classList.add('bg-primary', 'text-on-primary');
+  const updateButtonState = () => {
+    filterButtons.forEach((button) => {
+      const isActive = button.dataset.filter === activeFilter;
+      button.setAttribute('aria-pressed', String(isActive));
+      button.classList.toggle('bg-primary', isActive);
+      button.classList.toggle('text-on-primary', isActive);
+      button.classList.toggle('bg-surface-container-high', !isActive);
+      button.classList.toggle('text-on-surface-variant', !isActive);
+    });
+  };
 
-      postItems.forEach(item => {
-        if (filter === 'all') {
-          (item as HTMLElement).style.display = '';
-          return;
-        }
-        const tags: string[] = JSON.parse(item.getAttribute('data-tags') ?? '[]');
-        (item as HTMLElement).style.display = tags.includes(filter) ? '' : 'none';
-      });
+  const applyFilters = () => {
+    const query = normalizeText(searchInput?.value ?? '');
+    let visibleCount = 0;
+
+    postItems.forEach((item) => {
+      const matchesCategory = activeFilter === 'all' || item.dataset.category === activeFilter;
+      const matchesSearch = !query || normalizeText(item.dataset.search ?? '').includes(query);
+      const isVisible = matchesCategory && matchesSearch;
+      item.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+
+    if (emptyState) emptyState.hidden = visibleCount !== 0;
+    if (resultStatus) {
+      const hasFilters = activeFilter !== 'all' || query.length > 0;
+      resultStatus.textContent = hasFilters ? `找到 ${visibleCount} 篇文章` : `共 ${visibleCount} 篇文章`;
+    }
+  };
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter ?? 'all';
+      updateButtonState();
+      applyFilters();
     });
   });
+
+  searchInput?.addEventListener('input', applyFilters);
 </script>

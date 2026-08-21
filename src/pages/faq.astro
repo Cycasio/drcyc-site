@@ -55,7 +55,7 @@ const categories = [
       },
       {
         q: '常見副作用有哪些？會不會很嚴重？',
-        a: '最常見是胃腸道副作用：噁心、腹瀉、便秘，多在劑量調整期間出現，通常隨時間減輕。嚴重副作用（胰臟炎、膽囊疾病）相對少見。透過緩慢滴定劑量可顯著降低副作用頻率。',
+        a: '最常見是胃腸道副作用：噁心、腹瀉、便秘，多在劑量調整期間出現，部分人會隨時間改善。嚴重副作用（胰臟炎、膽囊疾病）相對少見。依仿單逐步增加劑量有助改善部分人的耐受性，但仍可能發生副作用。',
       },
       {
         q: '誰適合用猛健樂？台灣有健保給付嗎？',
@@ -63,7 +63,7 @@ const categories = [
       },
       {
         q: '只打猛健樂不改變生活習慣可以嗎？',
-        a: '藥物是五大減重支柱之一（飲食、運動、行為改變、睡眠、藥物），單靠藥物停藥後復胖風險更高。行為改變——尤其是飲食習慣與活動量——是維持成果的關鍵，COM-B 模型分析後針對個人障礙介入效果最佳。',
+        a: '藥物是五大減重支柱之一（飲食、運動、行為改變、睡眠、藥物）；停藥後常見體重回升。行為改變——尤其是飲食習慣與活動量——對長期健康仍有獨立價值，可用 COM-B 模型理解障礙，再依個人狀況規劃介入。',
       },
     ],
   },
@@ -132,7 +132,7 @@ const categories = [
     faqs: [
       {
         q: '什麼是臨場健康服務？企業為什麼需要？',
-        a: '依據《勞工健康保護規則》，僱用勞工達一定人數之企業須聘請醫師提供臨場健康服務。醫師定期到場協助健康諮詢、職業病預防、工作適性評估等，幫助企業降低職災風險、提升員工健康。',
+        a: '依據《勞工健康保護規則》，企業須依勞工人數、特別危害健康作業與事業類別核對醫護配置。服務可包含健康諮詢、職業病預防與工作適性評估；實際方式及頻率應依最新條文與附表判定。',
       },
       {
         q: '職安法四大計劃是什麼？企業都要做嗎？',
@@ -242,6 +242,7 @@ const description = '陳昱彰醫師常見問題彙整：藥物減重（猛健�
   description={description}
   jsonLd={[faqPageSchema, breadcrumbSchema]}
 >
+  <main>
   <!-- Hero -->
   <section class="page-hero">
     <div class="container">
@@ -297,11 +298,12 @@ const description = '陳昱彰醫師常見問題彙整：藥物減重（猛健�
         歡迎透過以下管道直接聯繫陳醫師
       </p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="mailto:cyc@edfm.org" class="btn btn-primary">寄信給我</a>
+        <!--email_off--><a href="mailto:cyc@edfm.org" class="btn btn-primary">寄信給我</a><!--/email_off-->
         <a href="https://www.facebook.com/lazydr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Facebook @lazydr</a>
       </div>
     </div>
   </section>
+  </main>
 </Layout>
 
 <style>

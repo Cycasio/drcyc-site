@@ -10,8 +10,10 @@
 /tools/eras-protocol /tools/ 301
 
 # Legacy health-tool aliases
-/health-tools /blog/health-tools/ 301
-/health-tools/ /blog/health-tools/ 301
+/blog/health-tools /tools/ 301
+/blog/health-tools/ /tools/ 301
+/health-tools /tools/ 301
+/health-tools/ /tools/ 301
 /health-tools/tdee-calculator /blog/health-tools/tdee-calculator/ 301
 /health-tools/tdee-calculator/ /blog/health-tools/tdee-calculator/ 301
 /tools/tdee /blog/health-tools/tdee-calculator/ 301

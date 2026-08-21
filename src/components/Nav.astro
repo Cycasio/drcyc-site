@@ -3,13 +3,15 @@ const pathname = Astro.url.pathname;
 
 const primaryLinks = [
   { href: '/', label: '首頁' },
-  { href: '/about', label: '關於' },
+  { href: '/about/', label: '關於' },
   {
-    href: '/services',
+    href: '/services/',
     label: '服務項目',
     children: [
       { href: '/conditions/', label: '主治項目' },
       { href: '/services/', label: '服務總覽' },
+      { href: '/weight-loss/', label: '高雄減重門診' },
+      { href: '/osteoporosis/', label: '骨質疏鬆門診' },
       { href: '/health-checkup/', label: '義大健檢指南' },
       { href: '/qishan-clinic/', label: '旗山夜診' },
       { href: '/workplace-health/', label: '職場健康' },
@@ -17,8 +19,8 @@ const primaryLinks = [
       { href: '/community-health/', label: '社區營造' },
     ],
   },
-  { href: '/blog', label: '衛教專欄' },
-  { href: '/tools', label: '健康工具' },
+  { href: '/blog/', label: '衛教專欄' },
+  { href: '/tools/', label: '健康工具' },
 ];
 
 function normalize(path: string): string {
@@ -35,7 +37,7 @@ function isActive(href: string): boolean {
 function isChildActive(parentHref: string, childHref: string): boolean {
   const current = normalize(pathname);
 
-  if (parentHref === '/services' && childHref === '/services/') {
+  if (parentHref === '/services/' && childHref === '/services/') {
     return current === '/services/';
   }
 
@@ -125,7 +127,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
+  <div id="mobile-menu" class="hidden max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain lg:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
     <div class="flex flex-col gap-4 pt-4">
       {primaryLinks.map(link => (
         link.children ? (

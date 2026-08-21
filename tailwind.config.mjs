@@ -62,8 +62,8 @@ export default {
       },
       fontFamily: {
         headline: ['Manrope', 'sans-serif'],
-        body: ['Public Sans', 'Noto Sans TC', 'sans-serif'],
-        label: ['Public Sans', 'sans-serif'],
+        body: ['"Public Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', '"PingFang TC"', '"Microsoft JhengHei"', '"Noto Sans CJK TC"', 'sans-serif'],
+        label: ['"Public Sans"', 'sans-serif'],
       },
     },
   },

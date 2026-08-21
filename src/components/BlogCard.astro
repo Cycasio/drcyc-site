@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { title, description, slug, pubDate, tags, image } = Astro.props;
+const canonicalSlug = slug.replace(/^\/+|\/+$/g, '');
 
 const dateStr = pubDate.toLocaleDateString('zh-TW', {
   year: 'numeric',
@@ -20,7 +21,7 @@ const firstTag = tags?.[0];
 ---
 
 <article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(25,28,29,0.05)] flex flex-col group">
-  <a href={`/blog/${slug}`} class="no-underline flex flex-col flex-grow">
+  <a href={`/blog/${canonicalSlug}/`} class="no-underline flex flex-col flex-grow">
     {image && (
       <div class="relative aspect-[16/10] overflow-hidden">
         <img
