@@ -91,13 +91,13 @@ const { heading = '減重進度', showHeading = true } = Astro.props as Props;
 
       const commentary = root.querySelector('[data-commentary]') as HTMLElement;
       if (p.reachedGoal) {
-        commentary.textContent = '已達標！減重後最大的挑戰是「維持」。建議目標達成後仍維持原有的飲食結構與運動頻率，並接受 1–2 年的長期追蹤——體重反彈通常發生在第 12–18 個月。';
+        commentary.textContent = '已達標！減重後最大的挑戰是「維持」。建議目標達成後仍維持原有的飲食結構與運動頻率，並持續追蹤；體重回升的時間與幅度因人而異。';
       } else if (p.lostPctOfStart >= 5) {
         commentary.textContent = `已減重 ${p.lostPctOfStart.toFixed(1)}%——達到「臨床有意義減重」門檻（≥ 5%）。在這個階段血糖、血壓、脂肪肝、睡眠呼吸中止都會明顯改善。繼續穩定推進即可。`;
       } else if (p.lostKg < 0) {
         commentary.textContent = '目前體重比起始略高。回顧最近 2 週的飲食與運動，常見原因是熱量缺口不足、睡眠品質下降、壓力性進食。若持續難以推進，建議至減重門診評估藥物或行為治療介入。';
       } else {
-        commentary.textContent = '進度尚未達 5%。持續穩定推進即可，不必追求快。建議用體重七日均值（用 7 天平均值看趨勢）取代每日數字以避免被水分波動誤導。';
+        commentary.textContent = '進度尚未達 5%。持續穩定推進即可，不必追求快。建議用 7 日平均體重（用 7 天平均值看趨勢）取代每日單一數字，以免被水分波動誤導。';
       }
     });
   }

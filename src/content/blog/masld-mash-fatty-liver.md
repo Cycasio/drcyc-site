@@ -1,6 +1,6 @@
 ---
 title: "脂肪肝其實是代謝病：從 NAFLD 到 MASLD／MASH 的改名，與你該知道的纖維化風險"
-description: "健檢說你有脂肪肝，卻以為「不痛不癢沒關係」？2023 年脂肪肝正式改名：NAFLD→MASLD、NASH→MASH，點出重點——它不是「喝不喝酒」的問題，而是代謝功能障礙在肝臟的表現。家醫科醫師說明新命名、五項代謝診斷條件、如何用免費的 FIB-4 評估肝纖維化、減重能不能逆轉，以及美國 2024 核准的首個 MASH 新藥。"
+description: "健檢說你有脂肪肝，卻以為「不痛不癢沒關係」？2023 年脂肪肝正式改名：NAFLD→MASLD、NASH→MASH，點出重點——它不是「喝不喝酒」的問題，而是代謝功能障礙在肝臟的表現。家醫科醫師說明新命名、五項代謝診斷條件、如何用免費的 FIB-4 評估肝纖維化、減重能不能逆轉，以及美國 2024 核准的第一個 MASH 新藥。"
 pubDate: 2026-07-01
 updatedDate: 2026-08-21
 author: "陳昱彰醫師"
@@ -26,7 +26,7 @@ tldr:
   - "<strong>脂肪肝 2023 年正式改名</strong>：NAFLD（非酒精性脂肪肝病）→ MASLD、NASH（脂肪肝炎）→ MASH。改名點出重點：它不是「喝不喝酒」的問題，而是<strong>代謝功能障礙（肥胖、三高、糖尿病）在肝臟的表現</strong>"
   - "新診斷不再只問「有沒有喝酒」，而是<strong>肝臟有脂肪 ＋ 至少符合一項代謝異常</strong>（BMI／腰圍、血糖、血壓、三酸甘油脂、HDL 五選一）"
   - "<strong>脂肪肝不是「不痛不癢沒關係」</strong>：會從單純脂肪肝 → 發炎（MASH）→ 纖維化 → 肝硬化／肝癌；而且 MASLD 病人的頭號死因其實是<strong>心血管疾病</strong>。關鍵是評估「肝纖維化」——用免費的 <strong>FIB-4</strong> 分數 ＋ FibroScan 篩"
-  - "<strong>治療核心是減重</strong>（減 7–10% 能改善甚至逆轉 MASH 與纖維化）：飲食（減糖限酒）、運動、控三高；GLP-1 有幫助；美國 2024 核准首個 MASH 專用藥 resmetirom（有趣的是它是甲狀腺受體促效劑）"
+  - "<strong>治療核心是減重</strong>（減 7–10% 能改善甚至逆轉 MASH 與纖維化）：飲食（減糖限酒）、運動、控三高；GLP-1 有幫助；美國 2024 核准第一個 MASH 專用藥 resmetirom（有趣的是它是甲狀腺受體促效劑）"
 faq:
   - q: "脂肪肝為什麼要改名成 MASLD／MASH？"
     a: "因為舊名字取得不好。「非酒精性（Non-alcoholic）」是用「它不是什麼」來定義（排除法），既模糊又帶有「酒精」的汙名；「fatty（脂肪）」也被認為有貶意。2023 年國際共識改名為 <strong>MASLD（代謝功能障礙相關脂肪肝病）</strong>與 <strong>MASH（代謝功能障礙相關脂肪肝炎）</strong>，用「它到底是什麼」來命名——<strong>核心是代謝功能障礙</strong>。這個改名不只是換字，而是改變思考方式：脂肪肝不是「肝的小毛病」，是代謝症候群在肝臟的表現。"
@@ -172,7 +172,7 @@ faq:
 ### 主要參考文獻
 
 1. **Rinella ME, et al. [A Multisociety Delphi Consensus Statement on New Fatty Liver Disease Nomenclature](https://pubmed.ncbi.nlm.nih.gov/37363821/). *Hepatology.* 2023;78(6):1966-1986. doi: [10.1097/HEP.0000000000000520](https://doi.org/10.1097/HEP.0000000000000520). PMID: 37363821.**（NAFLD→MASLD、NASH→MASH 的國際共識改名）
-2. **Harrison SA, et al. A Phase 3, Randomized, Controlled Trial of Resmetirom in NASH with Liver Fibrosis (MAESTRO-NASH). *N Engl J Med*. 2024;390:497-509.**（首個 MASH 藥物）
+2. **Harrison SA, et al. A Phase 3, Randomized, Controlled Trial of Resmetirom in NASH with Liver Fibrosis (MAESTRO-NASH). *N Engl J Med*. 2024;390:497-509.**（第一個 MASH 藥物）
 3. Rinella ME, et al. AASLD Practice Guidance on the clinical assessment and management of nonalcoholic/metabolic dysfunction-associated fatty liver disease. *Hepatology*. 2023.
 4. Vilar-Gomez E, et al. Weight Loss Through Lifestyle Modification Significantly Reduces Features of Nonalcoholic Steatohepatitis. *Gastroenterology*. 2015;149(2):367-378.（減重劑量與 MASH 改善）
 5. Newsome PN, et al. Semaglutide in patients with metabolic dysfunction-associated steatohepatitis (ESSENCE / phase trials). *N Engl J Med*. 2024-2025.

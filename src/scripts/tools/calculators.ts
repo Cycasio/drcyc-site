@@ -239,7 +239,7 @@ export const COMORBIDITY_LABELS: Record<keyof Comorbidities, string> = {
   htn: '高血壓',
   dyslipidemia: '高血脂',
   osa: '阻塞型睡眠呼吸中止症',
-  cvd: '心血管疾病（冠心病、中風）',
+  cvd: '心血管疾病（冠心症、中風）',
   nafld: '非酒精性脂肪肝',
 };
 

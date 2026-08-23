@@ -194,7 +194,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
           <Content />
         </div>
 
-        <!-- 可見 FAQ(同一份 frontmatter 同時餵 FAQPage schema 與頁面可見內容,符合 Google 規範 + AI 可截取) -->
+        <!-- 可見 FAQ(同一份 frontmatter 同時餵 FAQPage schema 與頁面可見內容,符合 Google 規範 + AI 可擷取) -->
         {post.data.faq && post.data.faq.length > 0 && (
           <section class="mt-16 pt-10 border-t border-slate-200" aria-label="常見問題" id="faq">
             <h2 class="text-2xl font-bold text-blue-950 font-headline mb-6">常見問題</h2>
@@ -217,7 +217,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
           <p><strong class="text-slate-700">醫療免責聲明</strong>：本文由義大醫院家庭暨社區醫學部 <a href="/about/" rel="author" class="text-teal-700 underline">陳昱彰醫師</a> 整理，基於發表時的實證醫學文獻，僅供衛教參考，<strong>不能取代醫師對個別狀況的診斷與治療建議</strong>。實際用藥、檢查與治療請與您的主治醫師討論，並以醫療院所最新公告為準。</p>
         </aside>
 
-        <!-- 自動延伸閱讀(主題網絡 + 內鏈密度) -->
+        <!-- 自動延伸閱讀(主題關聯 + 內鏈密度) -->
         {relatedPosts.length > 0 && (
           <section class="mt-16 pt-10 border-t border-slate-200" aria-label="延伸閱讀">
             <h2 class="text-2xl font-bold text-blue-950 font-headline mb-6">延伸閱讀</h2>
@@ -242,7 +242,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
         <section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">
           <h3 class="text-2xl md:text-3xl font-bold mb-4 font-headline">預約您的健康諮詢</h3>
           <p class="text-on-primary-container mb-8 max-w-md mx-auto">
-            想進一步了解如何優化個人健康？歡迎預約門診時段，我們將為您制定專屬的衛教計畫。
+            想進一步了解如何改善個人健康？歡迎預約門診時段，我們將為您制定專屬的衛教計畫。
           </p>
           <a
             href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
@@ -439,13 +439,13 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
     const hint = document.createElement('p');
     hint.id = `article-table-hint-${index + 1}`;
     hint.className = 'article-table-hint';
-    hint.textContent = '表格可左右滑動查看完整內容';
+    hint.textContent = '表格可左右滑動檢視完整內容';
 
     const scrollRegion = document.createElement('div');
     scrollRegion.className = 'article-table-scroll';
     scrollRegion.tabIndex = 0;
     scrollRegion.setAttribute('role', 'region');
-    scrollRegion.setAttribute('aria-label', `第 ${index + 1} 個資料表，可左右捲動查看完整內容`);
+    scrollRegion.setAttribute('aria-label', `第 ${index + 1} 個資料表，可左右捲動檢視完整內容`);
     scrollRegion.setAttribute('aria-describedby', hint.id);
 
     table.before(hint);

@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "check:terms": "node scripts/check-taiwan-terms.mjs",
+    "prebuild": "npm run check:terms",
+    "postbuild": "node scripts/check-taiwan-terms.mjs dist",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

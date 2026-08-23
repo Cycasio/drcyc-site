@@ -5,7 +5,7 @@ const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/blog/health-tools/cv-risk-calculator/`;
 const title = '10 年心血管風險計算機（Framingham）｜職場健康風險評估 | 陳昱彰醫師';
 const description =
-  '依 NCEP ATP III Framingham 風險評分計算 10 年冠心病發病機率，符合勞動部「異常工作負荷促發疾病預防指引」建議工具。輸出 OSHA 三色風險分級，可直接銜接過勞促發疾病風險計算機。';
+  '依 NCEP ATP III Framingham 風險評分估算 10 年內發生冠心症的機率，符合勞動部「異常工作負荷促發疾病預防指引」建議工具。輸出 OSHA 三色風險分級，可直接銜接過勞促發疾病風險計算機。';
 
 const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
@@ -89,7 +89,7 @@ const faqSchema = {
       <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">職業健康工具 · 陳昱彰醫師整理</p>
       <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">10 年心血管風險計算機<br class="hidden md:block"><span class="text-xl font-normal text-slate-500">（Framingham ATP III）</span></h1>
       <p class="text-slate-600 chinese-line-height">
-        依 NCEP ATP III Framingham 風險評分計算 10 年冠心病發病機率，
+        依 NCEP ATP III Framingham 風險評分估算 10 年內發生冠心症的機率，
         並對應勞動部職安署《異常工作負荷促發疾病預防指引》的三色風險分級（低 / 中 / 高度）。
         計算結果可直接帶入「過勞促發疾病風險計算機」。
       </p>
@@ -254,8 +254,8 @@ const faqSchema = {
 
         <!-- 糖尿病警告 -->
         <div id="dm-warning" class="hidden rounded-xl bg-red-50 border border-red-200 p-4 mb-4 text-sm text-red-900 chinese-line-height">
-          <strong>注意：</strong>此員工有糖尿病。依 NCEP ATP III，糖尿病患者被視為「冠心病等危症」，
-          臨床風險等同於已有心血管疾病——指引建議直接歸類為<strong>中高度心血管風險</strong>，
+          <strong>注意：</strong>此員工有糖尿病。依 NCEP ATP III，糖尿病患者被視為具有冠心病同等風險，
+          冠狀動脈事件風險與已有冠心病者相近——指引建議直接歸類為<strong>中高度心血管風險</strong>，
           實際處置應不低於中度風險的應對措施。
         </div>
 
@@ -343,7 +343,7 @@ const faqSchema = {
         <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸工具</h2>
         <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 chinese-line-height">
           <li><a href="/blog/health-tools/overwork-risk-calculator/" class="text-teal-700 underline">異常工作負荷促發疾病風險分級計算機</a>——將心血管風險 % 加上工作負荷，計算最終過勞風險等級</li>
-          <li><a href="/blog/overwork-prevention-plan/" class="text-teal-700 underline">異常工作負荷促發疾病預防計劃｜廠護實作重點</a></li>
+          <li><a href="/blog/overwork-prevention-plan/" class="text-teal-700 underline">異常工作負荷促發疾病預防計畫｜廠護實作重點</a></li>
           <li><a href="/blog/health-tools/cv-risk-calculator-prevent/" class="text-teal-700 underline">AHA PREVENT 心血管風險計算機</a>——2023 年發布的評估工具，核心模型納入 BMI、腎功能（eGFR）並估算心衰竭風險，適合門診初級預防諮詢</li>
         </ul>
       </section>
@@ -360,7 +360,7 @@ const faqSchema = {
         </div>
         <div>
           <h3 class="font-bold text-blue-950 mb-1">糖尿病對 Framingham 分數影響有多大？</h3>
-          <p class="text-sm">糖尿病在 NCEP ATP III 中被視為「冠心病等危症」，意即其風險等同於已發生心血管疾病。若未正確輸入糖尿病狀態，計算結果會嚴重低估實際風險。</p>
+          <p class="text-sm">糖尿病在 NCEP ATP III 中列為冠心病同等危症（CHD risk equivalent），意即冠狀動脈事件風險與已有冠心病者相近。若未正確輸入糖尿病狀態，計算結果會嚴重低估實際風險。</p>
         </div>
         <div>
           <h3 class="font-bold text-blue-950 mb-1">已確診心血管疾病或在服藥，還需要算 Framingham 嗎？</h3>
