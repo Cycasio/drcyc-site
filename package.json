@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "check:terms": "node scripts/check-taiwan-terms.mjs",
+    "check:schema-dates": "node scripts/check-structured-dates.mjs dist",
     "prebuild": "npm run check:terms",
-    "postbuild": "node scripts/check-taiwan-terms.mjs dist",
+    "postbuild": "node scripts/check-taiwan-terms.mjs dist && npm run check:schema-dates",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
