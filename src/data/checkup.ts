@@ -1,11 +1,19 @@
 // 義大醫院健診中心套餐資料(2025–2026)
 // 資料來源:義大醫院健診中心官方 PDF 與型錄
-// 最後核對:2026-04-13 by 陳昱彰醫師
+// 套餐內容最後核對:2026-05-26 by 陳昱彰醫師
+// USPSTF 大腸癌篩檢建議最後核對:2026-09-02
 // 免責聲明:價格與內容以義大醫院健診中心官方最新公告為準
 //          本資料由義大家醫科陳昱彰醫師整理,不收取任何轉介佣金
 
-export const LAST_UPDATED = '2026-05-26';
-export const OFFICIAL_URL = 'https://www.edah.org.tw';
+export const LAST_UPDATED = '2026-09-02';
+export const PACKAGE_LAST_CHECKED = '2026-05-26';
+export const HOSPITAL_URL = 'https://www.edah.org.tw';
+export const OFFICIAL_PACKAGES_URL =
+  'https://exdep.edah.org.tw/hec/index.php/en/2017-07-20-05-36-07';
+export const PUBLIC_EMPLOYEE_PDF_URL =
+  'https://exdep.edah.org.tw/hec/images/2025/Governmental/2025poster.pdf';
+export const USPSTF_COLORECTAL_URL =
+  'https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening';
 export const BOOKING_PHONE = '07-615-0011';
 export const BOOKING_EXTENSIONS = ['5706', '5708', '5715', '5716', '5735'];
 
@@ -145,7 +153,7 @@ export const PACKAGES: Package[] = [
     theme: '無痛胃腸鏡 + 全套',
     price: 18800,
     duration: '一日',
-    bestFor: '50 歲以上、大腸癌家族史、長期胃食道逆流或排便異常',
+    bestFor: '經共同決策選擇大腸鏡，或另有胃腸症狀、家族史等風險者',
     highlights: [
       '無痛胃鏡 + 無痛大腸鏡(含瀉劑、檢查食)',
       'PON1 巴拉松酶、Lp(a) 脂蛋白',
@@ -153,7 +161,7 @@ export const PACKAGES: Package[] = [
       '完整腫瘤標記與肝炎篩檢',
     ],
     chenNote:
-      '全系列我最推的一個。大腸鏡是 USPSTF Grade A 篩檢(45–75 歲);胃鏡雖然 USPSTF 沒列,但台灣胃癌發生率是歐美 2–3 倍、幽門桿菌盛行率高,日韓已納入國家篩檢。40 歲以上做第一次、之後每 5–10 年一次,是非常值得的投資。記得當天不能自行開車。',
+      '若你已和醫師共同決策選擇大腸鏡,或另有胃腸症狀、家族史等風險,H 是較完整的套餐之一。USPSTF 對無症狀、平均風險成人的「大腸癌篩檢」評等為 45–49 歲 Grade B、50–75 歲 Grade A；大腸鏡每 10 年是可選策略之一,不是「大腸鏡本身一律 Grade A」。76–85 歲則是 Grade C,需按健康狀況、既往篩檢史與個人偏好決定。胃鏡不在 USPSTF 例行篩檢建議內,可依症狀、幽門桿菌、家族史等個別評估。無痛檢查當天不能自行開車。',
   },
   // ── 精選套餐 ──
   {
@@ -290,10 +298,22 @@ export interface EvidenceItem {
 
 export const EVIDENCE: EvidenceItem[] = [
   {
-    name: '大腸癌篩檢(糞便潛血 / 大腸鏡)',
+    name: '大腸癌篩檢(45–49 歲)',
+    grade: 'B',
+    population: '無症狀、平均風險成人',
+    note: 'USPSTF 建議開始篩檢。可選每年糞便免疫法(FIT)或每 10 年大腸鏡等策略。',
+  },
+  {
+    name: '大腸癌篩檢(50–75 歲)',
     grade: 'A',
-    population: '45–75 歲所有成人,家族史可提前到 40 歲',
-    note: 'USPSTF 最強等級建議。首選糞便潛血每年 1 次或大腸鏡每 10 年 1 次。',
+    population: '無症狀、平均風險成人',
+    note: 'USPSTF 最強等級建議。評等是針對完整篩檢策略,不是大腸鏡單一檢查本身。',
+  },
+  {
+    name: '大腸癌篩檢(76–85 歲)',
+    grade: 'C',
+    population: '依健康狀況、預期壽命、既往篩檢史與個人偏好選擇性篩檢',
+    note: '過去未曾接受篩檢者較可能受益;應由醫病共同決定。',
   },
   {
     name: '子宮頸癌篩檢(抹片 / HPV)',
@@ -492,7 +512,7 @@ export const TRANSIT_PUBLIC = [
 export const FAQ = [
   {
     q: '義大醫院的健檢套餐怎麼挑最簡單?',
-    a: '先看三件事:年齡(50 歲以上優先考慮含大腸鏡的 H、舒適健檢)、是否吸菸(有吸菸史優先考慮含 LDCT 的 C、健康活力、菁采人生)、預算(公教人員專案 A–H 同等級最便宜)。若完全沒方向,建議先從預算內 CP 值最高的專案 C 或 H 開始,再視結果決定下一步。',
+    a: '先看三件事:年齡與是否已規律篩檢(45–75 歲成人應接受大腸癌篩檢,但不一定要選大腸鏡;若選大腸鏡可考慮 H、舒適健檢)、是否吸菸(有吸菸史優先確認自己是否符合 LDCT 條件)、預算。若完全沒方向,先和醫師盤點個人風險與已做過的篩檢,再挑套餐,比直接追求最多檢查更不容易過度檢查。',
   },
   {
     q: '義大健檢價格會變嗎?這份資料可信嗎?',

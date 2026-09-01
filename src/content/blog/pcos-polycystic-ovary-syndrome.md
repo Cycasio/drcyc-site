@@ -1,6 +1,6 @@
 ---
 title: "PCOS 正式改名 PMOS：多囊性卵巢症候群為什麼換名字，對你有什麼影響？"
-description: "2026 年 5 月，PCOS（多囊性卵巢症候群）正式改名為 PMOS（Polyendocrine Metabolic Ovarian Syndrome，多內分泌代謝卵巢症候群）——這是 The Lancet 論文＋50 多個國際組織、歷時 14 年、超過 2 萬人意見的全球共識。家醫科＋肥胖醫學醫師解析：為什麼非改不可、新名反映什麼、診斷與治療會不會變、3 年過渡期該注意什麼，以及它的代謝核心怎麼管理。"
+description: "PCOS 為何改名 PMOS？家醫科與肥胖醫學醫師整理 2026 國際共識、新名稱的代謝意義、診斷是否改變、三年過渡期與體重、月經及胰島素阻抗管理。"
 pubDate: 2026-06-24
 updatedDate: 2026-08-21
 author: "陳昱彰醫師"

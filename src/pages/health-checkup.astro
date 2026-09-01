@@ -12,7 +12,11 @@ import {
   TRANSIT_PUBLIC,
   FAQ,
   LAST_UPDATED,
-  OFFICIAL_URL,
+  PACKAGE_LAST_CHECKED,
+  HOSPITAL_URL,
+  OFFICIAL_PACKAGES_URL,
+  PUBLIC_EMPLOYEE_PDF_URL,
+  USPSTF_COLORECTAL_URL,
   BOOKING_PHONE,
   BOOKING_EXTENSIONS,
 } from '../data/checkup';
@@ -35,7 +39,6 @@ const medicalWebPage = {
   datePublished: '2026-04-13',
   dateModified: LAST_UPDATED,
   lastReviewed: LAST_UPDATED,
-  reviewedBy: { '@id': `${SITE}/#person` },
   author: { '@id': `${SITE}/#person` },
   publisher: { '@id': `${SITE}/#person` },
   about: { '@type': 'MedicalProcedure', name: '健康檢查 Health Checkup' },
@@ -115,7 +118,7 @@ const itemListSchema = {
       provider: {
         '@type': 'Hospital',
         name: '義大醫院',
-        url: OFFICIAL_URL,
+        url: HOSPITAL_URL,
       },
       offers: {
         '@type': 'Offer',
@@ -125,7 +128,7 @@ const itemListSchema = {
         seller: {
           '@type': 'Hospital',
           name: '義大醫院',
-          url: OFFICIAL_URL,
+          url: HOSPITAL_URL,
         },
         url: `${pageUrl}#pkg-${p.id}`,
       },
@@ -211,11 +214,18 @@ const description =
     <aside class="rounded-xl border-l-4 border-teal-600 bg-teal-50/60 p-5 mb-12 text-sm text-slate-700 leading-relaxed">
       <p class="mb-2">
         <strong class="text-teal-800">資料來源聲明</strong> —
-        本頁資訊整理自義大醫院健診中心官方公告,<strong>最後核對日期 {LAST_UPDATED}</strong>。
-        實際價格、項目與最新方案以
-        <a href={OFFICIAL_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
-          >義大醫院官方公告</a
-        >為準。
+        套餐資訊整理自義大醫院健診中心官方公告,<strong>套餐內容最後核對日期
+          {PACKAGE_LAST_CHECKED}</strong
+        >；USPSTF 大腸癌篩檢分級於 <strong>{LAST_UPDATED}</strong> 依
+        <a href={USPSTF_COLORECTAL_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
+          >USPSTF 正式建議</a
+        >重新核對。套餐原始資料可檢視
+        <a href={OFFICIAL_PACKAGES_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
+          >義大健診中心套餐總頁</a
+        >與
+        <a href={PUBLIC_EMPLOYEE_PDF_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
+          >2025–2026 公教人員專案 PDF</a
+        >；實際價格、項目與最新方案仍以健診中心最新公告為準。
       </p>
       <p>
         本文由義大家庭暨社區醫學部陳昱彰醫師整理,<strong>不收取任何轉介佣金</strong

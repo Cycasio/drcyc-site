@@ -51,7 +51,10 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
 
 <header class="sticky top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl transition-all border-none">
   <nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
-    <a href="/" class="text-xl font-bold tracking-tighter text-blue-950 hover:no-underline">陳昱彰醫師 Chen, Yu-Chang, MD</a>
+    <a href="/" class="whitespace-nowrap text-lg sm:text-xl font-bold tracking-tighter text-blue-950 hover:no-underline">
+      <span class="sm:hidden">陳昱彰醫師 YC Chen, MD</span>
+      <span class="hidden sm:inline">陳昱彰醫師 Chen, Yu-Chang, MD</span>
+    </a>
 
     <!-- Desktop Links -->
     <div class="hidden lg:flex items-center gap-7">
@@ -74,6 +77,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
                 {link.children.map(child => (
                   <a
                     href={child.href}
+                    aria-current={isChildActive(link.href, child.href) ? 'page' : undefined}
                     class:list={[
                       'block rounded-xl px-4 py-3 text-sm no-underline transition-colors',
                       isChildActive(link.href, child.href)
@@ -90,6 +94,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
         ) : (
           <a
             href={link.href}
+            aria-current={isActive(link.href) ? 'page' : undefined}
             class:list={[
               'transition-colors duration-300',
               isActive(link.href)
@@ -134,6 +139,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
           <div class="flex flex-col gap-1">
             <a
               href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
               class:list={[
                 'text-lg py-2 transition-colors',
                 isActive(link.href)
@@ -147,6 +153,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
               {link.children.map(child => (
                 <a
                   href={child.href}
+                  aria-current={isChildActive(link.href, child.href) ? 'page' : undefined}
                   class:list={[
                     'text-sm py-1.5 transition-colors',
                     isActive(child.href)
@@ -162,6 +169,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
         ) : (
           <a
             href={link.href}
+            aria-current={isActive(link.href) ? 'page' : undefined}
             class:list={[
               'text-lg py-2 transition-colors',
               isActive(link.href)
@@ -188,6 +196,15 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
+
+  const closeMobileMenu = (returnFocus = false) => {
+    if (!btn || !menu || menu.classList.contains('hidden')) return;
+    menu.classList.add('hidden');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', '開啟選單');
+    if (returnFocus) btn.focus();
+  };
+
   if (btn && menu) {
     btn.addEventListener('click', () => {
       const isHidden = menu.classList.toggle('hidden');
@@ -195,4 +212,15 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
       btn.setAttribute('aria-label', isHidden ? '開啟選單' : '關閉選單');
     });
   }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+
+    document.querySelectorAll<HTMLDetailsElement>('header details[open]').forEach((details) => {
+      const shouldReturnFocus = details.contains(document.activeElement);
+      details.open = false;
+      if (shouldReturnFocus) details.querySelector<HTMLElement>('summary')?.focus();
+    });
+    closeMobileMenu(true);
+  });
 </script>

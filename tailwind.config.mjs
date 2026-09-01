@@ -13,7 +13,8 @@ export default {
         'on-surface': '#191c1d',
         'on-surface-variant': '#43474e',
         'on-background': '#191c1d',
-        'on-primary-container': '#8aa4cf',
+        // 用於深藍底上的輔助文字；提高至 WCAG AA 對比。
+        'on-primary-container': '#cbd5e1',
         'on-secondary-container': '#007166',
         'on-error': '#ffffff',
         'on-error-container': '#93000a',
@@ -36,7 +37,7 @@ export default {
         'surface-variant': '#e1e3e4',
         'surface-tint': '#455f87',
         'background': '#f8f9fa',
-        'outline': '#74777f',
+        'outline': '#5f636b',
         'outline-variant': '#c4c6cf',
         'inverse-surface': '#2e3132',
         'inverse-on-surface': '#f0f1f2',

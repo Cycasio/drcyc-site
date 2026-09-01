@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { publications, publicationSchemas } from '../data/publications';
 
 const SITE = 'https://www.drcyc.io';
 
@@ -9,7 +10,7 @@ const aboutPageSchema = {
   url: `${SITE}/about/`,
   name: '關於陳昱彰醫師',
   description: '陳昱彰醫師的現職、專科資格、訓練身分、學歷與學術發表。',
-  dateModified: '2026-08-24T05:00:18+08:00',
+  dateModified: '2026-09-02T00:00:00+08:00',
   isPartOf: { '@id': `${SITE}/#website` },
   mainEntity: { '@id': `${SITE}/#person` },
   breadcrumb: {
@@ -54,46 +55,6 @@ const credentials = [
     '醫策會 EBM 競賽 臨床組 佳作',
     '義大醫院 模範住院醫師',
   ]},
-];
-
-const publications = [
-  {
-    citation: 'Chen YC, Chen WC, Liu CW, Huang WY, Lu I, Lin CW, Huang RY, Chen JS, Huang CH. (2023). Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs. European Review of Aging and Physical Activity, 20, Article 22.',
-    doi: '10.1186/s11556-023-00333-4',
-    pubmed: '38030985',
-  },
-  {
-    citation: 'Kuo KM, Chen YC, Talley PC, Huang CH. (2018). Continuance compliance of privacy policy of electronic medical records: the roles of both motivation and habit. BMC Medical Informatics and Decision Making, 18, Article 135.',
-    doi: '10.1186/s12911-018-0722-7',
-    pubmed: '30563500',
-  },
-];
-
-// 只在有顯示完整論文清單的關於頁輸出，並以 author 連回作者實體。
-const publicationSchemas = [
-  {
-    '@type': 'MedicalScholarlyArticle',
-    '@id': 'https://doi.org/10.1186/s11556-023-00333-4',
-    headline: 'Is moderate resistance training adequate for older adults with sarcopenia? A systematic review and network meta-analysis of RCTs',
-    author: { '@id': `${SITE}/#person` },
-    datePublished: '2023-11-29',
-    isPartOf: { '@type': 'Periodical', name: 'European Review of Aging and Physical Activity' },
-    identifier: '10.1186/s11556-023-00333-4',
-    url: 'https://doi.org/10.1186/s11556-023-00333-4',
-    sameAs: 'https://pubmed.ncbi.nlm.nih.gov/38030985/',
-    about: { '@type': 'MedicalCondition', name: 'Sarcopenia' },
-  },
-  {
-    '@type': 'ScholarlyArticle',
-    '@id': 'https://doi.org/10.1186/s12911-018-0722-7',
-    headline: 'Continuance compliance of privacy policy of electronic medical records: the roles of both motivation and habit',
-    author: { '@id': `${SITE}/#person` },
-    datePublished: '2018-12-18',
-    isPartOf: { '@type': 'Periodical', name: 'BMC Medical Informatics and Decision Making' },
-    identifier: '10.1186/s12911-018-0722-7',
-    url: 'https://doi.org/10.1186/s12911-018-0722-7',
-    sameAs: 'https://pubmed.ncbi.nlm.nih.gov/30563500/',
-  },
 ];
 
 ---
@@ -197,7 +158,13 @@ const publicationSchemas = [
     </section>
 
     <section class="mb-16">
-      <h2 class="text-2xl font-bold text-blue-950 mb-6">學術發表</h2>
+      <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-blue-950">學術發表</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">以下論文均可由出版社正式版本與 PubMed 紀錄核實。</p>
+        </div>
+        <a href="/publications/" class="text-sm font-bold text-teal-700 underline underline-offset-4">檢視完整作者、研究摘要與貢獻紀錄 →</a>
+      </div>
       <h3 class="text-sm font-bold tracking-widest text-teal-700 uppercase mb-4">SCI 期刊論文</h3>
       <ol class="space-y-6 mb-10">
         {publications.map((p, i) => (

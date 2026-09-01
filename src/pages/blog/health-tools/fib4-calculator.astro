@@ -5,7 +5,7 @@ const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/blog/health-tools/fib4-calculator/`;
 const title = 'FIB-4 肝纖維化指數計算機｜脂肪肝 MASLD 纖維化風險自我評估 | 陳昱彰醫師';
 const description =
-  'FIB-4 肝纖維化指數線上計算機：輸入年齡、AST（GOT）、ALT（GPT）、血小板，免費估算脂肪肝（MASLD）的進階肝纖維化風險。< 1.3 低風險、1.3–2.67 中間需 FibroScan、> 2.67 高風險應轉肝膽科；65 歲以上採 2.0 切點。義大醫院家醫科陳昱彰醫師整理，資料只在你的瀏覽器不上傳。';
+  '免費 FIB-4 肝纖維化指數計算機：輸入年齡、AST、ALT 與血小板，估算脂肪肝（MASLD）進階纖維化風險；資料只在瀏覽器內運算、不會上傳。';
 
 const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
@@ -26,7 +26,6 @@ const medicalWebPage = {
   inLanguage: 'zh-Hant',
   about: { '@type': 'MedicalEntity', name: 'FIB-4 肝纖維化指數（Fibrosis-4 Index）' },
   author: { '@id': `${SITE}/#person` },
-  reviewedBy: { '@id': `${SITE}/#person` },
   isAccessibleForFree: true,
 };
 
@@ -134,38 +133,42 @@ const faqSchema = {
           <!-- 年齡 -->
           <div>
             <label class="block text-sm font-semibold text-blue-900 mb-1" for="age">年齡（歲）</label>
-            <p class="text-xs text-slate-500 mb-1">約 35 歲以下 FIB-4 信度較差</p>
+            <p id="age-help" class="text-xs text-slate-600 mb-1">約 35 歲以下 FIB-4 信度較差</p>
             <input type="number" id="age" name="age" min="18" max="100" step="1" placeholder="例如：55"
+              aria-describedby="age-help input-error" aria-invalid="false"
               class="w-28 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
           </div>
 
           <!-- AST -->
           <div>
             <label class="block text-sm font-semibold text-blue-900 mb-1" for="ast">AST（GOT）（U/L）</label>
-            <p class="text-xs text-slate-500 mb-1">肝功能報告上的 GOT</p>
+            <p id="ast-help" class="text-xs text-slate-600 mb-1">肝功能報告上的 GOT</p>
             <input type="number" id="ast" name="ast" min="1" max="2000" step="1" placeholder="例如：40"
+              aria-describedby="ast-help input-error" aria-invalid="false"
               class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
           </div>
 
           <!-- ALT -->
           <div>
             <label class="block text-sm font-semibold text-blue-900 mb-1" for="alt">ALT（GPT）（U/L）</label>
-            <p class="text-xs text-slate-500 mb-1">肝功能報告上的 GPT</p>
+            <p id="alt-help" class="text-xs text-slate-600 mb-1">肝功能報告上的 GPT</p>
             <input type="number" id="alt" name="alt" min="1" max="2000" step="1" placeholder="例如：50"
+              aria-describedby="alt-help input-error" aria-invalid="false"
               class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
           </div>
 
           <!-- 血小板 -->
           <div>
             <label class="block text-sm font-semibold text-blue-900 mb-1" for="plt">血小板 Platelet（×10³/µL）</label>
-            <p class="text-xs text-slate-500 mb-1">報告上的數字直接填，例如 250（不用換算）</p>
+            <p id="plt-help" class="text-xs text-slate-600 mb-1">報告上的數字直接填，例如 250（不用換算）</p>
             <input type="number" id="plt" name="plt" min="10" max="1000" step="1" placeholder="例如：250"
+              aria-describedby="plt-help input-error" aria-invalid="false"
               class="w-36 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none">
           </div>
 
         </div>
 
-        <p id="input-error" class="hidden mt-4 text-sm text-rose-700 font-medium"></p>
+        <p id="input-error" class="hidden mt-4 text-sm text-rose-700 font-medium" role="alert" aria-live="assertive" aria-atomic="true"></p>
       </div>
 
       <div class="flex justify-center">
@@ -316,7 +319,6 @@ const faqSchema = {
     </footer>
 
   </main>
-</Layout>
 
 <script>
   function calcFib4(age: number, ast: number, alt: number, plt: number): number {
@@ -333,24 +335,33 @@ const faqSchema = {
   const $ = (id: string) => document.getElementById(id)!;
 
   function calculate() {
-    const age = parseFloat((document.getElementById('age') as HTMLInputElement).value);
-    const ast = parseFloat((document.getElementById('ast') as HTMLInputElement).value);
-    const alt = parseFloat((document.getElementById('alt') as HTMLInputElement).value);
-    const plt = parseFloat((document.getElementById('plt') as HTMLInputElement).value);
+    const ageInput = document.getElementById('age') as HTMLInputElement;
+    const astInput = document.getElementById('ast') as HTMLInputElement;
+    const altInput = document.getElementById('alt') as HTMLInputElement;
+    const pltInput = document.getElementById('plt') as HTMLInputElement;
+    const age = parseFloat(ageInput.value);
+    const ast = parseFloat(astInput.value);
+    const alt = parseFloat(altInput.value);
+    const plt = parseFloat(pltInput.value);
 
     const err = $('input-error');
-    const valid =
-      Number.isFinite(age) && age >= 18 && age <= 100 &&
-      Number.isFinite(ast) && ast > 0 && ast <= 2000 &&
-      Number.isFinite(alt) && alt > 0 && alt <= 2000 &&
-      Number.isFinite(plt) && plt >= 10 && plt <= 1000;
+    const inputStates = [
+      { input: ageInput, valid: Number.isFinite(age) && age >= 18 && age <= 100 },
+      { input: astInput, valid: Number.isFinite(ast) && ast > 0 && ast <= 2000 },
+      { input: altInput, valid: Number.isFinite(alt) && alt > 0 && alt <= 2000 },
+      { input: pltInput, valid: Number.isFinite(plt) && plt >= 10 && plt <= 1000 },
+    ];
+    inputStates.forEach(({ input, valid }) => input.setAttribute('aria-invalid', String(!valid)));
+    const valid = inputStates.every((state) => state.valid);
 
     if (!valid) {
       err.textContent = '請確認四個欄位都已填寫且在合理範圍（年齡 18–100 歲、AST／ALT 1–2000、血小板 10–1000）。';
       err.classList.remove('hidden');
+      inputStates.find((state) => !state.valid)?.input.focus();
       return;
     }
     err.classList.add('hidden');
+    err.textContent = '';
 
     const fib4 = calcFib4(age, ast, alt, plt);
     const band = interpret(fib4, age);
@@ -404,10 +415,15 @@ const faqSchema = {
 
   function resetForm() {
     (document.getElementById('fib4-form') as HTMLFormElement).reset();
+    document.querySelectorAll<HTMLInputElement>('#fib4-form input').forEach((input) => {
+      input.setAttribute('aria-invalid', 'false');
+    });
     $('results').classList.add('hidden');
     $('input-error').classList.add('hidden');
+    $('input-error').textContent = '';
   }
 
   document.getElementById('calc-btn')!.addEventListener('click', calculate);
   document.getElementById('reset-btn')!.addEventListener('click', resetForm);
 </script>
+</Layout>

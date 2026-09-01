@@ -43,6 +43,46 @@ const updatedStr = post.data.updatedDate
   : null;
 const firstTag = post.data.tags?.[0];
 
+const categoryCta = (() => {
+  if (['職業醫學', '職場健康'].includes(post.data.category ?? '')) {
+    return {
+      title: '規劃企業職場健康服務',
+      description: '需要臨場健康服務、四大計畫或員工健康教育？檢視合作內容與聯絡方式。',
+      href: '/workplace-health/',
+      label: '了解企業合作',
+      external: false,
+    };
+  }
+
+  if (post.data.category === '減重管理') {
+    return {
+      title: '規劃個人化減重療程',
+      description: '從飲食、運動到藥物評估，了解高雄減重門診的完整流程。',
+      href: '/weight-loss/',
+      label: '了解高雄減重門診',
+      external: false,
+    };
+  }
+
+  if (post.data.category === '骨質疏鬆') {
+    return {
+      title: '評估骨質疏鬆風險',
+      description: '需要骨密度、骨折風險或治療評估？先了解門診可提供的協助。',
+      href: '/osteoporosis/',
+      label: '了解骨質疏鬆門診',
+      external: false,
+    };
+  }
+
+  return {
+    title: '預約您的健康諮詢',
+    description: '想進一步了解如何改善個人健康？歡迎預約門診時段。',
+    href: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
+    label: '立即線上掛號',
+    external: true,
+  };
+})();
+
 const SITE = 'https://www.drcyc.io';
 const postUrl = `${SITE}/blog/${post.slug}/`;
 // 優先用文章自訂圖;否則用 build 期自動生成的標題卡 OG 圖(1200×630)
@@ -240,18 +280,18 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
 
         <!-- Bottom CTA Card -->
         <section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">
-          <h3 class="text-2xl md:text-3xl font-bold mb-4 font-headline">預約您的健康諮詢</h3>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4 font-headline">{categoryCta.title}</h3>
           <p class="text-on-primary-container mb-8 max-w-md mx-auto">
-            想進一步了解如何改善個人健康？歡迎預約門診時段，我們將為您制定專屬的衛教計畫。
+            {categoryCta.description}
           </p>
           <a
-            href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
-            target="_blank"
-            rel="noopener"
+            href={categoryCta.href}
+            target={categoryCta.external ? '_blank' : undefined}
+            rel={categoryCta.external ? 'noopener' : undefined}
             class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-fixed-variant px-8 py-3 rounded-full font-bold text-lg hover:opacity-90 transition-all no-underline"
           >
             →
-            立即線上掛號
+            {categoryCta.label}
           </a>
         </section>
       </article>
@@ -301,7 +341,6 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
       </aside>
     </div>
   </main>
-</Layout>
 
 <style is:global>
   .article-content p {
@@ -330,6 +369,9 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
     color: #022448;
     margin-top: 2rem;
     margin-bottom: 1rem;
+  }
+  .article-content :is(h2, h3)[id] {
+    scroll-margin-top: 6rem;
   }
   .article-content blockquote {
     border-left: 8px solid #006a60;
@@ -476,3 +518,4 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
     headingEls.forEach(el => observer.observe(el));
   }
 </script>
+</Layout>

@@ -26,7 +26,6 @@ const medicalWebPage = {
   inLanguage: 'zh-Hant',
   about: { '@type': 'MedicalEntity', name: '心血管風險評估 Framingham' },
   author: { '@id': `${SITE}/#person` },
-  reviewedBy: { '@id': `${SITE}/#person` },
   isAccessibleForFree: true,
 };
 
@@ -370,7 +369,6 @@ const faqSchema = {
     </section>
 
   </main>
-</Layout>
 
 <script>
   // ── 點數表 ────────────────────────────────────────────────────────────
@@ -560,3 +558,4 @@ const faqSchema = {
   document.getElementById('calc-btn')!.addEventListener('click', calculate);
   document.getElementById('reset-btn')!.addEventListener('click', resetForm);
 </script>
+</Layout>
