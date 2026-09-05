@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "test": "node --test scripts/*.test.ts",
     "check:terms": "node scripts/check-taiwan-terms.mjs",
     "check:schema-dates": "node scripts/check-structured-dates.mjs dist",
     "prebuild": "npm run check:terms",

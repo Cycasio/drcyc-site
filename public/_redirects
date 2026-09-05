@@ -10,6 +10,8 @@
 /tools/eras-protocol /tools/ 301
 
 # Legacy health-tool aliases
+/blog/health-tools/cv-risk-calculator-prevent /blog/health-tools/cardiovascular-risk-estimator/ 301
+/blog/health-tools/cv-risk-calculator-prevent/ /blog/health-tools/cardiovascular-risk-estimator/ 301
 /blog/health-tools /tools/ 301
 /blog/health-tools/ /tools/ 301
 /health-tools /tools/ 301

@@ -1,0 +1,262 @@
+---
+import CvdRiskCalculator from '../../../components/tools/CvdRiskCalculator.astro';
+import Layout from '../../../layouts/Layout.astro';
+import { CVD_RISK_MODEL_VERSION } from '../../../scripts/tools/cvd-risk-meta';
+
+const SITE = 'https://www.drcyc.io';
+const pageUrl = `${SITE}/blog/health-tools/cardiovascular-risk-estimator/`;
+const methodsDoi = 'https://doi.org/10.1161/CIRCULATIONAHA.123.067626';
+const statementDoi = 'https://doi.org/10.1161/CIR.0000000000001191';
+const title = '10 年與 30 年心血管風險估算工具 | 陳昱彰醫師';
+const description =
+  '免費站內心血管風險估算工具，分別呈現 10 年與 30 年總心血管疾病、ASCVD 及心臟衰竭風險，並說明適用年齡、輸入資料、隱私與台灣族群限制。';
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: '醫療計算工具', item: `${SITE}/tools/` },
+    { '@type': 'ListItem', position: 3, name: '10 年與 30 年心血管風險估算工具', item: pageUrl },
+  ],
+};
+
+const calculatorSchema = {
+  '@type': 'SoftwareApplication',
+  '@id': `${pageUrl}#calculator`,
+  name: '10 年與 30 年心血管風險估算工具',
+  url: pageUrl,
+  description,
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  softwareVersion: CVD_RISK_MODEL_VERSION,
+  inLanguage: 'zh-Hant',
+  isAccessibleForFree: true,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'TWD',
+  },
+  featureList: [
+    '10 年總心血管疾病風險',
+    '10 年 ASCVD 風險',
+    '10 年心臟衰竭風險',
+    '30 年總心血管疾病風險（30–59 歲）',
+    '30 年 ASCVD 風險（30–59 歲）',
+    '30 年心臟衰竭風險（30–59 歲）',
+  ],
+  isBasedOn: [methodsDoi, statementDoi],
+};
+
+const medicalWebPage = {
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: '10 年與 30 年心血管風險估算工具',
+  description,
+  inLanguage: 'zh-Hant',
+  about: { '@type': 'MedicalEntity', name: '初級預防心血管風險評估' },
+  author: { '@id': `${SITE}/#person` },
+  mainEntity: { '@id': `${pageUrl}#calculator` },
+  isAccessibleForFree: true,
+};
+
+const faqItems = [
+  {
+    question: '哪些人適合使用這個基本模型？',
+    answer:
+      '基本模型適用於 30–79 歲、沒有已知 ASCVD 或心臟衰竭的初級預防成人。10 年風險可估算 30–79 歲；30 年風險只適用 30–59 歲。',
+  },
+  {
+    question: '這個基本模型需要哪些資料？',
+    answer:
+      '需要公式使用的生理性別、年齡、總膽固醇、HDL 膽固醇、收縮壓、BMI、eGFR，以及糖尿病、目前吸菸、降壓藥治療與 statin 使用狀態。本站 1.0.0 版不使用 HbA1c、UACR 或 SDI 等選用變項。',
+  },
+  {
+    question: '這個基本模型和 Framingham 有什麼不同？',
+    answer:
+      '兩者的研究族群、輸入變項與預測終點不同。本站基本模型分別提供總心血管疾病、ASCVD 與心臟衰竭風險；不能把 ASCVD 與心臟衰竭百分比相加，也不能直接把結果套入既有 Framingham 職場分級表。',
+  },
+  {
+    question: '本站會保存輸入的健康資料嗎？',
+    answer:
+      '不會。輸入會透過加密連線送至本站同源計算端點，只用於當次運算；本站應用程式不寫入資料庫、瀏覽器儲存空間或程式日誌。Cloudflare 仍可能處理維持服務所需的一般請求中繼資料。',
+  },
+];
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema, calculatorSchema, medicalWebPage, faqSchema]}>
+  <main class="max-w-4xl mx-auto px-6 md:px-10 py-12">
+    <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
+      <a href="/" class="hover:text-teal-700">首頁</a>
+      <span class="mx-2">／</span>
+      <a href="/tools/" class="hover:text-teal-700">醫療計算工具</a>
+      <span class="mx-2">／</span>
+      <span>10 年與 30 年心血管風險估算工具</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">心血管預防 · 陳昱彰醫師整理</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-950 mb-3 font-headline">
+        10 年與 30 年心血管風險估算工具
+        <span class="block mt-2 text-xl font-normal text-slate-600">初級預防 · 基本模型 1.0.0</span>
+      </h1>
+      <p class="text-slate-700 chinese-line-height">
+        本頁採經獲准使用的基本模型 {CVD_RISK_MODEL_VERSION}，分別估算總心血管疾病（Total CVD）、
+        動脈粥樣硬化性心血管疾病（ASCVD）與心臟衰竭（HF）風險。
+      </p>
+    </header>
+
+    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-8 text-sm text-amber-950 chinese-line-height">
+      <strong>先確認用途：</strong>
+      這是初級預防的風險溝通工具，不是診斷工具，也不能單獨決定是否用藥。
+      本站並非原開發機構的官方網站，亦不代表該機構對本站或陳昱彰醫師背書。
+    </div>
+
+    <CvdRiskCalculator />
+
+    <article class="mt-12 space-y-10">
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">你會得到哪些結果？</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <p class="text-xs font-bold text-teal-700 mb-2">TOTAL CVD</p>
+            <h3 class="font-bold text-blue-950 mb-2">總心血管疾病</h3>
+            <p class="text-sm text-slate-600 chinese-line-height">致命或非致命 ASCVD 與心臟衰竭的複合終點預測；不是兩個百分比相加。</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <p class="text-xs font-bold text-teal-700 mb-2">ASCVD</p>
+            <h3 class="font-bold text-blue-950 mb-2">動脈粥樣硬化性心血管疾病</h3>
+            <p class="text-sm text-slate-600 chinese-line-height">預測心肌梗塞、冠心病死亡與中風等動脈粥樣硬化相關事件。</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <p class="text-xs font-bold text-teal-700 mb-2">HF</p>
+            <h3 class="font-bold text-blue-950 mb-2">心臟衰竭</h3>
+            <p class="text-sm text-slate-600 chinese-line-height">由心臟衰竭方程獨立估算；BMI 只進入這一組方程。</p>
+          </div>
+        </div>
+        <p class="mt-4 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900 chinese-line-height">
+          <strong>不能把 ASCVD 與心臟衰竭百分比相加。</strong>若要看整體風險，應直接看 Total CVD 結果。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-4">本站基本模型與 Framingham 的差異</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[640px] text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-blue-950">
+                <th class="border border-slate-200 px-3 py-2 text-left font-semibold">比較項目</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">Framingham ATP III</th>
+                <th class="border border-slate-200 px-3 py-2 text-center font-semibold">本站基本模型</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="border border-slate-200 px-3 py-2 text-left font-medium text-blue-900">本站工具的用途</th>
+                <td class="border border-slate-200 px-3 py-2 text-center">職場過勞指引列舉的方法之一</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">一般成人初級預防風險溝通</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <th scope="row" class="border border-slate-200 px-3 py-2 text-left font-medium text-blue-900">預測結果</th>
+                <td class="border border-slate-200 px-3 py-2 text-center">10 年冠心病事件風險</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">Total CVD、ASCVD、HF 分別估算</td>
+              </tr>
+              <tr>
+                <th scope="row" class="border border-slate-200 px-3 py-2 text-left font-medium text-blue-900">年齡</th>
+                <td class="border border-slate-200 px-3 py-2 text-center">20–79 歲</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">10 年：30–79 歲<br />30 年：30–59 歲</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <th scope="row" class="border border-slate-200 px-3 py-2 text-left font-medium text-blue-900">額外輸入</th>
+                <td class="border border-slate-200 px-3 py-2 text-center">—</td>
+                <td class="border border-slate-200 px-3 py-2 text-center">包含 eGFR；HF 方程另納入 BMI</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">重要限制</h2>
+        <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5 chinese-line-height">
+          <li>本工具只適用於尚未發生 ASCVD 或心臟衰竭的成人；已有相關病史者應由醫療人員個別評估。</li>
+          <li>模型由美國成人資料開發與驗證；尚未針對台灣族群重新校準，解讀時需保留族群差異。</li>
+          <li>本站採基本模型，不加入 HbA1c、UACR 或 SDI 等選用變項。</li>
+          <li>請勿任意改動輸入值來模擬服藥後效果；風險變化應結合臨床狀況與治療證據討論。</li>
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border border-sky-200 bg-sky-50 p-6">
+        <h2 class="text-lg font-bold text-blue-950 font-headline mb-3">資料如何處理？</h2>
+        <p class="text-sm text-slate-700 chinese-line-height">
+          按下計算後，輸入會透過加密連線送至本站的 Cloudflare 同源計算端點，只在記憶體中完成當次運算。
+          本站應用程式不使用 cookie、localStorage、KV、D1、R2 或程式日誌保存輸入與結果，也不將內容送往廣告或分析服務。
+          Cloudflare 仍可能處理方法、路徑、時間與狀態碼等維持服務所需的一般中繼資料。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">授權聲明、版本與資料來源</h2>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-4 text-sm text-slate-700 chinese-line-height">
+          <p class="font-semibold text-blue-950">Required attribution and notices</p>
+          <div lang="en" class="space-y-3 leading-6">
+            <p>
+              The PREVENT<sup class="text-[0.65em]">TM</sup> equations were developed by select members of the American Heart Association Cardiovascular-Kidney-Metabolic Scientific Advisory Group. The risk equations were derived and validated in a large, diverse sample of over 6 million individuals.[1], [2]
+            </p>
+            <p>
+              [1] Khan SS, Matsushita K, Sang Y, et al. Development and Validation of the American Heart Association Predicting Risk of Cardiovascular Disease EVENTs (PREVENT<sup class="text-[0.65em]">TM</sup>) Equations. Circulation 2023. DOI: 10.1161/CIRCULATIONAHA.123.067626.
+            </p>
+            <p>
+              [2] Khan SS, Coresh J, Pencina MJ, et al. Novel Prediction Equations for Absolute Risk Assessment of Total Cardiovascular Disease Incorporating Cardiovascular-Kidney-Metabolic Health: A Scientific Statement From the American Heart Association. Circulation 2023;148(24):1982-2004. DOI: 10.1161/CIR.0000000000001191.
+            </p>
+            <p>
+              The information provided herein is based in part on PREVENT<sup class="text-[0.65em]">TM</sup>, which is the American Heart Association’s (AHA) online risk calculator for primary prevention patients. The use of the AHA’s material is limited to certain aspects of PREVENT<sup class="text-[0.65em]">TM</sup>.
+            </p>
+            <p>
+              The information derived from the use of PREVENT<sup class="text-[0.65em]">TM</sup> is based on PREVENT<sup class="text-[0.65em]">TM</sup> 1.0.0. Updates and future adaptations of PREVENT<sup class="text-[0.65em]">TM</sup> may yield different results and conclusions.
+            </p>
+          </div>
+          <div class="border-t border-slate-200 pt-4 space-y-2">
+            <p class="font-semibold text-blue-950">中文說明（英文授權文字為準）</p>
+            <p>本站經申請後僅使用基本模型的部分功能，並非完整的官方產品。</p>
+            <p>本頁結果以版本 {CVD_RISK_MODEL_VERSION} 為依據；後續更新或改版可能產生不同結果與結論。</p>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-slate-600 chinese-line-height">
+          上方英文授權聲明中的兩筆 DOI 可用於查詢原始研究與科學聲明；本站未使用原開發機構標誌，也不宣稱獲得背書。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">延伸工具</h2>
+        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-2 chinese-line-height">
+          <li><a href="/blog/health-tools/cv-risk-calculator/" class="text-teal-700 underline">Framingham ATP III 10 年冠心病風險計算機</a></li>
+          <li><a href="/blog/health-tools/overwork-risk-calculator/" class="text-teal-700 underline">異常工作負荷促發疾病風險分級計算機</a></li>
+          <li><a href="/tools/" class="text-teal-700 underline">瀏覽全部醫療計算工具</a></li>
+        </ul>
+      </section>
+    </article>
+
+    <section class="mt-12 border-t border-outline-variant pt-8" id="faq">
+      <h2 class="text-xl font-bold text-blue-950 font-headline mb-5">常見問題</h2>
+      <div class="space-y-5 text-slate-700 chinese-line-height">
+        {faqItems.map((item) => (
+          <div>
+            <h3 class="font-bold text-blue-950 mb-1">{item.question}</h3>
+            <p class="text-sm">{item.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>
