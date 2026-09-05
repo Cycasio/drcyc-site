@@ -1,0 +1,588 @@
+---
+import { CVD_RISK_MODEL_VERSION } from '../../scripts/tools/cvd-risk-meta';
+
+const numericFields = [
+  {
+    name: 'age',
+    label: '年齡',
+    unit: '歲',
+    min: 30,
+    max: 79,
+    step: 1,
+    placeholder: '例如：45',
+    help: '10 年風險適用 30–79 歲；30 年風險只適用 30–59 歲。',
+  },
+  {
+    name: 'totalCholesterol',
+    label: '總膽固醇',
+    unit: 'mg/dL',
+    min: 130,
+    max: 320,
+    step: 1,
+    placeholder: '例如：200',
+    help: '請使用近期抽血報告的總膽固醇。',
+  },
+  {
+    name: 'hdlCholesterol',
+    label: 'HDL 膽固醇',
+    unit: 'mg/dL',
+    min: 20,
+    max: 100,
+    step: 1,
+    placeholder: '例如：60',
+    help: '請勿填成 LDL；HDL 常標示為高密度脂蛋白膽固醇。',
+  },
+  {
+    name: 'systolicBloodPressure',
+    label: '收縮壓',
+    unit: 'mmHg',
+    min: 90,
+    max: 200,
+    step: 1,
+    placeholder: '例如：120',
+    help: '填多次正確測量後較能代表平時狀況的收縮壓。',
+  },
+  {
+    name: 'bmi',
+    label: 'BMI',
+    unit: 'kg/m²',
+    min: 18.5,
+    max: 39.9,
+    step: 0.1,
+    placeholder: '例如：25.0',
+    help: 'BMI 只進入心臟衰竭方程；此版本接受 18.5–39.9。',
+  },
+  {
+    name: 'egfr',
+    label: 'eGFR',
+    unit: 'mL/min/1.73m²',
+    min: 15,
+    max: 140,
+    step: 1,
+    placeholder: '例如：95',
+    help: '原始計算機可輸入 15–140；原始模型採 2021 CKD-EPI creatinine equation，若報告使用其他公式，估算可能不同。',
+  },
+] as const;
+
+const yesNoFields = [
+  {
+    name: 'diabetes',
+    legend: '是否曾被診斷為糖尿病？',
+    help: '只要有糖尿病病史即選「是」。',
+  },
+  {
+    name: 'currentSmoker',
+    legend: '目前是否吸菸？',
+    help: '過去 30 天內曾吸任何香菸（即使偶爾）請選「是」；電子煙不自行等同香菸。',
+  },
+  {
+    name: 'antihypertensiveTreatment',
+    legend: '目前是否接受降壓藥治療？',
+    help: '目前因高血壓使用任何降壓藥物，即選「是」。',
+  },
+  {
+    name: 'statinUse',
+    legend: '目前是否使用 statin（史達汀類降血脂藥）？',
+    help: '此 1.0.0 版本問的是 statin，不是所有類型的降血脂藥物。',
+  },
+] as const;
+---
+
+<section id="cvd-risk-calculator" aria-labelledby="cvd-risk-calculator-title" class="mb-12 scroll-mt-24">
+  <div class="rounded-3xl border border-teal-200 bg-white shadow-sm overflow-hidden">
+    <header class="bg-gradient-to-br from-teal-50 to-sky-50 p-6 md:p-8 border-b border-teal-100">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex rounded-full bg-teal-700 px-3 py-1 text-xs font-bold text-white">本站不保存輸入</span>
+        <span class="inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-600 border border-slate-200">
+          基本模型 v{CVD_RISK_MODEL_VERSION}
+        </span>
+      </div>
+      <h2 id="cvd-risk-calculator-title" class="text-2xl font-bold text-blue-950 font-headline mb-2">
+        10 年與 30 年心血管風險估算
+      </h2>
+      <p class="text-sm text-slate-700 chinese-line-height max-w-3xl">
+        適用於 30–79 歲、沒有既往 ASCVD 或心臟衰竭的成人。資料透過加密連線送至本站同源端點，
+        只完成這次運算；本站應用程式不寫入資料庫、瀏覽器儲存空間或程式日誌。
+      </p>
+    </header>
+
+    <form
+      id="cvd-risk-form"
+      class="p-6 md:p-8 space-y-8"
+      method="post"
+      action="/api/cvd-risk"
+      autocomplete="off"
+      novalidate
+      aria-busy="false"
+    >
+      <div id="cvd-risk-error-summary" class="hidden rounded-xl border border-rose-300 bg-rose-50 p-4" role="alert" tabindex="-1">
+        <p id="cvd-risk-error-heading" class="font-bold text-rose-900 mb-2">請先修正以下資料：</p>
+        <ul id="cvd-risk-error-list" class="list-disc pl-5 text-sm text-rose-800 space-y-1"></ul>
+      </div>
+
+      <section aria-labelledby="cvd-risk-eligibility-title">
+        <h3 id="cvd-risk-eligibility-title" class="text-lg font-bold text-blue-950 font-headline mb-4">1. 確認適用資格</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <fieldset class="rounded-2xl border border-slate-200 p-4" data-field-group="knownCvd">
+            <legend class="px-1 text-sm font-bold text-blue-900">是否已被醫師診斷 ASCVD 或心臟衰竭？</legend>
+            <p id="cvd-risk-knownCvd-help" class="text-xs text-slate-600 mb-3 chinese-line-height">
+              例如心肌梗塞、急性冠心症或心絞痛、冠狀動脈介入治療或繞道手術、缺血性中風或短暫性腦缺血發作、周邊動脈疾病或心臟衰竭。
+            </p>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <label class="flex min-h-11 flex-1 items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 cursor-pointer hover:border-teal-500">
+                <input id="cvd-risk-knownCvd-no" type="radio" name="knownCvd" value="no" class="accent-teal-700" aria-describedby="cvd-risk-knownCvd-help cvd-risk-knownCvd-error" />
+                <span class="text-sm">否，沒有上述病史</span>
+              </label>
+              <label class="flex min-h-11 flex-1 items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 cursor-pointer hover:border-teal-500">
+                <input id="cvd-risk-knownCvd-yes" type="radio" name="knownCvd" value="yes" class="accent-teal-700" aria-describedby="cvd-risk-knownCvd-help cvd-risk-knownCvd-error" />
+                <span class="text-sm">是，曾有上述病史</span>
+              </label>
+            </div>
+            <p id="cvd-risk-knownCvd-error" data-error-for="knownCvd" class="hidden mt-2 text-xs font-medium text-rose-700"></p>
+          </fieldset>
+
+          <fieldset class="rounded-2xl border border-slate-200 p-4" data-field-group="sex">
+            <legend class="px-1 text-sm font-bold text-blue-900">公式使用的生理性別</legend>
+            <p id="cvd-risk-sex-help" class="text-xs text-slate-600 mb-3 chinese-line-height">
+              本模型採男、女兩套不同係數。
+            </p>
+            <div class="flex gap-2">
+              <label class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 cursor-pointer hover:border-teal-500">
+                <input id="cvd-risk-sex-male" type="radio" name="sex" value="male" class="accent-teal-700" aria-describedby="cvd-risk-sex-help cvd-risk-sex-error" />
+                <span class="text-sm">男性</span>
+              </label>
+              <label class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 cursor-pointer hover:border-teal-500">
+                <input id="cvd-risk-sex-female" type="radio" name="sex" value="female" class="accent-teal-700" aria-describedby="cvd-risk-sex-help cvd-risk-sex-error" />
+                <span class="text-sm">女性</span>
+              </label>
+            </div>
+            <p id="cvd-risk-sex-error" data-error-for="sex" class="hidden mt-2 text-xs font-medium text-rose-700"></p>
+          </fieldset>
+        </div>
+      </section>
+
+      <section aria-labelledby="cvd-risk-values-title">
+        <h3 id="cvd-risk-values-title" class="text-lg font-bold text-blue-950 font-headline mb-1">2. 填寫近期臨床數值</h3>
+        <p class="text-xs text-slate-600 mb-4">超出官方臨床計算範圍時不會自行截斷或代填。</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {numericFields.map((field) => (
+            <div>
+              <label class="block text-sm font-bold text-blue-900 mb-1" for={`cvd-risk-${field.name}`}>
+                {field.label} <span class="font-normal text-slate-500">（{field.unit}）</span>
+              </label>
+              <p id={`cvd-risk-${field.name}-help`} class="text-xs text-slate-600 mb-2 chinese-line-height">{field.help}</p>
+              <input
+                id={`cvd-risk-${field.name}`}
+                name={field.name}
+                type="number"
+                inputmode={field.step === 1 ? 'numeric' : 'decimal'}
+                min={field.min}
+                max={field.max}
+                step={field.step}
+                placeholder={field.placeholder}
+                aria-describedby={`cvd-risk-${field.name}-help cvd-risk-${field.name}-error`}
+                aria-invalid="false"
+                class="w-full min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-3 text-base tabular-nums focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+              />
+              <p id={`cvd-risk-${field.name}-error`} data-error-for={field.name} class="hidden mt-2 text-xs font-medium text-rose-700"></p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="cvd-risk-history-title">
+        <h3 id="cvd-risk-history-title" class="text-lg font-bold text-blue-950 font-headline mb-4">3. 危險因子與用藥</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {yesNoFields.map((field) => (
+            <fieldset class="rounded-2xl border border-slate-200 p-4" data-field-group={field.name}>
+              <legend class="px-1 text-sm font-bold text-blue-900">{field.legend}</legend>
+              <p id={`cvd-risk-${field.name}-help`} class="text-xs text-slate-600 mb-3 chinese-line-height">{field.help}</p>
+              <div class="flex gap-2">
+                <label class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 cursor-pointer hover:border-teal-500">
+                  <input id={`cvd-risk-${field.name}-no`} type="radio" name={field.name} value="no" class="accent-teal-700" aria-describedby={`cvd-risk-${field.name}-help cvd-risk-${field.name}-error`} />
+                  <span class="text-sm">否</span>
+                </label>
+                <label class="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 cursor-pointer hover:border-teal-500">
+                  <input id={`cvd-risk-${field.name}-yes`} type="radio" name={field.name} value="yes" class="accent-teal-700" aria-describedby={`cvd-risk-${field.name}-help cvd-risk-${field.name}-error`} />
+                  <span class="text-sm">是</span>
+                </label>
+              </div>
+              <p id={`cvd-risk-${field.name}-error`} data-error-for={field.name} class="hidden mt-2 text-xs font-medium text-rose-700"></p>
+            </fieldset>
+          ))}
+        </div>
+      </section>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-3 border-t border-slate-200 pt-6">
+        <button id="cvd-risk-submit" type="submit" class="min-h-11 rounded-full bg-teal-700 px-8 py-3 text-sm font-bold text-white hover:bg-teal-800 disabled:cursor-wait disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2">
+          計算風險
+        </button>
+        <button type="reset" class="min-h-11 rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-700 hover:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2">
+          清除全部資料
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <p id="cvd-risk-live" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+
+  <section id="cvd-risk-results" class="hidden mt-8 rounded-3xl border-2 border-teal-300 bg-teal-50 p-6 md:p-8" aria-labelledby="cvd-risk-results-title">
+    <div class="flex flex-wrap items-start justify-between gap-3 mb-5">
+      <div>
+        <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-2">基本模型 v{CVD_RISK_MODEL_VERSION}</p>
+        <h2 id="cvd-risk-results-title" tabindex="-1" class="text-2xl font-bold text-blue-950 font-headline focus:outline-none">評估結果</h2>
+      </div>
+      <span class="rounded-full bg-white border border-teal-200 px-3 py-1 text-xs font-semibold text-teal-800">非診斷工具</span>
+    </div>
+
+    <section aria-labelledby="cvd-risk-ten-year-title">
+      <h3 id="cvd-risk-ten-year-title" class="text-lg font-bold text-blue-950 mb-3">10 年風險</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="rounded-2xl bg-white border border-slate-200 p-4">
+          <p class="text-xs text-slate-600 mb-1">總心血管疾病（Total CVD）</p>
+          <p id="cvd-risk-10-total" class="text-3xl font-bold text-blue-950 tabular-nums">—</p>
+        </div>
+        <div class="rounded-2xl bg-white border border-slate-200 p-4">
+          <p class="text-xs text-slate-600 mb-1">動脈粥樣硬化性心血管疾病（ASCVD）</p>
+          <p id="cvd-risk-10-ascvd" class="text-3xl font-bold text-blue-950 tabular-nums">—</p>
+        </div>
+        <div class="rounded-2xl bg-white border border-slate-200 p-4">
+          <p class="text-xs text-slate-600 mb-1">心臟衰竭（HF）</p>
+          <p id="cvd-risk-10-hf" class="text-3xl font-bold text-blue-950 tabular-nums">—</p>
+        </div>
+      </div>
+      <p id="cvd-risk-people-explanation" class="mt-3 text-sm text-slate-700 chinese-line-height"></p>
+    </section>
+
+    <section id="cvd-risk-thirty-year-section" class="mt-7" aria-labelledby="cvd-risk-thirty-year-title">
+      <h3 id="cvd-risk-thirty-year-title" class="text-lg font-bold text-blue-950 mb-3">30 年風險</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="rounded-2xl bg-white border border-slate-200 p-4">
+          <p class="text-xs text-slate-600 mb-1">總心血管疾病（Total CVD）</p>
+          <p id="cvd-risk-30-total" class="text-3xl font-bold text-blue-950 tabular-nums">—</p>
+        </div>
+        <div class="rounded-2xl bg-white border border-slate-200 p-4">
+          <p class="text-xs text-slate-600 mb-1">動脈粥樣硬化性心血管疾病（ASCVD）</p>
+          <p id="cvd-risk-30-ascvd" class="text-3xl font-bold text-blue-950 tabular-nums">—</p>
+        </div>
+        <div class="rounded-2xl bg-white border border-slate-200 p-4">
+          <p class="text-xs text-slate-600 mb-1">心臟衰竭（HF）</p>
+          <p id="cvd-risk-30-hf" class="text-3xl font-bold text-blue-950 tabular-nums">—</p>
+        </div>
+      </div>
+    </section>
+
+    <p id="cvd-risk-thirty-year-unavailable" class="hidden mt-6 rounded-xl border border-sky-200 bg-white p-4 text-sm text-sky-900 chinese-line-height">
+      30 年風險僅適用 30–59 歲；60–79 歲只顯示 10 年結果。
+    </p>
+
+    <div class="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950 chinese-line-height">
+      <strong>請勿把 ASCVD 與心臟衰竭百分比相加。</strong>三種結果由不同方程分別估算；Total CVD 是獨立的複合終點模型。
+      結果用於醫病共同討論，不能單獨作為診斷或治療決策。
+    </div>
+    <div class="mt-3 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950 chinese-line-height">
+      <strong>台灣族群限制：</strong>模型以美國成人資料開發與驗證，尚未在台灣族群完成國別驗證或重新校準，
+      可能高估或低估實際風險；請勿直接套用美國治療門檻。
+    </div>
+    <p class="mt-3 text-xs text-slate-600 chinese-line-height">本站應用程式不主動保存這次輸入與結果；可按「清除全部資料」移除目前畫面內容。</p>
+  </section>
+</section>
+
+<script>
+  import {
+    isCvdRiskBaseResultForAge,
+    type CvdRiskBaseResult,
+  } from '../../scripts/tools/cvd-risk-meta';
+  import {
+    validateCvdRiskDraft,
+    type CvdRiskDraft,
+    type CvdRiskField,
+    type CvdRiskValidationIssue,
+  } from '../../scripts/tools/cvd-risk-validation';
+
+  const form = document.getElementById('cvd-risk-form') as HTMLFormElement | null;
+  const results = document.getElementById('cvd-risk-results') as HTMLElement | null;
+  const resultsTitle = document.getElementById('cvd-risk-results-title') as HTMLElement | null;
+  const errorSummary = document.getElementById('cvd-risk-error-summary') as HTMLElement | null;
+  const errorHeading = document.getElementById('cvd-risk-error-heading') as HTMLElement | null;
+  const errorList = document.getElementById('cvd-risk-error-list') as HTMLUListElement | null;
+  const live = document.getElementById('cvd-risk-live') as HTMLElement | null;
+  const submitButton = document.getElementById('cvd-risk-submit') as HTMLButtonElement | null;
+  let activeRequest: AbortController | null = null;
+
+  const targetIds: Record<CvdRiskField, string> = {
+    knownCvd: 'cvd-risk-knownCvd-no',
+    sex: 'cvd-risk-sex-male',
+    age: 'cvd-risk-age',
+    totalCholesterol: 'cvd-risk-totalCholesterol',
+    hdlCholesterol: 'cvd-risk-hdlCholesterol',
+    systolicBloodPressure: 'cvd-risk-systolicBloodPressure',
+    bmi: 'cvd-risk-bmi',
+    egfr: 'cvd-risk-egfr',
+    diabetes: 'cvd-risk-diabetes-no',
+    currentSmoker: 'cvd-risk-currentSmoker-no',
+    antihypertensiveTreatment: 'cvd-risk-antihypertensiveTreatment-no',
+    statinUse: 'cvd-risk-statinUse-no',
+  };
+  const cvdRiskFields = new Set<string>(Object.keys(targetIds));
+
+  function parseNumber(name: string): number | null {
+    const input = form?.elements.namedItem(name);
+    if (!(input instanceof HTMLInputElement) || input.value.trim() === '') return null;
+    const value = Number(input.value);
+    return Number.isFinite(value) ? value : null;
+  }
+
+  function selectedValue(name: string): string | null {
+    return form?.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? null;
+  }
+
+  function parseBoolean(name: string): boolean | null {
+    const value = selectedValue(name);
+    if (value == null) return null;
+    return value === 'yes';
+  }
+
+  function readDraft(): CvdRiskDraft {
+    const sex = selectedValue('sex');
+    return {
+      knownCvd: parseBoolean('knownCvd'),
+      sex: sex === 'male' || sex === 'female' ? sex : null,
+      age: parseNumber('age'),
+      totalCholesterol: parseNumber('totalCholesterol'),
+      hdlCholesterol: parseNumber('hdlCholesterol'),
+      systolicBloodPressure: parseNumber('systolicBloodPressure'),
+      bmi: parseNumber('bmi'),
+      egfr: parseNumber('egfr'),
+      diabetes: parseBoolean('diabetes'),
+      currentSmoker: parseBoolean('currentSmoker'),
+      antihypertensiveTreatment: parseBoolean('antihypertensiveTreatment'),
+      statinUse: parseBoolean('statinUse'),
+    };
+  }
+
+  function clearValidation(): void {
+    errorSummary?.classList.add('hidden');
+    if (errorHeading) errorHeading.textContent = '請先修正以下資料：';
+    if (errorList) errorList.replaceChildren();
+
+    form?.querySelectorAll<HTMLElement>('[aria-invalid="true"]').forEach((element) => {
+      element.setAttribute('aria-invalid', 'false');
+      if (element instanceof HTMLInputElement && element.type === 'number') {
+        element.classList.remove('border-rose-500', 'ring-2', 'ring-rose-200');
+      }
+    });
+    form?.querySelectorAll<HTMLElement>('[data-error-for]').forEach((element) => {
+      element.textContent = '';
+      element.classList.add('hidden');
+    });
+  }
+
+  function showValidation(issues: CvdRiskValidationIssue[]): void {
+    if (!form || !errorSummary || !errorList) return;
+    if (errorHeading) errorHeading.textContent = '請先修正以下資料：';
+
+    const firstIssueForField = new Map<CvdRiskField, CvdRiskValidationIssue>();
+    issues.forEach((issue) => {
+      if (!firstIssueForField.has(issue.field)) firstIssueForField.set(issue.field, issue);
+    });
+
+    firstIssueForField.forEach((issue, field) => {
+      form.querySelectorAll<HTMLElement>(`[name="${field}"]`).forEach((element) => {
+        element.setAttribute('aria-invalid', 'true');
+        if (element instanceof HTMLInputElement && element.type === 'number') {
+          element.classList.add('border-rose-500', 'ring-2', 'ring-rose-200');
+        }
+      });
+
+      const inlineError = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+      if (inlineError) {
+        inlineError.textContent = issue.message;
+        inlineError.classList.remove('hidden');
+      }
+
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${targetIds[field]}`;
+      link.textContent = issue.message;
+      link.className = 'underline hover:no-underline';
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        document.getElementById(targetIds[field])?.focus();
+      });
+      item.append(link);
+      errorList.append(item);
+    });
+
+    errorSummary.classList.remove('hidden');
+    errorSummary.focus();
+  }
+
+  function showServiceError(message: string): void {
+    if (!errorSummary || !errorList) return;
+    if (errorHeading) errorHeading.textContent = '計算暫時未完成：';
+    errorList.replaceChildren();
+    const item = document.createElement('li');
+    item.textContent = message;
+    errorList.append(item);
+    errorSummary.classList.remove('hidden');
+    errorSummary.focus();
+  }
+
+  function parseServerIssues(payload: unknown): CvdRiskValidationIssue[] {
+    if (typeof payload !== 'object' || payload === null || !('issues' in payload)) return [];
+    if (!Array.isArray(payload.issues)) return [];
+    return payload.issues.flatMap((issue) => {
+      if (typeof issue !== 'object' || issue === null) return [];
+      if (!('field' in issue) || !('message' in issue)) return [];
+      if (typeof issue.field !== 'string' || !cvdRiskFields.has(issue.field)) return [];
+      if (typeof issue.message !== 'string') return [];
+      return [{ field: issue.field as CvdRiskField, message: issue.message }];
+    });
+  }
+
+  function formatRisk(value: number): string {
+    return `${value.toFixed(1)}%`;
+  }
+
+  function setText(id: string, value: string): void {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  }
+
+  function setBusy(isBusy: boolean): void {
+    form?.setAttribute('aria-busy', String(isBusy));
+    if (!submitButton) return;
+    submitButton.disabled = isBusy;
+    submitButton.textContent = isBusy ? '計算中…' : '計算風險';
+  }
+
+  function displayResult(risk: CvdRiskBaseResult): void {
+    setText('cvd-risk-10-total', formatRisk(risk.tenYear.totalCvd));
+    setText('cvd-risk-10-ascvd', formatRisk(risk.tenYear.ascvd));
+    setText('cvd-risk-10-hf', formatRisk(risk.tenYear.heartFailure));
+
+    const thirtyYearSection = document.getElementById('cvd-risk-thirty-year-section');
+    const thirtyYearUnavailable = document.getElementById('cvd-risk-thirty-year-unavailable');
+    if (risk.thirtyYear) {
+      setText('cvd-risk-30-total', formatRisk(risk.thirtyYear.totalCvd));
+      setText('cvd-risk-30-ascvd', formatRisk(risk.thirtyYear.ascvd));
+      setText('cvd-risk-30-hf', formatRisk(risk.thirtyYear.heartFailure));
+      thirtyYearSection?.classList.remove('hidden');
+      thirtyYearUnavailable?.classList.add('hidden');
+    } else {
+      thirtyYearSection?.classList.add('hidden');
+      thirtyYearUnavailable?.classList.remove('hidden');
+    }
+
+    const usePerThousand = risk.tenYear.totalCvd < 1;
+    const denominator = usePerThousand ? '1,000' : '100';
+    const expectedPeople = usePerThousand
+      ? (risk.tenYear.totalCvd * 10).toFixed(1)
+      : risk.tenYear.totalCvd.toFixed(1);
+    setText(
+      'cvd-risk-people-explanation',
+      `可理解為：每 ${denominator} 位風險因子與你相近的人中，約 ${expectedPeople} 位可能在未來 10 年發生總心血管疾病。這是族群估計，不是個人命定結果。`,
+    );
+
+    results?.classList.remove('hidden');
+    if (live) live.textContent = `評估結果已完成。10 年總心血管疾病風險 ${formatRisk(risk.tenYear.totalCvd)}。`;
+    resultsTitle?.focus({ preventScroll: true });
+    resultsTitle?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    activeRequest?.abort();
+    clearValidation();
+    results?.classList.add('hidden');
+
+    const draft = readDraft();
+    const validation = validateCvdRiskDraft(draft);
+    if (!validation.ok) {
+      showValidation(validation.issues);
+      if (live) live.textContent = '資料尚未完整，請修正表單中的錯誤。';
+      return;
+    }
+
+    const controller = new AbortController();
+    activeRequest = controller;
+    let timedOut = false;
+    const timeoutId = window.setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, 12_000);
+    setBusy(true);
+
+    try {
+      const response = await fetch('/api/cvd-risk', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(draft),
+        cache: 'no-store',
+        credentials: 'same-origin',
+        signal: controller.signal,
+      });
+      const payload: unknown = await response.json();
+
+      if (!response.ok) {
+        const serverIssues = parseServerIssues(payload);
+        if (serverIssues.length > 0) showValidation(serverIssues);
+        else showServiceError('計算服務暫時無法完成這次請求，請稍後再試。');
+        if (live) live.textContent = '風險計算未完成。';
+        return;
+      }
+
+      const result =
+        typeof payload === 'object' && payload !== null && 'result' in payload
+          ? payload.result
+          : null;
+      if (!isCvdRiskBaseResultForAge(result, validation.value.age)) {
+        showServiceError('計算服務回傳格式異常，請稍後再試。');
+        if (live) live.textContent = '風險計算未完成。';
+        return;
+      }
+
+      displayResult(result);
+    } catch {
+      if (controller.signal.aborted && !timedOut) return;
+      showServiceError(timedOut ? '計算等候超過 12 秒，請重新送出。' : '目前無法連線到本站計算服務，請稍後再試。');
+      if (live) live.textContent = '風險計算未完成。';
+    } finally {
+      window.clearTimeout(timeoutId);
+      if (activeRequest === controller) {
+        activeRequest = null;
+        setBusy(false);
+      }
+    }
+  });
+
+  function handleFormChange(): void {
+    activeRequest?.abort();
+    activeRequest = null;
+    setBusy(false);
+    clearValidation();
+    results?.classList.add('hidden');
+  }
+
+  form?.addEventListener('input', handleFormChange);
+  form?.addEventListener('change', handleFormChange);
+
+  form?.addEventListener('reset', () => {
+    activeRequest?.abort();
+    activeRequest = null;
+    window.setTimeout(() => {
+      setBusy(false);
+      clearValidation();
+      results?.classList.add('hidden');
+      if (live) live.textContent = '已清除所有輸入與結果。';
+      document.getElementById('cvd-risk-knownCvd-no')?.focus();
+    }, 0);
+  });
+</script>
