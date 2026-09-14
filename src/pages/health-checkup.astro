@@ -23,6 +23,8 @@ import {
 
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/health-checkup/`;
+// 頁面內容更新與套餐、USPSTF 資料核對日期分開，避免暗示全部資訊均重新查核。
+const PAGE_UPDATED = '2026-09-15';
 
 const publicPackages = PACKAGES.filter((p) => p.group === '公教人員專案');
 const premiumPackages = PACKAGES.filter((p) => p.group === '健診中心精選');
@@ -37,7 +39,7 @@ const medicalWebPage = {
   description:
     '義大醫院家醫科陳昱彰醫師整理的 16 個健檢套餐完整比較,含 USPSTF 實證醫學點評、健檢前準備、清腸藥 SOP、交通與預約資訊。',
   datePublished: '2026-04-13',
-  dateModified: LAST_UPDATED,
+  dateModified: PAGE_UPDATED,
   lastReviewed: LAST_UPDATED,
   author: { '@id': `${SITE}/#person` },
   publisher: { '@id': `${SITE}/#person` },
@@ -300,6 +302,28 @@ const description =
       </div>
       <p class="text-xs text-slate-500 leading-relaxed chinese-line-height">
         ⚠️ {LOW_EVIDENCE_NOTE}
+      </p>
+    </section>
+
+    <section id="lpa-apob" class="scroll-mt-24 mb-14 rounded-xl border border-teal-200 bg-teal-50/50 p-6 md:p-8" aria-labelledby="lpa-apob-title">
+      <p class="text-xs font-bold tracking-widest text-teal-700 mb-3">心血管風險與健檢加選</p>
+      <h2 id="lpa-apob-title" class="text-2xl font-bold text-blue-950 mb-4">需要加驗 Lp(a) 或 ApoB 嗎？</h2>
+      <p class="text-slate-700 leading-relaxed mb-4 chinese-line-height">
+        膽固醇沒有紅字，不代表心血管風險一定低。2026 年美國血脂指引建議成人至少一生檢測一次
+        <strong>Lp(a)</strong>；<strong>ApoB</strong> 則較適合依糖尿病、三酸甘油脂及降血脂治療狀況，評估是否加驗，並非人人每年都需要。
+      </p>
+      <p class="text-slate-700 leading-relaxed mb-4 chinese-line-height">
+        義大健診公開加選表列有 Lp(a) 與 ApoB，但不代表每種套餐都包含。
+        表上的<strong>「A 型脂蛋白 Lp(a)」不是 ApoA1</strong>，預約時請確認完整檢驗名稱、費用與採檢準備。
+        檢查應依個別風險選擇，不必為了單一抽血項目就升級整套健檢。
+      </p>
+      <a href="/blog/lpa-apob-health-checkup/" class="inline-flex items-center min-h-11 font-semibold text-teal-800 underline underline-offset-4 hover:text-teal-950">
+        閱讀完整衛教：膽固醇正常，還需要驗 Lp(a) 和 ApoB 嗎？
+      </a>
+      <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+        本節更新：2026-09-15；
+        <a href="https://exdep.edah.org.tw/hec/index.php/en/2017-07-20-05-36-07/145-2025-12-17-06-43-25" class="underline" target="_blank" rel="noopener noreferrer">義大官方自費加選表</a>。
+        此更新不代表其他套餐價格或篩檢指引均已重新核對。
       </p>
     </section>
 
