@@ -55,6 +55,7 @@ const medicalWebPage = {
   description,
   inLanguage: 'zh-Hant',
   about: { '@type': 'MedicalEntity', name: '初級預防心血管風險評估' },
+  dateModified: '2026-09-20',
   author: { '@id': `${SITE}/#person` },
   mainEntity: { '@id': `${pageUrl}#calculator` },
   isAccessibleForFree: true,
@@ -114,6 +115,13 @@ const faqSchema = {
         本頁採經獲准使用的基本模型 {CVD_RISK_MODEL_VERSION}，分別估算總心血管疾病（Total CVD）、
         動脈粥樣硬化性心血管疾病（ASCVD）與心臟衰竭（HF）風險。
       </p>
+      <aside class="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700" aria-label="公式來源與必要授權聲明">
+        <p class="font-semibold text-blue-950 mb-2">公式來源（必要授權聲明）</p>
+        <p lang="en" class="leading-relaxed">
+          The PREVENT<sup class="text-[0.65em]">TM</sup> equations were developed by select members of the American Heart Association Cardiovascular-Kidney-Metabolic Scientific Advisory Group. The risk equations were derived and validated in a large, diverse sample of over 6 million individuals.[1], [2]
+        </p>
+        <a href="#model-attribution" class="inline-flex min-h-11 items-center text-teal-800 underline mt-1">檢視研究出處、部分使用範圍與版本聲明 ↓</a>
+      </aside>
     </header>
 
     <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-8 text-sm text-amber-950 chinese-line-height">
@@ -205,7 +213,7 @@ const faqSchema = {
         </p>
       </section>
 
-      <section>
+      <section id="model-attribution" class="scroll-mt-24">
         <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">授權聲明、版本與資料來源</h2>
         <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-4 text-sm text-slate-700 chinese-line-height">
           <p class="font-semibold text-blue-950">Required attribution and notices</p>
@@ -235,6 +243,15 @@ const faqSchema = {
         <p class="mt-4 text-xs text-slate-600 chinese-line-height">
           上方英文授權聲明中的兩筆 DOI 可用於查詢原始研究與科學聲明；本站未使用原開發機構標誌，也不宣稱獲得背書。
         </p>
+      </section>
+
+      <section class="rounded-xl border border-teal-200 bg-teal-50/50 p-5">
+        <h2 class="text-xl font-bold text-blue-950 font-headline mb-3">算完風險，還需要驗 Lp(a) 或 ApoB 嗎？</h2>
+        <p class="text-sm text-slate-700 chinese-line-height mb-3">本站基本模型不使用 Lp(a) 或 ApoB 作為輸入。這兩項檢驗提供模型之外的風險資訊；不能自行把結果加進風險百分比，也不應因估算偏低就忽略家族史或檢驗異常。</p>
+        <ul class="text-sm space-y-3">
+          <li><a href="/blog/lpa-apob-health-checkup/" class="text-teal-800 underline">了解 Lp(a)、ApoB 與 ApoA1 的差別及適合加驗的情況 →</a></li>
+          <li><a href="/health-checkup/#lpa-apob" class="text-teal-800 underline">檢視義大健檢加選與預約前確認事項 →</a></li>
+        </ul>
       </section>
 
       <section>

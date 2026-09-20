@@ -6,17 +6,20 @@ import {
   LOW_EVIDENCE_NOTE,
   GENERAL_PREP,
   ENDO_PREP,
-  BOWEL_PREP_DRUGS,
+  BOWEL_PREP_CHECKLIST,
+  BOWEL_PREP_SOURCE_URL,
+  PACKAGE_COUNT,
+  SCREENING_LAST_CHECKED,
+  TAIWAN_SCREENING,
+  HPA_SCREENING_URL,
   LOCATION,
   TRANSIT_CAR,
   TRANSIT_PUBLIC,
   FAQ,
-  LAST_UPDATED,
   PACKAGE_LAST_CHECKED,
   HOSPITAL_URL,
   OFFICIAL_PACKAGES_URL,
   PUBLIC_EMPLOYEE_PDF_URL,
-  USPSTF_COLORECTAL_URL,
   BOOKING_PHONE,
   BOOKING_EXTENSIONS,
 } from '../data/checkup';
@@ -24,7 +27,7 @@ import {
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/health-checkup/`;
 // 頁面內容更新與套餐、USPSTF 資料核對日期分開，避免暗示全部資訊均重新查核。
-const PAGE_UPDATED = '2026-09-15';
+const PAGE_UPDATED = '2026-09-20';
 
 const publicPackages = PACKAGES.filter((p) => p.group === '公教人員專案');
 const premiumPackages = PACKAGES.filter((p) => p.group === '健診中心精選');
@@ -35,12 +38,11 @@ const medicalWebPage = {
   '@type': 'MedicalWebPage',
   '@id': `${pageUrl}#webpage`,
   url: pageUrl,
-  name: '義大醫院健檢套餐完整指南 2026',
+  name: '義大醫院健檢指南 2026｜公費篩檢與套餐比較',
   description:
-    '義大醫院家醫科陳昱彰醫師整理的 16 個健檢套餐完整比較,含 USPSTF 實證醫學點評、健檢前準備、清腸藥 SOP、交通與預約資訊。',
+    `義大醫院家醫科陳昱彰醫師整理 ${PACKAGE_COUNT} 個參考健檢方案，分開說明台灣公費篩檢、USPSTF 建議與自費套餐，附核對日期及準備提醒。`,
   datePublished: '2026-04-13',
   dateModified: PAGE_UPDATED,
-  lastReviewed: LAST_UPDATED,
   author: { '@id': `${SITE}/#person` },
   publisher: { '@id': `${SITE}/#person` },
   about: { '@type': 'MedicalProcedure', name: '健康檢查 Health Checkup' },
@@ -126,7 +128,6 @@ const itemListSchema = {
         '@type': 'Offer',
         price: p.price.toString(),
         priceCurrency: 'TWD',
-        availability: 'https://schema.org/InStock',
         seller: {
           '@type': 'Hospital',
           name: '義大醫院',
@@ -156,38 +157,15 @@ const breadcrumbSchema = {
   ],
 };
 
-const bowelPrepHowToSchemas = BOWEL_PREP_DRUGS.map((d) => ({
-  '@type': 'HowTo',
-  '@id': `${pageUrl}#howto-${d.englishName.toLowerCase().replace(/\s+/g, '-')}`,
-  name: `${d.name} ${d.englishName} 服藥時程`,
-  description: `義大醫院健診中心無痛大腸鏡前清腸藥「${d.name}（${d.englishName}，${d.generic}）」服藥時程,依藥品仿單與醫院衛教單整理。`,
-  inLanguage: 'zh-Hant',
-  totalTime: 'PT12H',
-  supply: [
-    { '@type': 'HowToSupply', name: `${d.name}（${d.englishName}）` },
-    { '@type': 'HowToSupply', name: '白開水或無渣流質' },
-  ],
-  tool: [{ '@type': 'HowToTool', name: '量杯 / 飲水容器' }],
-  step: d.steps.map((s, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: s.time,
-    text: s.action,
-  })),
-  author: { '@id': `${SITE}/#person` },
-  publisher: { '@id': `${SITE}/#person` },
-  about: { '@type': 'MedicalProcedure', name: '無痛大腸鏡前清腸 Bowel Preparation' },
-}));
-
-const title = '義大醫院健檢套餐完整指南 2026｜家醫科陳昱彰醫師實證比較';
+const title = '義大醫院健檢指南 2026｜公費篩檢與套餐比較｜陳昱彰醫師';
 const description =
-  '高雄義大醫院健診中心 2025–2026 年度 16 個健檢套餐完整比較,含公教人員專案 A–H 與精選套餐價格、項目、適合對象、陳醫師 USPSTF 實證點評、健檢前準備、清腸藥 SOP、交通與預約資訊。';
+  `陳昱彰醫師整理義大醫院 ${PACKAGE_COUNT} 個參考健檢方案，先看台灣公費篩檢，再對照 USPSTF 建議與個人風險。套餐核對日 ${PACKAGE_LAST_CHECKED}，價格及供應請向健診中心確認。`;
 ---
 
 <Layout
   title={title}
   description={description}
-  jsonLd={[medicalWebPage, uspstfTermSet, itemListSchema, faqSchema, breadcrumbSchema, ...bowelPrepHowToSchemas]}
+  jsonLd={[medicalWebPage, uspstfTermSet, itemListSchema, faqSchema, breadcrumbSchema]}
 >
   <main class="max-w-6xl mx-auto px-6 md:px-10 py-12">
     <!-- Breadcrumb -->
@@ -203,14 +181,24 @@ const description =
         Health Checkup Guide · 2025–2026
       </p>
       <h1 class="text-3xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-5">
-        義大醫院健檢套餐完整指南
+        義大醫院健檢指南
       </h1>
       <p class="text-lg text-slate-700 leading-relaxed max-w-3xl chinese-line-height">
         我是義大醫院家醫科主治醫師<strong>陳昱彰</strong>。這一頁把義大健診中心 2025–2026
-        年度的 <strong>16 個健檢套餐</strong>整理成一張可以一次讀完的比較表,並在每個方案旁附上
-        <strong>USPSTF 實證醫學點評</strong>,告訴你什麼人真的會受益、什麼情況可以省下來。
+        年度的 <strong>{PACKAGE_COUNT} 個參考方案</strong>放在一起比較。
+        先確認<strong>台灣公費篩檢</strong>，再看符合個人風險的建議，最後才決定是否加選自費檢查。
       </p>
     </header>
+
+    <nav aria-label="健檢指南章節" class="flex flex-wrap gap-3 mb-8 text-sm">
+      {[
+        ['#taiwan-screening', '先看公費資格'],
+        ['#evidence', '篩檢實證'],
+        ['#lpa-apob', 'Lp(a) 與 ApoB'],
+        ['#comparison', '比較參考方案'],
+        ['#prep', '檢查前準備'],
+      ].map(([href, label]) => <a href={href} class="rounded-full border border-teal-200 px-4 py-2 min-h-11 inline-flex items-center text-teal-800 hover:bg-teal-50">{label}</a>)}
+    </nav>
 
     <!-- Disclaimer -->
     <aside class="rounded-xl border-l-4 border-teal-600 bg-teal-50/60 p-5 mb-12 text-sm text-slate-700 leading-relaxed">
@@ -218,10 +206,7 @@ const description =
         <strong class="text-teal-800">資料來源聲明</strong> —
         套餐資訊整理自義大醫院健診中心官方公告,<strong>套餐內容最後核對日期
           {PACKAGE_LAST_CHECKED}</strong
-        >；USPSTF 大腸癌篩檢分級於 <strong>{LAST_UPDATED}</strong> 依
-        <a href={USPSTF_COLORECTAL_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
-          >USPSTF 正式建議</a
-        >重新核對。套餐原始資料可檢視
+        >；本頁公費資格與篩檢建議的來源於 <strong>{SCREENING_LAST_CHECKED}</strong> 核對，並在各段附上原始來源。這不代表套餐價格已重新確認。套餐原始資料可檢視
         <a href={OFFICIAL_PACKAGES_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
           >義大健診中心套餐總頁</a
         >與
@@ -241,37 +226,55 @@ const description =
       <div class="grid md:grid-cols-3 gap-4">
         <div class="rounded-xl border border-slate-200 bg-white p-5">
           <div class="text-3xl font-extrabold text-teal-700 mb-2">1</div>
-          <h3 class="font-bold text-blue-950 mb-1">看自己的風險</h3>
+          <h3 class="font-bold text-blue-950 mb-1">看風險與公費資格</h3>
           <p class="text-sm text-slate-600 leading-relaxed">
-            年齡、吸菸史、家族病史、慢性病,決定了你該優先篩什麼。實證醫學章節有完整清單。
+            先盤點年齡、吸菸史、家族病史、慢性病與已做過的檢查，再確認公費資格。
           </p>
         </div>
         <div class="rounded-xl border border-slate-200 bg-white p-5">
           <div class="text-3xl font-extrabold text-teal-700 mb-2">2</div>
           <h3 class="font-bold text-blue-950 mb-1">對照套餐 + 點評</h3>
           <p class="text-sm text-slate-600 leading-relaxed">
-            每個方案旁邊都有陳醫師的一段話,告訴你這個套餐適合誰、哪些項目真的值得。
+            逐項比較需求與限制。整套包含某項檢查，不代表每個人都受益，也不代表整套具有同一實證等級。
           </p>
         </div>
         <div class="rounded-xl border border-slate-200 bg-white p-5">
           <div class="text-3xl font-extrabold text-teal-700 mb-2">3</div>
-          <h3 class="font-bold text-blue-950 mb-1">預約 + 指定醫師解說</h3>
+          <h3 class="font-bold text-blue-950 mb-1">確認預約與報告解說</h3>
           <p class="text-sm text-slate-600 leading-relaxed">
-            致電 {BOOKING_PHONE} 分機 {BOOKING_EXTENSIONS.join(' / ')},可直接指定由陳醫師解說報告。
+            致電 {BOOKING_PHONE} 分機 {BOOKING_EXTENSIONS.join(' / ')},可詢問由陳醫師解說報告的安排。
           </p>
         </div>
       </div>
     </section>
 
-    <!-- USPSTF Evidence -->
-    <section id="evidence" class="mb-14">
-      <h2 class="text-2xl font-bold text-blue-950 mb-3">實證醫學觀點:什麼檢查「真的」有用?</h2>
-      <p class="text-slate-700 leading-relaxed mb-6 chinese-line-height">
-        醫學中心的健檢型錄動輒 30–50 項,但真正有實證支持的篩檢項目其實不多。美國預防服務工作小組(
-        <strong>USPSTF</strong>)把篩檢建議分成 A / B / C / D / I 五個等級,A 和 B 代表「證據充足,建議執行」。
-        挑健檢時,讓 A/B 等級的項目先被涵蓋,再看其他附加內容有沒有符合你的個別需求 —
-        這是最省錢也最不容易被過度診斷綁架的方法。
+    <section id="taiwan-screening" class="scroll-mt-24 mb-14" aria-labelledby="taiwan-screening-title">
+      <p class="text-xs font-bold text-teal-700 mb-2">先確認公費，不必直接升級套餐</p>
+      <h2 id="taiwan-screening-title" class="text-2xl font-bold text-blue-950 mb-4">台灣公費篩檢：這三項先看資格</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {TAIWAN_SCREENING.map((item) => (
+          <article class="rounded-xl border border-teal-200 bg-teal-50/50 p-5">
+            <h3 class="font-bold text-blue-950 mb-2">{item.name}</h3>
+            <p class="text-sm text-slate-700 leading-relaxed">{item.eligibility}</p>
+          </article>
+        ))}
+      </div>
+      <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+        公費補助頻率不等於每個人都必須每年檢查。這是部分項目摘要，不是全部公費清單；肺癌、大腸癌等資格與個人篩檢紀錄請一併確認。
+        <a href={HPA_SCREENING_URL} class="text-teal-800 underline" target="_blank" rel="noopener noreferrer">檢視國健署完整癌症篩檢資格</a>。
+        資格來源核對：{SCREENING_LAST_CHECKED}。
       </p>
+    </section>
+
+    <!-- USPSTF Evidence -->
+    <section id="evidence" class="scroll-mt-24 mb-14">
+      <h2 class="text-2xl font-bold text-blue-950 mb-3">國外指引怎麼看？先確認適用族群</h2>
+      <p class="text-slate-700 leading-relaxed mb-4 chinese-line-height">
+        以下是美國預防服務工作小組（USPSTF）的正式建議摘要，<strong>不是台灣公費資格，也不是套餐推薦排行榜</strong>。
+        A／B 表示對指定族群建議提供；C 為個別選擇；D 為不建議；I 為證據不足。
+        有症狀、既往疾病或特殊家族史時，應先接受診斷或個別風險評估。
+      </p>
+      <p class="text-xs text-slate-500 mb-4">來源核對：{SCREENING_LAST_CHECKED}。每列均附正式原始建議；不使用尚未定案的更新草案。</p>
 
       <div class="overflow-x-auto rounded-xl border border-slate-200 mb-4">
         <table class="w-full text-sm">
@@ -287,10 +290,11 @@ const description =
               <tr class="border-t border-slate-100 align-top">
                 <td class="p-3 font-semibold text-blue-950">
                   {e.name}
-                  {e.note && <p class="font-normal text-slate-500 text-xs mt-1 leading-relaxed">{e.note}</p>}
+                  {e.note && <p class="font-normal text-slate-600 text-xs mt-1 leading-relaxed">{e.note}</p>}
+                  <a href={e.sourceUrl} class="inline-flex min-h-11 items-center text-xs font-normal text-teal-800 underline" target="_blank" rel="noopener noreferrer" aria-label={`${e.name}：USPSTF 正式建議`}>檢視正式建議 ↗</a>
                 </td>
                 <td class="p-3 text-center">
-                  <span class="inline-block rounded-full bg-teal-100 text-teal-800 font-bold px-3 py-1 text-xs">
+                  <span class:list={["inline-block rounded-full font-bold px-3 py-1 text-xs", e.grade === 'D' ? 'bg-rose-100 text-rose-900' : e.grade === 'I' || e.grade === 'C' ? 'bg-slate-100 text-slate-800' : 'bg-teal-100 text-teal-800']}>
                     {e.grade}
                   </span>
                 </td>
@@ -320,8 +324,13 @@ const description =
       <a href="/blog/lpa-apob-health-checkup/" class="inline-flex items-center min-h-11 font-semibold text-teal-800 underline underline-offset-4 hover:text-teal-950">
         閱讀完整衛教：膽固醇正常，還需要驗 Lp(a) 和 ApoB 嗎？
       </a>
+      <p class="text-sm text-slate-700 mt-3 leading-relaxed">
+        想先整理整體風險，可看
+        <a href="/blog/health-tools/cardiovascular-risk-estimator/" class="text-teal-800 underline">10 年與 30 年心血管風險估算工具</a>。
+        本站基本模型不使用 Lp(a) 或 ApoB 作為輸入；檢驗結果不能直接加進風險百分比。
+      </p>
       <p class="text-xs text-slate-500 mt-3 leading-relaxed">
-        本節更新：2026-09-15；
+        本節更新：2026-09-20；加選表核對：2026-09-15；
         <a href="https://exdep.edah.org.tw/hec/index.php/en/2017-07-20-05-36-07/145-2025-12-17-06-43-25" class="underline" target="_blank" rel="noopener noreferrer">義大官方自費加選表</a>。
         此更新不代表其他套餐價格或篩檢指引均已重新核對。
       </p>
@@ -329,14 +338,15 @@ const description =
 
     <!-- Package Comparison Summary -->
     <section id="comparison" class="mb-14">
-      <h2 class="text-2xl font-bold text-blue-950 mb-6">16 個套餐一次看完</h2>
+      <h2 class="text-2xl font-bold text-blue-950 mb-3">{PACKAGE_COUNT} 個參考方案一次看完</h2>
+      <p class="text-sm text-slate-600 mb-6">公教專案 {publicPackages.length} 個＋精選套餐 {premiumPackages.length} 個。下列為 {PACKAGE_LAST_CHECKED} 核對的參考價格，非現行報價；是否仍供應、適用身分及內容請先向健診中心確認。</p>
       <div class="overflow-x-auto rounded-xl border border-slate-200">
         <table class="w-full text-sm">
           <thead class="bg-slate-50 text-blue-950">
             <tr>
               <th class="text-left p-3 font-bold">套餐</th>
               <th class="text-left p-3 font-bold">主題</th>
-              <th class="text-right p-3 font-bold">價格</th>
+              <th class="text-right p-3 font-bold">參考價格</th>
               <th class="text-left p-3 font-bold">時長</th>
             </tr>
           </thead>
@@ -362,7 +372,7 @@ const description =
     <!-- Detailed packages: public -->
     <section id="packages-public" class="mb-14">
       <h2 class="text-2xl font-bold text-blue-950 mb-2">公教人員專案 A–H</h2>
-      <p class="text-sm text-slate-600 mb-6">$8,900–$18,800｜同等級項目最便宜的選擇</p>
+      <p class="text-sm text-slate-600 mb-6">$8,900–$18,800（參考價格）｜請確認適用身分及現行內容</p>
       <div class="space-y-6">
         {publicPackages.map((p) => (
           <article id={`pkg-${p.id}`} class="rounded-xl border border-slate-200 bg-white p-6 scroll-mt-24">
@@ -381,7 +391,7 @@ const description =
               </div>
             </div>
             <p class="text-sm text-slate-700 mb-4">
-              <strong class="text-blue-950">適合誰:</strong> {p.bestFor}
+              <strong class="text-blue-950">選擇前考量:</strong> {p.bestFor}
             </p>
             <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-4 chinese-line-height">
               {p.highlights.map((h) => <li>{h}</li>)}
@@ -399,7 +409,7 @@ const description =
     <!-- Detailed packages: premium -->
     <section id="packages-premium" class="mb-14">
       <h2 class="text-2xl font-bold text-blue-950 mb-2">健診中心精選套餐</h2>
-      <p class="text-sm text-slate-600 mb-6">$15,000–$196,000｜加入高階影像或功能醫學項目</p>
+      <p class="text-sm text-slate-600 mb-6">$15,000–$196,000（參考價格）｜項目較多不代表每項都需要</p>
       <div class="space-y-6">
         {premiumPackages.map((p) => (
           <article id={`pkg-${p.id}`} class="rounded-xl border border-slate-200 bg-white p-6 scroll-mt-24">
@@ -413,7 +423,7 @@ const description =
               </div>
             </div>
             <p class="text-sm text-slate-700 mb-4">
-              <strong class="text-blue-950">適合誰:</strong> {p.bestFor}
+              <strong class="text-blue-950">選擇前考量:</strong> {p.bestFor}
             </p>
             <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-4 chinese-line-height">
               {p.highlights.map((h) => <li>{h}</li>)}
@@ -446,41 +456,17 @@ const description =
         </div>
       </div>
 
-      <h3 class="text-lg font-bold text-blue-950 mt-8 mb-4">三種清腸藥的服用時程</h3>
-      <p class="text-sm text-slate-600 mb-6">
-        義大健診中心依個別情況開立下列其中一種。以下時程依各藥品仿單與醫院衛教單整理,實際服藥指示請以健診中心開立的單張與專人說明為準。
-      </p>
-      <div class="grid lg:grid-cols-3 gap-5">
-        {BOWEL_PREP_DRUGS.map((d) => (
-          <article id={`prep-${d.englishName.toLowerCase().replace(/\s+/g, '-')}`} class="rounded-2xl border border-slate-200 bg-white p-5 scroll-mt-24">
-            <header class="mb-4 pb-3 border-b border-slate-100">
-              <h4 class="text-lg font-bold text-blue-950">
-                {d.name} <span class="text-sm text-slate-500 font-normal">{d.englishName}</span>
-              </h4>
-              <p class="text-xs text-slate-500 mt-1">{d.generic}</p>
-            </header>
-            <ol class="space-y-3 text-sm text-slate-700 chinese-line-height">
-              {d.steps.map((s, i) => (
-                <li class="flex gap-3">
-                  <span class="shrink-0 w-6 h-6 rounded-full bg-teal-50 text-teal-700 text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
-                  <div>
-                    <div class="font-semibold text-blue-950 text-xs uppercase tracking-wide mb-0.5">{s.time}</div>
-                    <div>{s.action}</div>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <aside class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-600 chinese-line-height">
-              <p class="font-semibold text-blue-950 mb-1">⚠️ 注意</p>
-              <p>{d.note}</p>
-            </aside>
-            <p class="mt-3 text-[10px] text-slate-400">{d.source}</p>
-          </article>
-        ))}
+      <div class="mt-8 rounded-xl border border-amber-200 bg-amber-50/60 p-6">
+        <h3 class="text-lg font-bold text-blue-950 mb-3">清腸前，向檢查團隊確認這四件事</h3>
+        <p class="text-sm text-slate-700 mb-4 leading-relaxed">本頁不提供通用清腸劑量、固定服藥時刻或停藥指示。請以健診中心本次給你的書面衛教單為準。</p>
+        <ul class="list-disc pl-5 text-sm text-slate-700 space-y-3 leading-relaxed">
+          {BOWEL_PREP_CHECKLIST.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="text-xs text-slate-600 mt-4 leading-relaxed">
+          腎臟或心臟疾病、懷孕可能、曾有腸阻塞或無法大量飲水，請在預約時告知。
+          <a href={BOWEL_PREP_SOURCE_URL} class="text-teal-800 underline" target="_blank" rel="noopener noreferrer">參考：2025 多專科大腸鏡清腸共識</a>。
+        </p>
       </div>
-      <p class="text-xs text-slate-500 mt-4 chinese-line-height">
-        <strong>預約時需先告知</strong>:腎臟疾病、先天性巨結腸症、腸阻塞或腸穿孔、嚴重肝硬化合併腹水、癲癇病史、懷孕或無法配合大量飲水者,健診中心會評估適合的清腸方式。如服用抗血小板或抗凝血藥物(Aspirin、Clopidogrel、Warfarin、Dabigatran、Rivaroxaban、Apixaban 等),不可自行停藥;是否調整與停用多久取決於藥物、腎功能、預計內視鏡處置及個人出血/血栓風險,應由原處方醫師與內視鏡團隊共同決定。
-      </p>
     </section>
 
     <!-- Transit -->
@@ -501,7 +487,7 @@ const description =
           <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 chinese-line-height">
             {TRANSIT_PUBLIC.map((item) => <li>{item}</li>)}
           </ul>
-          <p class="text-xs text-slate-500 mt-3">※ 當日含無痛胃腸鏡者,務必由家人接送或搭大眾運輸。</p>
+          <p class="text-xs text-slate-500 mt-3">※ 接受鎮靜後不得自行駕車；離院方式及是否需成人陪同，請依本次院方書面指示事先安排。</p>
         </div>
       </div>
     </section>
@@ -526,7 +512,7 @@ const description =
 
     <!-- CTA -->
     <section class="rounded-2xl bg-gradient-to-br from-blue-950 to-teal-700 text-white p-10 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">預約時可直接指定陳醫師解說報告</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">預約時可詢問陳醫師解說報告的安排</h2>
       <p class="text-white/80 mb-4 max-w-2xl mx-auto leading-relaxed chinese-line-height">
         健檢拿到一份報告只是起點。具備家庭醫學、實證醫學與行為科學訓練的醫師,能把數字跟你的生活型態、病史連結起來,找出具體可以改變的切入點 —
         這才是把健檢花的錢真正用在「變健康」上。
