@@ -18,5 +18,7 @@ test('content preserves clinical and hospital-offering limits', () => {
   }
   assert.doesNotMatch(article, /\$350|\$700|350 元|700 元/);
   assert.match(checkup, /dateModified: PAGE_UPDATED/);
-  assert.match(checkup, /lastReviewed: LAST_UPDATED/);
+  // 局部內容來源核對不應宣稱整頁已完成醫療審閱。
+  assert.doesNotMatch(checkup, /lastReviewed:/);
+  assert.match(checkup, /SCREENING_LAST_CHECKED/);
 });

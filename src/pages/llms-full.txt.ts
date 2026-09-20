@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { PACKAGE_COUNT, PACKAGE_LAST_CHECKED } from '../data/checkup';
 
 // 固定的醫師資訊區塊(手動維護,變動少)
 const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
@@ -24,7 +25,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [高雄減重門診](/weight-loss/) — 義大減重中心與旗山週五夜診；整合飲食、運動、睡眠、壓力、行為科學與適當藥物選項
 - [骨質疏鬆門診](/osteoporosis/) — DXA 骨密度、骨折風險、次發原因、用藥與跌倒預防的整合評估
 - [企業臨場健康服務](/workplace-health/) — 依人數、危害作業與事業類別核對醫護配置，提供職場健康服務與合作洽詢
-- [義大健檢指南](/health-checkup/) — 義大醫院 16 個健檢套餐完整比較、實證點評、健檢前準備、清腸藥時程、交通與預約
+- [義大健檢指南](/health-checkup/) — 義大醫院 ${PACKAGE_COUNT} 個參考健檢方案（套餐資料核對日 ${PACKAGE_LAST_CHECKED}）；台灣公費篩檢、USPSTF 建議與自費套餐分開說明，現行價格及供應情況請向健診中心確認
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診（高雄市旗山區瑞吉里延平一路 337 號）：藥物減重、三高慢性病追蹤、家醫科，適合旗山/美濃/田寮/內門居民與下班後就診的上班族
 - [衛教演講 / 企業健康講座](/speaking/) — 曾合作中鋼、中油、國巨、李長榮、英特格、麥當勞、東海/義大/高科大/中正大學等；主題含減重、三高、骨鬆、行為科學、職場健康四大計畫；南部為主、線上可接；邀約 cyc@edfm.org
 - [衛教專欄](/blog/) — 健康衛教文章

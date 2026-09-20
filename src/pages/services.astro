@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { PACKAGE_COUNT } from '../data/checkup';
 ---
 
 <Layout title="服務項目｜陳昱彰醫師" description="義大醫院家醫科陳昱彰醫師提供的六大服務：藥物減重門診（含 GLP-1）、骨質疏鬆評估、企業臨場健康服務與職安四大計畫、高階健檢報告解說、運動處方、社區健康營造。結合行為科學與實證醫學，量身規劃。">
@@ -60,11 +61,11 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <h2 class="text-2xl font-bold mb-4 font-headline">義大健檢完整指南</h2>
             <p class="text-on-primary-container leading-relaxed mb-6 chinese-line-height">
-              義大醫院健診中心 16 個套餐一次比完，附 USPSTF 實證點評、健檢前準備、清腸藥時程與交通資訊。我幫你用家醫科的角度，告訴你哪個方案適合你，預約時也可指定由我為你解說報告。
+              整理義大醫院健診中心 {PACKAGE_COUNT} 個參考方案，分清台灣公費篩檢、USPSTF 建議與自費套餐，附資料核對日期與健檢前準備。預約時可詢問由陳醫師解說報告的安排。
             </p>
           </div>
           <span class="text-sm font-medium opacity-80 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-            檢視 16 套餐完整比較 →
+            檢視 {PACKAGE_COUNT} 個參考方案與篩檢建議 →
           </span>
         </a>
 

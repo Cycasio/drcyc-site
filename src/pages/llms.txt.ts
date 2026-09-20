@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { PACKAGE_COUNT, PACKAGE_LAST_CHECKED } from '../data/checkup';
 
 // ⚠️ 此檔 build 時自動生成 /llms.txt。文章索引由 getCollection('blog') 產生,永不漂移。
 // HEADER / FOOTER 為手動維護的靜態內容(醫師資訊、服務、證照、Q&A);新增文章「不需」改這裡。
@@ -30,7 +31,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [高雄減重門診](/weight-loss/) — 義大減重中心與旗山週五夜診；整合飲食、運動、睡眠、壓力、行為科學與適當藥物選項
 - [骨質疏鬆門診](/osteoporosis/) — DXA 骨密度、骨折風險、次發原因、用藥與跌倒預防的整合評估
 - [企業臨場健康服務](/workplace-health/) — 依人數、危害作業與事業類別核對醫護配置，提供職場健康服務與合作洽詢
-- [義大健檢指南](/health-checkup/) — 義大醫院 16 個健檢套餐比較與實證點評
+- [義大健檢指南](/health-checkup/) — 義大醫院 ${PACKAGE_COUNT} 個參考健檢方案（套餐資料核對日 ${PACKAGE_LAST_CHECKED}）；台灣公費篩檢、USPSTF 建議與自費套餐分開說明，現行價格及供應情況請向健診中心確認
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診：減重、三高、家醫科
 - [衛教演講 / 企業健康講座](/speaking/) — 企業、公所、學校、社區的健康講座邀約
 - [衛教專欄](/blog/) — 健康衛教文章
