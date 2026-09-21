@@ -55,13 +55,18 @@ const medicalWebPage = {
   description,
   inLanguage: 'zh-Hant',
   about: { '@type': 'MedicalEntity', name: '初級預防心血管風險評估' },
-  dateModified: '2026-09-20',
+  dateModified: '2026-09-21',
   author: { '@id': `${SITE}/#person` },
   mainEntity: { '@id': `${pageUrl}#calculator` },
   isAccessibleForFree: true,
 };
 
 const faqItems = [
+  {
+    question: '風險 5% 是什麼意思？代表血管塞了 5% 嗎？',
+    answer:
+      '不是。若結果是「10 年 ASCVD 風險 5%」，表示模型估計每 100 位風險因子相近的人中，約 5 位可能在未來 10 年發生心肌梗塞、冠心病死亡或中風等 ASCVD 事件。這不是血管狹窄程度，也不是預測幾歲發病。30 年結果則看未來 30 年，不能把不同期間或疾病的百分比混在一起。',
+  },
   {
     question: '哪些人適合使用這個基本模型？',
     answer:

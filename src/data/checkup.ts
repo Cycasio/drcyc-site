@@ -9,11 +9,19 @@ export const LAST_UPDATED = '2026-09-02';
 // 僅指下方篩檢建議與台灣公費資格的來源核對，不代表套餐價格重新查核。
 export const SCREENING_LAST_CHECKED = '2026-09-20';
 export const PACKAGE_LAST_CHECKED = '2026-05-26';
+// 15 個方案的官方公開標價；不代表全部檢查項目或預約供應狀態重新核對。
+export const PACKAGE_PRICE_LAST_CHECKED = '2026-09-21';
 export const HOSPITAL_URL = 'https://www.edah.org.tw';
 export const OFFICIAL_PACKAGES_URL =
   'https://exdep.edah.org.tw/hec/index.php/en/2017-07-20-05-36-07';
-export const PUBLIC_EMPLOYEE_PDF_URL =
-  'https://exdep.edah.org.tw/hec/images/2025/Governmental/2025poster.pdf';
+export const PUBLIC_EMPLOYEE_PDF_SOURCES = ['AB', 'CD', 'EF', 'GH'].map((pair) => ({
+  label: `公教 ${pair[0]}、${pair[1]} 專案（2026 PDF）`,
+  url: `https://exdep.edah.org.tw/hec/images/2026/Governmental/${pair}.PDF`,
+}));
+export const PREMIUM_PRICE_SOURCES = [
+  ['健康活力', '7-3'], ['舒適健檢', '12-3'], ['樂活安心', '11-3'],
+  ['富樂人生', '6-3'], ['菁采人生', '10-3'], ['吉緻健檢', '9-3'], ['尊爵健檢', '8-1-4'],
+].map(([label, image]) => ({ label, url: `https://exdep.edah.org.tw/hec/images/2026/Meal/${image}.jpg` }));
 export const USPSTF_COLORECTAL_URL =
   'https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening';
 export const BOOKING_PHONE = '07-615-0011';
@@ -58,7 +66,7 @@ export const PACKAGES: Package[] = [
     duration: '半日',
     bestFor: '想在半日內加做一項高階影像(CT),不跑到全日檢',
     highlights: [
-      '專案 A 全部內容',
+      '基礎抽血檢查、腹部超音波與胸部 X 光；內容與專案 A 不完全相同',
       '640 排 CT 三擇一:冠狀動脈鈣化指數 / 頭部 CT / 低劑量肺部 CT(LDCT)',
       '加做胰島素阻抗 HOMA-IR',
     ],
@@ -76,11 +84,10 @@ export const PACKAGES: Package[] = [
     highlights: [
       '640 排低劑量肺部 CT(LDCT)',
       '640 排冠狀動脈鈣化指數',
-      '同半胱胺酸 Homocysteine',
-      '骨質密度 DXA、電解質、完整腫瘤標記',
+      '電解質、腫瘤標記與腹部超音波；未包含同半胱胺酸及骨密度檢查',
     ],
     chenNote:
-      'USPSTF 的 LDCT Grade B 適用於 50–80 歲、至少 20 包年，且仍吸菸或戒菸未滿 15 年者；這個分級不延伸到整套套餐。冠狀動脈鈣化、骨密度及腫瘤標記需分別評估，不應因為搭售就視為都需要。',
+      'USPSTF 的 LDCT Grade B 適用於 50–80 歲、至少 20 包年，且仍吸菸或戒菸未滿 15 年者；這個分級不延伸到整套套餐。冠狀動脈鈣化及腫瘤標記需分別評估，不應因為搭售就視為都需要。',
   },
   {
     id: 'D',
@@ -101,19 +108,18 @@ export const PACKAGES: Package[] = [
   {
     id: 'E',
     group: '公教人員專案',
-    name: '腦血管健檢',
-    theme: '腦中風風險全套評估',
+    name: '腦部健檢',
+    theme: '頭部 MRI 與相關檢查',
     price: 16000,
     duration: '一日',
     bestFor: '希望了解腦部影像項目者；有症狀請先門診評估',
     highlights: [
       '1.5T 頭部磁振造影 Brain MRI',
-      '頸動脈內膜中層厚度 IMT(早期動脈硬化指標)',
       '同半胱胺酸 + CPK/LDH 心肌酵素',
       '骨質密度、完整電解質、風濕免疫',
     ],
     chenNote:
-      '腦部影像正常不能保證未來不會中風。血壓、血脂、糖尿病與吸菸管理仍是重要基礎。一般無症狀成人不建議例行篩檢頸動脈狹窄；IMT 與狹窄篩檢不是同一項評估，也不應據此宣稱整套檢查可預防中風。',
+      '腦部影像正常不能保證未來不會中風。血壓、血脂、糖尿病與吸菸管理仍是重要基礎，不應因包含頭部 MRI 就宣稱整套檢查可預防中風。有突發神經症狀應立即就醫，不要等健檢。',
   },
   {
     id: 'F',
@@ -127,7 +133,7 @@ export const PACKAGES: Package[] = [
       '慢性食物發炎檢測 IgG4',
       '環境荷爾蒙代謝評估',
       '腹部超音波、胸部 X 光、心電圖',
-      '基礎生化、血脂、甲狀腺',
+      '基礎生化、血脂、甲狀腺刺激素 TSH',
     ],
     chenNote:
       'IgG4 檢測與 IgE 過敏評估不同，不宜自行把檢驗結果當成食物過敏診斷，或據此長期限制飲食。有疲勞、過敏等症狀應先接受臨床評估；選套餐前請確認結果是否會改變有根據的照護方式。',
@@ -142,8 +148,8 @@ export const PACKAGES: Package[] = [
     bestFor: '經醫師評估有冠狀動脈影像需求者；不是胸痛就醫的替代方案',
     highlights: [
       '640 排冠狀動脈血管 CT(含顯影劑)— 直接看血管狹窄',
-      '完整腫瘤標記、腹部超音波',
-      '完整基礎抽血檢查',
+      '腫瘤標記與腹部超音波',
+      '基礎抽血檢查；實際項目請對照官方型錄',
     ],
     chenNote:
       '冠狀動脈 CTA 與鈣化指數的用途不同，不能只用價格或影像精細度比較。CTA 涉及顯影劑與輻射，需先評估臨床問題及腎功能。有胸痛、胸悶應先就醫；突發持續胸痛或合併冒冷汗、呼吸困難，請立即求助急診，不要等健檢。',
@@ -449,7 +455,7 @@ export const FAQ = [
   },
   {
     q: '義大健檢價格會變嗎?這份資料可信嗎?',
-    a: '價格每年會小幅更新。本頁由義大醫院家醫科陳昱彰醫師整理自 2025–2026 年度官方公告,並標註最後核對日期。預約前建議再跟健診中心確認 07-615-0011 分機 5706 / 5708 / 5715 / 5716 / 5735。若官方價格有更動,將以義大醫院最新公告為準。',
+    a: `價格與方案可能調整。本頁 15 個方案的官方公開標價於 ${PACKAGE_PRICE_LAST_CHECKED} 核對；整份套餐內容的前次核對日為 ${PACKAGE_LAST_CHECKED}，本次局部項目修正另於頁面說明。價格核對不代表全部內容或供應狀態重新確認。預約前請向健診中心確認 07-615-0011 分機 5706 / 5708 / 5715 / 5716 / 5735，實際價格與項目以院方確認為準。`,
   },
   {
     q: '健檢前要空腹多久?藥可以繼續吃嗎?',
