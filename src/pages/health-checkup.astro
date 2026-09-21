@@ -17,9 +17,11 @@ import {
   TRANSIT_PUBLIC,
   FAQ,
   PACKAGE_LAST_CHECKED,
+  PACKAGE_PRICE_LAST_CHECKED,
   HOSPITAL_URL,
   OFFICIAL_PACKAGES_URL,
-  PUBLIC_EMPLOYEE_PDF_URL,
+  PUBLIC_EMPLOYEE_PDF_SOURCES,
+  PREMIUM_PRICE_SOURCES,
   BOOKING_PHONE,
   BOOKING_EXTENSIONS,
 } from '../data/checkup';
@@ -27,7 +29,7 @@ import {
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/health-checkup/`;
 // 頁面內容更新與套餐、USPSTF 資料核對日期分開，避免暗示全部資訊均重新查核。
-const PAGE_UPDATED = '2026-09-20';
+const PAGE_UPDATED = '2026-09-21';
 
 const publicPackages = PACKAGES.filter((p) => p.group === '公教人員專案');
 const premiumPackages = PACKAGES.filter((p) => p.group === '健診中心精選');
@@ -159,7 +161,7 @@ const breadcrumbSchema = {
 
 const title = '義大醫院健檢指南 2026｜公費篩檢與套餐比較｜陳昱彰醫師';
 const description =
-  `陳昱彰醫師整理義大醫院 ${PACKAGE_COUNT} 個參考健檢方案，先看台灣公費篩檢，再對照 USPSTF 建議與個人風險。套餐核對日 ${PACKAGE_LAST_CHECKED}，價格及供應請向健診中心確認。`;
+  `陳昱彰醫師整理義大醫院 ${PACKAGE_COUNT} 個參考健檢方案，先看台灣公費篩檢，再對照 USPSTF 建議與個人風險。公開標價核對日 ${PACKAGE_PRICE_LAST_CHECKED}，實際價格、內容及供應請向健診中心確認。`;
 ---
 
 <Layout
@@ -204,16 +206,24 @@ const description =
     <aside class="rounded-xl border-l-4 border-teal-600 bg-teal-50/60 p-5 mb-12 text-sm text-slate-700 leading-relaxed">
       <p class="mb-2">
         <strong class="text-teal-800">資料來源聲明</strong> —
-        套餐資訊整理自義大醫院健診中心官方公告,<strong>套餐內容最後核對日期
-          {PACKAGE_LAST_CHECKED}</strong
-        >；本頁公費資格與篩檢建議的來源於 <strong>{SCREENING_LAST_CHECKED}</strong> 核對，並在各段附上原始來源。這不代表套餐價格已重新確認。套餐原始資料可檢視
+        <strong>15 個方案的官方公開標價核對日：{PACKAGE_PRICE_LAST_CHECKED}</strong>。
+        公費資格與篩檢建議核對日：{SCREENING_LAST_CHECKED}；整份套餐內容前次核對日：{PACKAGE_LAST_CHECKED}。
+        本次另修正公教 B、C、E、F、G 方案的部分項目，不代表全部套餐內容已重新核對。
+        實際價格、檢查項目、適用身分與是否仍供應，請於預約時向健診中心確認。
+      </p>
+      <details class="mb-3">
+        <summary class="cursor-pointer text-teal-800 font-semibold py-2">檢視官方套餐與標價來源</summary>
+        <p class="mt-2">
         <a href={OFFICIAL_PACKAGES_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
           >義大健診中心套餐總頁</a
-        >與
-        <a href={PUBLIC_EMPLOYEE_PDF_URL} target="_blank" rel="noopener" class="text-teal-700 underline"
-          >2025–2026 公教人員專案 PDF</a
-        >；實際價格、項目與最新方案仍以健診中心最新公告為準。
-      </p>
+        >；公教 PDF 與精選套餐下列型錄頁可核對本表價格，其他項目請看完整型錄。
+        </p>
+        <ul class="list-disc pl-5 mt-2 space-y-2">
+          {[...PUBLIC_EMPLOYEE_PDF_SOURCES, ...PREMIUM_PRICE_SOURCES].map((source) => (
+            <li><a href={source.url} target="_blank" rel="noopener noreferrer" class="text-teal-700 underline">{source.label}</a></li>
+          ))}
+        </ul>
+      </details>
       <p>
         本文由義大家庭暨社區醫學部陳昱彰醫師整理,<strong>不收取任何轉介佣金</strong
         >,亦非任何形式的廣告文宣。撰寫目的是協助民眾在有實證醫學觀點下選擇適合自己的健檢方案。
@@ -339,7 +349,7 @@ const description =
     <!-- Package Comparison Summary -->
     <section id="comparison" class="mb-14">
       <h2 class="text-2xl font-bold text-blue-950 mb-3">{PACKAGE_COUNT} 個參考方案一次看完</h2>
-      <p class="text-sm text-slate-600 mb-6">公教專案 {publicPackages.length} 個＋精選套餐 {premiumPackages.length} 個。下列為 {PACKAGE_LAST_CHECKED} 核對的參考價格，非現行報價；是否仍供應、適用身分及內容請先向健診中心確認。</p>
+      <p class="text-sm text-slate-600 mb-6">公教專案 {publicPackages.length} 個＋精選套餐 {premiumPackages.length} 個。下列為 {PACKAGE_PRICE_LAST_CHECKED} 核對的官方公開參考價格，非現行報價；是否仍供應、適用身分及內容請先向健診中心確認。</p>
       <div class="overflow-x-auto rounded-xl border border-slate-200">
         <table class="w-full text-sm">
           <thead class="bg-slate-50 text-blue-950">

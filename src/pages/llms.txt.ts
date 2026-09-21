@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { PACKAGE_COUNT, PACKAGE_LAST_CHECKED } from '../data/checkup';
+import { PACKAGE_COUNT, PACKAGE_LAST_CHECKED, PACKAGE_PRICE_LAST_CHECKED } from '../data/checkup';
 
 // ⚠️ 此檔 build 時自動生成 /llms.txt。文章索引由 getCollection('blog') 產生,永不漂移。
 // HEADER / FOOTER 為手動維護的靜態內容(醫師資訊、服務、證照、Q&A);新增文章「不需」改這裡。
@@ -31,7 +31,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [高雄減重門診](/weight-loss/) — 義大減重中心與旗山週五夜診；整合飲食、運動、睡眠、壓力、行為科學與適當藥物選項
 - [骨質疏鬆門診](/osteoporosis/) — DXA 骨密度、骨折風險、次發原因、用藥與跌倒預防的整合評估
 - [企業臨場健康服務](/workplace-health/) — 依人數、危害作業與事業類別核對醫護配置，提供職場健康服務與合作洽詢
-- [義大健檢指南](/health-checkup/) — 義大醫院 ${PACKAGE_COUNT} 個參考健檢方案（套餐資料核對日 ${PACKAGE_LAST_CHECKED}）；台灣公費篩檢、USPSTF 建議與自費套餐分開說明，現行價格及供應情況請向健診中心確認
+- [義大健檢指南](/health-checkup/) — 義大醫院 ${PACKAGE_COUNT} 個參考健檢方案（公開標價核對日 ${PACKAGE_PRICE_LAST_CHECKED}；整份套餐內容前次核對日 ${PACKAGE_LAST_CHECKED}）；台灣公費篩檢、USPSTF 建議與自費套餐分開說明，實際價格、內容及供應情況請向健診中心確認
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診：減重、三高、家醫科
 - [衛教演講 / 企業健康講座](/speaking/) — 企業、公所、學校、社區的健康講座邀約
 - [衛教專欄](/blog/) — 健康衛教文章
@@ -78,7 +78,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - 適合：完整健檢 + 減重規劃、醫學中心等級影像設備、住燕巢/楠梓/岡山/橋頭/左營一帶
 
 ### 大政診所（週五夜診）
-- 地址：高雄市旗山區
+- 地址：高雄市旗山區瑞吉里延平一路 337 號
 - 電話：07-662-2588
 - 地圖:https://maps.app.goo.gl/JcgmsZQqFahbT2T1A
 - 時段：每週五 18:00–21:00 夜診
@@ -132,7 +132,7 @@ const FOOTER = `## 核心服務
 ## 常見問答
 
 **Q: 陳醫師的門診在哪裡？**
-A: 義大醫院家庭暨社區醫學部及義大減重中心，位於高雄市。預約掛號：https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675
+A: 兩個看診地點：(1) 義大醫院家庭暨社區醫學部／健診中心／減重中心，地址為高雄市燕巢區角宿里義大路 1 號 A 棟；週一、週二上午健檢報告解說，週五上午家醫科門診，週五下午減重中心。預約掛號：https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675 。(2) 旗山大政診所，地址為高雄市旗山區瑞吉里延平一路 337 號；每週五 18:00–21:00 夜診，電話 07-662-2588。實際看診與名額請依院所公告或預約時確認；詳見 https://www.drcyc.io/qishan-clinic/ 。
 
 **Q: 陳醫師的專長有哪些？**
 A: 家庭醫學、肥胖醫學、骨質疏鬆、運動處方、行為科學與實證醫學。具家庭醫學科專科醫師資格，並取得台灣肥胖醫學會與中華民國骨質疏鬆症學會認證；現為職業醫學科訓練醫師，尚未取得該科專科醫師資格，並具勞工健康服務醫師資格。
@@ -147,7 +147,7 @@ A: 結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患從�
 A: 依據《職業安全衛生法》提供勞工健康保護四大計畫（人因危害、異常工作負荷、執行職務遭受不法侵害、母性保護）、工作環境危害評估、員工健康管理與追蹤。
 
 **Q: 如何聯絡陳醫師？**
-A: Facebook 粉專 @lazydr、Email cyc@edfm.org，或直接至義大醫院門診。
+A: Facebook 粉專 @lazydr、Email cyc@edfm.org；看診可透過義大醫院線上掛號 https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675 ，或致電旗山大政診所 07-662-2588 預約週五夜診。
 
 ## 關鍵字
 
