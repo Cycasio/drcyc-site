@@ -107,22 +107,22 @@ Semaglutide 與猛健樂的成分 tirzepatide，雖然經常被一起討論，�
 
 <h2 id="references">參考文獻（References）</h2>
 
-<p id="ref-1"></p>
+<h3 id="ref-1" style="scroll-margin-top: 6rem">［1］癌症觀察研究</h3>
 
-1. Hsu AH-C, Ramirez PT, Chang Y-H, et al. GLP-1 receptor agonist use and cancer risk in obese nondiabetic adults. *Annals of Oncology*. 2026;37(8):1178–1185. DOI: [10.1016/j.annonc.2026.04.013](https://doi.org/10.1016/j.annonc.2026.04.013). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/42252247/)
+Hsu AH-C, Ramirez PT, Chang Y-H, et al. GLP-1 receptor agonist use and cancer risk in obese nondiabetic adults. *Annals of Oncology*. 2026;37(8):1178–1185. DOI: [10.1016/j.annonc.2026.04.013](https://doi.org/10.1016/j.annonc.2026.04.013). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/42252247/)
 
-<p id="ref-2"></p>
+<h3 id="ref-2" style="scroll-margin-top: 6rem">［2］失智診斷觀察研究</h3>
 
-2. Schechter M, Sehtman-Shachar DR, Fishkin A, et al. Dementia progression with GLP-1 receptor agonists in people with mild cognitive impairment and type 2 diabetes: target-trial emulation study. *Alzheimer's & Dementia: Translational Research & Clinical Interventions*. 2026;12(3):e70315. DOI: [10.1002/trc2.70315](https://doi.org/10.1002/trc2.70315). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/42769274/)
+Schechter M, Sehtman-Shachar DR, Fishkin A, et al. Dementia progression with GLP-1 receptor agonists in people with mild cognitive impairment and type 2 diabetes: target-trial emulation study. *Alzheimer's & Dementia: Translational Research & Clinical Interventions*. 2026;12(3):e70315. DOI: [10.1002/trc2.70315](https://doi.org/10.1002/trc2.70315). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/42769274/)
 
-<p id="ref-3"></p>
+<h3 id="ref-3" style="scroll-margin-top: 6rem">［3］SELECT 血液蛋白指標研究</h3>
 
-3. Jiménez-Mausbach M, Tijms BM, Paterson C, et al. Semaglutide attenuates a proteomics-based dementia risk signature in older adults with overweight or obesity and cardiovascular disease without diabetes: A post hoc analysis of the SELECT phase 3 trial. *Alzheimer's & Dementia: Diagnosis, Assessment & Disease Monitoring*. 2026;18(3):e70432. DOI: [10.1002/dad2.70432](https://doi.org/10.1002/dad2.70432). [免費全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC13452022/)
+Jiménez-Mausbach M, Tijms BM, Paterson C, et al. Semaglutide attenuates a proteomics-based dementia risk signature in older adults with overweight or obesity and cardiovascular disease without diabetes: A post hoc analysis of the SELECT phase 3 trial. *Alzheimer's & Dementia: Diagnosis, Assessment & Disease Monitoring*. 2026;18(3):e70432. DOI: [10.1002/dad2.70432](https://doi.org/10.1002/dad2.70432). [免費全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC13452022/)
 
-<p id="ref-4"></p>
+<h3 id="ref-4" style="scroll-margin-top: 6rem">［4］癌症隨機試驗統合分析</h3>
 
-4. Ko A, Chang YC, Bahar F, et al. Risk for Cancer With Glucagon-Like Peptide-1 Receptor Agonists and Dual Agonists: A Systematic Review and Meta-analysis. *Annals of Internal Medicine*. 2026;179(2):216–229. DOI: [10.7326/ANNALS-25-02237](https://doi.org/10.7326/ANNALS-25-02237). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/41359966/)
+Ko A, Chang YC, Bahar F, et al. Risk for Cancer With Glucagon-Like Peptide-1 Receptor Agonists and Dual Agonists: A Systematic Review and Meta-analysis. *Annals of Internal Medicine*. 2026;179(2):216–229. DOI: [10.7326/ANNALS-25-02237](https://doi.org/10.7326/ANNALS-25-02237). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/41359966/)
 
-<p id="ref-5"></p>
+<h3 id="ref-5" style="scroll-margin-top: 6rem">［5］EVOKE 與 EVOKE+ 隨機試驗</h3>
 
-5. Cummings JL, Atri A, Sano M, et al. Efficacy and safety of oral semaglutide 14 mg (flexible dose) in early-stage symptomatic Alzheimer's disease (evoke and evoke+): two phase 3, randomised, placebo-controlled trials. *The Lancet*. 2026;407(10544):2167–2179. DOI: [10.1016/S0140-6736(26)00459-9](https://doi.org/10.1016/S0140-6736(26)00459-9). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/41865758/)
+Cummings JL, Atri A, Sano M, et al. Efficacy and safety of oral semaglutide 14 mg (flexible dose) in early-stage symptomatic Alzheimer's disease (evoke and evoke+): two phase 3, randomised, placebo-controlled trials. *The Lancet*. 2026;407(10544):2167–2179. DOI: [10.1016/S0140-6736(26)00459-9](https://doi.org/10.1016/S0140-6736(26)00459-9). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/41865758/)
