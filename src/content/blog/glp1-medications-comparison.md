@@ -2,7 +2,7 @@
 title: "減重藥物怎麼選？Mounjaro、Wegovy、Orlistat、Contrave 完整比較（2026）"
 description: "GIP/GLP-1 雙重受體促效劑猛健樂、GLP-1 類的 Wegovy、Ozempic、Rybelsus，以及非腸泌素類的 Orlistat 與 Contrave 有何差異？整理機轉、核准用途、試驗減重幅度、副作用與注意事項，協助就診前理解選項。"
 pubDate: 2026-05-31
-updatedDate: 2026-08-21
+updatedDate: 2026-10-21
 author: "陳昱彰醫師"
 tags:
   - Mounjaro
@@ -254,6 +254,8 @@ Contrave 因含 bupropion，仿單有自殺意念與行為的加框警語；開�
 如果你考慮使用減重藥物，歡迎到[義大醫院家醫科 / 減重中心](/conditions/)門診評估，或先用 [GLP-1 減重藥物資格評估工具](/tools/glp1-eligibility/)看看自己符不符合適應症。
 
 ---
+
+若想知道選藥時是否該考慮「防癌、防失智」，可參考[GLP-1 相關藥物的癌症與失智症研究整理](/blog/glp1-cancer-dementia-evidence/)。不同成分、族群與研究設計不能混為一談，目前這些新發現不足以單獨作為換藥理由。
 
 ### 主要參考文獻
 

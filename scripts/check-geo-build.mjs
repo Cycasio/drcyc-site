@@ -35,3 +35,25 @@ for (const route of ['/services/', '/qishan-clinic/', '/health-checkup/', '/blog
   assert.ok(existsSync('dist' + route + 'index.html'), route);
 }
 console.log('GEO build checks passed: 5 consolidated FAQs, ' + verifiedDates + ' content dates, internal routes and article attribution.');
+
+const glp1Route = '/blog/glp1-cancer-dementia-evidence/';
+const glp1 = read(glp1Route);
+const originalTitle = '減重藥不只幫助變瘦？也能降低癌症與失智症風險？';
+assert.equal(glp1.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1].trim(), originalTitle, 'GLP-1 original title preserved');
+assert.equal((glp1.match(/<h1\b/g) ?? []).length, 1, 'single article H1');
+assert.ok(glp1.includes('data-mobile-toc'), 'mobile TOC rendered');
+assert.ok(glp1.includes('class="evidence-summary"'), 'responsive research summary');
+assert.ok(glp1.includes('門診用藥判斷：新研究會改變選藥嗎？'), 'clinical interpretation visible');
+assert.ok(glp1.includes('id="references"'), 'stable references deep link');
+const refsHeading = glp1.match(/<h2 id="([^"]+)">參考文獻（References）<\/h2>/)?.[1];
+assert.ok(refsHeading, 'reference heading parsed as Markdown');
+assert.equal((glp1.match(new RegExp(`href="#${refsHeading}"`, 'g')) ?? []).length, 2, 'references in desktop and mobile TOCs');
+for (let i = 1; i <= 5; i++) {
+  assert.ok(glp1.includes(`id="ref-${i}"`), `reference ${i}`);
+  assert.ok(glp1.includes(`id="cite-${i}"`), `citation target ${i}`);
+  assert.ok(glp1.includes(`href="#cite-${i}"`), `return link ${i}`);
+}
+for (const route of ['/blog/mounjaro-weight-loss/', '/blog/glp1-medications-comparison/', '/blog/exercise-glp1-weight-loss/', '/weight-loss/']) {
+  assert.ok(read(route).includes(`href="${glp1Route}"`), route + ' contextual GLP-1 link');
+}
+console.log('GLP-1 checks passed: preserved title, both TOCs, five references/backlinks, summary, clinical guidance and four inbound links.');

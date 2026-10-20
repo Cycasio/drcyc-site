@@ -28,6 +28,7 @@ export function articleDates(directory, prefix = '') {
 
 // Dates represent actual content edits, never the date of a build.
 export const staticDates = new Map([
+  ['/weight-loss/', '2026-10-21'],
   ['/health-checkup/', '2026-10-19'],
   ['/qishan-clinic/', '2026-10-19'],
   ['/privacy/', '2026-10-19'],
