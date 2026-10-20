@@ -8,10 +8,14 @@
     "check:terms": "node scripts/check-taiwan-terms.mjs",
     "check:schema-dates": "node scripts/check-structured-dates.mjs dist",
     "prebuild": "npm run check:terms",
-    "postbuild": "node scripts/check-taiwan-terms.mjs dist && npm run check:schema-dates",
+    "postbuild": "node scripts/check-taiwan-terms.mjs dist && npm run check:schema-dates && npm run check:geo",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:geo": "node scripts/check-geo-build.mjs",
+    "check:functions": "tsc -p config/functions.tsconfig.json",
+    "check:release-stage": "node scripts/check-release-stage.mjs",
+    "types:events": "wrangler types config/site-events-env.d.ts --config config/analytics-types.wrangler.jsonc --env-interface SiteEventsEnv --include-runtime=false --strict-vars=false"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -20,7 +24,10 @@
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261018.1",
     "@resvg/resvg-js": "^2.6.2",
-    "satori": "^0.26.0"
+    "satori": "^0.26.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.151.1"
   }
 }

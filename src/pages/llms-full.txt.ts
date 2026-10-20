@@ -119,7 +119,7 @@ export const GET: APIRoute = async () => {
 # ${p.data.title}
 
 > ${p.data.description}
-> 發布:${p.data.pubDate.toISOString().slice(0, 10)}${p.data.updatedDate ? `　更新:${p.data.updatedDate.toISOString().slice(0, 10)}` : ''}　分類:${p.data.category ?? ''}
+> 原文：https://www.drcyc.io/blog/${p.slug}/\n> 作者：${p.data.author}\n> 發布:${p.data.pubDate.toISOString().slice(0, 10)}${p.data.updatedDate ? `　更新:${p.data.updatedDate.toISOString().slice(0, 10)}` : ''}　分類:${p.data.category ?? ''}
 
 ${p.body.trim()}${faqBlock}`;
     })
