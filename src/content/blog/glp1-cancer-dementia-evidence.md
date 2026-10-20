@@ -2,23 +2,41 @@
 title: "減重藥不只幫助變瘦？也能降低癌症與失智症風險？"
 description: "Semaglutide、猛健樂與部分 GLP-1 類藥物的癌症、失智研究有哪些新發現？整理 2026 年重要研究，說明可能好處、適用族群及目前證據限制。"
 pubDate: 2026-10-20
+updatedDate: 2026-10-21
 author: "陳昱彰醫師"
 tags: ["減重", "GLP-1", "semaglutide", "猛健樂", "癌症", "失智症"]
 category: "減重管理"
 medicalCondition: "肥胖症 Obesity"
+mobileToc: true
+tldr:
+  - '癌症：semaglutide 與猛健樂（tirzepatide）的研究，觀察到部分肥胖成人較少發生肥胖相關癌症。<a href="#ref-1" class="underline">［1］</a>'
+  - '失智症：semaglutide、dulaglutide、liraglutide 等 GLP-1 類藥物，在有糖尿病及輕度認知障礙的人中，觀察到較少失智診斷。<a href="#ref-2" class="underline">［2］</a>'
+  - '這些是值得期待的線索，還不能當成已證實的防癌、防失智效果，也不能直接套用到每一種藥或每個人。'
 ---
 
-**減重藥可能不只有控制體重的作用。近年研究發現，使用 semaglutide 或猛健樂（tirzepatide）的部分肥胖成人，較少出現與肥胖相關的癌症；semaglutide 及部分相關糖尿病藥物，也在特定族群中，觀察到較少失智診斷。** [［1］](#ref-1)[［2］](#ref-2)
+減重之外，這些藥物還可能帶來哪些健康好處？以下先看研究發現，再說明哪些結果還不能當成用藥的理由。
 
-這些發現讓研究人員開始探索：治療體重與血糖的藥物，是否也能幫助降低其他疾病的風險？
+## 五項研究，一次看懂
 
-以下整理目前的重要研究，以及這些結果對一般民眾的意義。
+不同研究回答不同問題：**實際診斷、血液指標與風險模型，不能畫上等號。** 手機版可逐張閱讀下列研究卡片。
+
+<table class="evidence-summary" role="table">
+  <caption>GLP-1 相關藥物與癌症、失智症：研究結果與限制</caption>
+  <thead><tr><th scope="col">藥物與研究</th><th scope="col">研究哪些人</th><th scope="col">主要發現</th><th scope="col">判讀重點</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Semaglutide、tirzepatide<br /><a href="#ref-1">［1］癌症觀察研究</a></th><td data-label="研究哪些人">肥胖、沒有糖尿病的成人，約 16.2 萬人。</td><td data-label="主要發現">中位追蹤兩年，13 種肥胖相關癌症合併結果的相對危險低約 41%。</td><td data-label="判讀重點">病歷觀察研究，不能證明防癌；不代表每種癌症都降低 41%。</td></tr>
+    <tr><th scope="row">GLP-1 類藥物<br /><a href="#ref-2">［2］失智診斷研究</a></th><td data-label="研究哪些人">有第二型糖尿病及輕度認知障礙者，1,320 人。</td><td data-label="主要發現">約 3.9 年時，失智累積發生率估計為 15.5%，DPP-4 抑制劑組為 20.4%。</td><td data-label="判讀重點">觀察的是失智診斷，但不是隨機試驗；不能套用到健康成人。</td></tr>
+    <tr><th scope="row">Semaglutide<br /><a href="#ref-3">［3］SELECT 次分析</a></th><td data-label="研究哪些人">65 歲以上、過重或肥胖且有心血管疾病、沒有糖尿病者，近 3,000 人。</td><td data-label="主要發現">兩組的模型預測失智風險都上升，用藥組上升較少。</td><td data-label="判讀重點">血液蛋白質推估的風險，不是實際失智病例減少。</td></tr>
+    <tr><th scope="row">GLP-1 類與雙重促效劑<br /><a href="#ref-4">［4］癌症統合分析</a></th><td data-label="研究哪些人">48 項隨機試驗，約 9.4 萬人。</td><td data-label="主要發現">尚未確認多數肥胖相關癌症有明確下降。</td><td data-label="判讀重點">多數試驗非為癌症設計，追蹤偏短；長期效果仍待確認。</td></tr>
+    <tr><th scope="row">口服 semaglutide<br /><a href="#ref-5">［5］EVOKE／EVOKE+</a></th><td data-label="研究哪些人">早期阿茲海默症患者，3,808 人。</td><td data-label="主要發現">約兩年後，未證實能延緩臨床惡化。</td><td data-label="判讀重點">兩項隨機試驗測試的是治療，不是健康成人的預防。</td></tr>
+  </tbody>
+</table>
 
 ## 癌症研究：semaglutide 與猛健樂出現正面訊號
 
 2026 年《Annals of Oncology》發表一項大型研究，分析約 **16.2 萬名肥胖、沒有糖尿病的成人**。研究比較使用 GLP-1 相關藥物的人，與接受飲食或運動諮詢的人，藥物包括 semaglutide 與 tirzepatide。
 
-中位追蹤兩年後，使用藥物的一組，發生「13 種肥胖相關癌症合併結果」的相對危險約低 **41%**。[［1］](#ref-1)
+中位追蹤兩年後，使用藥物的一組，發生「13 種肥胖相關癌症合併結果」的相對危險約低 **41%**。<a id="cite-1" href="#ref-1" aria-label="參考文獻 1">［1］</a>
 
 這個結果值得關注，因為研究對象不只是糖尿病患者，也包括因肥胖接受治療的人。
 
@@ -32,7 +50,7 @@ medicalCondition: "肥胖症 Obesity"
 
 研究比較 GLP-1 類藥物與另一類糖尿病藥物——DPP-4 抑制劑。GLP-1 組使用的藥物包括 **semaglutide、dulaglutide、liraglutide 等**。
 
-研究估計，約 3.9 年時，兩組的失智累積發生率分別為 **15.5% 與 20.4%**，使用 GLP-1 類藥物的一組較低。[［2］](#ref-2)
+研究估計，約 3.9 年時，兩組的失智累積發生率分別為 **15.5% 與 20.4%**，使用 GLP-1 類藥物的一組較低。<a id="cite-2" href="#ref-2" aria-label="參考文獻 2">［2］</a>
 
 這項研究觀察的是失智診斷，而不只是檢驗數值。它提供了一個可能的方向：對同時有糖尿病與認知功能退步的人，藥物選擇是否也可能影響未來失智的風險？
 
@@ -42,7 +60,7 @@ medicalCondition: "肥胖症 Obesity"
 
 另一項於 2026 年 8 月發表的研究，分析 SELECT 試驗中近 3,000 名年滿 65 歲、過重或肥胖且有心血管疾病、但沒有糖尿病的參與者。
 
-研究人員利用血液中的多種蛋白質，估計未來失智的風險。經過約兩年，兩組的預測風險都隨時間上升，但使用 semaglutide 的一組上升較少。[［3］](#ref-3)
+研究人員利用血液中的多種蛋白質，估計未來失智的風險。經過約兩年，兩組的預測風險都隨時間上升，但使用 semaglutide 的一組上升較少。<a id="cite-3" href="#ref-3" aria-label="參考文獻 3">［3］</a>
 
 部分報導將這項結果稱為「失智預測風險低 26%」。需要注意的是，**這是模型推估的變化，不是實際失智病例減少 26%**。
 
@@ -60,13 +78,13 @@ medicalCondition: "肥胖症 Obesity"
 
 一篇於 2026 年 2 月刊登的統合分析，整理 **48 項隨機試驗、約 9.4 萬人**，尚未確認多數肥胖相關癌症有明確下降。
 
-不過，這些試驗大多不是專門為癌症設計，追蹤時間也偏短。因此，目前既不能宣稱已經證實防癌，也不能斷言一定沒有長期效益。[［4］](#ref-4)
+不過，這些試驗大多不是專門為癌症設計，追蹤時間也偏短。因此，目前既不能宣稱已經證實防癌，也不能斷言一定沒有長期效益。<a id="cite-4" href="#ref-4" aria-label="參考文獻 4">［4］</a>
 
 ### 預防失智與治療失智，是不同問題
 
 阿茲海默症是失智症的一種類型。2026 年正式發表的 EVOKE 與 EVOKE+，是兩項大型隨機試驗，共納入 **3,808 名早期阿茲海默症患者**。
 
-研究比較口服 semaglutide 與安慰劑，結果在約兩年後，**沒有證實 semaglutide 能延緩臨床惡化**。[［5］](#ref-5)
+研究比較口服 semaglutide 與安慰劑，結果在約兩年後，**沒有證實 semaglutide 能延緩臨床惡化**。<a id="cite-5" href="#ref-5" aria-label="參考文獻 5">［5］</a>
 
 因此，不能因為部分研究看到較少失智診斷，就把這類藥物當成已經證實有效的阿茲海默症治療。
 
@@ -80,7 +98,11 @@ Semaglutide 與猛健樂的成分 tirzepatide，雖然經常被一起討論，�
 
 判讀研究時，除了看結果，也要確認使用的是哪一種藥、研究哪些人，以及觀察多久。
 
-## 一般民眾應如何看待這些新發現？
+## 門診用藥判斷：新研究會改變選藥嗎？
+
+**現階段，癌症與失智症的這些研究，還不足以單獨成為開始用藥或換藥的理由。** 對原本就有肥胖或糖尿病治療需求的人，這些發現可作為討論的一部分；選藥仍應以核准適應症、已證實的治療效益與個人安全性為主要依據。[［1］](#ref-1)[［2］](#ref-2)[［4］](#ref-4)[［5］](#ref-5)
+
+例如，不能因為看到 semaglutide 的失智研究，就認為自己應改用 semaglutide，或認為猛健樂也有相同效果。是否換藥，需要一起考慮目前療效、副作用、共病、費用及追蹤安排，而不是只看一個研究數字。
 
 如果有肥胖、糖尿病或相關健康問題，可以和醫師討論是否適合藥物治療。評估重點應包括：
 
@@ -98,31 +120,45 @@ Semaglutide 與猛健樂的成分 tirzepatide，雖然經常被一起討論，�
 
 有治療需求的人，可以將新研究納入與醫師的討論；現階段不建議單純為了防癌或預防失智而用藥。
 
-## 延伸閱讀
+## 需要減重或健檢評估？
 
 - [減重門診與體重管理](/weight-loss/)
 - [健康檢查與報告判讀](/health-checkup/)
 
-本文為一般衛教資訊，不取代個別診療與用藥評估。研究資料查核日期：2026 年 10 月 20 日。
+本文為一般衛教資訊，不取代個別診療與用藥評估。研究資料查核日期：2026 年 10 月 21 日。
 
-<h2 id="references">參考文獻（References）</h2>
+<div id="references" class="article-references">
+
+## 參考文獻（References）
 
 <h3 id="ref-1" style="scroll-margin-top: 6rem">［1］癌症觀察研究</h3>
 
 Hsu AH-C, Ramirez PT, Chang Y-H, et al. GLP-1 receptor agonist use and cancer risk in obese nondiabetic adults. *Annals of Oncology*. 2026;37(8):1178–1185. DOI: [10.1016/j.annonc.2026.04.013](https://doi.org/10.1016/j.annonc.2026.04.013). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/42252247/)
 
+[↑ 返回引用處](#cite-1)
+
 <h3 id="ref-2" style="scroll-margin-top: 6rem">［2］失智診斷觀察研究</h3>
 
 Schechter M, Sehtman-Shachar DR, Fishkin A, et al. Dementia progression with GLP-1 receptor agonists in people with mild cognitive impairment and type 2 diabetes: target-trial emulation study. *Alzheimer's & Dementia: Translational Research & Clinical Interventions*. 2026;12(3):e70315. DOI: [10.1002/trc2.70315](https://doi.org/10.1002/trc2.70315). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/42769274/)
+
+[↑ 返回引用處](#cite-2)
 
 <h3 id="ref-3" style="scroll-margin-top: 6rem">［3］SELECT 血液蛋白指標研究</h3>
 
 Jiménez-Mausbach M, Tijms BM, Paterson C, et al. Semaglutide attenuates a proteomics-based dementia risk signature in older adults with overweight or obesity and cardiovascular disease without diabetes: A post hoc analysis of the SELECT phase 3 trial. *Alzheimer's & Dementia: Diagnosis, Assessment & Disease Monitoring*. 2026;18(3):e70432. DOI: [10.1002/dad2.70432](https://doi.org/10.1002/dad2.70432). [免費全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC13452022/)
 
+[↑ 返回引用處](#cite-3)
+
 <h3 id="ref-4" style="scroll-margin-top: 6rem">［4］癌症隨機試驗統合分析</h3>
 
 Ko A, Chang YC, Bahar F, et al. Risk for Cancer With Glucagon-Like Peptide-1 Receptor Agonists and Dual Agonists: A Systematic Review and Meta-analysis. *Annals of Internal Medicine*. 2026;179(2):216–229. DOI: [10.7326/ANNALS-25-02237](https://doi.org/10.7326/ANNALS-25-02237). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/41359966/)
 
+[↑ 返回引用處](#cite-4)
+
 <h3 id="ref-5" style="scroll-margin-top: 6rem">［5］EVOKE 與 EVOKE+ 隨機試驗</h3>
 
 Cummings JL, Atri A, Sano M, et al. Efficacy and safety of oral semaglutide 14 mg (flexible dose) in early-stage symptomatic Alzheimer's disease (evoke and evoke+): two phase 3, randomised, placebo-controlled trials. *The Lancet*. 2026;407(10544):2167–2179. DOI: [10.1016/S0140-6736(26)00459-9](https://doi.org/10.1016/S0140-6736(26)00459-9). [PubMed 原文摘要](https://pubmed.ncbi.nlm.nih.gov/41865758/)
+
+[↑ 返回引用處](#cite-5)
+
+</div>
