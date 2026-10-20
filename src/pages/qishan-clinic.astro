@@ -5,61 +5,6 @@ import { DAZHENG, POSITIONING, QISHAN_RADIUS } from '../data/clinic';
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/qishan-clinic/`;
 
-const faqSchema = {
-  '@type': 'FAQPage',
-  '@id': `${pageUrl}#faq`,
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: '旗山大政診所的陳醫師夜診時間?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '每週五 18:00–21:00,由義大醫院家醫科陳昱彰醫師親自駐診。看診前建議先電話預約 07-662-2588 確認名額。',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '旗山這邊也能打猛健樂(Mounjaro)、GLP-1 減重嗎?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '可以。藥物減重門診在旗山夜診與義大減重中心兩地都有提供。如果你住旗山、美濃、田寮、內門一帶,或白天要上班、只有晚上有空,旗山大政夜診是適合的選擇。減重治療為自費項目,詳細方案與費用請於診間與醫師討論。',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '我有高血壓或糖尿病,可以在旗山繼續追蹤嗎?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '可以。三高(糖尿病、高血壓、高血脂)的穩定期追蹤與處方,是旗山夜診的主要服務之一。週五晚上就診、拿一個月份藥物是常見的使用方式,適合白天工作不便請假的上班族。',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '義大醫院跟旗山大政,我該選哪邊?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '兩邊是同一位醫師,只是定位不同。義大有醫學中心等級的影像與檢查設備,適合第一次完整評估、高階健檢、複雜個案。旗山大政是週五夜診,適合已經規劃好療程、需要固定回診的人,或住在旗山、美濃、田寮、內門一帶、白天不方便就診的居民。慢性病與減重療程其實在兩邊都能繼續,不會因為換地點而中斷。',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '大政診所怎麼預約、可以現場掛號嗎?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '電話預約 07-662-2588;若名額還有,現場掛號也可以,但建議提前打電話確認,以免白跑一趟。',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '旗山到義大比較近,還是大政診所比較近?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '對於住在旗山、美濃、田寮、內門的居民,大政診所明顯較近(通常 10–20 分鐘)。義大醫院位於燕巢區,從這些地方開車約 30–40 分鐘。若你住楠梓、左營、鳳山、岡山,義大距離反而比較近。',
-      },
-    },
-  ],
-};
-
 const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
@@ -69,12 +14,11 @@ const breadcrumbSchema = {
   ],
 };
 
-const title = '旗山大政診所 · 週五夜診|家醫科陳昱彰醫師 減重・三高門診';
-const description =
-  '義大醫院家醫科陳昱彰醫師,每週五晚上 18:00–21:00 於旗山大政診所親自駐診。提供藥物減重(含 GLP-1 類)、三高慢性病追蹤、家庭醫學門診。適合旗山、美濃、田寮、內門居民,以及下班後才有空就診的上班族。';
+const title = '旗山大政診所｜陳昱彰醫師週五夜診、電話與交通';
+const description = '陳昱彰醫師於旗山大政診所週五 18:00–21:00 看診，提供家醫科、三高追蹤與體重管理。地址：高雄市旗山區延平一路 337 號；電話 07-662-2588，出發前請確認當週時段與名額。';
 ---
 
-<Layout title={title} description={description} jsonLd={[faqSchema, breadcrumbSchema]}>
+<Layout title={title} description={description} jsonLd={[breadcrumbSchema]}>
   <main class="max-w-5xl mx-auto px-6 md:px-10 py-12">
     <!-- Breadcrumb -->
     <nav class="text-xs text-slate-500 mb-6" aria-label="breadcrumb">
@@ -129,10 +73,20 @@ const description =
           <span class="material-symbols-outlined" style="font-size:18px;" aria-hidden="true">location_on</span>
           地點
         </div>
-        <p class="text-lg font-bold text-blue-950">高雄市旗山區</p>
+        <p class="font-bold text-blue-950">{DAZHENG.address.addressRegion}{DAZHENG.address.addressLocality}{DAZHENG.address.streetAddress}</p>
         <a href={DAZHENG.mapUrl} target="_blank" rel="noopener" class="text-sm text-teal-700 underline mt-1 inline-block">
           開啟 Google 地圖 →
         </a>
+      </div>
+    </section>
+
+    <section class="mb-12 rounded-xl border border-teal-200 bg-teal-50/50 p-6" aria-labelledby="visit-preparation">
+      <h2 id="visit-preparation" class="scroll-mt-24 text-xl font-bold text-blue-950 mb-3">出發前先確認，初診帶哪些資料？</h2>
+      <p class="text-slate-700 chinese-line-height">本頁是陳昱彰醫師的固定夜診資訊，不是診所全體醫師的門診表。休診、代診與當日名額以診所公告及電話確認為準。</p>
+      <p class="text-slate-700 chinese-line-height mt-3">初診可準備健保卡、目前用藥清單與最近的檢驗報告；若要追蹤血壓或血糖，可帶日常紀錄。不要為了看診自行停藥。</p>
+      <div class="flex flex-wrap gap-3 mt-4">
+        <a href="tel:+88676622588" class="inline-flex min-h-11 items-center rounded-full bg-teal-700 px-5 py-3 text-white font-bold no-underline">電話確認夜診與名額</a>
+        <a href={DAZHENG.mapUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center rounded-full border border-teal-700 px-5 py-3 text-teal-800 font-bold no-underline">瀏覽交通位置</a>
       </div>
     </section>
 
@@ -146,13 +100,13 @@ const description =
             住在這些地方的居民
           </h3>
           <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 chinese-line-height">
-            <li><strong>旗山</strong> — 步行可達或短程車程</li>
-            <li><strong>美濃</strong> — 車程約 15 分鐘</li>
-            <li><strong>田寮</strong> — 車程約 15 分鐘</li>
-            <li><strong>內門</strong> — 車程約 20 分鐘</li>
+            <li><strong>旗山</strong>及鄰近地區居民</li>
+            <li><strong>美濃</strong></li>
+            <li><strong>田寮</strong></li>
+            <li><strong>內門</strong></li>
           </ul>
           <p class="text-xs text-slate-500 mt-3 chinese-line-height">
-            對這些地區的居民,大政診所通常比義大醫院近 15–25 分鐘車程。
+            請依出發地、交通與停車情況確認路線，不以固定車程保證可達。
           </p>
         </div>
         <div class="rounded-xl border-l-4 border-teal-600 bg-teal-50/50 p-6">
@@ -214,7 +168,7 @@ const description =
     <section class="mb-14">
       <h2 class="text-2xl font-bold text-blue-950 mb-4">旗山還是義大?我這樣建議</h2>
       <p class="text-slate-700 mb-6 leading-relaxed chinese-line-height">
-        兩邊是<strong>同一位醫師</strong>,同樣的治療邏輯、同樣的減重方案。差別只在設備與使用情境。
+        兩邊是<strong>同一位醫師</strong>，可依距離、時段與照護需求選擇；檢查設備、藥物供應、費用與轉介安排仍以各院所當時提供的服務為準。
       </p>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="rounded-xl border border-slate-200 bg-white p-6">
@@ -255,7 +209,7 @@ const description =
     <!-- Note -->
     <aside class="rounded-xl border-l-4 border-slate-300 bg-slate-50 p-5 mb-14 text-sm text-slate-600 leading-relaxed chinese-line-height">
       <strong class="text-slate-800">溫馨提醒</strong> —
-      本頁資訊為陳昱彰醫師在大政診所的看診時段與服務說明,非任何形式的藥物或療效廣告。藥物減重為自費項目,治療計畫、適應症、禁忌症與費用需在診間與醫師個別討論。詳細門診規則以大政診所公告為準。
+      頁面內容更新：2026-10-19（不代表當週診次已確認）。本頁資訊為陳昱彰醫師在大政診所的看診時段與服務說明,非任何形式的藥物或療效廣告。藥物減重為自費項目,治療計畫、適應症、禁忌症與費用需在診間與醫師個別討論。詳細門診規則以大政診所公告為準。
     </aside>
 
     <!-- CTA -->

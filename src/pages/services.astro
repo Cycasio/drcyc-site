@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { EDAH, DAZHENG } from '../data/clinic';
 import { PACKAGE_COUNT } from '../data/checkup';
 ---
 
@@ -182,6 +183,28 @@ import { PACKAGE_COUNT } from '../data/checkup';
             loading="lazy"
           />
         </div>
+      </div>
+    </section>
+
+    <section id="booking" class="scroll-mt-24 max-w-6xl mx-auto px-8 pb-16" aria-labelledby="booking-title">
+      <h2 id="booking-title" class="text-3xl font-bold text-blue-950 mb-6">先選擇看診地點與需求</h2>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-xl text-blue-950 mb-3">義大醫院門診</h3>
+          <p class="text-slate-600 mb-4">家醫科週五上午、減重中心週五下午。實際診次與名額請以掛號系統為準。</p>
+          <a href={EDAH.bookingUrl} target="_blank" rel="noopener" class="inline-flex items-center min-h-11 font-bold text-teal-700 underline">義大線上掛號</a>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-xl text-blue-950 mb-3">旗山大政診所</h3>
+          <p class="text-slate-600 mb-4">陳醫師週五夜診 18:00–21:00，出發前先電話確認休診、代診與名額。</p>
+          <a href={'tel:' + DAZHENG.telephone.replace(/-/g, '')} class="inline-flex items-center min-h-11 font-bold text-teal-700 underline">電話確認 07-662-2588</a>
+          <a href="/qishan-clinic/" class="block py-3 text-teal-700 underline">地址與就醫準備</a>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-xl text-blue-950 mb-3">高階健檢與報告解說</h3>
+          <p class="text-slate-600 mb-4">週一、週二上午的高階健檢服務，須由健診中心安排，不是直接掛一般門診。</p>
+          <a href="/health-checkup/#booking" class="inline-flex items-center min-h-11 font-bold text-teal-700 underline">健檢預約方式</a>
+        </article>
       </div>
     </section>
 

@@ -29,7 +29,7 @@ import {
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/health-checkup/`;
 // 頁面內容更新與套餐、USPSTF 資料核對日期分開，避免暗示全部資訊均重新查核。
-const PAGE_UPDATED = '2026-09-21';
+const PAGE_UPDATED = '2026-10-19';
 
 const publicPackages = PACKAGES.filter((p) => p.group === '公教人員專案');
 const premiumPackages = PACKAGES.filter((p) => p.group === '健診中心精選');
@@ -40,7 +40,7 @@ const medicalWebPage = {
   '@type': 'MedicalWebPage',
   '@id': `${pageUrl}#webpage`,
   url: pageUrl,
-  name: '義大醫院健檢指南 2026｜公費篩檢與套餐比較',
+  name: '義大醫院健檢費用與套餐比較｜公費篩檢、加選與預約指南',
   description:
     `義大醫院家醫科陳昱彰醫師整理 ${PACKAGE_COUNT} 個參考健檢方案，分開說明台灣公費篩檢、USPSTF 建議與自費套餐，附核對日期及準備提醒。`,
   datePublished: '2026-04-13',
@@ -159,7 +159,7 @@ const breadcrumbSchema = {
   ],
 };
 
-const title = '義大醫院健檢指南 2026｜公費篩檢與套餐比較｜陳昱彰醫師';
+const title = '義大醫院健檢費用與套餐比較｜公費篩檢、加選與預約指南｜陳昱彰醫師';
 const description =
   `陳昱彰醫師整理義大醫院 ${PACKAGE_COUNT} 個參考健檢方案，先看台灣公費篩檢，再對照 USPSTF 建議與個人風險。公開標價核對日 ${PACKAGE_PRICE_LAST_CHECKED}，實際價格、內容及供應請向健診中心確認。`;
 ---
@@ -335,12 +335,12 @@ const description =
         閱讀完整衛教：膽固醇正常，還需要驗 Lp(a) 和 ApoB 嗎？
       </a>
       <p class="text-sm text-slate-700 mt-3 leading-relaxed">
-        想先整理整體風險，可看
+        符合條件、沒有已知 ASCVD 或心臟衰竭的成人，可先閱讀
         <a href="/blog/health-tools/cardiovascular-risk-estimator/" class="text-teal-800 underline">10 年與 30 年心血管風險估算工具</a>。
-        本站基本模型不使用 Lp(a) 或 ApoB 作為輸入；檢驗結果不能直接加進風險百分比。
+        10 年估算適用 30–79 歲、30 年估算限 30–59 歲；使用前請確認工具完整限制。本站基本模型不使用 Lp(a) 或 ApoB 作為輸入，不能把檢驗結果直接加進百分比，也不能用它判定健保給付。
       </p>
       <p class="text-xs text-slate-500 mt-3 leading-relaxed">
-        本節更新：2026-09-20；加選表核對：2026-09-15；
+        本節更新：2026-10-19；加選表核對：2026-09-15；
         <a href="https://exdep.edah.org.tw/hec/index.php/en/2017-07-20-05-36-07/145-2025-12-17-06-43-25" class="underline" target="_blank" rel="noopener noreferrer">義大官方自費加選表</a>。
         此更新不代表其他套餐價格或篩檢指引均已重新核對。
       </p>
@@ -520,8 +520,24 @@ const description =
       </div>
     </section>
 
+    <section id="next-step" class="scroll-mt-24 mb-10 rounded-xl border border-teal-200 bg-teal-50/50 p-6 md:p-8" aria-labelledby="next-step-title">
+      <h2 id="next-step-title" class="text-2xl font-bold text-blue-950 mb-5">想安排健檢，還是已經有報告？</h2>
+      <div class="grid md:grid-cols-2 gap-6 text-slate-700 chinese-line-height">
+        <div>
+          <h3 class="font-bold text-blue-950 mb-2">尚未安排健檢</h3>
+          <p>向健診中心確認方案、加選項目、最新費用與準備方式；不需要因單一檢驗項目就升級整套套餐。</p>
+          <a href="#booking" class="inline-flex min-h-11 items-center text-teal-800 font-bold underline">瀏覽健診中心預約方式 →</a>
+        </div>
+        <div>
+          <h3 class="font-bold text-blue-950 mb-2">已有報告，想討論異常值</h3>
+          <p>準備完整報告（含單位與日期）、歷次紀錄、藥物清單與家族病史。一般異常值及慢性病追蹤可先確認適合的門診；高階健檢報告解說仍由健診中心安排。</p>
+          <a href="/services/" class="inline-flex min-h-11 items-center text-teal-800 font-bold underline">瀏覽門診服務與就診方式 →</a>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
-    <section class="rounded-2xl bg-gradient-to-br from-blue-950 to-teal-700 text-white p-10 text-center">
+    <section id="booking" class="scroll-mt-24 rounded-2xl bg-gradient-to-br from-blue-950 to-teal-700 text-white p-10 text-center">
       <h2 class="text-2xl md:text-3xl font-bold mb-4">預約時可詢問陳醫師解說報告的安排</h2>
       <p class="text-white/80 mb-4 max-w-2xl mx-auto leading-relaxed chinese-line-height">
         健檢拿到一份報告只是起點。具備家庭醫學、實證醫學與行為科學訓練的醫師,能把數字跟你的生活型態、病史連結起來,找出具體可以改變的切入點 —

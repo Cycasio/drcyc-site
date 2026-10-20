@@ -1,5 +1,6 @@
 # build output
 dist/
+dist-events-test/
 # generated types
 .astro/
 
@@ -16,6 +17,9 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.*
+.dev.vars*
+.wrangler/
 
 # macOS-specific files
 .DS_Store
