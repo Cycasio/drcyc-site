@@ -62,7 +62,7 @@ const dotClass: Record<string, string> = {
     <div class="space-y-2 mb-5">
       {orderedCats.map((c) => (
         <div data-category-row data-category-key={c.key} class="flex items-center gap-3 text-xs">
-          <span class={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${dotClass[c.tone]}`}></span>
+          <span class={`w-2.5 h-2.5 rounded-full shrink-0 ${dotClass[c.tone]}`}></span>
           <span class="font-medium text-slate-700 w-20">{c.label}</span>
           <span class="text-slate-500 tabular-nums">BMI {c.range}</span>
         </div>
@@ -94,10 +94,6 @@ const dotClass: Record<string, string> = {
   };
 
   const widgets = document.querySelectorAll('[data-bmi-widget]') as NodeListOf<HTMLElement>;
-  if (widgets.length > 0) {
-    render(loadMetrics());
-    onMetricsChange(render);
-  }
 
   function render(m: PatientMetrics) {
     widgets.forEach((root) => {
@@ -146,4 +142,10 @@ const dotClass: Record<string, string> = {
     red:     'bg-red-100 text-red-800',
     rose:    'bg-rose-100 text-rose-800',
   };
+
+  // Restored values can render immediately; initialize every lookup first.
+  if (widgets.length > 0) {
+    render(loadMetrics());
+    onMetricsChange(render);
+  }
 </script>

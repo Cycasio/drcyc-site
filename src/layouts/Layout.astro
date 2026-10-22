@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+import SiteEvents from '../components/SiteEvents.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
@@ -119,6 +121,7 @@ const personSchema = {
     { '@type': 'PropertyValue', propertyID: 'ORCID', value: '0009-0005-2506-1058' },
   ],
   sameAs: [
+    'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
     'https://www.facebook.com/lazydr',
     'https://www.instagram.com/lazydr.cyc',
     'https://orcid.org/0009-0005-2506-1058',
@@ -289,6 +292,7 @@ const schemaGraph = {
     <slot />
   </div>
   <Footer />
+  <SiteEvents />
 </body>
 </html>
 

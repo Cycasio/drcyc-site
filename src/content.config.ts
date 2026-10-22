@@ -1,7 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -11,6 +13,7 @@ const blog = defineCollection({
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
     image: z.string().optional(),
+    mobileToc: z.boolean().optional(),
     // TL;DR 重點 3 句話(顯示在文章開頭,AI 摘要引擎喜歡抓的「30 秒回答版」)
     tldr: z.array(z.string()).min(2).max(5).optional(),
     faq: z

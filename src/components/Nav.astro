@@ -1,5 +1,12 @@
 ---
+import { EDAH, DAZHENG } from '../data/clinic';
 const pathname = Astro.url.pathname;
+
+const booking = pathname === '/qishan-clinic/'
+  ? { href: 'tel:' + DAZHENG.telephone.replace(/-/g, ''), label: '旗山電話預約', external: false }
+  : pathname === '/health-checkup/'
+    ? { href: '/health-checkup/#booking', label: '健檢預約方式', external: false }
+    : { href: EDAH.bookingUrl!, label: '義大預約掛號', external: true };
 
 const primaryLinks = [
   { href: '/', label: '首頁' },
@@ -109,18 +116,18 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
     </div>
 
     <a
-      href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
-      target="_blank"
-      rel="noopener"
-      class="hidden lg:inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
+      href={booking.href}
+      target={booking.external ? "_blank" : undefined}
+      rel={booking.external ? "noopener" : undefined}
+      class="hidden lg:inline-block bg-linear-to-br/srgb from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
     >
-      預約掛號
+      {booking.label}
     </a>
 
     <!-- Mobile Hamburger -->
     <button
       id="mobile-menu-btn"
-      class="lg:hidden flex flex-col gap-1.5 p-2"
+      class="lg:hidden flex min-h-11 min-w-11 items-center justify-center flex-col gap-1.5 p-2"
       aria-label="開啟選單"
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -133,6 +140,10 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain lg:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 pb-6">
+    <div class="grid grid-cols-2 gap-3 pt-4">
+      <a href={EDAH.bookingUrl} target="_blank" rel="noopener" class="min-h-11 flex items-center justify-center rounded-full bg-primary px-3 py-3 text-sm font-bold text-white no-underline">義大掛號</a>
+      <a href="/qishan-clinic/#visit-preparation" class="min-h-11 flex items-center justify-center rounded-full border border-teal-300 px-3 py-3 text-sm font-bold text-teal-800 no-underline">旗山夜診</a>
+    </div>
     <div class="flex flex-col gap-4 pt-4">
       {primaryLinks.map(link => (
         link.children ? (
@@ -182,12 +193,12 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
         )
       ))}
       <a
-        href="https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675"
-        target="_blank"
-        rel="noopener"
-        class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-full font-bold text-sm text-center no-underline mt-2"
+        href={booking.href}
+        target={booking.external ? "_blank" : undefined}
+        rel={booking.external ? "noopener" : undefined}
+        class="bg-linear-to-br/srgb from-primary to-primary-container text-on-primary px-6 py-3 rounded-full font-bold text-sm text-center no-underline mt-2"
       >
-        預約掛號
+        {booking.label}
       </a>
     </div>
   </div>
@@ -206,6 +217,9 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
   };
 
   if (btn && menu) {
+    menu.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) closeMobileMenu();
+    });
     btn.addEventListener('click', () => {
       const isHidden = menu.classList.toggle('hidden');
       btn.setAttribute('aria-expanded', String(!isHidden));

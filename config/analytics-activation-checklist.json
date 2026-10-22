@@ -1,0 +1,46 @@
+{
+  "status": "implemented-disabled",
+  "productionChanged": false,
+  "approval": "Owner approved implementation on 2026-10-19; check plan and usage before activation.",
+  "binding": { "name": "SITE_EVENTS", "dataset": "drcyc_site_events" },
+  "buildGate": "PUBLIC_SITE_EVENTS_ENABLED=true",
+  "runtimeGate": "SITE_EVENTS_ENABLED=true",
+  "typesOnlyConfig": "config/analytics-types.wrangler.jsonc",
+  "doNotDeployTypesFixture": true,
+  "preserve": ["Existing Pages settings", "PREVENT Worker and routes", "Existing Web Analytics"],
+  "beforeActivation": [
+    "Verify current account plan, billing availability, usage and remaining allowances in the authorized account.",
+    "Confirm Pages Functions request allowance separately from Analytics Engine writes and reads.",
+    "Confirm an authorized binding-management route; the restricted Pages publisher does not grant binding writes.",
+    "Set production-only binding and runtime gate after deployment approval; no remote preview collection.",
+    "Rebuild with the public gate and confirm browser payload contains only the four allowed fields.",
+    "Verify a controlled fixed event appears in the intended dataset, then inspect the weighted report.",
+    "Check request abuse controls and usage alerts; Origin checks are not authentication and requests can be spoofed.",
+    "Record deployment ID, code hash, approvals, billing evidence and idempotency key."
+  ],
+  "rollback": "Disable SITE_EVENTS_ENABLED immediately, then rebuild without PUBLIC_SITE_EVENTS_ENABLED. Keep PREVENT unchanged.",
+  "privacy": {
+    "noCookies": true,
+    "noPersistentIds": true,
+    "noHealthInputsOrResults": true,
+    "noFullReferrerOrQuery": true,
+    "noEventIpOrUserAgent": true,
+    "platformTimestamp": true,
+    "retention": "3 months per official documentation; recheck on activation",
+    "doNotClaim": ["Unique visitors", "Completed appointments", "Patient conversions", "Complete AI attribution"],
+    "collectionScope": "Allowlisted pages and booking/phone targets only; at most one event per target per page load.",
+    "sourceScope": "Current page referrer class only. No session or cross-page attribution. Missing referrer is direct_unknown."
+  },
+  "publicPricingCheckedOn": "2026-10-19",
+  "publicPricingSnapshot": {
+    "free": "100000 writes/day and 10000 reads/day",
+    "paid": "10000000 writes/month then USD 0.25/million; 1000000 reads/month then USD 1/million",
+    "availability": "Public page says Analytics Engine usage is not currently billed; this is not account verification or a permanent guarantee."
+  },
+  "sources": [
+    "https://developers.cloudflare.com/analytics/analytics-engine/pricing/",
+    "https://developers.cloudflare.com/analytics/analytics-engine/limits/",
+    "https://developers.cloudflare.com/analytics/analytics-engine/sampling/",
+    "https://developers.cloudflare.com/pages/functions/bindings/#analytics-engine"
+  ]
+}

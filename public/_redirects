@@ -10,6 +10,8 @@
 /tools/eras-protocol /tools/ 301
 
 # Legacy health-tool aliases
+/blog/health-tools/cv-risk-calculator-prevent /blog/health-tools/cardiovascular-risk-estimator/ 301
+/blog/health-tools/cv-risk-calculator-prevent/ /blog/health-tools/cardiovascular-risk-estimator/ 301
 /blog/health-tools /tools/ 301
 /blog/health-tools/ /tools/ 301
 /health-tools /tools/ 301
@@ -35,3 +37,8 @@
 /me /about/ 301
 /me/ /about/ 301
 /小工具/* /tools/ 301
+
+# Exact noncanonical article URLs observed in Search Console; never a catch-all
+/blog/masld-mash-fatty-linear/ /blog/masld-mash-fatty-liver/ 301
+/blog/lpa-apob-health-health-checkup/ /blog/lpa-apob-health-checkup/ 301
+/blog/甲狀腺亢進與低下：症狀、抽血怎麼看、什麼時候該治療 /blog/thyroid-hyperthyroidism-hypothyroidism/ 301
