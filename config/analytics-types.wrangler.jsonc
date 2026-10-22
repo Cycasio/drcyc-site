@@ -1,0 +1,11 @@
+// Type-generation fixture only, NOT the production Pages deployment config.
+// Preserve existing Pages settings and PREVENT routing when enabling analytics.
+{
+  "name": "drcyc-site-types-only",
+  "compatibility_date": "2026-10-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "analytics_engine_datasets": [
+    { "binding": "SITE_EVENTS", "dataset": "drcyc_site_events" }
+  ],
+  "vars": { "SITE_EVENTS_ENABLED": "false" }
+}

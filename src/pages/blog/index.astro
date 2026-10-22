@@ -73,7 +73,7 @@ const articleListSchema = {
   numberOfItems: posts.length,
   itemListOrder: 'https://schema.org/ItemListOrderDescending',
   itemListElement: posts.map((post, index) => {
-    const postUrl = `${SITE}/blog/${post.slug}/`;
+    const postUrl = `${SITE}/blog/${post.id}/`;
     return {
       '@type': 'ListItem',
       position: index + 1,
@@ -120,7 +120,7 @@ const breadcrumbSchema = {
     <section class="mb-14" aria-labelledby="health-tools-heading">
       <a
         href="/tools/"
-        class="block rounded-3xl border border-outline-variant/30 bg-gradient-to-br from-surface-container-low to-white p-8 md:p-10 no-underline hover:shadow-lg transition-shadow"
+        class="block rounded-3xl border border-outline-variant/30 bg-linear-to-br/srgb from-surface-container-low to-white p-8 md:p-10 no-underline hover:shadow-lg transition-shadow"
       >
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div class="max-w-3xl">
@@ -151,7 +151,7 @@ const breadcrumbSchema = {
               placeholder="輸入疾病、藥物或健康主題"
               aria-controls="featured-post posts-grid"
               aria-describedby="filter-result-status"
-              class="w-full rounded-xl border border-outline-variant bg-white px-4 py-3 text-base text-on-surface placeholder:text-outline focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              class="w-full rounded-xl border border-outline-variant bg-white px-4 py-3 text-base text-on-surface placeholder:text-outline focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
@@ -198,7 +198,7 @@ const breadcrumbSchema = {
         data-search={getSearchText(featuredPost)}
       >
         <p class="text-xs font-bold tracking-widest text-teal-700 uppercase mb-3">最新文章</p>
-        <a href={`/blog/${featuredPost.slug}/`} class="no-underline group">
+        <a href={`/blog/${featuredPost.id}/`} class="no-underline group">
           <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest flex flex-col md:flex-row shadow-[0_20px_40px_rgba(25,28,29,0.05)]">
             {featuredPost.data.image && (
               <div class="md:w-3/5 overflow-hidden">
@@ -248,7 +248,7 @@ const breadcrumbSchema = {
           <BlogCard
             title={post.data.title}
             description={post.data.description}
-            slug={`${post.slug}/`}
+            slug={`${post.id}/`}
             pubDate={post.data.pubDate}
             tags={post.data.tags}
             image={post.data.image}

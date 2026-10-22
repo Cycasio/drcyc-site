@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { PACKAGE_COUNT, PACKAGE_LAST_CHECKED, PACKAGE_PRICE_LAST_CHECKED } from '../data/checkup';
 
 // 固定的醫師資訊區塊(手動維護,變動少)
 const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
@@ -24,12 +25,23 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [高雄減重門診](/weight-loss/) — 義大減重中心與旗山週五夜診；整合飲食、運動、睡眠、壓力、行為科學與適當藥物選項
 - [骨質疏鬆門診](/osteoporosis/) — DXA 骨密度、骨折風險、次發原因、用藥與跌倒預防的整合評估
 - [企業臨場健康服務](/workplace-health/) — 依人數、危害作業與事業類別核對醫護配置，提供職場健康服務與合作洽詢
-- [義大健檢指南](/health-checkup/) — 義大醫院 16 個健檢套餐完整比較、實證點評、健檢前準備、清腸藥時程、交通與預約
+- [義大健檢指南](/health-checkup/) — 義大醫院 ${PACKAGE_COUNT} 個參考健檢方案（公開標價核對日 ${PACKAGE_PRICE_LAST_CHECKED}；整份套餐內容前次核對日 ${PACKAGE_LAST_CHECKED}）；台灣公費篩檢、USPSTF 建議與自費套餐分開說明，實際價格、內容及供應情況請向健診中心確認
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診（高雄市旗山區瑞吉里延平一路 337 號）：藥物減重、三高慢性病追蹤、家醫科，適合旗山/美濃/田寮/內門居民與下班後就診的上班族
 - [衛教演講 / 企業健康講座](/speaking/) — 曾合作中鋼、中油、國巨、李長榮、英特格、麥當勞、東海/義大/高科大/中正大學等；主題含減重、三高、骨鬆、行為科學、職場健康四大計畫；南部為主、線上可接；邀約 cyc@edfm.org
 - [衛教專欄](/blog/) — 健康衛教文章
-- [醫療計算工具總覽](/tools/) — 12 個臨床計算工具:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT 心血管風險、Framingham、過勞風險評估等衛教工具
+- [醫療計算工具總覽](/tools/) — 12 個臨床計算工具:BMI、TDEE、體脂率、GLP-1 適應症、Framingham、10 年與 30 年心血管風險及過勞風險評估等衛教工具
+- [10 年與 30 年心血管風險估算工具](/blog/health-tools/cardiovascular-risk-estimator/) — 採經獲准使用的 1.0.0 基本模型；分別估算 Total CVD、ASCVD 與心臟衰竭風險
 - [FIB-4 肝纖維化指數計算機](/blog/health-tools/fib4-calculator/) — 依年齡、AST、ALT 與血小板估算脂肪肝纖維化風險的衛教工具
+
+## 10 年與 30 年心血管風險估算工具重點
+
+- 模型來源與版本：經獲准使用的基本模型 1.0.0；本站並非原開發機構官方網站，也不代表該機構背書。完整來源與授權聲明見工具頁。
+- 適用對象：沒有已知 ASCVD 或心臟衰竭的初級預防成人。10 年風險適用 30–79 歲；30 年風險適用 30–59 歲。
+- 必要輸入：公式使用的生理性別、年齡、總膽固醇、HDL、收縮壓、BMI、eGFR、糖尿病、目前吸菸、降壓藥治療與 statin 使用狀態。
+- 輸出：Total CVD、ASCVD、心臟衰竭三種風險分別估算，不可把 ASCVD 與心臟衰竭百分比相加。
+- 限制：模型以美國成人資料開發與驗證，尚未針對台灣族群重新校準；不能單獨作為診斷或治療決策。
+- 隱私：輸入經加密連線送至本站 Cloudflare 同源端點，只做當次運算；本站應用程式不保存輸入或結果，不將內容送往廣告或分析服務。
+- 方法 DOI：10.1161/CIRCULATIONAHA.123.067626；科學聲明 DOI：10.1161/CIR.0000000000001191。
 
 ## 核心服務
 
@@ -91,7 +103,7 @@ export const GET: APIRoute = async () => {
 
   // 自動產生的文章索引(永遠與實際文章同步,不再手動維護漂移)
   const index = posts
-    .map((p) => `- [${p.data.title}](/blog/${p.slug}/) — ${p.data.description}`)
+    .map((p) => `- [${p.data.title}](/blog/${p.id}/) — ${p.data.description}`)
     .join('\n');
 
   // 自動帶入每篇文章全文(raw markdown body),確保 llms-full 永遠完整
@@ -107,9 +119,9 @@ export const GET: APIRoute = async () => {
 # ${p.data.title}
 
 > ${p.data.description}
-> 發布:${p.data.pubDate.toISOString().slice(0, 10)}${p.data.updatedDate ? `　更新:${p.data.updatedDate.toISOString().slice(0, 10)}` : ''}　分類:${p.data.category ?? ''}
+> 原文：https://www.drcyc.io/blog/${p.id}/\n> 作者：${p.data.author}\n> 發布:${p.data.pubDate.toISOString().slice(0, 10)}${p.data.updatedDate ? `　更新:${p.data.updatedDate.toISOString().slice(0, 10)}` : ''}　分類:${p.data.category ?? ''}
 
-${p.body.trim()}${faqBlock}`;
+${(p.body ?? "").trim()}${faqBlock}`;
     })
     .join('\n\n');
 

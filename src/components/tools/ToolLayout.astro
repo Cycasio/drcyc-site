@@ -68,7 +68,7 @@ const breadcrumb = {
     <slot />
 
     <section class="mt-12 print:hidden">
-      <div class="rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-6 md:p-8">
+      <div class="rounded-2xl bg-linear-to-br/srgb from-primary to-primary-container text-on-primary p-6 md:p-8">
         <h2 class="text-xl md:text-2xl font-bold mb-2 font-headline">需要醫師親自評估？</h2>
         <p class="text-on-primary-container chinese-line-height mb-4">
           計算機只能呈現數字，藥物適應症、共病管理與行為改變需要在診間個別評估。歡迎線上預約義大醫院家醫科陳昱彰醫師門診。
@@ -117,7 +117,7 @@ const breadcrumb = {
         <strong>不能取代醫師診斷或治療建議</strong>。如需個人化評估與治療計畫，請至門診由醫師親自評估。
       </p>
       <p class="mt-2">
-        本網站不儲存任何個人資料，所有輸入僅儲存在您的瀏覽器（localStorage），可在頁面下方按「清除資料」隨時刪除。
+        本工具不將輸入上傳至本站伺服器，預設僅在本頁當次使用。只有勾選「在此裝置記住資料」才會保存於此瀏覽器，最長 7 天，到期後下次使用時清除；可隨時取消勾選或按「清除資料」。共用裝置請勿勾選。
       </p>
     </footer>
   </main>
@@ -127,6 +127,6 @@ const breadcrumb = {
   @media print {
     header.sticky, footer { display: none !important; }
     body { background: white !important; }
-    .print\\:hidden { display: none !important; }
+    .print\:hidden { display: none !important; }
   }
 </style>

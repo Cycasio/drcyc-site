@@ -1,0 +1,25 @@
+<script>
+  import { SITE_ORIGIN, pageId, sourceClass, linkTarget } from '../../functions/_shared/site-events';
+  // Both this build-time gate and the server-side gate must be enabled.
+  const nav = navigator as Navigator & { globalPrivacyControl?: boolean };
+  const page = pageId(location.pathname);
+  if (import.meta.env.PUBLIC_SITE_EVENTS_ENABLED === 'true'
+      && location.origin === SITE_ORIGIN && page
+      && nav.doNotTrack !== '1' && nav.globalPrivacyControl !== true) {
+    const sent = new Set<string>();
+    const source = sourceClass(document.referrer);
+    document.addEventListener('click', (event) => {
+      if (!event.isTrusted || !(event.target instanceof Element)) return;
+      const anchor = event.target.closest('a');
+      const target = anchor && linkTarget(anchor.href);
+      if (!target || sent.has(target)) return;
+      sent.add(target);
+      // No query/hash, full referrer, inputs, health results or persistent IDs.
+      void fetch('/api/site-events', {
+        method: 'POST', credentials: 'omit', referrerPolicy: 'no-referrer',
+        headers: { 'Content-Type': 'application/json' }, keepalive: true,
+        body: JSON.stringify({ event: target === 'edah_booking' ? 'booking_click' : 'phone_click', page, target, source }),
+      }).catch(() => { /* Analytics must never interrupt navigation. */ });
+    });
+  }
+</script>

@@ -35,6 +35,14 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
     )}
   </div>
 
+  <div class="mb-5 rounded-xl border border-outline-variant bg-white p-4 print:hidden">
+    <label class="flex items-start gap-2 text-sm text-slate-700">
+      <input type="checkbox" data-remember-metrics class="mt-1 accent-primary" />
+      <span>在此裝置記住資料（最長 7 天）<br /><span class="text-xs text-slate-500">預設不保存。診間、公用或與他人共用的裝置請勿勾選；取消勾選會刪除已保存資料。</span></span>
+    </label>
+    <p data-storage-status role="status" class="mt-2 text-xs text-slate-600">僅供本頁當次使用，重新整理或離開頁面後不保留。</p>
+  </div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     {has('sex') && (
       <fieldset class="md:col-span-2">
@@ -67,7 +75,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
           step="1"
           placeholder="例：45"
           data-field="age"
-          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </label>
     )}
@@ -83,7 +91,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
           step="0.1"
           placeholder="例：170"
           data-field="heightCm"
-          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </label>
     )}
@@ -99,7 +107,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
           step="0.1"
           placeholder="例：72.5"
           data-field="weightKg"
-          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </label>
     )}
@@ -115,7 +123,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
           step="0.1"
           placeholder="例：85"
           data-field="waistCm"
-          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </label>
     )}
@@ -133,7 +141,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
           step="0.1"
           placeholder="例：95"
           data-field="hipCm"
-          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </label>
     )}
@@ -143,7 +151,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
         <span class="block text-sm font-bold text-slate-700 mb-1">每週活動量</span>
         <select
           data-field="activityLevel"
-          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
         >
           <option value="">請選擇</option>
           {ACTIVITY_LEVELS.map((opt) => (
@@ -165,7 +173,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
             step="0.1"
             placeholder="例：85"
             data-field="weightHistory.startWeightKg"
-            class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+            class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </label>
         <label class="block">
@@ -178,7 +186,7 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
             step="0.1"
             placeholder="例：70"
             data-field="weightHistory.targetWeightKg"
-            class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+            class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </label>
       </>
@@ -207,6 +215,8 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
     clearMetrics,
     parseNumberInput,
     onMetricsChange,
+    metricsPersistence,
+    rememberMetrics,
     type PatientMetrics,
   } from '../../scripts/tools/metrics-store';
   import type { Comorbidities, ActivityLevel, Sex } from '../../scripts/tools/calculators';
@@ -214,6 +224,15 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
   type AnyInput = HTMLInputElement | HTMLSelectElement;
 
   function hydrateForm(form: HTMLFormElement, m: PatientMetrics) {
+    const persistence = metricsPersistence();
+    const remember = form.querySelector<HTMLInputElement>('[data-remember-metrics]');
+    if (remember) remember.checked = persistence.remembered;
+    const status = form.querySelector('[data-storage-status]');
+    if (status) status.textContent = persistence.storageError
+      ? '瀏覽器限制儲存或清除。計算仍可使用；若要確認刪除舊資料，請清除瀏覽器的本站資料。'
+      : persistence.expiresAt
+        ? `僅保存在此瀏覽器，至 ${new Date(persistence.expiresAt).toLocaleString('zh-TW')} 到期，下次使用時清除；不會自動延長。`
+        : '僅供本頁當次使用，重新整理或離開頁面後不保留。';
     const inputs = form.querySelectorAll('[data-field]') as NodeListOf<AnyInput>;
     inputs.forEach((el) => {
       const field = el.dataset.field;
@@ -283,6 +302,9 @@ const comorbidityKeys = Object.keys(COMORBIDITY_LABELS) as (keyof typeof COMORBI
   const forms = document.querySelectorAll('[data-metrics-form]') as NodeListOf<HTMLFormElement>;
   forms.forEach((form) => {
     hydrateForm(form, loadMetrics());
+    form.querySelector<HTMLInputElement>('[data-remember-metrics]')?.addEventListener('change', (e) => {
+      rememberMetrics((e.currentTarget as HTMLInputElement).checked);
+    });
 
     form.addEventListener('input', (e) => {
       const t = e.target;

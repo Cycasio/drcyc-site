@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { PACKAGE_COUNT, PACKAGE_LAST_CHECKED, PACKAGE_PRICE_LAST_CHECKED } from '../data/checkup';
 
 // ⚠️ 此檔 build 時自動生成 /llms.txt。文章索引由 getCollection('blog') 產生,永不漂移。
 // HEADER / FOOTER 為手動維護的靜態內容(醫師資訊、服務、證照、Q&A);新增文章「不需」改這裡。
@@ -30,12 +31,23 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - [高雄減重門診](/weight-loss/) — 義大減重中心與旗山週五夜診；整合飲食、運動、睡眠、壓力、行為科學與適當藥物選項
 - [骨質疏鬆門診](/osteoporosis/) — DXA 骨密度、骨折風險、次發原因、用藥與跌倒預防的整合評估
 - [企業臨場健康服務](/workplace-health/) — 依人數、危害作業與事業類別核對醫護配置，提供職場健康服務與合作洽詢
-- [義大健檢指南](/health-checkup/) — 義大醫院 16 個健檢套餐比較與實證點評
+- [義大健檢指南](/health-checkup/) — 義大醫院 ${PACKAGE_COUNT} 個參考健檢方案（公開標價核對日 ${PACKAGE_PRICE_LAST_CHECKED}；整份套餐內容前次核對日 ${PACKAGE_LAST_CHECKED}）；台灣公費篩檢、USPSTF 建議與自費套餐分開說明，實際價格、內容及供應情況請向健診中心確認
 - [旗山大政診所夜診](/qishan-clinic/) — 週五 18:00–21:00 夜診：減重、三高、家醫科
 - [衛教演講 / 企業健康講座](/speaking/) — 企業、公所、學校、社區的健康講座邀約
 - [衛教專欄](/blog/) — 健康衛教文章
-- [醫療計算工具總覽](/tools/) — 12 個臨床計算工具:BMI、TDEE、體脂率、GLP-1 適應症,以及 AHA PREVENT、Framingham 心血管風險、過勞風險評估等
+- [醫療計算工具總覽](/tools/) — 12 個臨床計算工具:BMI、TDEE、體脂率、GLP-1 適應症、Framingham、10 年與 30 年心血管風險及過勞風險評估等
+- [10 年與 30 年心血管風險估算工具](/blog/health-tools/cardiovascular-risk-estimator/) — 採經獲准使用的 1.0.0 基本模型；分別估算 Total CVD、ASCVD 與心臟衰竭風險
 - [FIB-4 肝纖維化指數計算機](/blog/health-tools/fib4-calculator/) — 脂肪肝 MASLD 纖維化風險自評,輸入年齡+AST(GOT)+ALT(GPT)+血小板,公式 (年齡×AST)/(血小板×√ALT);切點 <1.3 低/1.3-2.67 中(需 FibroScan)/>2.67 高(轉肝膽科),65 歲以上低風險切點改 2.0;台灣血小板單位 ×10³/µL 數值等於 10⁹/L 直接填;Sterling 2006 公式、AGA/AASLD 切點
+
+## 10 年與 30 年心血管風險估算工具重點
+
+- 模型來源與版本：經獲准使用的基本模型 1.0.0；本站並非原開發機構官方網站，也不代表該機構背書。完整來源與授權聲明見工具頁。
+- 適用對象：沒有已知 ASCVD 或心臟衰竭的初級預防成人。10 年風險適用 30–79 歲；30 年風險適用 30–59 歲。
+- 必要輸入：公式使用的生理性別、年齡、總膽固醇、HDL、收縮壓、BMI、eGFR、糖尿病、目前吸菸、降壓藥治療與 statin 使用狀態。
+- 輸出：Total CVD、ASCVD、心臟衰竭三種風險分別估算，不可把 ASCVD 與心臟衰竭百分比相加。
+- 限制：模型以美國成人資料開發與驗證，尚未針對台灣族群重新校準；不能單獨作為診斷或治療決策。
+- 隱私：輸入經加密連線送至本站 Cloudflare 同源端點，只做當次運算；本站應用程式不保存輸入或結果，不將內容送往廣告或分析服務。
+- 方法 DOI：10.1161/CIRCULATIONAHA.123.067626；科學聲明 DOI：10.1161/CIR.0000000000001191。
 
 ## 衛教演講 / 企業健康講座
 
@@ -66,7 +78,7 @@ const HEADER = `# 陳昱彰醫師（Yu-Chang Chen, MD）
 - 適合：完整健檢 + 減重規劃、醫學中心等級影像設備、住燕巢/楠梓/岡山/橋頭/左營一帶
 
 ### 大政診所（週五夜診）
-- 地址：高雄市旗山區
+- 地址：高雄市旗山區瑞吉里延平一路 337 號
 - 電話：07-662-2588
 - 地圖:https://maps.app.goo.gl/JcgmsZQqFahbT2T1A
 - 時段：每週五 18:00–21:00 夜診
@@ -120,7 +132,7 @@ const FOOTER = `## 核心服務
 ## 常見問答
 
 **Q: 陳醫師的門診在哪裡？**
-A: 義大醫院家庭暨社區醫學部及義大減重中心，位於高雄市。預約掛號：https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675
+A: 兩個看診地點：(1) 義大醫院家庭暨社區醫學部／健診中心／減重中心，地址為高雄市燕巢區角宿里義大路 1 號 A 棟；週一、週二上午健檢報告解說，週五上午家醫科門診，週五下午減重中心。預約掛號：https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675 。(2) 旗山大政診所，地址為高雄市旗山區瑞吉里延平一路 337 號；每週五 18:00–21:00 夜診，電話 07-662-2588。實際看診與名額請依院所公告或預約時確認；詳見 https://www.drcyc.io/qishan-clinic/ 。
 
 **Q: 陳醫師的專長有哪些？**
 A: 家庭醫學、肥胖醫學、骨質疏鬆、運動處方、行為科學與實證醫學。具家庭醫學科專科醫師資格，並取得台灣肥胖醫學會與中華民國骨質疏鬆症學會認證；現為職業醫學科訓練醫師，尚未取得該科專科醫師資格，並具勞工健康服務醫師資格。
@@ -135,7 +147,7 @@ A: 結合 COM-B 模型、動機式晤談等行為改變技術，幫助病患從�
 A: 依據《職業安全衛生法》提供勞工健康保護四大計畫（人因危害、異常工作負荷、執行職務遭受不法侵害、母性保護）、工作環境危害評估、員工健康管理與追蹤。
 
 **Q: 如何聯絡陳醫師？**
-A: Facebook 粉專 @lazydr、Email cyc@edfm.org，或直接至義大醫院門診。
+A: Facebook 粉專 @lazydr、Email cyc@edfm.org；看診可透過義大醫院線上掛號 https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675 ，或致電旗山大政診所 07-662-2588 預約週五夜診。
 
 ## 關鍵字
 
@@ -160,16 +172,16 @@ export const GET: APIRoute = async () => {
   );
 
   const line = (p: (typeof posts)[number]) =>
-    `- [${p.data.title}](/blog/${p.slug}/) — ${p.data.description}`;
+    `- [${p.data.title}](/blog/${p.id}/) — ${p.data.description}`;
 
   const used = new Set<string>();
   const blocks: string[] = [];
   for (const s of SECTIONS) {
     const items = posts.filter((p) => s.cats.includes(p.data.category));
-    items.forEach((p) => used.add(p.slug));
+    items.forEach((p) => used.add(p.id));
     if (items.length) blocks.push(`### ${s.title}\n${items.map(line).join('\n')}`);
   }
-  const rest = posts.filter((p) => !used.has(p.slug));
+  const rest = posts.filter((p) => !used.has(p.id));
   if (rest.length) blocks.push(`### 其他衛教\n${rest.map(line).join('\n')}`);
 
   const out = `${HEADER}\n## 衛教專欄文章\n\n${blocks.join('\n\n')}\n\n${FOOTER}`;

@@ -1,24 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post, allPosts: posts },
   }));
 }
 
 const { post, allPosts } = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 const h2Headings = headings.filter(h => h.depth === 2);
 
 // 自動找 3 篇相關文章:優先同 category + 重疊 tag 多者
 function findRelated(currentSlug: string, currentCategory: string | undefined, currentTags: string[] | undefined, all: typeof allPosts) {
   const tags = currentTags ?? [];
   const scored = all
-    .filter((p) => p.slug !== currentSlug)
+    .filter((p) => p.id !== currentSlug)
     .map((p) => {
       let score = 0;
       if (currentCategory && p.data.category === currentCategory) score += 10;
@@ -31,7 +31,7 @@ function findRelated(currentSlug: string, currentCategory: string | undefined, c
   return scored.slice(0, 3).map((x) => x.post);
 }
 
-const relatedPosts = findRelated(post.slug, post.data.category, post.data.tags, allPosts);
+const relatedPosts = findRelated(post.id, post.data.category, post.data.tags, allPosts);
 
 const dateStr = post.data.pubDate.toLocaleDateString('zh-TW', {
   year: 'numeric',
@@ -84,11 +84,11 @@ const categoryCta = (() => {
 })();
 
 const SITE = 'https://www.drcyc.io';
-const postUrl = `${SITE}/blog/${post.slug}/`;
+const postUrl = `${SITE}/blog/${post.id}/`;
 // 優先用文章自訂圖;否則用 build 期自動生成的標題卡 OG 圖(1200×630)
 const postImage = post.data.image && post.data.image.length > 0
   ? (post.data.image.startsWith('http') ? post.data.image : `${SITE}${post.data.image}`)
-  : `${SITE}/og/blog/${post.slug}.png`;
+  : `${SITE}/og/blog/${post.id}.png`;
 const usingGeneratedOg = !(post.data.image && post.data.image.length > 0);
 
 const blogPostingSchema = {
@@ -195,6 +195,16 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
         </p>
 
         <!-- TL;DR callout(AI 摘要引擎與行動讀者的「30 秒答案」) -->
+        {post.data.mobileToc && h2Headings.length > 0 && (
+          <details class="lg:hidden mb-6 rounded-xl border border-slate-200 bg-white p-4" data-mobile-toc>
+            <summary class="cursor-pointer font-bold text-teal-700">本文目錄・快速跳到研究或參考文獻</summary>
+            <nav aria-label="本文目錄" class="mt-3 flex flex-col gap-1">
+              {h2Headings.map((heading) => (
+                <a href={`#${heading.slug}`} class="block py-2 text-sm text-slate-700 underline underline-offset-4">{heading.text}</a>
+              ))}
+            </nav>
+          </details>
+        )}
         {post.data.tldr && post.data.tldr.length > 0 && (
           <aside
             class="mb-10 rounded-2xl border-l-4 border-teal-500 bg-teal-50/60 p-5 md:p-6"
@@ -264,7 +274,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((r) => (
                 <a
-                  href={`/blog/${r.slug}/`}
+                  href={`/blog/${r.id}/`}
                   class="block p-5 rounded-2xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all no-underline"
                 >
                   {r.data.category && (
@@ -279,7 +289,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
         )}
 
         <!-- Bottom CTA Card -->
-        <section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">
+        <section class="mt-20 p-10 bg-linear-to-br/srgb from-primary to-primary-container rounded-2xl text-on-primary text-center">
           <h3 class="text-2xl md:text-3xl font-bold mb-4 font-headline">{categoryCta.title}</h3>
           <p class="text-on-primary-container mb-8 max-w-md mx-auto">
             {categoryCta.description}
@@ -467,16 +477,86 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
     color: #006a60;
     font-weight: 700;
   }
+  .article-content :is(.article-references, a[id^="cite-"]) {
+    scroll-margin-top: 6rem;
+  }
+  .article-content .article-references p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+  .article-content .article-references h3 {
+    font-size: 1.125rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .article-content .article-references a[href^="#cite-"] {
+    display: inline-block;
+    min-height: 44px;
+    padding-block: 0.5rem;
+  }
+  .article-content table.evidence-summary {
+    display: table;
+    table-layout: fixed;
+    overflow: visible;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .evidence-summary caption {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #022448;
+  }
+  .article-content .evidence-summary :is(th, td) {
+    padding: 0.75rem;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+  }
   @media (max-width: 639px) {
     .article-table-hint {
       display: block;
+    }
+    .article-content table.evidence-summary,
+    .evidence-summary tbody {
+      display: block;
+    }
+    .evidence-summary thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    .evidence-summary caption {
+      display: block;
+    }
+    .evidence-summary tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid #c4c6cf;
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+    .article-content .evidence-summary :is(th, td) {
+      display: block;
+      border: 0;
+      padding: 0.75rem 1rem;
+    }
+    .evidence-summary td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #006a60;
+      margin-bottom: 0.25rem;
     }
   }
 </style>
 
 <script>
   document.querySelectorAll<HTMLTableElement>('.article-content table').forEach((table, index) => {
-    if (table.closest('.article-table-scroll')) return;
+    if (table.closest('.article-table-scroll') || table.classList.contains('evidence-summary')) return;
 
     const hint = document.createElement('p');
     hint.id = `article-table-hint-${index + 1}`;

@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { EDAH, DAZHENG } from '../data/clinic';
+import { PACKAGE_COUNT } from '../data/checkup';
 ---
 
 <Layout title="服務項目｜陳昱彰醫師" description="義大醫院家醫科陳昱彰醫師提供的六大服務：藥物減重門診（含 GLP-1）、骨質疏鬆評估、企業臨場健康服務與職安四大計畫、高階健檢報告解說、運動處方、社區健康營造。結合行為科學與實證醫學，量身規劃。">
@@ -60,11 +62,11 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <h2 class="text-2xl font-bold mb-4 font-headline">義大健檢完整指南</h2>
             <p class="text-on-primary-container leading-relaxed mb-6 chinese-line-height">
-              義大醫院健診中心 16 個套餐一次比完，附 USPSTF 實證點評、健檢前準備、清腸藥時程與交通資訊。我幫你用家醫科的角度，告訴你哪個方案適合你，預約時也可指定由我為你解說報告。
+              整理義大醫院健診中心 {PACKAGE_COUNT} 個參考方案，分清台灣公費篩檢、USPSTF 建議與自費套餐，附資料核對日期與健檢前準備。預約時可詢問由陳醫師解說報告的安排。
             </p>
           </div>
           <span class="text-sm font-medium opacity-80 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-            檢視 16 套餐完整比較 →
+            檢視 {PACKAGE_COUNT} 個參考方案與篩檢建議 →
           </span>
         </a>
 
@@ -142,7 +144,7 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- 衛教演講 / 企業健康講座 (col-span-12 full-width banner) -->
         <a href="/speaking/" class="md:col-span-12 bg-on-secondary-container text-secondary-container rounded-xl p-10 flex flex-col md:flex-row items-start md:items-center gap-8 no-underline hover:opacity-95 transition-opacity">
-          <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white flex-shrink-0">
+          <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0">
             <span class="material-symbols-outlined" aria-hidden="true" style="font-size:36px;">campaign</span>
           </div>
           <div class="flex-1">
@@ -173,7 +175,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
           <p class="mt-6 text-on-surface-variant">— YC Chen, MD</p>
         </div>
-        <div class="w-48 h-48 rounded-full overflow-hidden bg-surface-container border-4 border-white shadow-xl flex-shrink-0">
+        <div class="w-48 h-48 rounded-full overflow-hidden bg-surface-container border-4 border-white shadow-xl shrink-0">
           <img
             src="/images/portrait.jpg"
             alt="陳昱彰醫師 Dr. Yu-Chang Chen MD — 義大醫院家庭暨社區醫學部主治醫師，提供家庭醫學、肥胖醫學、骨質疏鬆、職業醫學、運動醫學等臨床服務"
@@ -181,6 +183,28 @@ import Layout from '../layouts/Layout.astro';
             loading="lazy"
           />
         </div>
+      </div>
+    </section>
+
+    <section id="booking" class="scroll-mt-24 max-w-6xl mx-auto px-8 pb-16" aria-labelledby="booking-title">
+      <h2 id="booking-title" class="text-3xl font-bold text-blue-950 mb-6">先選擇看診地點與需求</h2>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-xl text-blue-950 mb-3">義大醫院門診</h3>
+          <p class="text-slate-600 mb-4">家醫科週五上午、減重中心週五下午。實際診次與名額請以掛號系統為準。</p>
+          <a href={EDAH.bookingUrl} target="_blank" rel="noopener" class="inline-flex items-center min-h-11 font-bold text-teal-700 underline">義大線上掛號</a>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-xl text-blue-950 mb-3">旗山大政診所</h3>
+          <p class="text-slate-600 mb-4">陳醫師週五夜診 18:00–21:00，出發前先電話確認休診、代診與名額。</p>
+          <a href={'tel:' + DAZHENG.telephone.replace(/-/g, '')} class="inline-flex items-center min-h-11 font-bold text-teal-700 underline">電話確認 07-662-2588</a>
+          <a href="/qishan-clinic/" class="block py-3 text-teal-700 underline">地址與就醫準備</a>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h3 class="font-bold text-xl text-blue-950 mb-3">高階健檢與報告解說</h3>
+          <p class="text-slate-600 mb-4">週一、週二上午的高階健檢服務，須由健診中心安排，不是直接掛一般門診。</p>
+          <a href="/health-checkup/#booking" class="inline-flex items-center min-h-11 font-bold text-teal-700 underline">健檢預約方式</a>
+        </article>
       </div>
     </section>
 
