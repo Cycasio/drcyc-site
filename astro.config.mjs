@@ -1,7 +1,8 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
+import { unified } from '@astrojs/markdown-remark';
 import { articleDates, staticDates } from './scripts/sitemap-lastmod.mjs';
 
 const SITE = 'https://www.drcyc.io';
@@ -10,6 +11,12 @@ const lastmod = new Map([...articleDates(fileURLToPath(new URL('./src/content/bl
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
+  compressHTML: true,
+  markdown: { processor: unified() },
+  vite: {
+    plugins: [tailwindcss()],
+    build: { assetsInlineLimit: (filePath) => filePath.endsWith('.js') ? false : undefined },
+  },
   integrations: [
     // Only verified content dates; unknown dates remain omitted.
     sitemap({
@@ -20,6 +27,5 @@ export default defineConfig({
         return date ? { ...item, lastmod: new Date(date + 'T00:00:00+08:00') } : item;
       },
     }),
-    tailwind(),
   ],
 });

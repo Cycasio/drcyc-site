@@ -103,7 +103,7 @@ export const GET: APIRoute = async () => {
 
   // 自動產生的文章索引(永遠與實際文章同步,不再手動維護漂移)
   const index = posts
-    .map((p) => `- [${p.data.title}](/blog/${p.slug}/) — ${p.data.description}`)
+    .map((p) => `- [${p.data.title}](/blog/${p.id}/) — ${p.data.description}`)
     .join('\n');
 
   // 自動帶入每篇文章全文(raw markdown body),確保 llms-full 永遠完整
@@ -119,9 +119,9 @@ export const GET: APIRoute = async () => {
 # ${p.data.title}
 
 > ${p.data.description}
-> 原文：https://www.drcyc.io/blog/${p.slug}/\n> 作者：${p.data.author}\n> 發布:${p.data.pubDate.toISOString().slice(0, 10)}${p.data.updatedDate ? `　更新:${p.data.updatedDate.toISOString().slice(0, 10)}` : ''}　分類:${p.data.category ?? ''}
+> 原文：https://www.drcyc.io/blog/${p.id}/\n> 作者：${p.data.author}\n> 發布:${p.data.pubDate.toISOString().slice(0, 10)}${p.data.updatedDate ? `　更新:${p.data.updatedDate.toISOString().slice(0, 10)}` : ''}　分類:${p.data.category ?? ''}
 
-${p.body.trim()}${faqBlock}`;
+${(p.body ?? "").trim()}${faqBlock}`;
     })
     .join('\n\n');
 

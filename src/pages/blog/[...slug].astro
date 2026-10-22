@@ -1,24 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post, allPosts: posts },
   }));
 }
 
 const { post, allPosts } = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 const h2Headings = headings.filter(h => h.depth === 2);
 
 // 自動找 3 篇相關文章:優先同 category + 重疊 tag 多者
 function findRelated(currentSlug: string, currentCategory: string | undefined, currentTags: string[] | undefined, all: typeof allPosts) {
   const tags = currentTags ?? [];
   const scored = all
-    .filter((p) => p.slug !== currentSlug)
+    .filter((p) => p.id !== currentSlug)
     .map((p) => {
       let score = 0;
       if (currentCategory && p.data.category === currentCategory) score += 10;
@@ -31,7 +31,7 @@ function findRelated(currentSlug: string, currentCategory: string | undefined, c
   return scored.slice(0, 3).map((x) => x.post);
 }
 
-const relatedPosts = findRelated(post.slug, post.data.category, post.data.tags, allPosts);
+const relatedPosts = findRelated(post.id, post.data.category, post.data.tags, allPosts);
 
 const dateStr = post.data.pubDate.toLocaleDateString('zh-TW', {
   year: 'numeric',
@@ -84,11 +84,11 @@ const categoryCta = (() => {
 })();
 
 const SITE = 'https://www.drcyc.io';
-const postUrl = `${SITE}/blog/${post.slug}/`;
+const postUrl = `${SITE}/blog/${post.id}/`;
 // 優先用文章自訂圖;否則用 build 期自動生成的標題卡 OG 圖(1200×630)
 const postImage = post.data.image && post.data.image.length > 0
   ? (post.data.image.startsWith('http') ? post.data.image : `${SITE}${post.data.image}`)
-  : `${SITE}/og/blog/${post.slug}.png`;
+  : `${SITE}/og/blog/${post.id}.png`;
 const usingGeneratedOg = !(post.data.image && post.data.image.length > 0);
 
 const blogPostingSchema = {
@@ -274,7 +274,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((r) => (
                 <a
-                  href={`/blog/${r.slug}/`}
+                  href={`/blog/${r.id}/`}
                   class="block p-5 rounded-2xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all no-underline"
                 >
                   {r.data.category && (
@@ -289,7 +289,7 @@ const postJsonLd = [medicalWebPageSchema, blogPostingSchema, breadcrumbSchema, .
         )}
 
         <!-- Bottom CTA Card -->
-        <section class="mt-20 p-10 bg-gradient-to-br from-primary to-primary-container rounded-2xl text-on-primary text-center">
+        <section class="mt-20 p-10 bg-linear-to-br/srgb from-primary to-primary-container rounded-2xl text-on-primary text-center">
           <h3 class="text-2xl md:text-3xl font-bold mb-4 font-headline">{categoryCta.title}</h3>
           <p class="text-on-primary-container mb-8 max-w-md mx-auto">
             {categoryCta.description}
