@@ -145,7 +145,7 @@ const faqSchema = {
           <input
             type="number" id="cvRisk" name="cvRisk"
             min="0" max="100" step="0.1" placeholder="例如：12.5"
-            class="w-40 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+            class="w-40 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-hidden"
           >
           <div id="cv-preview" class="mt-2 text-xs text-slate-500"></div>
         </div>
@@ -173,7 +173,7 @@ const faqSchema = {
             <input
               type="number" id="individualBurnout" name="individualBurnout"
               min="0" max="100" step="1" placeholder="0–100"
-              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-hidden"
             >
             <div id="ind-preview" class="mt-1 text-xs text-slate-500"></div>
           </div>
@@ -189,7 +189,7 @@ const faqSchema = {
             <input
               type="number" id="workBurnout" name="workBurnout"
               min="0" max="100" step="1" placeholder="0–100"
-              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-hidden"
             >
             <div id="work-preview" class="mt-1 text-xs text-slate-500"></div>
           </div>
@@ -204,7 +204,7 @@ const faqSchema = {
             <input
               type="number" id="overtimeHours" name="overtimeHours"
               min="0" max="300" step="1" placeholder="例如：60"
-              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+              class="w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-hidden"
             >
             <div id="ot-preview" class="mt-1 text-xs text-slate-500"></div>
           </div>
@@ -332,7 +332,7 @@ const faqSchema = {
               <select
                 id={`individual-burnout-${i + 1}`}
                 name={`individualBurnoutItem${i + 1}`}
-                class="ind-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none"
+                class="ind-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-hidden"
               >
                 <option value="">— 請選擇 —</option>
                 <option value="100">總是</option>
@@ -382,7 +382,7 @@ const faqSchema = {
               <select
                 id={`work-burnout-${i + 1}`}
                 name={`workBurnoutItem${i + 1}`}
-                class="work-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-none"
+                class="work-item w-full sm:w-48 rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:border-teal-500 focus:outline-hidden"
                 data-reverse={reverse ? 'true' : 'false'}
               >
                 <option value="">— 請選擇 —</option>
@@ -490,7 +490,7 @@ const faqSchema = {
     </article>
 
     <!-- CTA -->
-    <section class="mt-12 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary p-6 md:p-8">
+    <section class="mt-12 rounded-2xl bg-linear-to-br/srgb from-primary to-primary-container text-on-primary p-6 md:p-8">
       <h2 class="text-xl md:text-2xl font-bold mb-2 font-headline">需要到廠進行臨場職業醫學服務？</h2>
       <p class="text-on-primary-container chinese-line-height mb-5">
         陳昱彰醫師提供企業臨場服務，協助廠護執行四大計畫評估、健康面談、結果判讀與後續追蹤建議。

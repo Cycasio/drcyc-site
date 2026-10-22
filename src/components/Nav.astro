@@ -119,7 +119,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
       href={booking.href}
       target={booking.external ? "_blank" : undefined}
       rel={booking.external ? "noopener" : undefined}
-      class="hidden lg:inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
+      class="hidden lg:inline-block bg-linear-to-br/srgb from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:opacity-90 transition-all no-underline"
     >
       {booking.label}
     </a>
@@ -196,7 +196,7 @@ function hasActiveChild(link: { href: string; children?: { href: string; label: 
         href={booking.href}
         target={booking.external ? "_blank" : undefined}
         rel={booking.external ? "noopener" : undefined}
-        class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-full font-bold text-sm text-center no-underline mt-2"
+        class="bg-linear-to-br/srgb from-primary to-primary-container text-on-primary px-6 py-3 rounded-full font-bold text-sm text-center no-underline mt-2"
       >
         {booking.label}
       </a>

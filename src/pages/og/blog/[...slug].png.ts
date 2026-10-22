@@ -11,7 +11,7 @@ const tcFont = readFileSync(resolve(process.cwd(), 'src/assets/fonts/NotoSansTC-
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
 // 用 satori 組標題卡(JSX-free,直接用物件 VDOM)

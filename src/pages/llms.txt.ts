@@ -172,16 +172,16 @@ export const GET: APIRoute = async () => {
   );
 
   const line = (p: (typeof posts)[number]) =>
-    `- [${p.data.title}](/blog/${p.slug}/) — ${p.data.description}`;
+    `- [${p.data.title}](/blog/${p.id}/) — ${p.data.description}`;
 
   const used = new Set<string>();
   const blocks: string[] = [];
   for (const s of SECTIONS) {
     const items = posts.filter((p) => s.cats.includes(p.data.category));
-    items.forEach((p) => used.add(p.slug));
+    items.forEach((p) => used.add(p.id));
     if (items.length) blocks.push(`### ${s.title}\n${items.map(line).join('\n')}`);
   }
-  const rest = posts.filter((p) => !used.has(p.slug));
+  const rest = posts.filter((p) => !used.has(p.id));
   if (rest.length) blocks.push(`### 其他衛教\n${rest.map(line).join('\n')}`);
 
   const out = `${HEADER}\n## 衛教專欄文章\n\n${blocks.join('\n\n')}\n\n${FOOTER}`;
