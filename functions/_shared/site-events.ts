@@ -6,10 +6,12 @@ const pagePaths = [
   '/blog/lpa-apob-health-checkup/', '/blog/hyperlipidemia-ldl-lower-better/',
   '/blog/hearing-conservation-program/', '/blog/ergonomic-hazard-prevention-plan/',
   '/blog/workplace-violence-prevention-plan/',
+  '/weight-loss/', '/osteoporosis/',
 ] as const;
 export const pageIds = [
   'home', 'services', 'qishan', 'checkup', 'mounjaro', 'thyroid',
   'lpa_apob', 'ldl', 'hearing', 'ergonomics', 'violence',
+  'weight_loss', 'osteoporosis',
 ] as const;
 export const sources = ['chatgpt', 'perplexity', 'google', 'other', 'internal', 'direct_unknown'] as const;
 export const targets = ['edah_booking', 'edah_phone', 'qishan_phone'] as const;

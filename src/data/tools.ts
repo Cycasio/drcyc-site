@@ -93,10 +93,10 @@ export const TOOLS: ToolMeta[] = [
   {
     slug: 'waist-ratio',
     url: `${TOOLS_SITE}/tools/waist-ratio/`,
-    title: '腰圍身高比 WHtR 計算｜中央型肥胖風險評估｜陳昱彰醫師',
-    pageHeading: '腰圍身高比 / 腰臀比 計算',
+    title: '腰圍身高比計算機｜WHtR 公式、0.5 標準與腰臀比｜陳昱彰醫師',
+    pageHeading: '腰圍身高比計算機（WHtR）與腰臀比',
     shortLabel: '腰圍指標',
-    description: '腰圍身高比（WHtR）與腰臀比（WHR）能比 BMI 更準確反映中央型肥胖與心血管風險。附國健署腰圍標準（男 ≥ 90 cm／女 ≥ 80 cm）對照。',
+    description: '腰圍身高比＝腰圍÷身高，兩者使用相同單位。輸入公分即可計算 WHtR，臀圍選填可加算腰臀比；附 0.5、0.6 判讀、台灣成人腰圍標準與正確量法，作為健康風險初步評估。',
     keyword: '腰圍身高比',
     emoji: '📏',
     category: '進階指標',

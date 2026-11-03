@@ -134,7 +134,8 @@ const edahClinicSchema = {
   '@type': 'MedicalClinic',
   '@id': `${SITE}/#edah-clinic`,
   name: '義大醫院 家庭暨社區醫學部 / 減重中心(陳昱彰醫師)',
-  url: SITE,
+  url: `${SITE}/services/#booking`,
+  description: '陳昱彰醫師週五上午家庭醫學門診、週五下午減重中心門診；實際開診與掛號以院方公告為準。週一、週二上午的高階健檢須由健診中心另行安排，不屬於一般門診掛號時段。',
   telephone: '+886-7-615-0011',
   hasMap: 'https://maps.app.goo.gl/Qf7E1ZuDcFaAQBhW6',
   medicalSpecialty: ['https://schema.org/PrimaryCare'],
@@ -143,7 +144,6 @@ const edahClinicSchema = {
     { '@type': 'MedicalProcedure', name: '減重管理門診', url: `${SITE}/weight-loss/`, description: '結合 COM-B 行為科學、營養、運動處方與藥物治療的個人化減重療程' },
     { '@type': 'MedicalProcedure', name: '骨質疏鬆門診', url: `${SITE}/osteoporosis/`, description: '骨密度評估、FRAX 風險預估、藥物與生活型態治療' },
     { '@type': 'MedicalProcedure', name: '企業臨場健康服務', description: '依《職業安全衛生法》提供勞工健康服務' },
-    { '@type': 'MedicalProcedure', name: '高階健康檢查解讀', description: '結合行為科學的個人化健檢諮詢' },
     { '@type': 'MedicalProcedure', name: '運動處方 FITT-VP', description: '依個人健康與體適能狀況規劃心肺、阻力、柔軟度與漸進調整' },
   ],
   parentOrganization: { '@type': 'Hospital', name: '義大醫院', url: 'https://www.edah.org.tw' },
@@ -164,8 +164,6 @@ const edahClinicSchema = {
     { '@type': 'AdministrativeArea', name: '高雄市左營區' },
   ],
   openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:30', closes: '12:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:30', closes: '12:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:30', closes: '12:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '13:30', closes: '17:00' },
   ],
@@ -173,6 +171,23 @@ const edahClinicSchema = {
     '@type': 'ReserveAction',
     target: 'https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675',
     name: '線上預約掛號',
+  },
+};
+
+// 健檢由健診中心安排，不能與可直接掛號的門診時段混列。
+const edahCheckupSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${SITE}/#edah-checkup-service`,
+  name: '義大醫院高階健檢與報告解說預約',
+  serviceType: '預約制健康檢查與報告解說',
+  url: `${SITE}/health-checkup/#booking`,
+  provider: { '@type': 'Hospital', name: '義大醫院', url: 'https://www.edah.org.tw' },
+  description: '陳昱彰醫師週一、週二上午的高階健檢服務須由健診中心安排，不是直接掛一般門診。請先洽健診中心確認方案、費用、日期及由陳醫師解說報告的安排。',
+  availableChannel: {
+    '@type': 'ServiceChannel',
+    serviceUrl: `${SITE}/health-checkup/#booking`,
+    servicePhone: { '@type': 'ContactPoint', telephone: '+886-7-615-0011', contactType: '健診中心預約；分機 5706、5708、5715、5716、5735' },
   },
 };
 
@@ -230,6 +245,7 @@ const schemaGraph = {
   '@graph': [
     personSchema,
     edahClinicSchema,
+    edahCheckupSchema,
     qishanClinicSchema,
     websiteSchema,
     ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),

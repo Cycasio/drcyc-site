@@ -51,8 +51,6 @@ const breadcrumbSchema = {
   ],
 };
 
-const totalClients = CLIENTS.reduce((n, g) => n + g.clients.length, 0);
-
 const title = '企業衛教講座 / 健康演講|家醫科陳昱彰醫師・南部演講邀約';
 const description =
   '陳昱彰醫師提供企業健康講座與衛教演講，主題涵蓋減重、三高、骨質疏鬆、行為科學與職場健康；服務高雄、台南、屏東、嘉義及線上場次，頁面附講題、合作經歷與邀約方式。';
@@ -80,16 +78,16 @@ const description =
         >都有過不少演講經驗。主題從減重新藥、三高慢性病、骨鬆肌少,到職場健康與行為改變都有。
       </p>
       <p class="text-base text-slate-600 mt-4 leading-relaxed chinese-line-height max-w-3xl">
-        我的演講風格不是「背投影片」,而是用<strong>實證資料 + 員工真實案例 + 行為科學工具</strong
-        >,讓聽眾帶得走具體可以執行的東西。如果你正在尋找一場能讓員工「真的改變」的健康講座,歡迎來信邀約。
+        演講結合<strong>實證資料、常見健康情境與行為科學工具</strong>，
+        把健康知識整理成聽眾能理解、能嘗試的行動。可依單位需求與聽眾背景討論內容，歡迎來信邀約。
       </p>
     </header>
 
     <!-- Quick facts -->
     <section class="grid sm:grid-cols-3 gap-4 mb-14">
       <div class="rounded-xl border border-slate-200 bg-white p-5 text-center">
-        <div class="text-3xl font-extrabold text-teal-700">{totalClients}+</div>
-        <p class="text-xs text-slate-600 mt-1">合作單位(部份可公開)</p>
+        <div class="text-xl font-extrabold text-teal-700">企業・校園・社區</div>
+        <p class="text-xs text-slate-600 mt-1">演講與健康教育經驗</p>
       </div>
       <div class="rounded-xl border border-slate-200 bg-white p-5 text-center">
         <div class="text-3xl font-extrabold text-teal-700">6</div>
@@ -98,6 +96,25 @@ const description =
       <div class="rounded-xl border border-slate-200 bg-white p-5 text-center">
         <div class="text-3xl font-extrabold text-teal-700">南部 + 線上</div>
         <p class="text-xs text-slate-600 mt-1">服務範圍</p>
+      </div>
+    </section>
+
+    <section id="public-records" class="scroll-mt-24 mb-14" aria-labelledby="public-records-title">
+      <h2 id="public-records-title" class="text-2xl font-bold text-blue-950 mb-2">公開演講紀錄</h2>
+      <p class="text-sm text-slate-600 mb-6">以下活動可在校方或院方公開資料查詢。</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <p class="text-sm text-teal-700 font-semibold mb-2"><time datetime="2025-11-19">2025 年 11 月 19 日</time>・線上講座</p>
+          <h3 class="text-lg font-bold text-blue-950 mb-3">國立高雄科技大學｜談三高</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">陳昱彰醫師受邀分享「談三高：高血壓、高血脂、高血糖」。校方會議紀錄記載共有 178 人參加。</p>
+          <a href="https://shecenter.nkust.edu.tw/var/file/23/1023/img/1599/859949365.pdf#page=11" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-sm text-teal-700 font-bold underline">檢視校方紀錄（PDF 第 11 頁）</a>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-white p-6">
+          <p class="text-sm text-teal-700 font-semibold mb-2">院方報導：2021 年 6 月・科工館</p>
+          <h3 class="text-lg font-bold text-blue-950 mb-3">Curves 加盟主協會｜減重與生活習慣</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">應可爾茲（Curves）加盟主協會邀請，陳昱彰醫師與義大減重中心團隊分享飲食、習慣、運動及減重治療相關知識。院方報導未列確切活動日期。</p>
+          <a href="https://exdep.edah.org.tw/bmi/images/2021-06.pdf#page=2" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-sm text-teal-700 font-bold underline">檢視院方報導（PDF 第 2 頁）</a>
+        </article>
       </div>
     </section>
 
