@@ -7,7 +7,7 @@ const services = [
   { icon: '⚠️', title: '職場危害評估', desc: '現場作業環境巡視，辨識物理、化學、人因性危害因子，提供改善建議與風險控管方案。' },
   { icon: '🛡️', title: '職業傷病預防', desc: '肌肉骨骼疾病、過勞預防、異常工作負荷管理，協助企業建立預防機制。' },
   { icon: '🧠', title: '職場心理健康', desc: '壓力管理、員工協助方案(EAP)諮詢、職場霸凌預防與心理健康促進。' },
-  { icon: '📊', title: '健康管理系統', desc: '導入數位化員工健康管理平台，追蹤健康資料、推播衛教內容並管理慢性病。' },
+  { icon: '📊', title: '健康管理流程', desc: '協助整理健檢異常追蹤、衛教與後續評估項目；資料管理工具依企業既有系統與需求討論。' },
 ];
 
 const articles = [
@@ -100,13 +100,10 @@ const faqs = [
       <div class="about-content">
         <p>
           陳昱彰醫師為<strong>家庭醫學科專科醫師</strong>，現正接受<strong>職業醫學科專科訓練</strong>，並具勞工健康服務醫師資格；尚未取得職業醫學科專科醫師資格。
-          不僅熟悉法規要求，更以<strong>行為科學</strong>為基礎，
-          協助企業建立真正有效的員工健康管理機制——不只是紙上合規，
-          而是讓健康促進真正落實。
+          結合<strong>行為科學</strong>，與企業窗口討論工作環境、員工需求及可執行的健康管理方式。
         </p>
         <p>
-          結合<strong>數位健康管理平台</strong>，提供健檢資料追蹤、
-          個人化衛教推播、慢性病管理等服務，讓臨場服務的效果延續到日常。
+          可協助整理健檢異常追蹤、衛教與後續評估項目。資料管理方式依企業既有系統、服務範圍與個人資料保護要求確認。
         </p>
       </div>
     </div>
@@ -124,6 +121,24 @@ const faqs = [
             <p>{s.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="cooperation-process" class="section" aria-labelledby="cooperation-title">
+    <div class="container">
+      <h2 id="cooperation-title" class="section-title">企業合作怎麼開始？</h2>
+      <ol class="grid">
+        <li class="card"><h3>1. 確認需求</h3><p>先了解產業、員工人數、主要作業型態與需要處理的健康問題，確認服務範圍及合作窗口。</p></li>
+        <li class="card"><h3>2. 盤點現況</h3><p>依約定範圍檢視現有健康管理流程、作業風險與彙整資料，釐清優先事項。初次洽詢不需寄送員工姓名或完整健檢報告。</p></li>
+        <li class="card"><h3>3. 安排服務</h3><p>討論臨場健康諮詢、健檢異常追蹤、工作調整建議或健康講座；需要其他專業協助時，說明轉介與協作方式。</p></li>
+        <li class="card"><h3>4. 整理後續事項</h3><p>將討論結果整理成改善與追蹤項目，確認企業窗口、後續安排及需要再評估的問題。</p></li>
+      </ol>
+      <div class="about-content" style="margin-top:2rem">
+        <h3>可依需求討論的交付內容</h3>
+        <p>服務重點紀錄、改善事項與追蹤清單、衛教講義，以及需要進一步就醫時的轉介建議。實際內容依合作範圍確認。</p>
+        <p>想先了解健康教育的主題與經驗，可參考<a href="/speaking/#public-records">公開演講紀錄與講座邀約</a>。</p>
+        <a href="#contact" class="btn btn-primary">提供需求，洽詢合作</a>
       </div>
     </div>
   </section>
@@ -181,6 +196,9 @@ const faqs = [
 </Layout>
 
 <style>
+  main { --primary:#2f7470;--primary-dark:#245c59;--text:#142747;--text-light:#475569;--bg-light:#eef4f4;--border:#d5dfe5;--radius:12px;color:var(--text);line-height:1.8; }
+  .container { width:min(1120px,calc(100% - 3rem));max-width:1120px;margin-inline:auto; }
+  section[id] { scroll-margin-top:6rem; }
   .page-hero { padding:5rem 0 4rem;background:linear-gradient(135deg,#f0f5ff 0%,#e8f0fe 100%);text-align:center; }
   .page-hero h1 { font-size:2.5rem;font-weight:800;margin-bottom:1rem; }
   .hero-badge { display:inline-block;background:var(--primary);color:white;padding:0.35rem 1rem;border-radius:99px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem; }
@@ -201,7 +219,7 @@ const faqs = [
   .about-content p { margin-bottom:1rem; }
   .about-content strong { color:var(--text); }
 
-  .grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem; }
+  .grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:1.5rem;list-style:none;padding:0; }
   .card { background:white;padding:2rem;border-radius:var(--radius);border:1px solid var(--border);transition:box-shadow 0.2s; }
   .card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
   .card-icon { font-size:2rem;display:block;margin-bottom:0.75rem; }
@@ -216,7 +234,7 @@ const faqs = [
   .faq-item[open] summary::before { content:'－ '; }
   .faq-item p { padding:0 1.5rem 1.25rem;color:var(--text-light); }
 
-  .articles-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem; }
+  .articles-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:1.25rem; }
   .article-card { display:flex;flex-direction:column;gap:0.5rem;background:white;padding:1.75rem;border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:box-shadow 0.2s; }
   .article-card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08);text-decoration:none; }
   .article-tag { display:inline-block;background:var(--primary);color:white;padding:0.2rem 0.65rem;border-radius:99px;font-size:0.75rem;font-weight:600;width:fit-content; }

@@ -25,6 +25,10 @@ test('strict fixed schema and event/target relation', () => {
 });
 test('only explicit pages, targets and referrer categories', () => {
   assert.equal(pageId('/health-checkup/'), 'checkup');
+  assert.equal(pageId('/weight-loss/'), 'weight_loss');
+  assert.equal(pageId('/osteoporosis/'), 'osteoporosis');
+  assert.ok(validEvent({ ...sample, page: 'weight_loss' }));
+  assert.ok(validEvent({ ...sample, page: 'osteoporosis' }));
   assert.equal(pageId('/blog/health-tools/cardiovascular-risk-estimator/'), undefined);
   assert.equal(pageId('/health-checkup/?ldl=123'), undefined);
   assert.equal(linkTarget('tel:+886-7-662-2588'), 'qishan_phone');

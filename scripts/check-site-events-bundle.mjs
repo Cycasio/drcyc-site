@@ -1,27 +1,38 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
+import { dirname, resolve, sep } from 'node:path';
 import { runInNewContext } from 'node:vm';
 
 // Compile the enabled bundle to dist-events-test first. No real network or browser writes.
-const enabled = readFileSync('dist-events-test/health-checkup/index.html', 'utf8');
-const code = [...enabled.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]).find((s) => s.includes('/api/site-events'));
+function readClient(build) {
+  const html = readFileSync(`${build}/health-checkup/index.html`, 'utf8');
+  const sources = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>/g)]
+    .map((match) => match[1]).filter((src) => /^\/_astro\/SiteEvents\.[A-Za-z0-9_.-]+\.js$/.test(src));
+  assert.equal(sources.length, 1, `${build}: rebuild with exactly one external SiteEvents client`);
+  const assetRoot = realpathSync(resolve(build, '_astro'));
+  const asset = realpathSync(resolve(build, `.${sources[0]}`));
+  assert.ok(asset.startsWith(`${assetRoot}${sep}`) && dirname(asset) === assetRoot, 'client must stay inside its build asset directory');
+  return readFileSync(asset, 'utf8');
+}
+const code = readClient('dist-events-test');
 assert.ok(code, 'enabled analytics bundle must exist');
-assert.ok(!readFileSync('dist/health-checkup/index.html', 'utf8').includes('/api/site-events'), 'default build must omit collection code');
-function run(overrides = {}) {
+const defaultCode = readClient('dist');
+assert.ok(!defaultCode.includes('/api/site-events'), 'default build must omit collection code');
+function run(overrides = {}, clientCode = code) {
   let click;
   const requests = [];
   class Element {
     constructor(href) { this.href = href; }
     closest() { return this; }
   }
-  runInNewContext(code, {
+  runInNewContext(clientCode, {
     URL, Element,
     navigator: overrides.navigator ?? {},
     location: { origin: 'https://www.drcyc.io', pathname: '/health-checkup/', search: '?health=never-send', hash: '#private', ...overrides.location },
     document: { referrer: 'https://chatgpt.com/c/private-conversation?secret=never-send', addEventListener: (type, handler) => { if (type === 'click') click = handler; } },
     fetch: (url, options) => { requests.push({ url, options }); return Promise.resolve(); },
   });
-  return { requests, click: (href, trusted = true) => click?.({ isTrusted: trusted, target: new Element(href) }) };
+  return { requests, hasClickHandler: !!click, click: (href, trusted = true) => click?.({ isTrusted: trusted, target: new Element(href) }) };
 }
 const active = run();
 active.click('https://unapproved.example/');
@@ -34,6 +45,18 @@ assert.deepEqual(JSON.parse(active.requests[0].options.body), { event: 'phone_cl
 assert.equal(active.requests[0].options.credentials, 'omit');
 assert.equal(active.requests[0].options.referrerPolicy, 'no-referrer');
 assert.ok(!JSON.stringify(active.requests).includes('never-send'));
+for (const [pathname, page] of [['/weight-loss/', 'weight_loss'], ['/osteoporosis/', 'osteoporosis']]) {
+  const pageClient = run({ location: { pathname } });
+  pageClient.click('https://webreg.edah.org.tw/Register/ChooseDoctorTime/2675');
+  assert.equal(pageClient.requests.length, 1);
+  assert.deepEqual(JSON.parse(pageClient.requests[0].options.body), { event: 'booking_click', page, target: 'edah_booking', source: 'chatgpt' });
+}
+for (const pathname of ['/health-checkup/', '/weight-loss/', '/osteoporosis/']) {
+  const inactive = run({ location: { pathname } }, defaultCode);
+  inactive.click('tel:+88676622588');
+  assert.equal(inactive.hasClickHandler, false, 'default build must not register collection handlers');
+  assert.equal(inactive.requests.length, 0);
+}
 for (const overrides of [
   { navigator: { doNotTrack: '1' } }, { navigator: { globalPrivacyControl: true } },
   { location: { origin: 'http://127.0.0.1:4331' } },

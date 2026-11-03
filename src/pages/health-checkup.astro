@@ -29,10 +29,11 @@ import {
 const SITE = 'https://www.drcyc.io';
 const pageUrl = `${SITE}/health-checkup/`;
 // 頁面內容更新與套餐、USPSTF 資料核對日期分開，避免暗示全部資訊均重新查核。
-const PAGE_UPDATED = '2026-10-19';
+const PAGE_UPDATED = '2026-11-03';
 
 const publicPackages = PACKAGES.filter((p) => p.group === '公教人員專案');
 const premiumPackages = PACKAGES.filter((p) => p.group === '健診中心精選');
+const priceRange = (items: typeof PACKAGES) => `${Math.min(...items.map(p => p.price)).toLocaleString('en-US')}–${Math.max(...items.map(p => p.price)).toLocaleString('en-US')} 元`;
 
 const fmtPrice = (n: number) => `$${n.toLocaleString('en-US')}`;
 
@@ -161,7 +162,7 @@ const breadcrumbSchema = {
 
 const title = '義大醫院健檢費用與套餐比較｜公費篩檢、加選與預約指南｜陳昱彰醫師';
 const description =
-  `陳昱彰醫師整理義大醫院 ${PACKAGE_COUNT} 個參考健檢方案，先看台灣公費篩檢，再對照 USPSTF 建議與個人風險。公開標價核對日 ${PACKAGE_PRICE_LAST_CHECKED}，實際價格、內容及供應請向健診中心確認。`;
+  `義大醫院全身健康檢查費用怎麼看？比較 ${PACKAGE_COUNT} 個參考套餐、公教專案與健診中心方案，附預約電話、檢查準備及醫師解說。價格核對日 ${PACKAGE_PRICE_LAST_CHECKED}，非現行報價，預約前須向院方確認。`;
 ---
 
 <Layout
@@ -183,7 +184,7 @@ const description =
         Health Checkup Guide · 2025–2026
       </p>
       <h1 class="text-3xl md:text-5xl font-extrabold text-blue-950 leading-tight mb-5">
-        義大醫院健檢指南
+        義大醫院健檢費用<br class="sm:hidden" />與套餐比較
       </h1>
       <p class="text-lg text-slate-700 leading-relaxed max-w-3xl chinese-line-height">
         我是義大醫院家醫科主治醫師<strong>陳昱彰</strong>。這一頁把義大健診中心 2025–2026
@@ -192,8 +193,20 @@ const description =
       </p>
     </header>
 
+    <section id="fees" aria-labelledby="fees-title" class="scroll-mt-24 rounded-2xl border border-teal-200 bg-teal-50/60 p-5 md:p-7 mb-8">
+      <h2 id="fees-title" class="text-xl font-bold text-blue-950 mb-3">義大醫院全身健康檢查要多少錢？</h2>
+      <p class="text-slate-700 leading-relaxed mb-4">費用依方案、適用身分與加選項目而異。以下是本頁整理的公開標價範圍，<strong>核對日為 {PACKAGE_PRICE_LAST_CHECKED}，非現行報價</strong>；實際費用、內容及供應請先向院方確認。</p>
+      <dl class="grid sm:grid-cols-2 gap-3 mb-4">
+        <div class="rounded-xl bg-white border border-teal-100 p-4"><dt class="text-sm text-slate-600">公教人員參考專案</dt><dd class="mt-1 text-xl font-bold text-blue-950">{priceRange(publicPackages)}</dd><dd class="mt-1 text-sm text-slate-600">須確認適用身分與方案年度</dd></div>
+        <div class="rounded-xl bg-white border border-teal-100 p-4"><dt class="text-sm text-slate-600">健診中心精選參考方案</dt><dd class="mt-1 text-xl font-bold text-blue-950">{priceRange(premiumPackages)}</dd><dd class="mt-1 text-sm text-slate-600">加選、麻醉等費用是否包含，請逐項詢問</dd></div>
+      </dl>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">「全身健檢」沒有一套適合所有人的固定清單。先確認公費資格與個人風險，再選需要的項目；有症狀或報告異常時，可先至門診評估。</p>
+      <div class="flex flex-wrap gap-3"><a href="#comparison" class="inline-flex min-h-11 items-center rounded-full bg-teal-700 px-5 py-2 text-white font-bold">比較 {PACKAGE_COUNT} 個參考方案</a><a href="#booking" class="inline-flex min-h-11 items-center rounded-full border border-teal-300 px-5 py-2 font-bold text-teal-800">健檢電話預約與報告解說</a></div>
+    </section>
+
     <nav aria-label="健檢指南章節" class="flex flex-wrap gap-3 mb-8 text-sm">
       {[
+        ['#fees', '費用先看這裡'],
         ['#taiwan-screening', '先看公費資格'],
         ['#evidence', '篩檢實證'],
         ['#lpa-apob', 'Lp(a) 與 ApoB'],

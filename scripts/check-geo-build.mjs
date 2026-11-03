@@ -14,6 +14,18 @@ for (const slug of ['motivational-interviewing', 'sarcopenia-resistance-training
 }
 assert.ok(read('/health-checkup/').includes('id="booking"'));
 assert.ok(read('/health-checkup/').includes('id="next-step"'));
+// Scheduled outpatient access and appointment-only checkups must not be mixed.
+const serviceHtml = read('/services/');
+const serviceNodes = [...serviceHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+  .flatMap(m => { const value = JSON.parse(m[1]); return value['@graph'] ?? [value]; });
+const clinic = serviceNodes.find(n => n['@id'] === 'https://www.drcyc.io/#edah-clinic');
+assert.ok(clinic.openingHoursSpecification.length > 0);
+assert.ok(clinic.openingHoursSpecification.every(h => h.dayOfWeek === 'Friday'), 'appointment-only checkups must not be general clinic opening hours');
+const checkup = serviceNodes.find(n => n['@id'] === 'https://www.drcyc.io/#edah-checkup-service');
+assert.equal(checkup['@type'], 'Service');
+assert.ok(checkup.description.includes('須由健診中心安排'));
+assert.equal(checkup.availableChannel.serviceUrl, 'https://www.drcyc.io/health-checkup/#booking');
+assert.ok(serviceHtml.includes('不是直接掛一般門診'));
 assert.ok(!read('/qishan-clinic/').includes('"@type":"FAQPage"'));
 const entries = [...readFileSync('dist/sitemap-0.xml', 'utf8').matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
 const dates = new Map([...articleDates('src/content/blog'), ...staticDates]);

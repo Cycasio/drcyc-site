@@ -39,7 +39,7 @@ const { heading = '腰圍指標', showHeading = true } = Astro.props as Props;
     <div class="bg-surface-container rounded-xl p-4 print:bg-slate-50 print:border print:border-slate-200">
       <p class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-2">陳醫師臨床點評</p>
       <p class="text-sm text-slate-700 chinese-line-height">
-        腰圍比 BMI 更能反映「內臟脂肪」與心血管風險。臨床上看到的「BMI 正常但腰圍超標」族群（瘦胖子）並不少，他們的代謝風險和肥胖者其實接近。WHtR 0.5 是一個簡單記法：<strong>「腰圍應小於身高的一半」</strong>。
+        腰圍可協助評估腹部脂肪堆積，需搭配 BMI、血壓、血糖與血脂一起判讀。即使 BMI 正常，腰圍偏高仍值得注意。WHtR 的簡單記法是<strong>「腰圍小於身高的一半」</strong>；比例不是內臟脂肪的直接測量，也不是個人發病機率。
       </p>
     </div>
   </div>
@@ -50,7 +50,7 @@ const { heading = '腰圍指標', showHeading = true } = Astro.props as Props;
   import { calcWaistMetrics, fmtNumber, type WaistRisk } from '../../scripts/tools/calculators';
 
   const RISK_LABEL: Record<WaistRisk, string> = {
-    low: '健康',
+    low: '低於 0.5，仍需綜合評估',
     increased: '風險升高',
     high: '高風險',
   };
@@ -90,7 +90,7 @@ const { heading = '腰圍指標', showHeading = true } = Astro.props as Props;
         whrCard.classList.remove('opacity-50');
         (root.querySelector('[data-whr]') as HTMLElement).textContent = fmtNumber(w.whR, 2);
         const whrBadge = root.querySelector('[data-whr-badge]') as HTMLElement;
-        whrBadge.textContent = w.whRRisk === 'high' ? '中央型肥胖' : '健康';
+        whrBadge.textContent = w.whRRisk === 'high' ? '達腰臀比風險切點' : '未達腰臀比風險切點';
         whrBadge.className = 'inline-block mt-2 px-2 py-0.5 rounded-full text-xs font-bold '
           + (w.whRRisk === 'high' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800');
         (root.querySelector('[data-whr-cutoff]') as HTMLElement).textContent =
