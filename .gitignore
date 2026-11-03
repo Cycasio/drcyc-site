@@ -1,6 +1,7 @@
 # build output
 dist/
 dist-events-test/
+dist-events-disabled/
 # generated types
 .astro/
 

@@ -31,7 +31,7 @@ export const staticDates = new Map([
   ['/weight-loss/', '2026-10-21'],
   ['/health-checkup/', '2026-11-03'],
   ['/qishan-clinic/', '2026-10-19'],
-  ['/privacy/', '2026-10-22'],
+  ['/privacy/', '2026-11-04'],
   ['/tools/', '2026-10-22'],
   ['/tools/bmi/', '2026-10-22'],
   ['/tools/dashboard/', '2026-10-22'],
