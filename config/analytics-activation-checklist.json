@@ -1,7 +1,7 @@
 {
-  "status": "implemented-disabled",
+  "status": "activation-prepared-pending-live-verification",
   "productionChanged": false,
-  "approval": "Owner approved implementation on 2026-10-19; check plan and usage before activation.",
+  "approval": "Owner approved minimal click statistics; account Analytics Engine activation verified on 2026-11-04. Production binding, release and real dataset receipt still require verification.",
   "binding": { "name": "SITE_EVENTS", "dataset": "drcyc_site_events" },
   "buildGate": "PUBLIC_SITE_EVENTS_ENABLED=true",
   "runtimeGate": "SITE_EVENTS_ENABLED=true",
@@ -31,7 +31,7 @@
     "collectionScope": "Allowlisted pages and booking/phone targets only; at most one event per target per page load.",
     "sourceScope": "Current page referrer class only. No session or cross-page attribution. Missing referrer is direct_unknown."
   },
-  "publicPricingCheckedOn": "2026-10-19",
+  "publicPricingCheckedOn": "2026-11-04",
   "publicPricingSnapshot": {
     "free": "100000 writes/day and 10000 reads/day",
     "paid": "10000000 writes/month then USD 0.25/million; 1000000 reads/month then USD 1/million",

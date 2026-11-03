@@ -3,7 +3,11 @@ import { readFileSync, realpathSync } from 'node:fs';
 import { dirname, resolve, sep } from 'node:path';
 import { runInNewContext } from 'node:vm';
 
-// Compile the enabled bundle to dist-events-test first. No real network or browser writes.
+// Default: compare dist-events-test (enabled) with dist (disabled).
+// --production: verify the actual enabled dist against a separate disabled build.
+// No real network or browser writes; only these fixed build directories are accepted.
+assert.ok(process.argv.length === 2 || (process.argv.length === 3 && process.argv[2] === '--production'), 'usage: node scripts/check-site-events-bundle.mjs [--production]');
+const production = process.argv[2] === '--production';
 function readClient(build) {
   const html = readFileSync(`${build}/health-checkup/index.html`, 'utf8');
   const sources = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>/g)]
@@ -14,9 +18,9 @@ function readClient(build) {
   assert.ok(asset.startsWith(`${assetRoot}${sep}`) && dirname(asset) === assetRoot, 'client must stay inside its build asset directory');
   return readFileSync(asset, 'utf8');
 }
-const code = readClient('dist-events-test');
+const code = readClient(production ? 'dist' : 'dist-events-test');
 assert.ok(code, 'enabled analytics bundle must exist');
-const defaultCode = readClient('dist');
+const defaultCode = readClient(production ? 'dist-events-disabled' : 'dist');
 assert.ok(!defaultCode.includes('/api/site-events'), 'default build must omit collection code');
 function run(overrides = {}, clientCode = code) {
   let click;
